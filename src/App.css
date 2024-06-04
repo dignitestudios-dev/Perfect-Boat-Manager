@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #001229;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #5c7799;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 46, 46, 0.831);
+  cursor: pointer;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  font-family: "Satoshi", Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
