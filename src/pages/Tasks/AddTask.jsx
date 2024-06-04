@@ -3,6 +3,7 @@ import AddFleetInput from "../../components/fleet/AddFleetInput";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats } from "react-icons/tb";
+import DateModal from "../../components/tasks/DateModal";
 
 const AddTask = () => {
   const { navigate } = useContext(GlobalContext);
@@ -46,7 +47,10 @@ const AddTask = () => {
               <div className="w-auto flex justify-start items-center gap-3">
                 <IoCalendarOutline className="text-2xl text-white/40" />
                 <span className="text-md font-normal text-white">Due Date</span>
-                <button className="text-xs font-normal text-[#199BD1]">
+                <button
+                  onClick={() => setIsCalendarOpen(true)}
+                  className="text-xs font-normal text-[#199BD1]"
+                >
                   Select Due Date
                 </button>
               </div>
@@ -60,6 +64,7 @@ const AddTask = () => {
                 </button>
               </div>
             </div>
+            <DateModal isOpen={isCalendarOpen} setIsOpen={setIsCalendarOpen} />
           </div>
 
           <div className="w-full flex justify-end mt-10 items-center gap-4">
