@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
 
 const EmployeesTableBig = () => {
   const { navigate } = useContext(GlobalContext);
@@ -45,7 +47,10 @@ const EmployeesTableBig = () => {
           </span>
           <span className="w-full flex justify-start items-center">Action</span>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -58,12 +63,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -76,12 +88,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -94,12 +113,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -112,12 +138,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -130,12 +163,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -148,12 +188,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -166,12 +213,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -184,12 +238,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -202,12 +263,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -220,12 +288,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -238,12 +313,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -256,12 +338,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -274,12 +363,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -292,12 +388,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -310,12 +413,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -328,12 +438,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -346,12 +463,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -364,12 +488,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -382,12 +513,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -400,12 +538,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -418,12 +563,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -436,12 +588,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -454,12 +613,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -472,12 +638,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -490,12 +663,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -508,12 +688,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -526,12 +713,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -544,12 +738,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -562,12 +763,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -580,12 +788,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -598,12 +813,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -616,12 +838,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -634,12 +863,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -652,12 +888,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -670,12 +913,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -688,12 +938,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -706,12 +963,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -724,12 +988,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -742,12 +1013,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -760,12 +1038,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -778,12 +1063,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -796,12 +1088,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -814,12 +1113,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -832,12 +1138,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -850,12 +1163,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -868,12 +1188,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -886,12 +1213,19 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/employees/1", "Employees")}
+          className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-full flex justify-start items-center">
             Mike Smith
           </span>
@@ -904,9 +1238,13 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex justify-start items-center gap-2">
-            <span className=" flex justify-start items-center ">Edit</span>
-            <span className=" flex justify-start items-center ">Delete</span>
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <span className=" flex justify-start items-center ">
+              <FaRegEdit />
+            </span>
+            <span className=" flex justify-start items-center ">
+              <RiDeleteBinLine />
+            </span>
           </div>
         </div>
       </div>

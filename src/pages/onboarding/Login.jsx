@@ -11,7 +11,7 @@ const Login = () => {
     <div className="w-screen h-screen flex items-start justify-start">
       <form
         onSubmit={() => {
-          navigate("/home");
+          navigate("/home", "Home");
         }}
         className="w-full lg:w-1/2 h-full bg-[#001229] px-4 py-8 lg:p-20 z-10 flex flex-col overflow-y-auto justify-start items-center gap-8"
       >

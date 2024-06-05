@@ -36,7 +36,7 @@ const AddEmployee = () => {
                 </h3>
               </div>
             </div>
-            <div className="w-full h-auto flex flex-col justify-start items-start gap-4 ">
+            <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
               <div className="w-full grid grid-cols-2 gap-12">
                 <AddFleetInput label={"Name"} />
                 <AddFleetInput label={"Email"} />

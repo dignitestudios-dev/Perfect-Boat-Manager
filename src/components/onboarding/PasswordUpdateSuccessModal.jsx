@@ -1,10 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { SuccessVector } from "../../assets/export";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 const PasswordUpdateSuccessModal = ({ isOpen, setIsOpen }) => {
+  const { navigate } = useContext(GlobalContext);
   useEffect(() => {
     setTimeout(() => {
       setIsOpen(false);
+      navigate("/login", "Home");
     }, 2000);
   }, []);
   return (

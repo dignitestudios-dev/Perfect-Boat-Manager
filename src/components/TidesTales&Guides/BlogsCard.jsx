@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AuthMockup } from "../../assets/export";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 const BlogsCard = () => {
+  const { navigate } = useContext(GlobalContext);
   return (
-    <div className="w-full h-[334px] flex flex-col justify-start items-start rounded-[16px] shadow-md bg-[#1A293D]">
+    <div
+      onClick={() => navigate("/blogs/1", "Tides, Tales & Guides")}
+      className="w-full h-[334px] flex flex-col justify-start items-start rounded-[16px] shadow-md bg-[#1A293D]"
+    >
       <img
         src={AuthMockup}
         alt="blog_image"

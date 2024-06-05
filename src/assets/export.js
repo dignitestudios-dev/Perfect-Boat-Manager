@@ -7,7 +7,8 @@ import CheckMark from "./check_success.png";
 import Logo from "./logo.png";
 import HomeMockup from "./home_mockup.png";
 import TableBoatImage from "./table_boat_image.png";
-
+import BlogBoat from "./blog_boat.png";
+import Html from "./blog_html.png";
 export {
   SplashLogo,
   QR,
@@ -18,4 +19,6 @@ export {
   Logo,
   HomeMockup,
   TableBoatImage,
+  BlogBoat,
+  Html,
 };

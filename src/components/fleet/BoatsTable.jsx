@@ -43,7 +43,10 @@ const BoatsTable = () => {
           </span>
         </div>
 
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/boats/1", "Boat")}
+          className="w-full h-auto grid grid-cols-5 cursor-pointer  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -64,7 +67,10 @@ const BoatsTable = () => {
             East California Dock
           </span>
         </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/boats/1", "Boat")}
+          className="w-full h-auto grid grid-cols-5 cursor-pointer  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -85,7 +91,10 @@ const BoatsTable = () => {
             East California Dock
           </span>
         </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/boats/1", "Boat")}
+          className="w-full h-auto grid grid-cols-5 cursor-pointer  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -106,7 +115,10 @@ const BoatsTable = () => {
             East California Dock
           </span>
         </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/boats/1", "Boat")}
+          className="w-full h-auto grid grid-cols-5 cursor-pointer  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -127,7 +139,10 @@ const BoatsTable = () => {
             East California Dock
           </span>
         </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div
+          onClick={() => navigate("/boats/1", "Boat")}
+          className="w-full h-auto grid grid-cols-5 cursor-pointer  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}

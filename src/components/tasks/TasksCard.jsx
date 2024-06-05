@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { MdDelete } from "react-icons/md";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 const TasksCard = () => {
+  const { navigate } = useContext(GlobalContext);
   return (
-    <div className="w-full h-[162px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]">
+    <button
+      onClick={() => navigate("/tasks/1", "All Tasks")}
+      className="w-full h-[162px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
+    >
       <div className="w-[6px] h-full rounded-l-[6px] bg-[#FFCC00]"></div>
       <div className="w-[calc(100%-6px)] h-full py-4 px-6 flex flex-col gap-2 justify-start items-start relative">
         <div className="w-full h-auto flex justify-between items-center">
@@ -34,7 +39,7 @@ const TasksCard = () => {
           </button>
         </div>
       </div>
-    </div>
+    </button>
   );
 };
 

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { HomeMockup } from "../../assets/export";
+import { GlobalContext } from "../../contexts/GlobalContext";
 
 const Home = () => {
+  const { navigate } = useContext(GlobalContext);
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-center">
       <div className="bg-[#001229] w-[708px] h-auto flex flex-col p-6 rounded-[18px] gap-10 pt-[136px]  justify-start items-center relative">
@@ -20,7 +22,7 @@ const Home = () => {
 
           <div className="w-full flex flex-col gap-4 justify-center items-center">
             <button
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/add-task", "Assign Tasks")}
               className="w-full md:w-[434px] h-[52px] rounded-[12px] bg-[#55C9FA]   text-white text-[16px] font-normal tracking-[-0.24px] leading-[21.6px] flex justify-center items-center"
             >
               Create Task
