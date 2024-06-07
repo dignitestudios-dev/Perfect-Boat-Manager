@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
@@ -6,9 +6,11 @@ import { TbCaretDownFilled } from "react-icons/tb";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import AddFleetImage from "../../../../owner_perfectboat/src/components/fleet/AddFleetImage";
 import { AuthMockup } from "../../assets/export";
+import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
 
 const BoatDetail = () => {
   const { navigate } = useContext(GlobalContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -116,7 +118,10 @@ const BoatDetail = () => {
           <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
             Assigned Tasks{" "}
           </h3>
-          <button className="text-[14px] font-medium bg-[#199bd1]/[0.2] h-8 rounded-full w-[70px] text-[#199bd1]">
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="text-[14px] font-medium bg-[#199bd1]/[0.2] h-8 rounded-full w-[70px] text-[#199bd1]"
+          >
             View All
           </button>
         </div>
@@ -283,6 +288,7 @@ const BoatDetail = () => {
             </div>
           </button>
         </div>
+        <ViewAllTasksModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       </div>
       <div className="w-full flex justify-end mt-10 items-center gap-4">
         <button
