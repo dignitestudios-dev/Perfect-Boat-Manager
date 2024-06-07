@@ -1,4 +1,5 @@
 import GlobalLayout from "../layouts/GlobalLayout";
+import SettingsLayout from "../layouts/SettingsLayout";
 import Home from "../pages/Dashboard/Home";
 import AddEmployee from "../pages/Employees/AddEmployee";
 import DeactivatedEmployees from "../pages/Employees/DeactivatedEmployees";
@@ -7,11 +8,17 @@ import EmployeeDetail from "../pages/Employees/EmployeeDetail";
 import Employees from "../pages/Employees/Employees";
 import BoatDetail from "../pages/Fleet/BoatDetail";
 import Boats from "../pages/Fleet/Boats";
+import ChangePasswordPage from "../pages/Settings/ChangePasswordPage";
+import NotificationSettingsPage from "../pages/Settings/NotificationSettingsPage";
 import Notifications from "../pages/Settings/Notifications";
 import PrivacyPolicy from "../pages/Settings/PrivacyPolicy";
+import Profile from "../pages/Settings/Profile";
 import TermsOfServices from "../pages/Settings/TermsOfServices";
+import UserManagementPage from "../pages/Settings/UserManagementPage";
 import AddTask from "../pages/Tasks/AddTask";
+import AssignReportedTask from "../pages/Tasks/AssignReportedTask";
 import EditTask from "../pages/Tasks/EditTask";
+import NewTaskRequestPage from "../pages/Tasks/NewTaskRequestPage";
 import NewTasksRequests from "../pages/Tasks/NewTasksRequests";
 import TaskDetail from "../pages/Tasks/TaskDetail";
 import Tasks from "../pages/Tasks/Tasks";
@@ -65,6 +72,11 @@ export const normalRoutes = [
     page: <GlobalLayout page={<AddTask />} />,
   },
   {
+    title: "Assign reported Task",
+    url: "/assign-reported-task",
+    page: <GlobalLayout page={<AssignReportedTask />} />,
+  },
+  {
     title: "Boat",
     url: "/boats",
     page: <GlobalLayout page={<Boats />} />,
@@ -78,6 +90,11 @@ export const normalRoutes = [
     title: "New Task Request",
     url: "/new-tasks-request",
     page: <GlobalLayout page={<NewTasksRequests />} />,
+  },
+  {
+    title: "New Task Details",
+    url: "/new-tasks-request/:id",
+    page: <GlobalLayout page={<NewTaskRequestPage />} />,
   },
   {
     title: "Inactive Employees",
@@ -108,5 +125,29 @@ export const normalRoutes = [
     title: "Notifications",
     url: "/notifications",
     page: <GlobalLayout page={<Notifications />} />,
+  },
+  {
+    title: "Profile",
+    url: "/profile",
+    page: (
+      <GlobalLayout page={<SettingsLayout page={<UserManagementPage />} />} />
+    ),
+  },
+
+  {
+    title: "Settings",
+    url: "/settings/change-password",
+    page: (
+      <GlobalLayout page={<SettingsLayout page={<ChangePasswordPage />} />} />
+    ),
+  },
+  {
+    title: "Settings",
+    url: "/settings/notifications",
+    page: (
+      <GlobalLayout
+        page={<SettingsLayout page={<NotificationSettingsPage />} />}
+      />
+    ),
   },
 ];

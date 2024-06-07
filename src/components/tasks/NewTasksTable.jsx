@@ -45,7 +45,10 @@ const NewTaskTable = () => {
           </span>
         </div>
 
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <button
+          onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
+          className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -66,8 +69,11 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center ">
             David Beckham
           </span>
-        </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        </button>
+        <button
+          onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
+          className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -88,8 +94,11 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center ">
             David Beckham
           </span>
-        </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        </button>
+        <button
+          onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
+          className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -110,8 +119,11 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center ">
             David Beckham
           </span>
-        </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        </button>
+        <button
+          onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
+          className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -132,8 +144,11 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center ">
             David Beckham
           </span>
-        </div>
-        <div className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        </button>
+        <button
+          onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
+          className="w-full h-auto grid grid-cols-5  border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+        >
           <span className="w-[106px] h-[76px]  flex justify-start items-center relative">
             <img
               src={AuthMockup}
@@ -154,7 +169,7 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center ">
             David Beckham
           </span>
-        </div>
+        </button>
       </div>
     </div>
   );

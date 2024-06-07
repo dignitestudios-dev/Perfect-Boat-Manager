@@ -126,7 +126,10 @@ const EmployeeDetail = () => {
               Action
             </span>
           </div>
-          <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+          <button
+            onClick={() => navigate("/tasks/1", "All Tasks")}
+            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          >
             <span className="w-full flex justify-start items-center">
               Boat A
             </span>
@@ -150,8 +153,11 @@ const EmployeeDetail = () => {
                 <RiDeleteBinLine />
               </span>
             </div>
-          </div>
-          <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+          </button>
+          <button
+            onClick={() => navigate("/tasks/1")}
+            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          >
             <span className="w-full flex justify-start items-center">
               Boat A
             </span>
@@ -175,8 +181,11 @@ const EmployeeDetail = () => {
                 <RiDeleteBinLine />
               </span>
             </div>
-          </div>
-          <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+          </button>
+          <button
+            onClick={() => navigate("/tasks/1")}
+            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          >
             <span className="w-full flex justify-start items-center">
               Boat A
             </span>
@@ -200,8 +209,11 @@ const EmployeeDetail = () => {
                 <RiDeleteBinLine />
               </span>
             </div>
-          </div>
-          <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+          </button>
+          <button
+            onClick={() => navigate("/tasks/1")}
+            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          >
             <span className="w-full flex justify-start items-center">
               Boat A
             </span>
@@ -225,8 +237,11 @@ const EmployeeDetail = () => {
                 <RiDeleteBinLine />
               </span>
             </div>
-          </div>
-          <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+          </button>
+          <button
+            onClick={() => navigate("/tasks/1")}
+            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          >
             <span className="w-full flex justify-start items-center">
               Boat A
             </span>
@@ -250,7 +265,7 @@ const EmployeeDetail = () => {
                 <RiDeleteBinLine />
               </span>
             </div>
-          </div>
+          </button>
         </div>
       </div>
       <div className="w-full flex justify-end mt-10 items-center gap-4">

@@ -5,7 +5,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats, TbCaretDownFilled } from "react-icons/tb";
 import DateModal from "../../components/tasks/DateModal";
 
-const AddTask = () => {
+const AssignReportedTask = () => {
   const { navigate } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [customInput, setCustomInput] = useState(false);
@@ -25,13 +25,13 @@ const AddTask = () => {
             <div className="w-full h-auto flex justify-between items-center">
               <div>
                 <h3 className="text-[18px] font-bold leading-[24.3px]">
-                  Assign New Task
+                  Assign Reported Task
                 </h3>
               </div>
             </div>
             <div className="w-full h-auto flex flex-col  justify-start items-start gap-4 ">
               <div className="w-full grid grid-cols-2 gap-12">
-                <AddFleetInput label={"Select Boat"} />
+                <AddFleetInput label={"Select Boat"} state={"Boat A"} />
               </div>
               <div className="w-full grid grid-cols-2 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
@@ -46,7 +46,7 @@ const AddTask = () => {
                         : "rounded-xl"
                     } h-[52px] cursor-pointer bg-[#1A293D] outline-none flex justify-between items-center  px-3 focus:border-[1px] focus:border-[#55C9FA]  relative`}
                   >
-                    <span className="text-gray-400">--Select--</span>
+                    <span className="text-gray-400">Full Inspection</span>
                     <span className="text-gray-400">
                       <TbCaretDownFilled
                         className={`${
@@ -95,7 +95,10 @@ const AddTask = () => {
                     </div>
                   </div>
                 </div>
-                <AddFleetInput label={"Assign Employee"} />
+                <AddFleetInput
+                  label={"Assign Employee"}
+                  state={"Jack Anderson"}
+                />
               </div>
               <div className="w-full grid grid-cols-1 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
@@ -104,6 +107,7 @@ const AddTask = () => {
                   </label>
                   <textarea
                     type="text"
+                    value="Lorem ipsum dolor sit amet consectetur. Sed tellus sit in diam semper sollicitudin. Non facilisis proin gravida pellentesque tortor orci id. Facilisis neque enim nisi lectus a sed et bibendum. Justo tellus ipsum eu tempus orci sed. Neque consequat sed id mauris quis lorem nisl. Massa orci adipiscing arcu placerat aliquet egestas. Quis purus nunc sodales vitae non semper enim posuere. \n \n Vel ut pulvinar faucibus praesent ut. Purus magna nec integer bibendum mauris commodo dolor id. Bibendum tempus lacus arcu neque felis lorem blandit cursus. Porttitor lorem auctor dolor egestas diam libero. Feugiat condimentum feugiat est quis egestas nibh tellus nulla auctor. Id dignissim consectetur scelerisque quis adipiscing. Nunc tincidunt amet nunc in nunc pellentesque erat aliquam. Donec pharetra scelerisque massa id cursus gravida. Mi est cursus egestas mi a faucibus. Aenean feugiat placerat iaculis semper quis aliquam non amet faucibus. Venenatis in gravida at ut risus nisi dictum condimentum integer. Integer rhoncus sit elementum morbi cras consectetur odio aliquam. Massa fermentum tincidunt sit ut pulvinar. In suspendisse vulputate elementum nisl pharetra imperdiet odio dolor nibh."
                     className="w-full h-[315px] resize-none bg-[#1A293D] outline-none  p-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
                   ></textarea>
                 </div>
@@ -146,7 +150,7 @@ const AddTask = () => {
               {"Back"}
             </button>
             <button className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]">
-              {"Save"}
+              {"Assign Reported Task"}
             </button>
           </div>
         </div>
@@ -155,4 +159,4 @@ const AddTask = () => {
   );
 };
 
-export default AddTask;
+export default AssignReportedTask;
