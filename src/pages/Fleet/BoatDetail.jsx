@@ -4,7 +4,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbCaretDownFilled } from "react-icons/tb";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
-import AddFleetImage from "../../../../owner_perfectboat/src/components/fleet/AddFleetImage";
+import AddFleetImage from "../../components/fleet/AddFleetImage";
 import { AuthMockup } from "../../assets/export";
 import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
 
