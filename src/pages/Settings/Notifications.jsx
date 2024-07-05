@@ -22,7 +22,46 @@ const Notifications = () => {
         <h1 className="text-[28px] font-bold text-white leading-[37.8px]">
           Notifications
         </h1>
-        <div className="w-full flex items-center justify-between  gap-6">
+        <div className="w-full  border-b-[0.5px] border-white/15 flex  justify-between items-center h-[34px] text-base font-normal text-[#fff]/[50%]">
+          <div className="w-auto h-[34px] flex gap-6 justify-start items-center">
+            <button
+              onClick={() => setActiveTab("All")}
+              className={`px-2 h-[34px] ${
+                activeTab == "All" &&
+                "text-[#199BD1] font-bold  border-b-[3px] border-[#199BD1]"
+              } `}
+            >
+              All
+            </button>
+            <button
+              onClick={() => setActiveTab("Read")}
+              className={`px-2 h-[34px] ${
+                activeTab == "Read" &&
+                "text-[#199BD1]  font-bold border-b-[3px] border-[#199BD1]"
+              } `}
+            >
+              Read
+            </button>
+            <button
+              onClick={() => setActiveTab("Unread")}
+              className={`px-2 h-[34px] flex justify-between items-center gap-2 ${
+                activeTab == "Unread" &&
+                "text-[#199BD1]  font-bold border-b-[3px] border-[#199BD1]"
+              } `}
+            >
+              <span>Unread</span>
+              <span className="bg-[#199BD1] text-white w-[18px] h-[18px] rounded-full text-[10px] flex items-center justify-center">
+                15
+              </span>
+            </button>
+          </div>
+          <button
+            className={`w-[107px] h-[32px] mb-2 text-[11px] font-bold rounded-[10px] text-white bg-[#199BD1]`}
+          >
+            Clear All
+          </button>
+        </div>
+        {/* <div className="w-full flex items-center justify-between  gap-6">
           <div className="flex items-center">
             <div className="">
               <button
@@ -81,8 +120,8 @@ const Notifications = () => {
           </div>
           {/* <button className="bg-[#199BD1] rounded-full text-[13px] font-semibold text-white py-2.5 w-[118px]">
           Clear All
-        </button> */}
-        </div>
+        </button>
+        </div>  */}
         <div className="w-full">
           {filterNotifications().map((notification) => (
             <Link

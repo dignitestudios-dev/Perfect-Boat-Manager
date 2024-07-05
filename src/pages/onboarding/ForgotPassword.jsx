@@ -42,19 +42,9 @@ const ForgotPassword = () => {
         </div>
 
         <AuthSubmitBtn text={"Continue"} />
-        <div className="w-full h-auto flex   flex-col gap-1 justify-start items-start  ">
-          <div className="w-full lg:w-[434px] flex gap-1 justify-center items-center ">
-            <span className="text-[13px] font-medium text-[#C2C6CB]">
-              Didn't recieve a code?
-            </span>
-            <button className="outline-none text-[13px] border-none text-[#199BD1] font-bold">
-              Resend now
-            </button>
-          </div>
-        </div>
       </form>
       <div className="w-1/2 lg:flex hidden relative h-full">
-        <span className="w-16 h-full bg-black/50 blur-xl absolute top-0 -left-4"></span>
+        <span className="w-20 h-full grad-blur2 absolute top-0 -left-4"></span>
         <img src={AuthMockup} alt="auth_mockup" className="w-full h-full" />
       </div>
     </div>

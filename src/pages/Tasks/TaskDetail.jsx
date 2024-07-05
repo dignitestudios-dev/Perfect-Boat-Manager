@@ -122,10 +122,7 @@ const TaskDetail = () => {
                 Location
               </span>
             </div>
-            <button
-              onClick={() => navigate("/employees/1", "Employees")}
-              className="w-full h-10 grid grid-cols-5 py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-            >
+            <span className="w-full h-10 grid grid-cols-5 py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
               <span className="w-full flex justify-start items-center">
                 Mike Smith
               </span>
@@ -141,7 +138,7 @@ const TaskDetail = () => {
               <span className="w-full flex justify-start items-center ">
                 East California Dock
               </span>
-            </button>
+            </span>
           </div>
         </div>
         <div className="w-full flex justify-end py-4 items-center gap-4">

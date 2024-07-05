@@ -19,7 +19,7 @@ const TasksContainer = () => {
     <div className="h-full  w-full  flex flex-col gap-6 justify-start items-center">
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-          Tasks List{" "}
+          All Tasks{" "}
           <span className="text-[12px] font-normal text-white/50 ">(723)</span>
         </h3>
 

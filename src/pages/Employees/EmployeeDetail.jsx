@@ -1,14 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { TiPencil } from "react-icons/ti";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
-import { FaRegEdit } from "react-icons/fa";
+import { FaCaretDown, FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
+import { CiCalendar } from "react-icons/ci";
+import DateModal from "../../components/tasks/DateModal";
 
 const EmployeeDetail = () => {
   const { navigate } = useContext(GlobalContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleLocationModal = (e) => {
+    if (locationRef.current && !locationRef.current.contains(e.target)) {
+      setLocationFilter((prev) => !prev);
+    }
+  };
+  const [locationFilter, setLocationFilter] = useState(false);
+  const locationRef = useRef(null);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       <div className="w-full h-auto  bg-[#1A293D] text-white  flex flex-col justify-start items-start">
@@ -115,12 +126,54 @@ const EmployeeDetail = () => {
             <span className="w-full flex justify-start items-center">
               Boat Name
             </span>
-            <span className="w-full flex justify-start items-center">
-              Task Type
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Due Date
-            </span>
+            <button
+              onClick={toggleLocationModal}
+              className="w-full flex flex-col gap-1 relative justify-start items-start"
+            >
+              <div className="w-auto flex gap-1 justify-start items-center ">
+                <span>Task Type</span>
+                <FaCaretDown />
+              </div>
+              <div
+                ref={locationRef}
+                className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
+                  locationFilter ? "scale-100" : "scale-0"
+                } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
+              >
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Full Cleaning
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Full Cleaning
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Full Cleaning
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Full Cleaning
+                  </span>
+                </div>
+              </div>
+            </button>
+            <button
+              onClick={() => setIsCalendarOpen(true)}
+              className="w-full flex  gap-1  justify-start items-center relative"
+            >
+              <CiCalendar className="text-lg" />
+              <span>Due Date</span>
+            </button>
+            <DateModal isOpen={isCalendarOpen} setIsOpen={setIsCalendarOpen} />
             <span className="w-full flex justify-start items-center">
               Recurring Days
             </span>

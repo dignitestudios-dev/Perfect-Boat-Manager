@@ -38,8 +38,8 @@ const UpdatePassword = () => {
             type={"password"}
           />
           <AuthInput
-            text={"Repeat Password"}
-            placeholder={"Enter Password"}
+            text={"Re-enter Password"}
+            placeholder={"Re-enter Password"}
             type={"password"}
           />
         </div>
@@ -53,7 +53,7 @@ const UpdatePassword = () => {
         )}
       </form>
       <div className="w-1/2 lg:flex hidden relative h-full">
-        <span className="w-16 h-full bg-black/50 blur-xl absolute top-0 -left-4"></span>
+        <span className="w-20 h-full grad-blur2 absolute top-0 -left-4"></span>
         <img src={AuthMockup} alt="auth_mockup" className="w-full h-full" />
       </div>
     </div>

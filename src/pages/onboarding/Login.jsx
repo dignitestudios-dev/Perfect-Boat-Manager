@@ -16,7 +16,7 @@ const Login = () => {
         className="w-full lg:w-1/2 h-full bg-[#001229] px-4 py-8 lg:p-20 z-10 flex flex-col overflow-y-auto justify-start items-center gap-8"
       >
         <h1 className="w-full justify-start items-start text-[48px] font-bold text-white leading-[64.8px] tracking-[-1.2px]">
-          Login
+          Log in
         </h1>
         <div className="w-full h-auto flex flex-col justify-start items-start gap-4">
           <AuthInput
@@ -39,11 +39,11 @@ const Login = () => {
           </div>
         </div>
 
-        <AuthSubmitBtn text={"Login"} />
+        <AuthSubmitBtn text={"Log in"} />
         <div className="w-full h-auto flex   flex-col gap-1 justify-start items-start  ">
           <div className="w-full lg:w-[434px] flex flex-wrap gap-1 justify-center items-center ">
             <span className="text-[16px] font-medium text-[#C2C6CB]">
-              By creating account, I accept the
+              By logging in, you agree to our
             </span>
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
@@ -62,11 +62,21 @@ const Login = () => {
             >
               Privacy policy
             </button>
+            <span className="text-[16px] font-medium text-[#C2C6CB]">&</span>
+
+            <button
+              className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Cookie Policy.
+            </button>
           </div>
         </div>
       </form>
       <div className="w-1/2 lg:flex hidden relative h-full">
-        <span className="w-16 h-full bg-black/50 blur-xl absolute top-0 -left-4"></span>
+        <span className="w-20 h-full grad-blur2 absolute top-0 -left-4"></span>
         <img src={AuthMockup} alt="auth_mockup" className="w-full h-full" />
       </div>
     </div>

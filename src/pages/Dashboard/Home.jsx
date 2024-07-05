@@ -23,7 +23,7 @@ const Home = () => {
           <div className="w-full flex flex-col gap-4 justify-center items-center">
             <button
               onClick={() => navigate("/add-task", "Assign Tasks")}
-              className="w-full md:w-[434px] h-[52px] rounded-[12px] bg-[#55C9FA]   text-white text-[16px] font-normal tracking-[-0.24px] leading-[21.6px] flex justify-center items-center"
+              className="w-full md:w-[434px] h-[52px] rounded-[12px] bg-[#199BD1]   text-white text-[16px] font-bold tracking-[-0.24px] leading-[21.6px] flex justify-center items-center"
             >
               Create Task
             </button>

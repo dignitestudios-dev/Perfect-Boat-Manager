@@ -31,7 +31,7 @@ body {
   width: 100vw;
   height: 100vh;
   overflow-y: auto;
-  font-family: "Satoshi", Arial, Helvetica, sans-serif;
+  font-family: "Satoshi Variable", Arial, Helvetica, sans-serif;
   overflow-x: hidden;
 }
 
@@ -50,4 +50,25 @@ body {
 .fKBdIn {
   background-color: #243347 !important;
   color: #fff !important;
+}
+.sc-feUZmu {
+  color: white !important;
+}
+.sc-fPXMVe {
+  background-color: #243347 !important;
+  color: #fff !important;
+}
+.sc-gFqAkR {
+  background-color: #243347 !important;
+  color: #fff !important;
+}
+.bg-gradient {
+  background: linear-gradient(to right, #199ad13d, #06afb2);
+}
+
+.grad-blur {
+  background-image: linear-gradient(rgba(0, 18, 41, 0), #001229);
+}
+.grad-blur2 {
+  background-image: linear-gradient(to right, #001229, rgba(0, 18, 41, 0));
 }

@@ -20,7 +20,7 @@ const Navbar = () => {
           <GoDotFill className="w-[20px] h-[20px] text-[#F44237] absolute -top-2 -right-2" />
         </Link>
         <button
-          onClick={() => setIsDropdownOpen((prev) => !prev)}
+          onClick={() => navigate("/profile", "Profile")}
           className="flex items-center gap-2 relative"
         >
           <img
@@ -35,10 +35,10 @@ const Navbar = () => {
             <p className="text-[11px] font-medium text-white">Kevin Brian</p>
           </div>
 
-          <button className="text-xl text-white">
+          {/* <button className="text-xl text-white">
             <RxCaretDown />
-          </button>
-          <div
+          </button> */}
+          {/* <div
             className={`w-[120px] h-[60px] rounded-[12px] absolute top-12 shadow-md p-3 transition-all duration-300 flex flex-col justify-start items-start gap-2 right-0 bg-[#21344C] z-[1000] ${
               isDropdownOpen ? "scale-100" : "scale-0"
             }`}
@@ -57,7 +57,7 @@ const Navbar = () => {
             >
               Settings
             </button>
-          </div>
+          </div> */}
         </button>
       </div>
     </div>

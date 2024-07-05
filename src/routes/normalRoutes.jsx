@@ -102,8 +102,8 @@ export const normalRoutes = [
     page: <GlobalLayout page={<DeactivatedEmployees />} />,
   },
   {
-    title: "Terms Of Services",
-    url: "/terms-of-services",
+    title: "Terms & Conditions",
+    url: "/terms-and-conditions",
     page: <GlobalLayout page={<TermsOfServices />} />,
   },
   {

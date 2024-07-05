@@ -4,6 +4,7 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats, TbCaretDownFilled } from "react-icons/tb";
 import DateModal from "../../components/tasks/DateModal";
+import AssignCompleteModal from "../../components/tasks/AssignCompleteModal";
 
 const AddTask = () => {
   const { navigate } = useContext(GlobalContext);
@@ -16,6 +17,16 @@ const AddTask = () => {
       setIsTaskDropdownOpen((prev) => !prev);
     }
   };
+  const recurringRef = useRef(null);
+  const [recurringDropdown, setRecurringDropdown] = useState(false);
+
+  const toggleRecurringDropdown = (e) => {
+    if (recurringRef.current && !recurringRef.current.contains(e.target)) {
+      setRecurringDropdown((prev) => !prev);
+    }
+  };
+
+  const [hasAssigned, setHasAssigned] = useState(false);
 
   return (
     <div className="w-full h-auto min-h-screen overflow-y-auto bg-[#1A293D] text-white p-4 pb-20 flex flex-col justify-start items-start">
@@ -127,8 +138,58 @@ const AddTask = () => {
                 <span className="text-md font-normal text-white">
                   Recurring Days
                 </span>
-                <button className="text-xs font-normal text-[#199BD1]">
-                  None
+                <button
+                  onClick={toggleRecurringDropdown}
+                  className="text-xs flex flex-col justify-start items-start font-normal text-[#199BD1] relative"
+                >
+                  <span>None</span>
+                  <div
+                    ref={recurringRef}
+                    className={`w-[164px] h-32 overflow-y-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
+                      recurringDropdown ? "scale-100" : "scale-0"
+                    } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
+                  >
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        None
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        30 days
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        45 days
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        60 days
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        90 days
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        180 days
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        1 year
+                      </span>
+                    </div>
+                    <div className="w-full flex justify-start items-start gap-2">
+                      <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                        Custom
+                      </span>
+                    </div>
+                  </div>
                 </button>
               </div>
             </div>
@@ -145,9 +206,18 @@ const AddTask = () => {
             >
               {"Back"}
             </button>
-            <button className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]">
+            <button
+              onClick={() => {
+                setHasAssigned(true);
+              }}
+              className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+            >
               {"Save"}
             </button>
+            <AssignCompleteModal
+              isOpen={hasAssigned}
+              setIsOpen={setHasAssigned}
+            />
           </div>
         </div>
       </div>

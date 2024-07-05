@@ -2,9 +2,15 @@ import React, { useState } from "react";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import { AuthMockup } from "../../assets/export";
 import { FiEdit, FiEdit2 } from "react-icons/fi";
+import PhoneEditModal from "../../components/global/PhoneEditModal";
+import VerifyPhoneEditOtp from "../../components/global/VerifyPhoneEditOtp";
+import PhoneUpdateSuccess from "../../components/global/PhoneUpdateSuccess";
 
 const UserManagementPage = () => {
   const [edit, setEdit] = useState(false);
+  const [verifyOtp, setVerifyOtp] = useState(false);
+  const [phoneUpdated, setPhoneUpdated] = useState(false);
+
   return (
     <div className="w-full flex flex-col gap-6 px-5 pb-5 md:px-0">
       <div className="w-full flex flex-col  gap-8 justify-between items-start">
@@ -33,21 +39,21 @@ const UserManagementPage = () => {
               alt="user_image"
               className="w-full h-full rounded-full"
             />
-            {edit && (
+            {/* {edit && (
               <button className="w-6 h-6 rounded-full bg-blue-600 absolute bottom-1 right-2 flex items-center justify-center text-sm">
                 <FiEdit />
               </button>
-            )}
+            )} */}
           </div>
           <div className="w-full h-auto flex justify-start items-start gap-4">
             <AddFleetInput
               label={"First Name"}
-              disabled={!edit}
+              disabled={true}
               state={"Mike"}
             />
             <AddFleetInput
               label={"Last Name"}
-              disabled={!edit}
+              disabled={true}
               state={"Smith"}
             />
           </div>
@@ -59,15 +65,29 @@ const UserManagementPage = () => {
             />
             <AddFleetInput
               label={"Phone Number"}
-              disabled={!edit}
+              disabled={true}
               state={"000 000 0000"}
             />
           </div>
-
           {edit && (
-            <button className="w-full h-[52px] rounded-xl mt-6 bg-[#119bd1] text-white flex items-center justify-center text-sm font-medium">
-              Update
-            </button>
+            <PhoneEditModal
+              isOpen={edit}
+              setIsOpen={setEdit}
+              setVerifyOtp={setVerifyOtp}
+            />
+          )}
+          {verifyOtp && (
+            <VerifyPhoneEditOtp
+              isOpen={verifyOtp}
+              setIsOpen={setVerifyOtp}
+              setPhoneUpdated={setPhoneUpdated}
+            />
+          )}
+          {phoneUpdated && (
+            <PhoneUpdateSuccess
+              isOpen={phoneUpdated}
+              setIsOpen={setPhoneUpdated}
+            />
           )}
         </div>
       </div>

@@ -9,13 +9,13 @@ const Splash = () => {
   const { navigate } = useContext(GlobalContext);
   return (
     <div className="bg-[#001229] w-screen h-screen flex flex-col gap-32 pt-[136px]  justify-start items-center relative">
-      <span className="w-[286px] h-[286px] rounded-full bg-[#00638C] blur-[75px] flex items-center justify-center absolute top-16 left-[calc(50%-143px)]" />
-      <img src={SplashLogo} alt="splash_logo" className="z-50 " />
+      <span className="w-[396px] h-[396px] rounded-full bg-[#00638C] blur-[105px] flex items-center justify-center absolute top-16 left-[calc(50%-193px)]" />
+      <img src={SplashLogo} alt="splash_logo" className="z-50 w-[551.88px] " />
 
       <div className="w-auto flex flex-col gap-8 px-4 md:px-0 justify-center items-center">
         <div className="flex flex-col gap-4 justify-center items-center">
           <h1 className="text-[32px] text-center font-bold leading-[43.2px] text-white">
-            Will you be managing boats with a Team?
+            Welcome to Nautical Bliss!
           </h1>
           <p className="text-[16px] text-center font-medium leading-[21.6px] text-white">
             Your Command Center For Smooth Sailing

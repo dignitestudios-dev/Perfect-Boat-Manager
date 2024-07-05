@@ -33,7 +33,7 @@ const DateModal = ({ isOpen, setIsOpen }) => {
     >
       <div
         ref={dateRef}
-        className="w-full lg:w-[748px] h-auto md:h-[547px] divide-x-2 divide-[#eaeaea] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex  justify-start items-start bg-[#243347] rounded-3xl"
+        className="w-full lg:w-[748px] h-auto md:h-[557px] divide-x-2 divide-[#eaeaea] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex  justify-start items-start bg-[#243347] rounded-3xl"
       >
         <div className="w-[40%] md:flex hidden h-full  p-10  flex-col justify-between items-center">
           <h1 className="text-[#fff]/[0.5] text-xl font-medium">
@@ -47,8 +47,8 @@ const DateModal = ({ isOpen, setIsOpen }) => {
           </h1>
         </div>
         <div className="w-full md:w-[60%] px-2 pt-10 pb-4 h-full flex flex-col gap-4 justify-start items-start">
-          <div className="w-full flex flex-col justify-start items-start  px-8">
-            <h1 className="text-2xl font-bold">Select Date</h1>
+          <div className="w-full flex flex-col gap-1 justify-start items-start  px-8">
+            <h1 className="text-2xl text-white font-bold">Select Date</h1>
             <p className="text-md text-white/50 font-normal">
               Choose the perfect date for the task deadline
             </p>
@@ -59,7 +59,7 @@ const DateModal = ({ isOpen, setIsOpen }) => {
           >
             <Application
               theme={theme}
-              className="w-full h-[22rem] bg-[#243347] flex gap-4 flex-col items-center justify-start"
+              className="w-full h-[23rem] bg-[#243347] flex gap-4 flex-col items-center justify-start"
             >
               <Card
                 className="rainbow-p-around_large bg-[#243347] w-full h-full"
