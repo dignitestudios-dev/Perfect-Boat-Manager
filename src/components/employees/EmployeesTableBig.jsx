@@ -25,7 +25,7 @@ const EmployeesTableBig = () => {
   return (
     <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
       <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-        Employee List{" "}
+        Employees List{" "}
         <span className="text-[12px] font-normal text-white/50 ">(723)</span>
       </h3>
 
@@ -52,7 +52,7 @@ const EmployeesTableBig = () => {
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">
         <div className="w-full grid grid-cols-5 text-[13px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
-          <span className="w-full flex justify-start items-center">Name</span>
+          <span className="w-full flex justify-start items-center">Employee Name</span>
           <span className="w-full flex justify-start items-center">Email</span>
           <button
             onClick={toggleJobModal}
@@ -135,9 +135,9 @@ const EmployeesTableBig = () => {
               </div>
             </div>
           </button>
-          <span className="w-full flex justify-start items-center">Action</span>
+          <span className="w-full flex justify-start items-center px-[170px]">Action</span>
         </div>
-        <div className="w-full h-10 grid grid-cols-5 border-b cursor-pointe border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+        <div className="w-full h-10 grid grid-cols-5 border-b cursor-pointer border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
           <span
             onClick={() => navigate("/employees/1", "Employees")}
             className="w-full flex justify-start items-center cursor-pointer"
@@ -153,7 +153,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -178,7 +178,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -203,7 +203,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -228,7 +228,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -253,7 +253,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -278,7 +278,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -303,7 +303,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -328,7 +328,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -353,7 +353,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -378,7 +378,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -403,7 +403,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -428,7 +428,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -454,7 +454,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -480,7 +480,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -506,7 +506,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -532,7 +532,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -558,7 +558,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -584,7 +584,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -610,7 +610,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -636,7 +636,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -662,7 +662,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -688,7 +688,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -714,7 +714,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -740,7 +740,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -765,7 +765,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -790,7 +790,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -815,7 +815,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -840,7 +840,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -865,7 +865,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -890,7 +890,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -915,7 +915,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -940,7 +940,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -965,7 +965,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -990,7 +990,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1015,7 +1015,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1040,7 +1040,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1066,7 +1066,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1092,7 +1092,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1118,7 +1118,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1144,7 +1144,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1170,7 +1170,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1196,7 +1196,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1222,7 +1222,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1248,7 +1248,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1274,7 +1274,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1300,7 +1300,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1326,7 +1326,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>
@@ -1352,7 +1352,7 @@ const EmployeesTableBig = () => {
           <span className="w-full flex justify-start items-center ">
             East California Dock
           </span>
-          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+          <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
             <span className=" flex justify-start items-center ">
               <FaRegEdit />
             </span>

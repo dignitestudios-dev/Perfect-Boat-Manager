@@ -57,7 +57,7 @@ export const sidebarArr = [
     icon: <MdOutlinePrivacyTip />,
   },
   {
-    title: "Terms & Conditions",
+    title: "Terms of Services",
     url: "/terms-and-conditions",
     icon: <IoIosCheckmarkCircleOutline />,
   },

@@ -33,7 +33,7 @@ const DateModal = ({ isOpen, setIsOpen }) => {
     >
       <div
         ref={dateRef}
-        className="w-full lg:w-[748px] h-auto md:h-[557px] divide-x-2 divide-[#eaeaea] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex  justify-start items-start bg-[#243347] rounded-3xl"
+        className="w-full lg:w-[748px] h-auto md:h-[557px] divide-x-2 divide-[#1A293D] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex  justify-start items-start bg-[#243347] rounded-3xl"
       >
         <div className="w-[40%] md:flex hidden h-full  p-10  flex-col justify-between items-center">
           <h1 className="text-[#fff]/[0.5] text-xl font-medium">
@@ -79,9 +79,10 @@ const DateModal = ({ isOpen, setIsOpen }) => {
             </Application>
           </div>
 
-          <button className="w-full h-14 rounded-lg flex justify-center items-center text-md font-medium bg-[#199BD1] text-white">
-            Save
+          <button className="w-3/4 h-14 px-4 ml-11 rounded-lg flex justify-center items-center text-md font-medium bg-[#199BD1] text-white">
+             Save
           </button>
+
         </div>
       </div>
     </div>

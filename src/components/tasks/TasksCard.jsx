@@ -14,7 +14,7 @@ const TasksCard = () => {
         <div className="w-full h-auto flex justify-between items-center">
           <h3 className="text-[20px] font-bold leading-[27px]">Boat A</h3>
           <span className="w-[70px] h-[27px] rounded-full bg-[#FFCC00]/[0.12] text-[11px] font-medium leading-[14.85px] flex items-center justify-center text-[#FFCC00]">
-            In-Progress
+            Recurring
           </span>
         </div>
         <div className="w-auto flex flex-col justify-start items-start gap-1">
@@ -22,7 +22,7 @@ const TasksCard = () => {
             Oil Cleaning
           </span>
           <span className="text-[16px] font-normal leading-[21.6px] text-white/50">
-            Created By: <span className="font-medium">David</span>
+            Created y: <span className="font-medium">David</span>
           </span>
         </div>
         <div className="absolute bottom-3 left-3 w-[calc(100%-1.5rem)] flex justify-between items-center">

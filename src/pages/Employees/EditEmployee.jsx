@@ -108,7 +108,7 @@ const EditEmployee = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">
@@ -133,7 +133,7 @@ const EditEmployee = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">
@@ -158,7 +158,7 @@ const EditEmployee = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">
@@ -183,7 +183,7 @@ const EditEmployee = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">
@@ -208,7 +208,7 @@ const EditEmployee = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">

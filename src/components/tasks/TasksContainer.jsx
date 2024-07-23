@@ -49,7 +49,7 @@ const TasksContainer = () => {
               All
             </button>
             <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]/[0.5]">
-              In-Progress
+              Recurring
             </button>
             <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]/[0.5]">
               Completed
@@ -74,25 +74,25 @@ const TasksContainer = () => {
               } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-9 right-0`}
             >
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   None
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Latest
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Earliest
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Calendar
                 </span>

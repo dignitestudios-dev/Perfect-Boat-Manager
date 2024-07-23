@@ -18,7 +18,7 @@ const TaskDetail = () => {
                 Task
               </h3>
               <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-                In-Progress
+                Recurring
               </span>
             </div>
 
@@ -61,7 +61,7 @@ const TaskDetail = () => {
             <div className="w-full grid grid-cols-1 gap-12">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                 <label className="text-[16px] font-medium leading-[21.6px]">
-                  {"Add Note"}
+                  {"Note"}
                 </label>
                 <textarea
                   type="text"

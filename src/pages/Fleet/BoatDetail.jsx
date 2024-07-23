@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
-import { FaRegEdit } from "react-icons/fa";
+import { FaCaretDown, FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { TbCaretDownFilled } from "react-icons/tb";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
@@ -10,6 +10,14 @@ import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
 
 const BoatDetail = () => {
   const { navigate } = useContext(GlobalContext);
+  const [jobFilter, setJobFilter] = useState(false);
+  const jobRef = useRef(null);
+
+  const toggleJobModal = (e) => {
+    if (jobRef.current && !jobRef.current.contains(e.target)) {
+      setJobFilter((prev) => !prev);
+    }
+  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
@@ -131,9 +139,46 @@ const BoatDetail = () => {
             <span className="w-full flex justify-start items-center">
               Boat Name
             </span>
-            <span className="w-full flex justify-start items-center">
-              Task Type
-            </span>
+            <button
+            onClick={toggleJobModal}
+            className="w-auto flex flex-col gap-1 justify-start items-start relative"
+          >
+            <div className="w-auto flex gap-1 justify-start items-center ">
+              <span>Task Type</span>
+              <FaCaretDown />
+            </div>
+            <div
+              ref={jobRef}
+              className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
+                jobFilter ? "scale-100" : "scale-0"
+              } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
+            >
+              <div className="w-full flex justify-start items-start gap-2">
+                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                  Hull Cleaning
+                </span>
+              </div>
+              <div className="w-full flex justify-start items-start gap-2">
+                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                  Hull Cleaning
+                </span>
+              </div>
+              <div className="w-full flex justify-start items-start gap-2">
+                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                  Hull Cleaning
+                </span>
+              </div>
+              <div className="w-full flex justify-start items-start gap-2">
+                <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
+                 Hull Cleaning
+                </span>
+              </div>
+            </div>
+          </button>
             <span className="w-full flex justify-start items-center">
               Due Date
             </span>
@@ -143,7 +188,7 @@ const BoatDetail = () => {
             <span className="w-full flex justify-start items-center">
               Status
             </span>
-            <span className="w-full flex justify-start items-center">
+            <span className="w-full flex justify-start items-center px-[80px]">
               Action
             </span>
           </div>
@@ -164,9 +209,9 @@ const BoatDetail = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
                 <FaRegEdit />
               </span>
@@ -192,9 +237,9 @@ const BoatDetail = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
                 <FaRegEdit />
               </span>
@@ -220,9 +265,9 @@ const BoatDetail = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
                 <FaRegEdit />
               </span>
@@ -248,9 +293,9 @@ const BoatDetail = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
                 <FaRegEdit />
               </span>
@@ -276,9 +321,9 @@ const BoatDetail = () => {
               90 days
             </span>
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              In-Progress
+              Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px] ">
               <span className=" flex justify-start items-center ">
                 <FaRegEdit />
               </span>

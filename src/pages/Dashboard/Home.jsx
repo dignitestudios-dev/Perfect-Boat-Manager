@@ -13,7 +13,7 @@ const Home = () => {
         <div className="w-auto flex flex-col gap-8 px-4 md:px-0 justify-center items-center">
           <div className="flex flex-col gap-4 justify-center items-center">
             <h1 className="text-[32px] text-center font-bold leading-[43.2px] text-white">
-              You have no task yet!
+              You have no tasks yet!
             </h1>
             <p className="text-[14px] text-center font-normal leading-[18.6px] text-white">
               Click below to create you first task
