@@ -69,7 +69,7 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
             ✕
           </button>
           <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-            Boats List{" "}
+            Select Boats{" "}
             <span className="text-[12px] font-normal text-white/50 ">(723)</span>
           </h3>
 

@@ -30,6 +30,17 @@ export const sidebarArr = [
     title: "Employees",
     url: "/employees",
     icon: <FiUsers />,
+    submenu: [
+      {
+        title: "All Employees",
+        url: "/employees",
+      },
+
+      {
+        title: "Add Employee",
+        url: "add-employee",
+      },
+    ],
   },
   {
     title: "Boat",
