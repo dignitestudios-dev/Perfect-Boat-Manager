@@ -10,10 +10,10 @@ const AddEmployee = () => {
       <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">
         <div className="w-full h-auto flex flex-col lg:flex-row justify-between gap-3 lg:items-center">
           <div>
-            <h1 className="text-[28px] font-bold text-white leading-[37.8px]">
-              Employee
+            <h1 className="text-[18px] font-bold  text-white leading-[24.3px]">
+             Add Employee
             </h1>
-            <span className="text-[14px] font-normal leading-[21.6px]">
+            {/* <span className="text-[14px] font-normal leading-[21.6px]">
               Experience the power of simplified fleet management today. Whether
               you are assigning task or tracking boat maintenance,
               <br />{" "}
@@ -21,7 +21,7 @@ const AddEmployee = () => {
                 The Perfect Boat
               </span>{" "}
               has you covered at every step of the journey.
-            </span>
+            </span> */}
           </div>
           <button className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5">
             Import CSV
@@ -31,9 +31,9 @@ const AddEmployee = () => {
           <div className="w-full flex flex-col justify-start items-start gap-6">
             <div className="w-full h-auto flex justify-between items-center">
               <div>
-                <h3 className="text-[18px] font-bold leading-[24.3px]">
+                {/* <h3 className="text-[18px] font-bold leading-[24.3px]">
                   Add Employee
-                </h3>
+                </h3> */}
               </div>
             </div>
             <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
