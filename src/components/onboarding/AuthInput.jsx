@@ -33,7 +33,7 @@ const AuthInput = ({ state, setState, text, type, error, placeholder }) => {
             }}
           >
             {type == "password" &&
-              (!isPassVisible ? <BsEye /> : <BsEyeSlash />)}
+              (!isPassVisible ? <BsEyeSlash /> : <BsEye />)}
           </button>
         </div>
       </div>
