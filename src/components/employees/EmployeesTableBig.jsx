@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaCaretDown, FaRegEdit } from "react-icons/fa";
+import DeletedModal from "../global/DeletedModal";
 
 const EmployeesTableBig = () => {
   const { navigate } = useContext(GlobalContext);
@@ -28,8 +29,12 @@ const EmployeesTableBig = () => {
   };
 
   const handleDeleteClick = () => {
-    navigate("/edit-employee/1");
+    setIsDeletedModalOpen(true); // Open DeletedModal
   };
+  
+
+  const [isDeletedModalOpen, setIsDeletedModalOpen] = useState(false);
+
 
   return (
     <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -220,6 +225,11 @@ const EmployeesTableBig = () => {
           </div>
         </div>
       </div>
+      <DeletedModal 
+  isOpen={isDeletedModalOpen} 
+  onClose={() => setIsDeletedModalOpen(false)} 
+/>
+
     </div>
   );
 };

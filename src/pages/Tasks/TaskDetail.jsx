@@ -31,13 +31,15 @@ const TaskDetail = () => {
             </button>
           </div>
           <div className="w-full h-auto flex flex-col  justify-start items-start gap-4 ">
-            <div className="w-[327px] h-[90px] flex gap-3 justify-start items-center rounded-[12px] bg-[#1A293D] p-2">
+          <div className="w-full h-auto grid grid-cols-2 gap-12">
+            {/* Boat Name and Assign Employee section */}
+            <div className="w-full lg:w-[327px] h-[90px] flex gap-3 justify-start items-center rounded-[12px] bg-[#1A293D] p-2">
               <img
                 src={AuthMockup}
                 alt="taskimage"
                 className="w-[106px] h-[74px] rounded-[12px]"
               />
-              <div className="w-auto flex flex-col  justify-start items-start">
+              <div className="w-auto flex flex-col justify-start items-start">
                 <h3 className="text-[16px] font-medium leading-[21.6px] text-white">
                   Boat Name A
                 </h3>
@@ -46,6 +48,10 @@ const TaskDetail = () => {
                 </p>
               </div>
             </div>
+            <div className="w-full h-auto flex flex-col gap-1 justify-between items-start">
+              <AddFleetInput label={"Task Created By"} state={"Jack Smith"} />
+            </div>
+          </div>
             <div className="w-full grid grid-cols-2 gap-12">
               <AddFleetInput
                 label={"Task Type"}

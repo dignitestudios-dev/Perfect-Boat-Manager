@@ -7,6 +7,10 @@ import AddFleetInput from "../../components/fleet/AddFleetInput";
 import AddFleetImage from "../../components/fleet/AddFleetImage";
 import { AuthMockup } from "../../assets/export";
 import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
+import DateModal from "../../components/tasks/DateModal";
+import AssignedModal from "../Tasks/AssignedModal";
+import { MdOutlineDateRange } from "react-icons/md";
+import DeletedModal from "../../components/global/DeletedModal";
 
 const BoatDetail = () => {
   const { navigate } = useContext(GlobalContext);
@@ -18,7 +22,28 @@ const BoatDetail = () => {
       setJobFilter((prev) => !prev);
     }
   };
+
+
+  const handleDeleteClick = () => {
+    setIsDeletedModalOpen(true); // Open DeletedModal
+  };
+  
+  const handleDateModalOpen = () => {
+    setIsDateModalOpen(true); // Open DateModal
+  };
+
+  const handleViewAllClick = () => {
+    setIsAssignedModalOpen(true); // Open AssignedModal instead of navigating
+  };
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDateModalOpen, setIsDateModalOpen] = useState(false); // Add state for DateModal
+  const [isAssignedModalOpen, setIsAssignedModalOpen] = useState(false);
+  const [isDeletedModalOpen, setIsDeletedModalOpen] = useState(false);
+
+  
+
+
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -127,7 +152,7 @@ const BoatDetail = () => {
             Assigned Tasks{" "}
           </h3>
           <button
-            onClick={() => setIsModalOpen(true)}
+            onClick={handleViewAllClick}
             className="text-[14px] font-medium bg-[#199bd1]/[0.2] h-8 rounded-full w-[70px] text-[#199bd1]"
           >
             View All
@@ -179,9 +204,13 @@ const BoatDetail = () => {
               </div>
             </div>
           </button>
-            <span className="w-full flex justify-start items-center">
-              Due Date
-            </span>
+          <div
+              className="w-full flex justify-start items-center cursor-pointer"
+              onClick={handleDateModalOpen} // Handle click to open DateModal
+            >
+             <MdOutlineDateRange className="mr-1 text-lg" />
+             Due Date
+            </div>
             <span className="w-full flex justify-start items-center">
               Recurring Days
             </span>
@@ -193,7 +222,7 @@ const BoatDetail = () => {
             </span>
           </div>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
+            // onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
             <span className="w-full flex justify-start items-center">
@@ -213,15 +242,16 @@ const BoatDetail = () => {
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit   onClick={() => navigate("/tasks/1", "All Tasks")}
+ />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+                <RiDeleteBinLine   onClick={handleDeleteClick}                />
               </span>
             </div>
           </button>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
+            // onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
             <span className="w-full flex justify-start items-center">
@@ -241,15 +271,16 @@ const BoatDetail = () => {
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit   onClick={() => navigate("/tasks/1", "All Tasks")}
+ />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+                <RiDeleteBinLine   onClick={handleDeleteClick}                />
               </span>
             </div>
           </button>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
+            // onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
             <span className="w-full flex justify-start items-center">
@@ -269,15 +300,16 @@ const BoatDetail = () => {
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit   onClick={() => navigate("/tasks/1", "All Tasks")}
+ />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+                <RiDeleteBinLine   onClick={handleDeleteClick}                />
               </span>
             </div>
           </button>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
+            // onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
             <span className="w-full flex justify-start items-center">
@@ -297,15 +329,16 @@ const BoatDetail = () => {
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit   onClick={() => navigate("/tasks/1", "All Tasks")}
+ />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+                <RiDeleteBinLine   onClick={handleDeleteClick}                />
               </span>
             </div>
           </button>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
+            // onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
             <span className="w-full flex justify-start items-center">
@@ -323,12 +356,13 @@ const BoatDetail = () => {
             <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
               Recurring
             </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px] ">
+            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit   onClick={() => navigate("/tasks/1", "All Tasks")}
+ />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+                <RiDeleteBinLine   onClick={handleDeleteClick}                />
               </span>
             </div>
           </button>
@@ -343,7 +377,23 @@ const BoatDetail = () => {
           {"Back"}
         </button>
       </div>
+      <DateModal isOpen={isDateModalOpen} setIsOpen={setIsDateModalOpen} />
+      {isAssignedModalOpen && (
+        <AssignedModal
+          handleViewAllClick={handleViewAllClick} // Pass the function if needed in the modal
+          setIsOpen={setIsAssignedModalOpen}
+        />
+      )}
+
+
+<DeletedModal 
+  isOpen={isDeletedModalOpen} 
+  onClose={() => setIsDeletedModalOpen(false)} 
+/>
+
     </div>
+   
+    
   );
 };
 
