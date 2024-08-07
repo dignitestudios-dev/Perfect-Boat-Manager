@@ -1,8 +1,9 @@
 import React from 'react';
-import { MdAccessTime } from "react-icons/md";
-import { TbSailboat } from "react-icons/tb";
+import { HiOutlineUserGroup } from "react-icons/hi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
-const EmployeeAddModal = ({ isOpen, onClose }) => {
+
+const CongratsModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
@@ -19,15 +20,16 @@ const EmployeeAddModal = ({ isOpen, onClose }) => {
           </svg>
         </button>
         <div className="p-4 text-center items-center">
-          <TbSailboat className="mx-auto mb-4 text-[#36B8F3] bg-[#001F3F] p-2 w-14 h-14 rounded-full" />
+          <IoMdCheckmarkCircleOutline 
+          className="mx-auto mb-4 text-[#36B8F3] bg-[#001F3F] p-2 w-14 h-14 rounded-full" />
           {/* <MdAccessTime className="mx-auto mb-4 text-[#36B8F3] bg-[#001F3F] p-2 w-12 h-12 rounded-full" /> */}
-          <h1 className="mb-2 text-2xl text-white font-bold">Congratulations</h1>
-          <p className="mb-6 text-lg font-normal text-white">You've expanded your workforce with a new employee.</p>
-          <p className="mb-5 text-md text-white underline">Add More</p>
+          <h1 className="mb-2 text-lg text-white font-bold">CSV Imported Successfully</h1>
+          {/* <p className="mb-6 text-lg font-normal text-white">You've expanded your workforce with a new employee.</p>
+          <p className="mb-5 text-md text-white underline">Add More</p> */}
         </div>
       </div>
     </div>
   );
 };
 
-export default EmployeeAddModal;
+export default CongratsModal;

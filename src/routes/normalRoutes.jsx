@@ -20,6 +20,7 @@ import AssignReportedTask from "../pages/Tasks/AssignReportedTask";
 import EditTask from "../pages/Tasks/EditTask";
 import NewTaskRequestPage from "../pages/Tasks/NewTaskRequestPage";
 import NewTasksRequests from "../pages/Tasks/NewTasksRequests";
+import TaskCompleted from "../pages/Tasks/TaskCompleted";
 import TaskDetail from "../pages/Tasks/TaskDetail";
 import Tasks from "../pages/Tasks/Tasks";
 import BlogDetails from "../pages/TidesTalesAndGuide/BlogDetails";
@@ -149,5 +150,10 @@ export const normalRoutes = [
         page={<SettingsLayout page={<NotificationSettingsPage />} />}
       />
     ),
+  },
+  {
+    title: "Task Completed",
+    url: "/task-completed",
+    page: <GlobalLayout page={<TaskCompleted />} />,
   },
 ];

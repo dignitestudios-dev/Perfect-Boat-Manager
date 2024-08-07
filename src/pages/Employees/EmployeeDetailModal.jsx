@@ -58,7 +58,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
                 className="w-72 h-10 bg-[#2A394C] text-white px-4 rounded-md outline-none"
               />
               <button
-                onClick={() => console.log('Search triggered')} // Implement search functionality here
+                onClick={() => setIsOpen(false)} // Implement search functionality here
                 className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
               >
                 Done
