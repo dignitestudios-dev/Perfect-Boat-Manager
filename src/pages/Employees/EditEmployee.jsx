@@ -126,7 +126,7 @@ const EditEmployee = () => {
                 </button> */}
                 <button
                   onClick={handleViewAllClick}
-                  className="ml-[290px] flex items-center gap-2 text-white font-medium bg-[#199BD1] hover:bg-[#002240] px-4 py-2 rounded-lg"
+                  className="ml-28 justify-left flex items-center gap-2 text-white font-medium bg-[#199BD1] hover:bg-[#002240] px-4 py-2 rounded-lg"
                 >
                   Assign New Task
                 </button>

@@ -4,14 +4,17 @@ const NotificationSettingsPage = () => {
   return (
     <div className="w-full flex flex-col gap-6 px-5 pb-5 md:px-0">
       <div className="w-full flex justify-start items-start">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-[24px] font-bold leading-[32.4px]">
-            Notifications
-          </h1>
-          <p className="text-[12px] leading-[16.2px] text-white/50">
-            Stay update with important alerts and reminders. Manage your
-            notifications for a <br /> personalized experinece.
-          </p>
+      <div className="flex w-full justify-between items-start">
+          <div>
+            <h1 className="text-[24px] font-bold leading-[32.4px]">Notifications</h1>
+            <p className="text-xsm leading-[20px] text-gray-500 mt-2">
+            Tailor your voyage notifications to perfection. Stay informed with alerts that matter most on
+            <br /> your Nautical Journey.
+            </p>
+          </div>
+          <button className="bg-[#119bd1] text-white px-4 py-2 rounded-lg text-sm font-medium">
+            Save Changes
+          </button>
         </div>
       </div>
       <div className="w-full flex flex-col gap-4">

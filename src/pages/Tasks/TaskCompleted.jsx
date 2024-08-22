@@ -1,12 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { TiPencil } from "react-icons/ti";
 import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats } from "react-icons/tb";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { AuthMockup } from "../../assets/export";
+import AddFleetImage from "../../components/fleet/AddFleetImage";
+import TaskCompletedModal from "./TaskCompletedModal";
 
 const TaskCompleted = () => {
   const { navigate } = useContext(GlobalContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
@@ -44,50 +55,10 @@ const TaskCompleted = () => {
                 <p className="text-gray-400 text-xs">(Optional)</p>
               </div>
               <div className="w-full h-auto flex flex-wrap justify-start items-start gap-4">
-                <div className="w-full md:w-[175px] h-[147px] rounded-xl text-3xl flex flex-col items-center justify-center">
-                  <img
-                    src={AuthMockup}
-                    alt="boatimage"
-                    className="w-full h-full rounded-xl"
-                  />
-                  <label className="flex items-center gap-2 mt-2">
-                    <input type="radio" name="boat-image" value="1" />
-                    <p className="text-xs">Select as cover photo</p>
-                  </label>
-                </div>
-                <div className="w-full md:w-[175px] h-[147px] rounded-xl text-3xl flex flex-col items-center justify-center">
-                  <img
-                    src={AuthMockup}
-                    alt="boatimage"
-                    className="w-full h-full rounded-xl"
-                  />
-                  <label className="flex items-center gap-2 mt-2">
-                    <input type="radio" name="boat-image" value="2" />
-                    <p className="text-xs">Select as cover photo</p>
-                  </label>
-                </div>
-                <div className="w-full md:w-[175px] h-[147px] rounded-xl text-3xl flex flex-col items-center justify-center">
-                  <img
-                    src={AuthMockup}
-                    alt="boatimage"
-                    className="w-full h-full rounded-xl"
-                  />
-                  <label className="flex items-center gap-2 mt-2">
-                    <input type="radio" name="boat-image" value="3" />
-                    <p className="text-xs">Select as cover photo</p>
-                  </label>
-                </div>
-                <div className="w-full md:w-[175px] h-[147px] rounded-xl text-3xl flex flex-col items-center justify-center">
-                  <img
-                    src={AuthMockup}
-                    alt="boatimage"
-                    className="w-full h-full rounded-xl"
-                  />
-                  <label className="flex items-center gap-2 mt-2">
-                    <input type="radio" name="boat-image" value="4" />
-                    <p className="text-xs">Select as cover photo</p>
-                  </label>
-                </div>
+                <AddFleetImage />
+                <AddFleetImage />
+                <AddFleetImage />
+                <AddFleetImage />
               </div>
             </div>
             <div className="w-full grid grid-cols-1 gap-12 mt-4">
@@ -132,11 +103,18 @@ const TaskCompleted = () => {
           >
             Back
           </button>
-          <button className="w-full lg:w-[208px] h-[52px] bg-[#1FBA46] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]">
-          Save
+          <button
+            type="button"
+            onClick={openModal}
+            className="w-full lg:w-[208px] h-[52px] bg-[#1FBA46] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+          >
+            Save
           </button>
         </div>
       </div>
+
+      {/* TaskCompletedModal Component */}
+      <TaskCompletedModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
     </div>
   );
 };

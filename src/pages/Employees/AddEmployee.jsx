@@ -45,7 +45,7 @@ const AddEmployee = () => {
             </div>
           </div>
           <div className="w-full flex justify-end mt-10 items-center gap-4">
-            <button
+            {/* <button
               type="button"
               onClick={() => {
                 navigate(-1, "Employees");
@@ -53,7 +53,7 @@ const AddEmployee = () => {
               className="w-full lg:w-[208px] h-[52px] bg-[#02203A] text-[#199BD1] rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
             >
               Back
-            </button>
+            </button> */}
             <button
               className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
               onClick={() => setIsAddModalOpen(true)}

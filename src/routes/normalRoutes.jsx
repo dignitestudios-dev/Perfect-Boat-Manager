@@ -49,7 +49,7 @@ export const normalRoutes = [
   },
   {
     title: "Employee Edit",
-    url: "/edit-employee/:id",
+    url: "/edit-employee",
     page: <GlobalLayout page={<EditEmployee />} />,
   },
   {
