@@ -43,7 +43,7 @@ export const sidebarArr = [
     ],
   },
   {
-    title: "Boat",
+    title: "Boats",
     url: "/boats",
     icon: <TbSailboat />,
   },

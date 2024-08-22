@@ -62,13 +62,15 @@ const AssignReportedTask = () => {
                       e.preventDefault(); // Prevent default anchor behavior
                       setIsEmployeeModalOpen(true); // Show the EmployeeDetailModal
                     }}
-                    className="text-[#199BD1] text-sm font-medium hover:underline"
+                    className="text-[#199BD1] ml-2 text-sm font-medium hover:underline"
                   >
                     Change
                   </a>
                 </div>
-                <AddFleetInput />
-
+                <div className="w-full grid grid-cols-2 gap-12">
+              <AddFleetInput />
+              
+            </div>
                 {/* Horizontal line above the Note label */}
                 <hr className="w-full border-t border-gray-600 my-4" />
                 <label className="text-[16px] font-medium leading-[21.6px]">
@@ -172,7 +174,7 @@ const AssignReportedTask = () => {
         <button
           type="button"
           onClick={handleAssignTask} // Call the assign task function
-          className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+            className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
         >
           {"Assign Reported Task"}
         </button>

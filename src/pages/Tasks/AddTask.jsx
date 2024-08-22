@@ -6,9 +6,11 @@ import { TbCalendarStats, TbCaretDownFilled } from "react-icons/tb";
 import DateModal from "../../components/tasks/DateModal";
 import EmployeeDetailModal from "../Employees/EmployeeDetailModal"; // Ensure the correct path
 import BoatSelectModal from "../Fleet/BoatSelectModal";
+import { FaCaretDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import TaskAssignSucessModal from "./TaskAssignSuccessModal";
 
 const AddTask = () => {
-  const { navigate } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [customInput, setCustomInput] = useState(false);
   const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
@@ -23,6 +25,7 @@ const AddTask = () => {
   const taskTypeDropdownRef = useRef();
   const additionalDropdownRef = useRef();
   const RecurringRef = useRef(null);
+  const navigate = useNavigate();
 
   const toggleDropdown = (e) => {
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -31,13 +34,19 @@ const AddTask = () => {
   };
 
   const toggleTaskTypeDropdown = (e) => {
-    if (taskTypeDropdownRef.current && !taskTypeDropdownRef.current.contains(e.target)) {
+    if (
+      taskTypeDropdownRef.current &&
+      !taskTypeDropdownRef.current.contains(e.target)
+    ) {
       setIsTaskTypeDropdownOpen((prev) => !prev);
     }
   };
 
   const toggleAdditionalDropdown = (e) => {
-    if (additionalDropdownRef.current && !additionalDropdownRef.current.contains(e.target)) {
+    if (
+      additionalDropdownRef.current &&
+      !additionalDropdownRef.current.contains(e.target)
+    ) {
       setIsAdditionalDropdownOpen((prev) => !prev);
     }
   };
@@ -60,7 +69,7 @@ const AddTask = () => {
             </div>
           </div>
           <div className="w-full h-auto flex flex-col justify-start items-start gap-4">
-            <div className="w-full grid grid-cols-2 gap-12">
+            <div className="w-full grid grid-cols-2 gap-5 lg:gap-32">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                 <label className="text-[16px] font-medium leading-[21.6px]">
                   Select Boat
@@ -85,7 +94,7 @@ const AddTask = () => {
                 </button>
               </div>
             </div>
-            <div className="w-full grid grid-cols-2 gap-12">
+            <div className="w-full grid grid-cols-2 gap-5 lg:gap-32">
               <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
                 <label className="text-[16px] font-medium leading-[21.6px]">
                   {"Task Type"}
@@ -114,21 +123,21 @@ const AddTask = () => {
                     } flex-col justify-start items-start gap-3 transition-all duration-500 py-3 absolute -bottom-40 shadow-xl left-0 w-full h-40 max-h-40 bg-[#1A293D] rounded-b-2xl`}
                   >
                     <div className="w-full h-auto overflow-y-auto">
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Type A
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Type B
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Type C
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Type D
                       </button>
                       <button
                         onClick={() => setCustomInput(true)}
-                        className="w-full text-gray-300 h-8 px-5 hover:bg-[#1c1c1c] flex flex-col gap-1 justify-center relative items-start"
+                        className="w-full text-gray-300 h-8 px-5 hover:bg-[#000]/10 flex flex-col gap-1 justify-center relative items-start"
                       >
                         <span>Custom</span>
                         {customInput && (
@@ -175,21 +184,21 @@ const AddTask = () => {
                     } flex-col justify-start items-start gap-3 transition-all duration-500 py-3 absolute -bottom-40 shadow-xl left-0 w-full h-40 max-h-40 bg-[#1A293D] rounded-b-2xl`}
                   >
                     <div className="w-full h-auto overflow-y-auto">
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Option 1
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Option 2
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Option 3
                       </button>
-                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#1c1c1c]">
+                      <button className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10">
                         Option 4
                       </button>
                       <button
                         onClick={() => setCustomInput(true)}
-                        className="w-full text-gray-300 h-8 px-5 hover:bg-[#1c1c1c] flex flex-col gap-1 justify-center relative items-start"
+                        className="w-full text-gray-300 h-8 px-5 hover:bg-[#000]/10 flex flex-col gap-1 justify-center relative items-start"
                       >
                         <span>Custom</span>
                         {customInput && (
@@ -244,7 +253,10 @@ const AddTask = () => {
                 onClick={toggleRecurringDropdown}
                 className="text-xs flex flex-col justify-start items-start font-normal text-[#199BD1] relative"
               >
-                <span>Select Days</span>
+                <span className="flex gap-1 justify-start items-center">
+                  <span>Select Days</span>
+                  <FaCaretDown />
+                </span>
                 <div
                   ref={RecurringRef}
                   className={`w-[164px] h-32 overflow-y-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
@@ -315,17 +327,17 @@ const AddTask = () => {
         )}
       </div>
 
-      <div className="w-full flex mt-8 justify-end items-center gap-6">
+      <div className="w-full flex mt-16 justify-end items-center gap-6">
         <div className="w-auto flex justify-between items-center gap-4">
-          <button
+          {/* <button
             type="button"
             onClick={() => {
-              navigate(-1);
+              navigate("/dashboard");
             }}
             className="w-52 h-[52px] bg-[#02203A] text-[#199BD1] rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
           >
             {"Back"}
-          </button>
+          </button> */}
           <button
             onClick={() => {
               setHasAssigned(true);
@@ -334,6 +346,17 @@ const AddTask = () => {
           >
             {"Save"}
           </button>
+          {/* <TaskAssignedModal
+            isOpen={hasAssigned}
+            // onClick={() => setHasAssigned(false)}
+          /> */}
+
+{hasAssigned && (
+  <TaskAssignSucessModal
+    isOpen={hasAssigned}
+    setIsOpen={setHasAssigned}
+  />
+)}
         </div>
       </div>
     </div>

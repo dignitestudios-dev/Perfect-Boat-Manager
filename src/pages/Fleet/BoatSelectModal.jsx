@@ -60,8 +60,8 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[#000000a0] z-50">
-      <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
-        <div className="relative w-full max-w-4xl h-full bg-[#001229] rounded-lg overflow-auto p-4 lg:p-6">
+      <div className="w-[100%]  h-[90%] lg:w-[953px] lg:h-[680px] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
+        <div className="relative w-full  h-full bg-[#001229] rounded-2xl  p-4 lg:p-6">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute top-4 right-4 text-white text-lg"
@@ -70,12 +70,13 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
           </button>
           <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
             Select Boats{" "}
-            <span className="text-[12px] font-normal text-white/50 ">(723)</span>
+            <span className="text-[12px] font-normal text-white/50 ">
+              (723)
+            </span>
           </h3>
 
           <div className="w-full h-auto flex justify-between items-center mt-4">
             <div className="flex w-1/2 lg:w-[295px] h-[32px] justify-start items-start rounded-[8px] bg-[#1A293D] relative">
-            
               <span className="w-[32px] h-full flex items-center justify-center">
                 <FiSearch className="text-white/50 text-lg" />
               </span>
@@ -86,13 +87,13 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
               />
             </div>
             <button
-                onClick={() => setIsOpen(false)} // Implement search functionality here
-                className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
-              >
-                Done
-              </button>
+              onClick={() => console.log("Search triggered")} // Implement search functionality here
+              className="bg-[#119bd1] text-white px-6 flex items-center justify-center text-[12px] font-bold leading-[16.2px] w-[118px] h-[32px] rounded-md"
+            >
+              Done
+            </button>
           </div>
-          <div className="mt-2">
+          <div className="mt-4">
             <label className="flex items-center text-white/50">
               <input
                 type="checkbox"
@@ -104,9 +105,11 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
             </label>
           </div>
 
-          <div className="w-full flex flex-col gap-1 justify-start items-start mt-4">
+          <div className="w-full h-[80%] overflow-y-auto flex flex-col gap-1 justify-start items-start mt-4">
             <div className="w-full grid grid-cols-5 text-[13px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
-              <span className="w-full flex justify-start items-center">Boat Image</span>
+              <span className="w-full flex justify-start items-center">
+                Boat Image
+              </span>
               <button
                 onClick={toggleBoatTypeModal}
                 className="w-auto flex flex-col gap-1 justify-start items-start relative"
@@ -122,27 +125,40 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
                   } flex flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
                 >
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Type 1
                     </span>
                   </div>
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Type 2
                     </span>
                   </div>
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Type 3
                     </span>
                   </div>
                 </div>
               </button>
-              <span className="w-full flex justify-start items-center">Name</span>
-              <span className="w-full flex justify-start items-center">Model/Make/Size</span>
+              <span className="w-full flex justify-start items-center">
+                Name
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Model/Make/Size
+              </span>
               <button
                 onClick={toggleLocationFilter}
                 className="w-auto flex flex-col gap-1 justify-start items-start relative"
@@ -158,19 +174,28 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
                   } flex flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
                 >
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Location 1
                     </span>
                   </div>
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Location 2
                     </span>
                   </div>
                   <div className="w-full flex justify-start items-start gap-2">
-                    <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
+                    <input
+                      type="checkbox"
+                      className="w-3 h-3 accent-[#199BD1]"
+                    />
                     <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
                       Location 3
                     </span>
@@ -179,41 +204,59 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
               </button>
             </div>
 
-            {Array(5).fill().map((_, index) => (
-              <div
-                key={index}
-                onClick={() => navigate("/boats/1", "Boat")}
-                className="w-full h-auto grid grid-cols-5 cursor-pointer border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-              >
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    className="accent-[#199BD1] mr-2"
-                    checked={selectedBoats[index] || false}
-                    onChange={() => handleSelectBoat(index)}
-                  />
-                  <span className="w-[106px] h-[76px] flex justify-start items-center relative">
-                    <img
-                      src={AuthMockup}
-                      alt="boat_image"
-                      className="w-full h-full rounded-[14px]"
+            {Array(5)
+              .fill()
+              .map((_, index) => (
+                <div
+                  key={index}
+                  className="w-full h-auto grid grid-cols-5 cursor-pointer border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+                >
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      className="accent-[#199BD1] mr-2"
+                      checked={selectedBoats[index] || false}
+                      onChange={() => handleSelectBoat(index)}
                     />
+                    <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+                      <img
+                        src={AuthMockup}
+                        alt="boat_image"
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "15px 0 0 15px",
+                          objectFit: "cover",
+                        }}
+                      />
+                      <div
+                        className="w-24"
+                        style={{
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          right: 0,
+                          bottom: 0,
+                          background:
+                            "linear-gradient(to right, transparent, #001229)",
+                        }}
+                      />
+                    </span>
+                  </div>
+                  <span className="w-full flex justify-start items-center">
+                    Type goes here
+                  </span>
+                  <span className="w-full flex justify-start items-center">
+                    Boat Name
+                  </span>
+                  <span className="w-full flex justify-start items-center">
+                    2019 / Toyotta / Class A
+                  </span>
+                  <span className="w-full flex justify-start items-center">
+                    East California Dock
                   </span>
                 </div>
-                <span className="w-full flex justify-start items-center">
-                  Type goes here
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Boat Name
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  2019 / Toyotta / Class A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  East California Dock
-                </span>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
       </div>

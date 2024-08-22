@@ -47,7 +47,7 @@ const NewTaskTable = () => {
       </div>
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">
-        <div className="w-full grid grid-cols-4 text-[13px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+        <div className="w-full grid grid-cols-4 text-[11px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
           <span className="w-full flex justify-start items-center">
             Boat Image
           </span>
@@ -95,31 +95,31 @@ const NewTaskTable = () => {
 
         <button
           onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
-          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
         >
-          <span className="w-[170px] h-[100px] flex justify-start items-center relative">
-              <img
-                src={AuthMockup}
-                alt="boat_image"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '8px',
-                  objectFit: 'cover',
-                }}
-              />
-              <div
-                style={{
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: '70%',
-                  background: 'linear-gradient(to right, transparent, #111111)',
-                }}
-              />
-            </span>
+          <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+            <img
+              src={AuthMockup}
+              alt="boat_image"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "15px 0 0 15px",
+                objectFit: "cover",
+              }}
+            />
+            <div
+              className="w-24"
+              style={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                background: "linear-gradient(to right, transparent, #001229)",
+              }}
+            />
+          </span>
           <span className="w-full flex justify-start items-center">
             Boat Name
           </span>
@@ -133,31 +133,31 @@ const NewTaskTable = () => {
 
         <button
           onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
-          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
         >
-        <span className="w-[170px] h-[100px] flex justify-start items-center relative">
-              <img
-                src={AuthMockup}
-                alt="boat_image"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '8px',
-                  objectFit: 'cover',
-                }}
-              />
-              <div
-                style={{
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: '70%',
-                  background: 'linear-gradient(to right, transparent, #111111)',
-                }}
-              />
-            </span>
+          <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+            <img
+              src={AuthMockup}
+              alt="boat_image"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "15px 0 0 15px",
+                objectFit: "cover",
+              }}
+            />
+            <div
+              className="w-24"
+              style={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                background: "linear-gradient(to right, transparent, #001229)",
+              }}
+            />
+          </span>
           <span className="w-full flex justify-start items-center">
             Boat Name
           </span>
@@ -171,31 +171,31 @@ const NewTaskTable = () => {
 
         <button
           onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
-          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
         >
-          <span className="w-[170px] h-[100px] flex justify-start items-center relative">
-              <img
-                src={AuthMockup}
-                alt="boat_image"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '8px',
-                  objectFit: 'cover',
-                }}
-              />
-              <div
-                style={{
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: '70%',
-                  background: 'linear-gradient(to right, transparent, #111111)',
-                }}
-              />
-            </span>
+          <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+            <img
+              src={AuthMockup}
+              alt="boat_image"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "15px 0 0 15px",
+                objectFit: "cover",
+              }}
+            />
+            <div
+              className="w-24"
+              style={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                background: "linear-gradient(to right, transparent, #001229)",
+              }}
+            />
+          </span>
           <span className="w-full flex justify-start items-center">
             Boat Name
           </span>
@@ -209,31 +209,31 @@ const NewTaskTable = () => {
 
         <button
           onClick={() => navigate("/new-tasks-request/1", "New Task Request")}
-          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+          className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
         >
-          <span className="w-[170px] h-[100px] flex justify-start items-center relative">
-              <img
-                src={AuthMockup}
-                alt="boat_image"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  borderRadius: '8px',
-                  objectFit: 'cover',
-                }}
-              />
-              <div
-                style={{
-                  content: '""',
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: '70%',
-                  background: 'linear-gradient(to right, transparent, #111111)',
-                }}
-              />
-            </span>
+          <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+            <img
+              src={AuthMockup}
+              alt="boat_image"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "15px 0 0 15px",
+                objectFit: "cover",
+              }}
+            />
+            <div
+              className="w-24"
+              style={{
+                content: '""',
+                position: "absolute",
+                top: 0,
+                right: 0,
+                bottom: 0,
+                background: "linear-gradient(to right, transparent, #001229)",
+              }}
+            />
+          </span>
           <span className="w-full flex justify-start items-center">
             Boat Name
           </span>

@@ -99,7 +99,7 @@ const EditEmployee = () => {
   // };
 
   const handleEditTaskClick = () => {
-    navigateTo("/edit-task/1"); // Navigate to the edit task page
+    navigateTo("/tasks/1"); // Navigate to the edit task page
   };
 
   
@@ -124,12 +124,12 @@ const EditEmployee = () => {
                 {/* <button className="flex items-center gap-2 text-[#199BD1] font-medium bg-[#002240] px-4 py-2 rounded-lg">
                   Edit Details
                 </button> */}
-                <button
+                {/* <button
                   onClick={handleViewAllClick}
                   className="ml-28 justify-left flex items-center gap-2 text-white font-medium bg-[#199BD1] hover:bg-[#002240] px-4 py-2 rounded-lg"
                 >
                   Assign New Task
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -168,12 +168,12 @@ const EditEmployee = () => {
           >
             Resend
           </button>
-              <button
+              {/* <button
                 onClick={handleResetPassClick}
                 className="text-[14px] font-medium bg-[#199bd1]/[0.2] h-10 rounded-full w-[120px] text-[#199bd1] ml-[997px]"
               >
                 Reset Password
-              </button>
+              </button> */}
             </div>
 
             <div className="w-auto flex flex-col justify-start items-start gap-3">
