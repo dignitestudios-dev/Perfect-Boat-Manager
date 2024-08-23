@@ -60,6 +60,7 @@ const AddEmployee = () => {
             >
               Add
             </button>
+            
           </div>
         </div>
       </div>

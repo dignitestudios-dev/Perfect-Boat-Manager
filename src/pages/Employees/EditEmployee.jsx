@@ -68,13 +68,20 @@ const EditEmployee = () => {
   const navigateTo = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAssignedModalOpen, setIsAssignedModalOpen] = useState(false);
-  // const [isManagerDetailModalOpen, setIsManagerDetailModalOpen] = useState(false); // New state for 
-  const [isResendModalOpen, setIsResendModalOpen] = useState(false); // State for ResendModal
-  const [isDateModalOpen, setIsDateModalOpen] = useState(false); // Add state for DateModal
+  const [isResendModalOpen, setIsResendModalOpen] = useState(false);
+  const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [isDeletedModalOpen, setIsDeletedModalOpen] = useState(false);
+  const [areButtonsVisible, setAreButtonsVisible] = useState(true); // Button visibility
+  const [headerText, setHeaderText] = useState("Edit **Employee Name**"); // Header text
 
+  const handleAssignNewTaskClick = () => {
+    navigate("/add-task"); // Navigate to the /add-task page
+  };
 
-
+  const handleEditDetailsClick = () => {
+    setAreButtonsVisible(false); // Hide buttons
+    setHeaderText("Edit Employee"); // Change header text
+  };
 
 
   const handleViewAllClick = () => {
@@ -94,9 +101,9 @@ const EditEmployee = () => {
     setIsResendModalOpen(true); // Open ResendModal
   };
 
-  // const handleChangeClick = () => {
-  //   setIsManagerDetailModalOpen(true); // Open ManagerDetailModal
-  // };
+  const handleChangeClick = () => {
+    setIsManagerDetailModalOpen(true); // Open ManagerDetailModal
+  };
 
   const handleEditTaskClick = () => {
     navigateTo("/tasks/1"); // Navigate to the edit task page
@@ -114,24 +121,27 @@ const EditEmployee = () => {
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       <div className="w-full h-auto bg-[#1A293D] text-white flex flex-col justify-start items-start">
-        <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">
-          <div className="w-full h-auto flex flex-col lg:flex-row justify-between gap-3 lg:items-center">
-            <div className="flex flex-col lg:flex-row items-start lg:gap-[720px] sm:gap-">
-              <h3 className="text-[18px] font-bold leading-[24.3px]">
-                Edit **Employee Name**
-              </h3>
+      <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">
+          <div className="w-full h-auto flex flex-col lg:flex-row justify-between items-center gap-3">
+            <h3 className="text-[18px] font-bold leading-[24.3px]">
+              {headerText}
+            </h3>
+            {areButtonsVisible && (
               <div className="flex gap-4">
-                {/* <button className="flex items-center gap-2 text-[#199BD1] font-medium bg-[#002240] px-4 py-2 rounded-lg">
+                <button
+                  className="flex items-center gap-2 text-[#199BD1] font-medium bg-[#002240] px-4 py-2 rounded-lg"
+                  onClick={handleEditDetailsClick} // Call the function
+                >
                   Edit Details
-                </button> */}
-                {/* <button
-                  onClick={handleViewAllClick}
-                  className="ml-28 justify-left flex items-center gap-2 text-white font-medium bg-[#199BD1] hover:bg-[#002240] px-4 py-2 rounded-lg"
+                </button>
+                <button
+          onClick={handleAssignNewTaskClick} // Update the onClick event
+          className="flex items-center gap-2 text-white font-medium bg-[#199BD1] hover:bg-[#002240] px-4 py-2 rounded-lg"
                 >
                   Assign New Task
-                </button> */}
+                </button>
               </div>
-            </div>
+            )}
           </div>
           <div className="w-full h-auto flex flex-col gap-6 justify-start items-start">
             <div className="w-full flex flex-col justify-start items-start gap-6">
