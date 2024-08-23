@@ -205,7 +205,7 @@ const BoatDetail = () => {
             </div>
           </button>
           <div
-              className="w-full flex justify-start items-center cursor-pointer"
+           className="w-full flex justify-start items-center cursor-pointer"
               onClick={handleDateModalOpen} // Handle click to open DateModal
             >
              <MdOutlineDateRange className="mr-1 text-lg" />
