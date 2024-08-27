@@ -43,7 +43,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-lg font-semibold">Select Employee</h3>
               <button
-                onClick={() => setIsOpen(false)} // Close the modal when "✕" is clicked
+                onClick={() => setIsOpen(false)}
                 className="text-lg font-bold"
               >
                 ✕
@@ -58,7 +58,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
                 className="w-72 h-10 bg-[#2A394C] text-white px-4 rounded-md outline-none"
               />
               <button
-                onClick={() => setIsOpen(false)} // Implement search functionality here
+                onClick={() => setIsOpen(false)}
                 className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
               >
                 Done
@@ -68,7 +68,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
           <div className="relative h-full overflow-auto">
             <table className="min-w-full text-white">
               <thead>
-                <tr>
+                <tr className="border-b border-gray-600">
                   <th className="px-0 py-2"></th>
                   <th className="px-4 py-2">Employee Name</th>
                   <th className="px-4 py-2">Email</th>
@@ -124,7 +124,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
               </thead>
               <tbody>
                 {[...Array(20)].map((_, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="border-b border-gray-600">
                     <td className="px-0 py-2">
                       <input type="checkbox" className="w-4 h-4 accent-[#199BD1]" />
                     </td>
@@ -139,7 +139,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
           </div>
           <div className="flex justify-end mt-4">
             <button
-              onClick={() => setIsOpen(false)} // Close the modal when "Done" is clicked
+              onClick={() => setIsOpen(false)}
               className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
             >
               Done

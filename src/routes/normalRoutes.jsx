@@ -1,3 +1,5 @@
+import DeleteAccount from "../components/global/DeleteAccount";
+import DeleteAccountList from "../components/global/DeleteAccountList";
 import GlobalLayout from "../layouts/GlobalLayout";
 import SettingsLayout from "../layouts/SettingsLayout";
 import Home from "../pages/Dashboard/Home";
@@ -155,5 +157,10 @@ export const normalRoutes = [
     title: "Task Completed",
     url: "/task-completed",
     page: <GlobalLayout page={<TaskCompleted />} />,
+  },
+  {
+    title: "Delete Account",
+    url: "/deleteaccount",
+    page: <GlobalLayout page={<DeleteAccountList />} />,
   },
 ];

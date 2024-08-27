@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import EmployeeDetailModal from "../../pages/Employees/EmployeeDetailModal";
-import AssignManagerModal from "../../pages/Managers/AssignManagerModal";
 import { useNavigate } from "react-router-dom";
 import AccountDeletedModal from "./AccountDeletedModal";
 
@@ -34,7 +33,7 @@ const DeleteAccountList = () => {
   };
 
   const handleSubmit = () => {
-    navigate("/employees/add");
+    navigate("/edit-employee");
   };
 
   const backSubmit = () => {

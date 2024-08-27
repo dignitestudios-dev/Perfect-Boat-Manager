@@ -59,9 +59,9 @@ const TaskDetail = () => {
                 state={"Oil Cleaning"}
               />
               <AddFleetInput
-                label={"Assign Employee"}
+                label={"Task"}
                 disabled={true}
-                state={"Jack Smith"}
+                state={"Inspect bottom paint for growth"}
               />
             </div>
             <div className="w-full grid grid-cols-1 gap-12">

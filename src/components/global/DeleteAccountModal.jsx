@@ -7,7 +7,7 @@ const DeleteAccountModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   const handleSubmit = () => {
-    navigate("/deletemanageraccount");
+    navigate("/deleteaccount");
   };
 
   return (

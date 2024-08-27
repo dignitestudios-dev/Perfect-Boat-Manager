@@ -48,7 +48,7 @@ const Login = () => {
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
               onClick={() => {
-                navigate("/login");
+                navigate("");
               }}
             >
               Terms & conditions
@@ -57,7 +57,7 @@ const Login = () => {
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
               onClick={() => {
-                navigate("/login");
+                navigate("");
               }}
             >
               Privacy policy
@@ -67,7 +67,7 @@ const Login = () => {
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
               onClick={() => {
-                navigate("/login");
+                navigate("");
               }}
             >
               Cookie Policy.

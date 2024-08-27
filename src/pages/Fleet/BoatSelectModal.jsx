@@ -87,7 +87,7 @@ const BoatSelectModal = ({ isOpen, setIsOpen }) => {
               />
             </div>
             <button
-              onClick={() => console.log("Search triggered")} // Implement search functionality here
+              onClick={() => setIsOpen(false)}                          // Implement search functionality here
               className="bg-[#119bd1] text-white px-6 flex items-center justify-center text-[12px] font-bold leading-[16.2px] w-[118px] h-[32px] rounded-md"
             >
               Done
