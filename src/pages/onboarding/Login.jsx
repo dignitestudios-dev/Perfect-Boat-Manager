@@ -47,18 +47,18 @@ const Login = () => {
             </span>
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
-              onClick={() => {
-                navigate("");
-              }}
+              // onClick={() => {
+              //   navigate("");
+              // }}
             >
               Terms & conditions
             </button>
             <span className="text-[16px] font-medium text-[#C2C6CB]">&</span>
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
-              onClick={() => {
-                navigate("");
-              }}
+              // onClick={() => {
+              //   navigate("");
+              // }}
             >
               Privacy policy
             </button>
@@ -66,9 +66,9 @@ const Login = () => {
 
             <button
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
-              onClick={() => {
-                navigate("");
-              }}
+              // onClick={() => {
+              //   navigate("");
+              // }}
             >
               Cookie Policy.
             </button>
