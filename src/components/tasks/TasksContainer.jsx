@@ -49,7 +49,7 @@ const TasksContainer = () => {
               All
             </button>
             <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]/[0.5]">
-              Recurring
+              In-progress
             </button>
             <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]/[0.5]">
               Completed

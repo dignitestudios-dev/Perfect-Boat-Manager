@@ -329,15 +329,15 @@ const AddTask = () => {
 
       <div className="w-full flex mt-16 justify-end items-center gap-6">
         <div className="w-auto flex justify-between items-center gap-4">
-          {/* <button
+           <button
             type="button"
             onClick={() => {
-              navigate("/dashboard");
+              navigate("/tasks");
             }}
             className="w-52 h-[52px] bg-[#02203A] text-[#199BD1] rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
           >
             {"Back"}
-          </button> */}
+          </button> 
           <button
             onClick={() => {
               setHasAssigned(true);

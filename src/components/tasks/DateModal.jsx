@@ -15,7 +15,7 @@ const theme = {
 
 const DateModal = ({ isOpen, setIsOpen }) => {
   const today = moment();
-  const [date, setDate] = useState(today.toDate()); // Initialize date with today's date
+  const [date, setDate] = useState(today.toDate());
   const dateRef = useRef();
 
   const toggleModal = (e) => {
@@ -33,9 +33,17 @@ const DateModal = ({ isOpen, setIsOpen }) => {
     >
       <div
         ref={dateRef}
-        className="w-full lg:w-[748px] h-auto md:h-[557px] divide-x-2 divide-[#1A293D] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex  justify-start items-start bg-[#243347] rounded-3xl"
+        className="relative w-full lg:w-[748px] h-auto md:h-[557px] divide-x-2 divide-[#1A293D] shadow-[0_3px_10px_rgb(0,0,0,0.2)] flex justify-start items-start bg-[#243347] rounded-3xl"
       >
-        <div className="w-[40%] md:flex hidden h-full  p-10  flex-col justify-between items-center">
+        {/* Close button */}
+        <button
+          className="absolute top-4 right-4 text-[#199BD1] text-2xl font-bold"
+          onClick={() => setIsOpen(false)}
+        >
+          ✕
+        </button>
+
+        <div className="w-[40%] md:flex hidden h-full p-10 flex-col justify-between items-center">
           <h1 className="text-[#fff]/[0.5] text-xl font-medium">
             {new Date(date).toLocaleString("en-US", { weekday: "long" })}
           </h1>
@@ -47,7 +55,7 @@ const DateModal = ({ isOpen, setIsOpen }) => {
           </h1>
         </div>
         <div className="w-full md:w-[60%] px-2 pt-10 pb-4 h-full flex flex-col gap-4 justify-start items-start">
-          <div className="w-full flex flex-col gap-1 justify-start items-start  px-8">
+          <div className="w-full flex flex-col gap-1 justify-start items-start px-8">
             <h1 className="text-2xl text-white font-bold">Select Date</h1>
             <p className="text-md text-white/50 font-normal">
               Choose the perfect date for the task deadline
@@ -80,9 +88,8 @@ const DateModal = ({ isOpen, setIsOpen }) => {
           </div>
 
           <button className="w-3/4 h-14 px-4 ml-11 rounded-lg flex justify-center items-center text-md font-medium bg-[#199BD1] text-white">
-             Save
+            Save
           </button>
-
         </div>
       </div>
     </div>
