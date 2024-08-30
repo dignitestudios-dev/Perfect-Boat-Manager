@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import { AuthMockup } from "../../assets/export";
 import { FaRegEdit } from "react-icons/fa";
@@ -8,21 +8,25 @@ import DeletedModal from "../../components/global/DeletedModal";
 
 
 
-const openDeleteModal = () => {
-  setIsDeleteModalOpen(true);
-};
 
-const closeDeleteModal = () => {
-  setIsDeleteModalOpen(false);
-};
-
-const handleDeleteConfirm = () => {
-  // Perform delete action here  
-  closeDeleteModal();
-};
 
 const NewTaskRequestPage = () => {
   const { navigate } = useContext(GlobalContext);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  const openDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+  };
+  
+  const closeDeleteModal = () => {
+    setIsDeleteModalOpen(false);
+  };
+  
+  const handleDeleteConfirm = () => {
+    // Perform delete action here  
+    closeDeleteModal();
+  };
+
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -137,27 +141,31 @@ const NewTaskRequestPage = () => {
             </span>
           </div>
           <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
             className="w-full h-10 grid grid-cols-6  py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
-            <span className="w-full flex justify-start items-center">
+            <span className="w-full flex justify-start items-center"              onClick={() => navigate("/tasks/1", "All Tasks")}
+            >
               Full Inspection
             </span>
-            <span className="w-full flex justify-start items-center">
+            <span className="w-full flex justify-start items-center"             onClick={() => navigate("/tasks/1", "All Tasks")}
+            >
               12-02-2024
             </span>
-            <span className="w-full flex justify-start items-center ">
+            <span className="w-full flex justify-start items-center "             onClick={() => navigate("/tasks/1", "All Tasks")}
+            >
               90 days
             </span>
-            <span className="w-full flex justify-start items-center">
+            <span className="w-full flex justify-start items-center"             onClick={() => navigate("/tasks/1", "All Tasks")}
+            >
               *Employee Name*
             </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
+            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] "             onClick={() => navigate("/tasks/1", "All Tasks")}
+            >
               Recurring
             </span>
             <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
               <span className=" flex justify-start items-center ">
-                <FaRegEdit />
+                <FaRegEdit onClick={() => navigate("/tasks/1", "All Tasks")} />
               </span>
               <span className=" flex justify-start items-center ">
               <RiDeleteBinLine onClick={openDeleteModal}/>
