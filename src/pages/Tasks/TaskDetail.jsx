@@ -164,7 +164,7 @@ const TaskDetail = () => {
             }}
             className="w-full lg:w-[208px] h-[52px] bg-[#1FBA46] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
           >
-            {"Mark As Completed"}
+            {"Mark As Completed"} 
           </button>
         </div>
       </div>

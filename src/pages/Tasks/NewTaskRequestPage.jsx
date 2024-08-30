@@ -4,6 +4,22 @@ import { AuthMockup } from "../../assets/export";
 import { FaRegEdit } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { GlobalContext } from "../../contexts/GlobalContext";
+import DeletedModal from "../../components/global/DeletedModal";
+
+
+
+const openDeleteModal = () => {
+  setIsDeleteModalOpen(true);
+};
+
+const closeDeleteModal = () => {
+  setIsDeleteModalOpen(false);
+};
+
+const handleDeleteConfirm = () => {
+  // Perform delete action here  
+  closeDeleteModal();
+};
 
 const NewTaskRequestPage = () => {
   const { navigate } = useContext(GlobalContext);
@@ -144,7 +160,7 @@ const NewTaskRequestPage = () => {
                 <FaRegEdit />
               </span>
               <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
+              <RiDeleteBinLine onClick={openDeleteModal}/>
               </span>
             </div>
           </button>
@@ -238,6 +254,11 @@ const NewTaskRequestPage = () => {
           {"Assign Reported Task"}
         </button>
       </div>
+      <DeletedModal
+        isOpen={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        onConfirm={handleDeleteConfirm}
+      />
     </div>
   );
 };

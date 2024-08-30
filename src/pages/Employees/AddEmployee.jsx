@@ -20,7 +20,7 @@ const AddEmployee = () => {
           </div>
           <button
             className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
-            // onClick={() => setIsImportCSVModalOpen(true)}
+            onClick={() => setIsImportCSVModalOpen(true)}
           >
             Import CSV
           </button>

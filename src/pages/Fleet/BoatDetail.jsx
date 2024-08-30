@@ -386,10 +386,10 @@ const BoatDetail = () => {
       )}
 
 
-{/* <DeletedModal 
+<DeletedModal 
   isOpen={isDeletedModalOpen} 
   onClose={() => setIsDeletedModalOpen(false)} 
-/> */}
+/>
 
     </div>
    
