@@ -5,13 +5,13 @@ import { TbUsers } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa"; // Import FaTimes for the close icon
 import { HiOutlineNewspaper } from "react-icons/hi2";
 
-
 const TaskAssignSucessModal = ({ isOpen, setIsOpen }) => {
   const { navigate } = useContext(GlobalContext);
   const modalRef = useRef();
 
   const closeModal = () => {
     setIsOpen(false);
+    navigate("/tasks");
   };
 
   const handleClickOutside = (e) => {
@@ -36,12 +36,11 @@ const TaskAssignSucessModal = ({ isOpen, setIsOpen }) => {
           onClick={closeModal}
           className="absolute top-4 right-4 text-[#199BD1]  text-xl font-bold mb-8"
         >
-            ✕
+          ✕
         </button>
 
         {/* Modal content */}
-        <HiOutlineNewspaper
-        className="mx-auto text-[#36B8F3] bg-[#1A293D] p-2 w-[64.17px] h-[64.17px] rounded-full" />
+        <HiOutlineNewspaper className="mx-auto text-[#36B8F3] bg-[#1A293D] p-2 w-[64.17px] h-[64.17px] rounded-full" />
         <div className="w-auto flex flex-col justify-center items-center gap-3">
           <div className="w-full h-auto flex flex-col justify-center items-center gap-1">
             <span className="text-[16px] leading-[21.6px] text-white font-normal text-center">

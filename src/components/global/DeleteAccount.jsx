@@ -1,7 +1,12 @@
-import React from 'react';
+import React from "react";
 
-
-const DeleteAccount = ({ isOpen, onClose, onDeactivate, onDelete }) => {
+const DeleteAccount = ({
+  isOpen,
+  onClose,
+  onDeactivate,
+  onDelete,
+  deactivateLoading = false,
+}) => {
   if (!isOpen) return null;
 
   return (
@@ -18,18 +23,23 @@ const DeleteAccount = ({ isOpen, onClose, onDeactivate, onDelete }) => {
 
         {/* Content */}
         <div className="flex-1 flex flex-col justify-center">
-          <p className="text-[18px] text-white font-bold text-left mt-[-22px] mb-2">Confirm Action?</p>
-          <p className="text-[16px] text-white text-left">What would you like to do with this account?</p>
+          <p className="text-[18px] text-white font-bold text-left mt-[-22px] mb-2">
+            Confirm Action?
+          </p>
+          <p className="text-[16px] text-white text-left">
+            What would you like to do with this account?
+          </p>
         </div>
 
         {/* Container for buttons aligned to the bottom right */}
         <div className="flex justify-end gap-2 mt-4">
           <button
+            disabled={deactivateLoading}
             onClick={onDeactivate}
             type="button"
             className="text-[#199BD1] font-bold py-2 px-4 rounded-lg text-[16px]"
           >
-            Deactivate
+            {deactivateLoading ? "Deactivating..." : "Deactivate"}
           </button>
           <button
             onClick={onDelete}

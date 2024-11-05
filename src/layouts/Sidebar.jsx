@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Logo } from "../assets/export";
 import { sidebarArr } from "../constants/sidebarArr";
 import SidebarLink from "./SidebarLink";
 import { RiLogoutCircleLine, RiMenuLine } from "react-icons/ri";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const { logout } = useContext(AuthContext);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -47,8 +49,9 @@ const Sidebar = () => {
           ))}
           <button
             onClick={() => {
-              navigate("/login", "Home");
+              // navigate("/login");
               handleCloseDrawer();
+              logout();
             }}
             className={`w-full h-[46px] outline-none rounded-[12px] 
             bg-transparent text-white/50 

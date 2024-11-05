@@ -1,39 +1,63 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import { FaCaretDown } from "react-icons/fa";
+import LocationType from "../../components/global/headerDropDowns/LocationType";
+import JobType from "../../components/global/headerDropDowns/JobType";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import AssignModalLoader from "../../components/global/Loaders/AssignModalLoader";
 
-const EmployeeDetailModal = ({ setIsOpen }) => {
+const EmployeeDetailModal = ({
+  setIsOpen,
+  SetPassSelectedEmployee,
+  setInputError,
+}) => {
+  const { employees } = useContext(GlobalContext);
+
   const [searchTerm, setSearchTerm] = useState("");
-  const [jobTitleFilter, setJobTitleFilter] = useState(false);
-  const [locationFilter, setLocationFilter] = useState(false);
-  const jobTitleRef = useRef(null);
-  const locationRef = useRef(null);
+  const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
+  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
+  const [jobType, setJobType] = useState("all");
+  const [locationType, setLocationType] = useState("all");
 
-  const jobTitles = ["Manager", "Engineer", "Developer"];
-  const locations = ["East California Dock", "West California Dock", "South California Dock"];
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
 
-  const toggleJobTitleFilter = () => {
-    setJobTitleFilter((prev) => !prev);
+  const filteredData = employees?.filter((item) => {
+    const matchesSearch = searchTerm
+      ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+      : true;
+    const jobTypeMatch =
+      jobType && jobType !== "all"
+        ? item?.jobtitle?.toLowerCase() === jobType?.toLowerCase()
+        : true;
+    const locationTypeMatch =
+      locationType && locationType !== "all"
+        ? item?.location?.toLowerCase() === locationType?.toLowerCase()
+        : true;
+    return matchesSearch && locationTypeMatch && jobTypeMatch;
+  });
+
+  const toggleJobTitleDropdown = () => {
+    setJobTitleDropdownOpen(!jobTitleDropdownOpen);
   };
 
-  const toggleLocationFilter = () => {
-    setLocationFilter((prev) => !prev);
+  const toggleLocationDropdown = () => {
+    setLocationDropdownOpen(!locationDropdownOpen);
   };
 
-  const handleClickOutside = (event) => {
-    if (jobTitleRef.current && !jobTitleRef.current.contains(event.target)) {
-      setJobTitleFilter(false);
+  const handleSelectEmployee = (employeeId, employeeName) => {
+    setInputError({});
+    if (selectedEmployee?.id === employeeId) {
+      setSelectedEmployee(null);
+    } else {
+      setSelectedEmployee({ id: employeeId, name: employeeName });
     }
-    if (locationRef.current && !locationRef.current.contains(event.target)) {
-      setLocationFilter(false);
-    }
   };
 
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+  const handleEmployeeSelection = () => {
+    if (selectedEmployee) {
+      SetPassSelectedEmployee(selectedEmployee);
+      setIsOpen(false);
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
@@ -58,7 +82,7 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
                 className="w-72 h-10 bg-[#2A394C] text-white px-4 rounded-md outline-none"
               />
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => handleEmployeeSelection()}
                 className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
               >
                 Done
@@ -73,67 +97,65 @@ const EmployeeDetailModal = ({ setIsOpen }) => {
                   <th className="px-4 py-2">Employee Name</th>
                   <th className="px-4 py-2">Email</th>
                   <th className="px-4 py-2 relative">
-                    <button
-                      onClick={toggleJobTitleFilter}
-                      className="flex items-center gap-1"
-                    >
-                      Job Title
-                      <FaCaretDown />
-                    </button>
-                    <div
-                      ref={jobTitleRef}
-                      className={`absolute top-6 left-0 w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
-                        jobTitleFilter ? "scale-100" : "scale-0"
-                      } flex flex-col gap-3 shadow-lg p-3 justify-start items-start`}
-                    >
-                      {jobTitles.map((title, index) => (
-                        <div key={index} className="w-full flex justify-start items-start gap-2">
-                          <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                          <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
-                            {title}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    <JobType
+                      jobTitleDropdownOpen={jobTitleDropdownOpen}
+                      toggleJobTitleDropdown={toggleJobTitleDropdown}
+                      jobType={jobType}
+                      setJobType={setJobType}
+                    />
                   </th>
                   <th className="px-4 py-2 relative">
-                    <button
-                      onClick={toggleLocationFilter}
-                      className="flex items-center gap-1"
-                    >
-                      Location
-                      <FaCaretDown />
-                    </button>
-                    <div
-                      ref={locationRef}
-                      className={`absolute top-6 left-0 w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
-                        locationFilter ? "scale-100" : "scale-0"
-                      } flex flex-col gap-3 shadow-lg p-3 justify-start items-start`}
-                    >
-                      {locations.map((location, index) => (
-                        <div key={index} className="w-full flex justify-start items-start gap-2">
-                          <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                          <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
-                            {location}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
+                    <LocationType
+                      locationDropdownOpen={locationDropdownOpen}
+                      toggleLocationDropdown={toggleLocationDropdown}
+                      locationType={locationType}
+                      setLocationType={setLocationType}
+                    />
                   </th>
                 </tr>
               </thead>
               <tbody>
-                {[...Array(20)].map((_, index) => (
-                  <tr key={index} className="border-b border-gray-600">
+                {filteredData?.length > 0 ? (
+                  <>
+                    {filteredData?.map((employee, index) => {
+                      const isSelected = selectedEmployee?.id === employee._id;
+                      return (
+                        <tr key={index} className="border-b border-gray-600">
+                          <td className="px-0 py-2">
+                            <input
+                              checked={isSelected}
+                              onChange={() =>
+                                handleSelectEmployee(
+                                  employee._id,
+                                  employee.name
+                                )
+                              }
+                              type="checkbox"
+                              className="w-4 h-4 accent-[#199BD1]"
+                            />
+                          </td>
+                          <td className="px-4 py-2">{employee?.name}</td>
+                          <td className="px-4 py-2"> {employee?.email} </td>
+                          <td className="px-4 py-2">{employee?.jobtitle}</td>
+                          <td className="px-4 py-2">{employee?.location}</td>
+                        </tr>
+                      );
+                    })}
+                  </>
+                ) : (
+                  <tr>
                     <td className="px-0 py-2">
-                      <input type="checkbox" className="w-4 h-4 accent-[#199BD1]" />
+                      <input
+                        // type="checkbox"
+                        className="w-4 h-4 accent-[#199BD1] hidden"
+                      />
                     </td>
-                    <td className="px-4 py-2">Mark Taylor</td>
-                    <td className="px-4 py-2">markT@gmail.com</td>
-                    <td className="px-4 py-2">Dock Manager</td>
-                    <td className="px-4 py-2">East California Dock</td>
+                    <td className="px-4 py-2"></td>
+                    <td className="px-4 py-2 text-start">No record found</td>
+                    <td className="px-4 py-2"></td>
+                    <td className="px-4 py-2"></td>
                   </tr>
-                ))}
+                )}
               </tbody>
             </table>
           </div>

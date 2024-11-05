@@ -160,7 +160,7 @@ export const normalRoutes = [
   },
   {
     title: "Delete Account",
-    url: "/deleteaccount",
+    url: "/delete-account/:id",
     page: <GlobalLayout page={<DeleteAccountList />} />,
   },
 ];

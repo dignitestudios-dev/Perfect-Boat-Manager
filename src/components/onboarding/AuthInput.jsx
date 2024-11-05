@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 
-const AuthInput = ({ state, setState, text, type, error, placeholder }) => {
+const AuthInput = ({ text, type, placeholder, register, error, maxLength }) => {
   const [isPassVisible, setIsPassVisible] = useState(false);
 
   return (
@@ -20,9 +20,10 @@ const AuthInput = ({ state, setState, text, type, error, placeholder }) => {
           <input
             type={isPassVisible ? "text" : type}
             placeholder={placeholder}
-            className="w-full outline-none  rounded-[12px] placeholder:text-[13px] placeholder:font-normal placeholder:text-[#6B737E] text-white bg-transparent h-full px-3 text-sm font-medium "
-            value={state}
-            onChange={(e) => setState(e.target.value)}
+            maxLength={maxLength}
+            className="w-full outline-none  rounded-[12px] placeholder:text-[13px] placeholder:font-normal
+             placeholder:text-[#6B737E] text-white bg-transparent h-full px-3 text-sm font-medium pb-[2px]"
+            {...register}
           />
           <button
             type="button"
@@ -37,6 +38,7 @@ const AuthInput = ({ state, setState, text, type, error, placeholder }) => {
           </button>
         </div>
       </div>
+      {error && <p className="text-red-500 text-sm">{error.message}</p>}
     </div>
   );
 };
