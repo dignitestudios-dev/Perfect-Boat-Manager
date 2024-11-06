@@ -9,6 +9,7 @@ const EmployeeDetailModal = ({
   setIsOpen,
   SetPassSelectedEmployee,
   setInputError,
+  employeeId = "",
 }) => {
   const { employees } = useContext(GlobalContext);
 
@@ -24,6 +25,7 @@ const EmployeeDetailModal = ({
     const matchesSearch = searchTerm
       ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase())
       : true;
+    const matchesEmployeeId = item._id !== employeeId;
     const jobTypeMatch =
       jobType && jobType !== "all"
         ? item?.jobtitle?.toLowerCase() === jobType?.toLowerCase()
@@ -32,7 +34,9 @@ const EmployeeDetailModal = ({
       locationType && locationType !== "all"
         ? item?.location?.toLowerCase() === locationType?.toLowerCase()
         : true;
-    return matchesSearch && locationTypeMatch && jobTypeMatch;
+    return (
+      matchesSearch && locationTypeMatch && jobTypeMatch && matchesEmployeeId
+    );
   });
 
   const toggleJobTitleDropdown = () => {

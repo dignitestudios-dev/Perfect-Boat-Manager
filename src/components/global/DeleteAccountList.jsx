@@ -1,62 +1,147 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import EmployeeDetailModal from "../../pages/Employees/EmployeeDetailModal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import AccountDeletedModal from "./AccountDeletedModal";
+import { STATUS_ENUM } from "../../constants/data";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import axios from "../../axios";
+import StatusType from "./headerDropDowns/StatusType";
+import LocationType from "./headerDropDowns/LocationType";
+import TaskType from "./headerDropDowns/TaskType";
+import { ErrorToast } from "./Toaster";
+import AssignModalLoader from "./Loaders/AssignModalLoader";
+import ManagerListLoader from "./Loaders/ManagerListLoader";
+import { getUnixDate } from "../../constants/DateFormat";
+import { FiLoader } from "react-icons/fi";
+
+const statusColor = (status) => {
+  switch (status) {
+    case "newtask":
+      return "bg-[#FF007F]/[0.12] text-[#FF007F]";
+    case "overdue":
+      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
+    case "in-progress":
+      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+    case "completed":
+      return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    default:
+      return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
+  }
+};
+
+const getFormattedStatus = (status) => {
+  return STATUS_ENUM[status] || status;
+};
 
 const DeleteAccountList = () => {
-  const [locationFilter, setLocationFilter] = useState(false);
-  const [jobFilter, setJobFilter] = useState(false);
-  const [isBoatModalOpen, setIsBoatModalOpen] = useState(false); // State for employee detail modal
-  const [isAssignEmployeeModalOpen, setIsAssignEmployeeModalOpen] =
-    useState(false); // State for assign employee modal
-  const [isAccountDeletedModalOpen, setIsAccountDeletedModalOpen] =
-    useState(false); // State for delete modal
-
+  const { id } = useParams();
+  const { setUpdateEmployee } = useContext(GlobalContext);
+  const location = useLocation();
   const navigate = useNavigate();
+  const { reasonForDelete } = location.state || {};
+  console.log("🚀 ~ DeleteAccountList ~ reasonForDelete:", reasonForDelete);
 
-  const locationRef = useRef(null);
-  const jobRef = useRef(null);
+  const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
+  const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [taskType, setTaskType] = useState("");
 
-  const toggleLocationDropdown = (e) => {
-    if (locationRef.current && !locationRef.current.contains(e.target)) {
-      setLocationFilter((prev) => !prev);
-    }
+  const [isBoatModalOpen, setIsBoatModalOpen] = useState(false);
+  const [isAssignEmployeeModalOpen, setIsAssignEmployeeModalOpen] =
+    useState(false);
+  const [isAccountDeletedModalOpen, setIsAccountDeletedModalOpen] =
+    useState(false);
+
+  const [userData, setUserData] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [deleteLoad, setDeleteLoad] = useState(false);
+  const [passSelectedEmployee, setPassSelectedEmployee] = useState("");
+
+  const [inputError, setInputError] = useState({});
+
+  const toggleTaskTypeDropdown = () => {
+    setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
   };
 
-  const toggleJobDropdown = (e) => {
-    if (jobRef.current && !jobRef.current.contains(e.target)) {
-      setJobFilter((prev) => !prev);
-    }
+  const toggleStatusDropdown = () => {
+    setStatusDropdownOpen(!statusDropdownOpen);
   };
 
-  const handleSubmit = () => {
-    navigate("/edit-employee");
+  const filteredData = userData?.tasks?.filter((item) => {
+    const matchesStatus =
+      statusFilter && statusFilter !== "all"
+        ? item?.status === statusFilter
+        : true;
+    const taskTypeMatch =
+      taskType && taskType !== "all"
+        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+        : true;
+    return matchesStatus && taskTypeMatch;
+  });
+
+  const handleViewProfile = () => {
+    navigate(`/employees/${id}`);
   };
 
   const backSubmit = () => {
     navigate("/employees");
   };
-  const handleDelete = () => {
-    // Handle the delete action here
-    // For now, just show the delete confirmation modal
-    setIsAccountDeletedModalOpen(true);
-  };
 
-  const statusColor = (status) => {
-    switch (status) {
-      case "newtask":
-        return "bg-[#FF007F]/[0.12] text-[#FF007F]";
-      case "overdue":
-        return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
-      case "in-progress":
-        return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
-      case "completed":
-        return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
-      default:
-        return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
+  const handleDelete = async () => {
+    setInputError({});
+    if (!passSelectedEmployee?.id) {
+      setInputError({ employee: "Select Employee" });
+      return;
+    }
+    setDeleteLoad(true);
+    try {
+      const taskData = {
+        task: userData?.tasks?.map((task) => task?._id),
+      };
+
+      const putResponse = await axios.put(
+        `/manager/employees/${passSelectedEmployee.id}/task/assign`,
+        taskData
+      );
+      if (putResponse?.status === 200) {
+        const obj = {
+          reason: reasonForDelete,
+        };
+        const deleteResponse = await axios.delete(`/manager/employees/${id}`, {
+          data: obj,
+        });
+
+        if (deleteResponse?.status === 200) {
+          setIsAccountDeletedModalOpen(true);
+          setUpdateEmployee((prev) => !prev);
+        }
+      }
+    } catch (error) {
+      console.error("Error deleting task:", error);
+      ErrorToast(error?.response?.data?.message);
+    } finally {
+      setDeleteLoad(false);
     }
   };
+
+  const getDataById = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(`/manager/employees/${id}`);
+      if (response?.status === 200) {
+        setUserData(response?.data?.data);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getDataById();
+  }, []);
 
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
@@ -66,16 +151,16 @@ const DeleteAccountList = () => {
             Delete Account
           </h3>
           <button
-            onClick={handleSubmit}
+            onClick={handleViewProfile}
             className="w-full lg:w-[135px] h-[35px] flex items-center gap-1 rounded-[10px] justify-center bg-[#1A293D] text-[#199BD1] text-[11px] font-bold leading-[14.85px]"
           >
             View Profile
           </button>
         </div>
         <p className="text-[16px]">
-          Before deleting the account of *employee name*, please reassign the
-          following tasks that are currently assigned to this employee to
-          another employee.
+          Before deleting the account of {userData?.employee?.name}, please
+          reassign the following tasks that are currently assigned to this
+          employee to another employee.
         </p>
         <div className="w-full max-w-[500px] flex flex-col gap-2 sm:gap-4 ">
           <label className="text-[16px] font-medium leading-[21.6px] text-white">
@@ -85,11 +170,14 @@ const DeleteAccountList = () => {
             onClick={() => setIsBoatModalOpen(true)} // Open the Employee Detail Modal
             className="w-full h-[52px] bg-[#1A293D] disabled:text-50 outline-none px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
           >
-            Click here to assign
+            {passSelectedEmployee?.name || "Click here to assign"}
           </button>
+          {inputError?.employee && (
+            <p className="text-red-500 -mt-3 pl-2">{inputError?.employee}</p>
+          )}
         </div>
 
-        <div className="w-full overflow-x-auto mt-4">
+        <div className="w-full overflow-x-auto lg:overflow-visible mt-4">
           <div className="min-w-[700px]">
             {" "}
             {/* Increased min-width to accommodate the new column */}
@@ -98,34 +186,12 @@ const DeleteAccountList = () => {
               <span className="w-full flex justify-start items-center">
                 Boat name
               </span>
-              <span className="w-full flex justify-start items-center relative">
-                Task Type
-                <FaCaretDown
-                  className={`ml-2 cursor-pointer ${
-                    jobFilter ? "rotate-180" : "rotate-0"
-                  }`}
-                  onClick={toggleJobDropdown}
-                />
-                <div
-                  ref={jobRef}
-                  className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
-                    jobFilter ? "scale-100" : "scale-0"
-                  } flex flex-col gap-3 shadow-lg p-3 absolute top-full left-0 mt-1`}
-                >
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Maintenance
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Cleaning
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Inspection
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Repair
-                  </div>
-                </div>
-              </span>
+              <TaskType
+                taskTypeDropdownOpen={taskTypeDropdownOpen}
+                toggleTaskTypeDropdown={toggleTaskTypeDropdown}
+                setTaskType={setTaskType}
+                taskType={taskType}
+              />
               <span className="w-full flex justify-start items-center">
                 Due Date
               </span>
@@ -133,193 +199,58 @@ const DeleteAccountList = () => {
                 Recurring
               </span>{" "}
               {/* New column */}
-              <span className="w-full flex justify-start items-center relative">
-                Status
-                <FaCaretDown
-                  className={`ml-2 cursor-pointer ${
-                    locationFilter ? "rotate-180" : "rotate-0"
-                  }`}
-                  onClick={toggleLocationDropdown}
-                />
-                <div
-                  ref={locationRef}
-                  className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
-                    locationFilter ? "scale-100" : "scale-0"
-                  } flex flex-col gap-3 shadow-lg p-3 absolute top-full left-0 mt-1`}
-                >
-                  <div className="text-white/50 text-[11px] font-medium">
-                    In-Progress
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Completed
-                  </div>
-                  <div className="text-white/50 text-[11px] font-medium">
-                    Overdue
-                  </div>
-                </div>
-              </span>
+              <StatusType
+                statusDropdownOpen={statusDropdownOpen}
+                statusFilter={statusFilter}
+                toggleStatusDropdown={toggleStatusDropdown}
+                setStatusFilter={setStatusFilter}
+              />
             </div>
-            {/* Table Content */}
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat A
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Maintenance
-              </span>
-              <span className="w-full flex justify-start items-center">
-                12-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat B
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Cleaning
-              </span>
-              <span className="w-full flex justify-start items-center">
-                15-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#00CC99]/[0.12] text-[#00CC99] px-2">
-                  Completed
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat C
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Inspection
-              </span>
-              <span className="w-full flex justify-start items-center">
-                20-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FF5733]/[0.12] text-[#FF5733] px-2">
-                  Overdue
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat D
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Repair
-              </span>
-              <span className="w-full flex justify-start items-center">
-                25-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat D
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Repair
-              </span>
-              <span className="w-full flex justify-start items-center">
-                25-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat D
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Repair
-              </span>
-              <span className="w-full flex justify-start items-center">
-                25-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat D
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Repair
-              </span>
-              <span className="w-full flex justify-start items-center">
-                25-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
-            <div className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">
-                Boat D
-              </span>
-              <span className="w-full flex justify-start items-center">
-                Repair
-              </span>
-              <span className="w-full flex justify-start items-center">
-                25-2-2023
-              </span>
-              <span className="w-full flex justify-start items-center">
-                90 days
-              </span>{" "}
-              {/* Recurring */}
-              <span className="w-full flex justify-start items-center">
-                <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-                  In-Progress
-                </span>
-              </span>
-            </div>
+            {loading ? (
+              <div className="pt-2">
+                <ManagerListLoader />
+              </div>
+            ) : (
+              <>
+                {filteredData?.length > 0 ? (
+                  <>
+                    {filteredData?.map((task, index) => (
+                      <div
+                        key={index}
+                        className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
+                      >
+                        <span className="w-full flex justify-start items-center">
+                          {task?.boatName}
+                        </span>
+                        <span className="w-full flex justify-start items-center">
+                          {task?.taskType}
+                        </span>
+                        <span className="w-full flex justify-start items-center">
+                          {task?.dueDate
+                            ? getUnixDate(task?.dueDate)
+                            : "No Due Date"}
+                        </span>
+                        <span className="w-full flex justify-start items-center">
+                          {task?.reoccuringDays || "---"}
+                        </span>{" "}
+                        {/* Recurring */}
+                        <span className="w-full flex justify-start items-center">
+                          <span
+                            className={`w-auto h-[27px] ${statusColor(
+                              task?.status
+                            )} rounded-full flex items-center justify-center px-2`}
+                          >
+                            {getFormattedStatus(task?.status)}
+                          </span>
+                        </span>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <div className="pt-4">No record found</div>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -332,17 +263,30 @@ const DeleteAccountList = () => {
         >
           Back
         </button>
+
         <button
-          onClick={handleDelete} // Trigger delete action
-          className="w-[235px] h-[54px] bg-[#199BD1] text-[#FFFFFF] font-medium rounded-lg"
+          disabled={deleteLoad}
+          onClick={handleDelete}
+          className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
+             justify-center font-medium leading-[21.6px] tracking-[-0.24px]"
         >
-          Delete Account
+          <div className="flex items-center">
+            <span className="mr-1">Delete Account</span>
+            {deleteLoad && (
+              <FiLoader className="animate-spin text-lg mx-auto" />
+            )}
+          </div>
         </button>
       </div>
 
       {/* EmployeeDetailModal Component */}
       {isBoatModalOpen && (
-        <EmployeeDetailModal setIsOpen={setIsBoatModalOpen} />
+        <EmployeeDetailModal
+          employeeId={id}
+          setIsOpen={setIsBoatModalOpen}
+          SetPassSelectedEmployee={setPassSelectedEmployee}
+          setInputError={setInputError}
+        />
       )}
 
       {/* AssignManagerModal Component */}

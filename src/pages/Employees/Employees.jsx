@@ -4,7 +4,6 @@ import axios from "../../axios";
 
 const Employees = () => {
   const [employees, setEmployees] = useState([]);
-  console.log("🚀 ~ Employees ~ employees:", employees);
   const [loadingEmployees, setLoadingEmployees] = useState(false);
   const [pageDetails, setPageDetails] = useState({});
 

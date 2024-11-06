@@ -5,13 +5,13 @@ import { TbUsers } from "react-icons/tb";
 import { FaTimes } from "react-icons/fa"; // Import FaTimes for the close icon
 import { CheckMark } from "../../assets/export";
 
-
 const AccountDeletedModal = ({ isOpen, setIsOpen }) => {
   const { navigate } = useContext(GlobalContext);
   const modalRef = useRef();
 
   const closeModal = () => {
     setIsOpen(false);
+    navigate("/employees");
   };
 
   const handleClickOutside = (e) => {
@@ -36,7 +36,7 @@ const AccountDeletedModal = ({ isOpen, setIsOpen }) => {
           onClick={closeModal}
           className="absolute top-4 right-4 text-[#199BD1]  text-xl font-bold mb-8"
         >
-            ✕
+          ✕
         </button>
 
         {/* Modal content */}
@@ -47,7 +47,6 @@ const AccountDeletedModal = ({ isOpen, setIsOpen }) => {
             <span className="text-[16px] leading-[21.6px] text-white font-normal text-center">
               This account is successfully deleted
             </span>
-            
           </div>
         </div>
       </div>

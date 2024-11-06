@@ -10,6 +10,8 @@ import DeleteAccountModal from "../global/DeleteAccountModal";
 import JobType from "../global/headerDropDowns/JobType";
 import LocationType from "../global/headerDropDowns/LocationType";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
+import { ErrorToast } from "../global/Toaster";
+import axios from "../../axios";
 
 const EmployeesTableBig = ({ data, loading, getEmployees }) => {
   const { navigate, setUpdateEmployee } = useContext(GlobalContext);
@@ -40,7 +42,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees }) => {
   );
 
   const handleEditClick = (id) => {
-    navigate(`/edit-employee/${id}`);
+    navigate(`/employees/${id}`);
   };
 
   const handleDeleteClick = (id) => {

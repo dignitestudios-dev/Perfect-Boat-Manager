@@ -5,15 +5,7 @@ import DeletedModal from "../global/DeletedModal";
 import { getUnixDate } from "../../constants/DateFormat";
 import axios from "../../axios";
 import { ErrorToast, SuccessToast } from "../global/Toaster";
-
-const STATUS_ENUM = {
-  newtask: "New Task",
-  inprogress: "In Progress",
-  recurring: "Recurring",
-  overdue: "Overdue",
-  completed: "Completed",
-  upcomingtask: "Upcoming Task",
-};
+import { STATUS_ENUM } from "../../constants/data";
 
 const statusColor = (status) => {
   switch (status) {

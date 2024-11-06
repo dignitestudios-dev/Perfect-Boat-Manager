@@ -1,341 +1,279 @@
-import React, { useContext, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { TiPencil } from "react-icons/ti";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
-import { FaCaretDown, FaRegEdit } from "react-icons/fa";
-import { RiDeleteBinLine } from "react-icons/ri";
-import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
-import { CiCalendar } from "react-icons/ci";
-import DateModal from "../../components/tasks/DateModal";
+
+import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
+import axios from "../../axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { FiLoader } from "react-icons/fi";
+import ResendPasswordCard from "../../components/employees/ResendPasswordCard";
+import AssignedTasksCard from "../../components/employees/AssignedTasksCard";
 
 const EmployeeDetail = () => {
   const { navigate } = useContext(GlobalContext);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const toggleLocationModal = (e) => {
-    if (locationRef.current && !locationRef.current.contains(e.target)) {
-      setLocationFilter((prev) => !prev);
+  const { id } = useParams();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm();
+
+  const [employee, setEmployee] = useState("");
+  const [employeeTasks, setEmployeeTasks] = useState([]);
+  const [updatedTasks, setUpdatedTasks] = useState([]);
+  const [submitLoading, setSubmitLoading] = useState(false);
+
+  const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getEmployeeData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`/manager/employees/${id}`);
+      if (response.status === 200) {
+        setEmployee(response?.data?.data?.employee);
+        setEmployeeTasks(response?.data?.data?.tasks);
+        setValue("name", response?.data?.data?.employee?.name);
+        setValue("email", response?.data?.data?.employee?.email);
+        setValue("jobtitle", response?.data?.data?.employee?.jobtitle);
+        setValue("location", response?.data?.data?.employee?.location);
+        setValue("phone", response?.data?.data?.employee?.phoneNumber);
+      }
+    } catch (err) {
+      ErrorToast(err?.response?.data?.message);
+    } finally {
+      setIsLoading(false);
     }
   };
-  const [locationFilter, setLocationFilter] = useState(false);
-  const locationRef = useRef(null);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      getEmployeeData();
+    }
+  }, [id]);
+
+  const handleUpdateEmployee = async (data) => {
+    try {
+      setSubmitLoading(true);
+
+      const updatedEmployeeData = {
+        ...data,
+        password: "Test@123",
+        tasks: updatedTasks
+          ? updatedTasks?.map((item) => item?._id)
+          : employeeTasks?.map((item) => item?.id),
+      };
+
+      const response = await axios.put(
+        `/manager/employees/${id}`,
+        updatedEmployeeData
+      );
+      if (response.status === 200) {
+        SuccessToast("Employee Updated");
+        navigate("/employees", "Employee List");
+      }
+    } catch (error) {
+      ErrorToast(error?.response?.data?.message);
+      console.error("Error updating employee:", error);
+    } finally {
+      setSubmitLoading(false);
+    }
+  };
 
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
-      <div className="w-full h-auto  bg-[#1A293D] text-white  flex flex-col justify-start items-start">
-        <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">
-          <div className="w-full h-auto flex flex-col lg:flex-row justify-between gap-3 lg:items-center">
-            <div>
-              <h3 className="text-[18px] font-bold leading-[24.3px]">
-                **Employee Name**
-              </h3>
-            </div>
-            <div className="w-auto flex justify-end items-center gap-2">
-              <button
-                onClick={() => navigate("/edit-employee/1", "Employees")}
-                className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3]/[0.12] rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
-              >
-                <TiPencil className="text-lg" />
-                <span>Edit</span>
-              </button>
-              <button
-                onClick={() => navigate("/add-task", "Assign Tasks")}
-                className="bg-[#199BD1] w-[127px] h-[32px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
-              >
-                Assign New Task
-              </button>
-            </div>
-          </div>
-          <div className="w-full h-auto flex flex-col gap-6 justify-start items-start ">
-            <div className="w-full flex flex-col justify-start items-start gap-6">
-              <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
-                <div className="w-full grid grid-cols-2 gap-12">
-                  <AddFleetInput
-                    label={"Name"}
-                    state={"David Beckham"}
-                    disabled={true}
-                  />
-                  <AddFleetInput
-                    label={"Email"}
-                    state={"david@gmail.com"}
-                    disabled={true}
-                  />
-                </div>
-                <div className="w-full grid grid-cols-2 gap-12">
-                  <AddFleetInput
-                    label={"Job Title"}
-                    state={"Dock manager"}
-                    disabled={true}
-                  />
-                  <AddFleetInput
-                    label={"Location"}
-                    state={"East California dock"}
-                    disabled={true}
-                  />
-                </div>
-                <div className="w-full grid grid-cols-2 gap-12">
-                  <AddFleetInput
-                    label={"Phone Number"}
-                    state={"000000000"}
-                    disabled={true}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full flex flex-col gap-6 justify-start items-start mt-14 py-6 border-t-[1px] border-white/10">
-            <div className="w-auto flex gap-2 justify-start items-center ">
-              <h3 className="text-[18px] font-bold leading-[24.3px]">
-                Resend Password
-              </h3>
-              <button className="text-[14px] font-medium text-[#199bd1]">
-                Change
-              </button>
-            </div>
-
-            <div className="w-auto flex flex-col justify-start items-start gap-3">
-              <div className="flex justify-start items-center gap-2 text-white text-[16px] font-normal leading-[21.6px]">
-                <span className="text-white/50">Email:</span>
-                <span>marktaylor12345@gmail.com</span>
-              </div>
-              <div className="flex justify-start items-center gap-2 text-white text-[16px] font-normal leading-[21.6px]">
-                <span className="text-white/50">Password:</span>
-                <span>Pass12345</span>
-              </div>
-            </div>
-          </div>
+      {isLoading ? (
+        <div className="w-full h-[90dvh] flex justify-center items-center">
+          <FiLoader className="text-[30px] animate-spin text-lg mx-auto" />
         </div>
-      </div>
-
-      <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
-        <div className="w-auto flex justify-between items-center gap-2">
-          <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-            Assigned Tasks{" "}
-          </h3>
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="text-[14px] font-medium bg-[#199bd1]/[0.2] h-8 rounded-full w-[70px] text-[#199bd1]"
-          >
-            View All
-          </button>
-        </div>
-
-        <div className="w-full flex flex-col gap-1 justify-start items-start">
-          <div className="w-full h-6 grid grid-cols-6 text-[13px] font-medium  border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
-            <span className="w-full flex justify-start items-center">
-              Boat Name
-            </span>
-            <button
-              onClick={toggleLocationModal}
-              className="w-full flex flex-col gap-1 relative justify-start items-start"
-            >
-              <div className="w-auto flex gap-1 justify-start items-center ">
-                <span>Task Type</span>
-                <FaCaretDown />
-              </div>
-              <div
-                ref={locationRef}
-                className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
-                  locationFilter ? "scale-100" : "scale-0"
-                } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-6 left-0`}
-              >
-                <div className="w-full flex justify-start items-start gap-2">
-                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                    Full Cleaning
-                  </span>
-                </div>
-                <div className="w-full flex justify-start items-start gap-2">
-                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                    Full Cleaning
-                  </span>
-                </div>
-                <div className="w-full flex justify-start items-start gap-2">
-                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                    Full Cleaning
-                  </span>
-                </div>
-                <div className="w-full flex justify-start items-start gap-2">
-                  <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                    Full Cleaning
-                  </span>
-                </div>
-              </div>
-            </button>
-            <button
-              onClick={() => setIsCalendarOpen(true)}
-              className="w-full flex  gap-1  justify-start items-center relative"
-            >
-              <CiCalendar className="text-lg" />
-              <span>Due Date</span>
-            </button>
-            <DateModal isOpen={isCalendarOpen} setIsOpen={setIsCalendarOpen} />
-            <span className="w-full flex justify-start items-center">
-              Recurring Days
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Status
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Action
-            </span>
-          </div>
-          <button
-            onClick={() => navigate("/tasks/1", "All Tasks")}
-            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-          >
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              Recurring
-            </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-              <span className=" flex justify-start items-center ">
-                <FaRegEdit />
-              </span>
-              <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
-              </span>
-            </div>
-          </button>
-          <button
-            onClick={() => navigate("/tasks/1")}
-            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-          >
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              Recurring
-            </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-              <span className=" flex justify-start items-center ">
-                <FaRegEdit />
-              </span>
-              <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
-              </span>
-            </div>
-          </button>
-          <button
-            onClick={() => navigate("/tasks/1")}
-            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-          >
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              Recurring
-            </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-              <span className=" flex justify-start items-center ">
-                <FaRegEdit />
-              </span>
-              <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
-              </span>
-            </div>
-          </button>
-          <button
-            onClick={() => navigate("/tasks/1")}
-            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-          >
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              Recurring
-            </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-              <span className=" flex justify-start items-center ">
-                <FaRegEdit />
-              </span>
-              <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
-              </span>
-            </div>
-          </button>
-          <button
-            onClick={() => navigate("/tasks/1")}
-            className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
-          >
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-            <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
-              Recurring
-            </span>
-            <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-              <span className=" flex justify-start items-center ">
-                <FaRegEdit />
-              </span>
-              <span className=" flex justify-start items-center ">
-                <RiDeleteBinLine />
-              </span>
-            </div>
-          </button>
-        </div>
-
-        <ViewAllTasksModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
-      </div>
-      <div className="w-full flex justify-end mt-10 items-center gap-4">
-        <button
-          onClick={() => navigate(-1, "Employees")}
-          className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+      ) : (
+        <form
+          className="w-full h-auto grid grid-cols-1 justify-center items-center gap-4"
+          onSubmit={handleSubmit(handleUpdateEmployee)}
         >
-          {"Back"}
-        </button>
-      </div>
+          <div className="w-full h-auto  bg-[#1A293D] text-white  flex flex-col justify-start items-start">
+            <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">
+              <div className="w-full h-auto flex flex-col lg:flex-row justify-between gap-3 lg:items-center">
+                <div>
+                  <h3 className="text-[18px] font-bold leading-[24.3px]">
+                    {isEditing ? `Edit ${employee.name}` : employee.name}
+                  </h3>
+                </div>
+                <div className="w-auto flex justify-end items-center gap-2">
+                  {isEditing ? (
+                    <div></div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setIsEditing(true)}
+                      className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3]/[0.12]
+                       rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
+                    >
+                      <TiPencil className="text-lg" />
+                      <span>Edit</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => navigate("/add-task", "Assign Tasks")}
+                    className="bg-[#199BD1] w-[127px] h-[32px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
+                  >
+                    Assign New Task
+                  </button>
+                </div>
+              </div>
+              <div className="w-full h-auto flex flex-col gap-6 justify-start items-start ">
+                <div className="w-full flex flex-col justify-start items-start gap-6">
+                  <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
+                    <div className="w-full grid grid-cols-2 gap-12">
+                      <AddFleetInput
+                        isDisabled={!isEditing}
+                        label="Name"
+                        type="text"
+                        placeholder="Enter Name"
+                        register={register("name", {
+                          required: "Please enter your name.",
+                          pattern: {
+                            value: /^[A-Za-z\s]+$/,
+                            message: "Please enter a valid name.",
+                          },
+                        })}
+                        error={errors.name}
+                        onInput={(e) => {
+                          e.target.value = e.target.value.replace(
+                            /[^A-Za-z]/g,
+                            ""
+                          );
+                        }}
+                      />
+                      <AddFleetInput
+                        isDisabled={!isEditing}
+                        label="Email"
+                        type="email"
+                        placeholder="Enter Email"
+                        register={register("email", {
+                          required: "Please enter your email address.",
+                          pattern: {
+                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                            message: "Please enter a valid email address.",
+                          },
+                        })}
+                        error={errors.email}
+                      />
+                    </div>
+                    <div className="w-full grid grid-cols-2 gap-12">
+                      <AddFleetInput
+                        isDisabled={!isEditing}
+                        label="Job Title"
+                        type="text"
+                        placeholder="Enter Job Title"
+                        register={register("jobtitle", {
+                          required: "Please enter your job title",
+                        })}
+                        error={errors.jobtitle}
+                      />
+                      <AddFleetInput
+                        isDisabled={!isEditing}
+                        label="Location"
+                        type="text"
+                        placeholder="Enter Location"
+                        register={register("location", {
+                          required: "Please enter a location",
+                          minLength: {
+                            value: 2,
+                            message:
+                              "Location must be at least 2 characters long",
+                          },
+                        })}
+                        error={errors.location}
+                      />
+                    </div>
+                    <div className="w-full grid grid-cols-2 gap-12">
+                      <AddFleetInput
+                        isDisabled={!isEditing}
+                        label="Phone Number"
+                        type="text"
+                        placeholder="Enter Phone Number"
+                        isPhone={true}
+                        register={register("phone", {
+                          required: "Please enter your phone number.",
+                          pattern: {
+                            value: /^\+?[0-9]{10}$/,
+                            message: "Please enter a valid phone number.",
+                          },
+                        })}
+                        maxLength={10}
+                        error={errors.phone}
+                        onInput={(e) => {
+                          e.target.value = e.target.value.replace(
+                            /(?!^\+)[^\d]/g,
+                            ""
+                          );
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <ResendPasswordCard employee={employee} />
+            </div>
+          </div>
+
+          <AssignedTasksCard
+            tasks={employeeTasks}
+            setUpdatedTasks={setUpdatedTasks}
+            setEmployeeTasks={setEmployeeTasks}
+            isEdit={isEditing}
+          />
+          <div className="w-full flex justify-end mt-10 items-center gap-4">
+            {isEditing ? (
+              <>
+                <button
+                  type="button"
+                  onClick={() => setIsEditing(false)}
+                  className="w-full lg:w-[208px] h-[52px] bg-[#02203A] rounded-[12px] text-[#FFFFFF] flex items-center
+             justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+                >
+                  Back
+                </button>
+                <button
+                  disabled={submitLoading}
+                  type="submit"
+                  className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
+             justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+                >
+                  <div className="flex items-center">
+                    <span className="mr-1">Save</span>
+                    {submitLoading && (
+                      <FiLoader className="animate-spin text-lg mx-auto" />
+                    )}
+                  </div>
+                </button>
+              </>
+            ) : (
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
+             justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+              >
+                Back
+              </button>
+            )}
+          </div>
+        </form>
+      )}
     </div>
   );
 };

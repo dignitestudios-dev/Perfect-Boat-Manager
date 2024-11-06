@@ -1,42 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaRegEdit, FaCaretDown } from "react-icons/fa";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiSearch } from "react-icons/fi";
+import { getUnixDate } from "../../constants/DateFormat";
+import TaskType from "../../components/global/headerDropDowns/TaskType";
+import StatusType from "../../components/global/headerDropDowns/StatusType";
 
-
-const Dropdown = ({ label, options }) => {
-  const [isOpen, setIsOpen] = React.useState(false);
-
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
-  };
-
-  return (
-    <div className="relative w-full">
-      <button
-        onClick={toggleDropdown}
-        className="flex items-center gap-1  py-2 rounded-md"
-      >
-        {label}
-        <FaCaretDown />
-      </button>
-      {isOpen && (
-        <div className="absolute top-10 left-0 w-full bg-[#1A293D] rounded-md shadow-lg p-3 z-10">
-          {options.map((option, index) => (
-            <div key={index} className="flex items-center gap-2 p-2">
-              <input type="checkbox" className="w-3 h-3 accent-[#199BD1]" />
-              <span className="text-white/50 text-[11px] font-medium leading-[14.85px]">
-                {option}
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+const statusColor = (status) => {
+  switch (status) {
+    case "newtask":
+      return "bg-[#FF007F]/[0.12] text-[#FF007F]";
+    case "overdue":
+      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
+    case "in-progress":
+      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+    case "completed":
+      return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    default:
+      return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
+  }
 };
 
-const AssignedModal = ({ handleViewAllClick, setIsOpen }) => {
+const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
+  const [taskType, setTaskType] = useState("");
+  const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
+  const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [search, setSearch] = useState("");
+
+  const toggleTaskTypeDropdown = () => {
+    setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
+  };
+
+  const toggleStatusDropdown = () => {
+    setStatusDropdownOpen(!statusDropdownOpen);
+  };
+
+  const filteredData = tasks?.filter((item) => {
+    const matchesSearch = search
+      ? item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    const matchesStatus =
+      statusFilter && statusFilter !== "all"
+        ? item?.status === statusFilter
+        : true;
+    const taskTypeMatch =
+      taskType && taskType !== "all"
+        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+        : true;
+    return matchesSearch && matchesStatus && taskTypeMatch;
+  });
+
+  const handleEditTaskClick = (taskId) => {
+    navigateTo(`/tasks/${taskId}`);
+  };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
       <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
@@ -51,16 +69,17 @@ const AssignedModal = ({ handleViewAllClick, setIsOpen }) => {
             </button>
           </div>
           <div className="flex justify-between items-center mb-4">
-          <div className="flex w-1/2 lg:w-[295px] h-[32px] justify-start items-start rounded-[8px] bg-[#1A293D] relative">
-          <span className="w-[32px] h-full flex items-center justify-center">
-            <FiSearch className="text-white/50 text-lg" />
-          </span>
-          <input
-            type="text"
-            placeholder="Search here"
-            className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full"
-          />
-        </div>
+            <div className="flex w-1/2 lg:w-[295px] h-[32px] justify-start items-start rounded-[8px] bg-[#1A293D] relative">
+              <span className="w-[32px] h-full flex items-center justify-center">
+                <FiSearch className="text-white/50 text-lg" />
+              </span>
+              <input
+                onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Search here"
+                className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full"
+              />
+            </div>
           </div>
           <div className="relative h-full overflow-auto">
             <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
@@ -69,7 +88,12 @@ const AssignedModal = ({ handleViewAllClick, setIsOpen }) => {
                   Boat Name
                 </span>
                 <div className="w-full flex justify-start items-center bg-transparent">
-                  <Dropdown label="Task Type" options={["Inspection", "Maintenance", "Repair"]} />
+                  <TaskType
+                    taskTypeDropdownOpen={taskTypeDropdownOpen}
+                    toggleTaskTypeDropdown={toggleTaskTypeDropdown}
+                    setTaskType={setTaskType}
+                    taskType={taskType}
+                  />
                 </div>
                 <span className="w-full flex justify-start items-center">
                   Due Date
@@ -78,177 +102,76 @@ const AssignedModal = ({ handleViewAllClick, setIsOpen }) => {
                   Recurring Days
                 </span>
                 <div className="w-full flex justify-start items-center">
-                  <Dropdown label="Status" options={["Pending", "In Progress", "Completed"]} />
+                  <StatusType
+                    statusDropdownOpen={statusDropdownOpen}
+                    statusFilter={statusFilter}
+                    toggleStatusDropdown={toggleStatusDropdown}
+                    setStatusFilter={setStatusFilter}
+                  />
                 </div>
-                <span className="w-full flex justify-start items-center">
-                  Action
-                </span>
-              </div>
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
+                {isEdit && (
+                  <span className="w-full flex justify-start items-center">
+                    Action
                   </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
+                )}
               </div>
+              {filteredData?.length > 0 ? (
+                <>
+                  {filteredData?.map((task, index) => (
+                    <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+                      <span className="w-full flex justify-start items-center">
+                        {task?.boatName}
+                      </span>
+                      <span className="w-full flex justify-start items-center">
+                        {task?.taskType?.length > 40
+                          ? task?.taskType?.slice(0, 40) + "..."
+                          : task?.taskType}
+                      </span>
+                      <span className="w-full flex justify-start items-center">
+                        {getUnixDate(task?.dueDate)}
+                      </span>
+                      <span className="w-full flex justify-start items-center ">
+                        {task?.reoccuringDays}
+                      </span>
+                      <span className="w-full flex justify-start items-center ">
+                        <span
+                          className={`w-auto h-[27px] rounded-full flex items-center justify-center
+              ${statusColor(task?.status)} px-2`}
+                        >
+                          {task?.status}
+                        </span>
+                      </span>
+                      {isEdit && (
+                        <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
+                          <span
+                            type="button"
+                            onClick={() => handleEditTaskClick(task?._id)}
+                            className=" flex justify-start items-center cursor-pointer"
+                          >
+                            <FaRegEdit />
+                          </span>
+                          <span
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemoveTask(task?._id);
+                              // setDeleteModalOpen(true); // Open modal when delete icon is clicked
+                            }}
+                            className=" flex justify-start items-center cursor-pointer"
+                          >
+                            <RiDeleteBinLine />
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </>
+              ) : (
+                <span className="w-full flex justify-start items-center pt-4">
+                  No record found
+                </span>
+              )}
 
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
-                  </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
-              </div>
-
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
-                  </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
-              </div>
-
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
-                  </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
-              </div>
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
-                  </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
-              </div>
-              <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-                <span className="w-full flex justify-start items-center">
-                  Boat A
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  Full Inspection
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  12-02-2024
-                </span>
-                <span className="w-full flex justify-start items-center ">
-                  90 days
-                </span>
-                <span className="w-full flex justify-start items-center ">
-            <span className="w-auto h-[27px] rounded-full flex items-center justify-center bg-[#FFCC00]/[0.12] text-[#FFCC00] px-2">
-              In-Progress
-            </span>
-          </span>
-                <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
-                  <span className="flex justify-start items-center">
-                    <FaRegEdit />
-                  </span>
-                  <span className="flex justify-start items-center">
-                    <RiDeleteBinLine />
-                  </span>
-                </div>
-              </div>
               {/* Add more rows as needed */}
             </div>
           </div>

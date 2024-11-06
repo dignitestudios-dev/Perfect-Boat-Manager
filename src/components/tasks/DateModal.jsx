@@ -36,6 +36,7 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
 
   return (
     <div
+      type="button"
       onClick={toggleModal}
       className={`fixed z-[10000] top-0 p-2 left-0 transition-all duration-300 w-screen h-screen flex justify-center items-center bg-transparent ${
         isOpen ? "scale-1" : "scale-0"
@@ -47,6 +48,7 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
       >
         {/* Close button */}
         <button
+          type="button"
           className="absolute top-4 right-4 text-[#199BD1] text-2xl font-bold"
           onClick={() => setIsOpen(false)}
         >

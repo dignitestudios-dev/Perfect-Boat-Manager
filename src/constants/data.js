@@ -8,3 +8,12 @@ export const recurringOptions = [
   { value: "365", label: "1 year" },
   { value: "custom", label: "Custom" },
 ];
+
+export const STATUS_ENUM = {
+  newtask: "New Task",
+  inprogress: "In Progress",
+  recurring: "Recurring",
+  overdue: "Overdue",
+  completed: "Completed",
+  upcomingtask: "Upcoming Task",
+};
