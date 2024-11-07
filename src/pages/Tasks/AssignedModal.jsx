@@ -38,7 +38,9 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
 
   const filteredData = tasks?.filter((item) => {
     const matchesSearch = search
-      ? item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+      ? item?.boat?.name
+        ? item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase())
+        : item?.name?.toLowerCase()?.includes(search?.toLowerCase())
       : true;
     const matchesStatus =
       statusFilter && statusFilter !== "all"
@@ -120,7 +122,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
                   {filteredData?.map((task, index) => (
                     <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
                       <span className="w-full flex justify-start items-center">
-                        {task?.boatName}
+                        {task?.boat?.name ? task?.boat?.name : task?.boatName}
                       </span>
                       <span className="w-full flex justify-start items-center">
                         {task?.taskType?.length > 40

@@ -62,7 +62,11 @@ const TasksCard = ({ getTasks, data }) => {
         onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
         className="w-full h-[172px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
-        <div className={`w-[6px] h-full rounded-l-[6px] bg-[#FFCC00]`}></div>
+        <div
+          className={`w-[6px] h-full rounded-l-[6px] ${statusColor(
+            data?.status
+          )}`}
+        ></div>
         <div className="w-[calc(100%-6px)] h-full py-4 px-6 flex flex-col gap-2 justify-start items-start relative">
           <div className="w-full h-auto flex justify-between items-center">
             <h3 className="text-[20px] font-bold leading-[27px]">

@@ -7,6 +7,7 @@ import axios from "../../axios";
 import { ErrorToast } from "../global/Toaster";
 import LocationType from "../global/headerDropDowns/LocationType";
 import { useNavigate } from "react-router-dom";
+import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 
 const NewTaskTable = () => {
   const navigate = useNavigate();
@@ -34,7 +35,6 @@ const NewTaskTable = () => {
         `/manager/task/requests?${locationQuery}`
       );
       setData(data?.data || []);
-      console.log("🚀 ~ getData ~ data:", data);
     } catch (err) {
       console.error("Error fetching Task data:", err);
       ErrorToast(err?.response?.data?.message);
@@ -90,7 +90,7 @@ const NewTaskTable = () => {
         </div>
 
         {loading ? (
-          <div>Loading...</div>
+          <ManagerListLoader />
         ) : (
           <>
             {filteredData?.map((task, index) => (
@@ -134,7 +134,7 @@ const NewTaskTable = () => {
                   {task?.boat?.location}
                 </span>
                 <span className="w-full flex justify-start items-center px-[60px]">
-                  David Beckham
+                  {task?.employee?.name}
                 </span>
               </button>
             ))}

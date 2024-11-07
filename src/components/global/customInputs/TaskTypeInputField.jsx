@@ -9,6 +9,8 @@ const TaskTypeInputField = ({
   setTasks,
   selectedTaskType,
   setSelectedTaskType,
+  setCustomTypeText,
+  customTypeText,
 }) => {
   const taskTypeDropdownRef = useRef();
   const [isTaskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
@@ -90,7 +92,7 @@ const TaskTypeInputField = ({
                   <input
                     onChange={(e) => setCustomTypeText(e.target.value)}
                     type="text"
-                    className="w-[60%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
+                    className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
                                border-[1px] border-[#55C9FA] rounded-md"
                   />
                   <button

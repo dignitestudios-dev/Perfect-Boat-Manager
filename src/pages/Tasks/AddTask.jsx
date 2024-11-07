@@ -28,6 +28,7 @@ const AddTask = () => {
   const [passSelectedBoat, SetPassSelectedBoat] = useState("");
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
+  const [customTypeText, setCustomTypeText] = useState("");
   const [selectedTaskType, setSelectedTaskType] = useState(null);
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
 
@@ -76,8 +77,8 @@ const AddTask = () => {
         taskType: selectedTaskType?.replace(/([A-Z])/g, " $1")?.trim(),
         dueDate: dueDate?.unix,
         description: noteText,
-        reoccuring: true,
-        reoccuringDays: +recurringDays,
+        reoccuring: recurringDays === "none" ? false : true,
+        reoccuringDays: recurringDays === "none" ? 0 : +recurringDays,
         assignTo: [passSelectedEmployee?.id],
       };
 
@@ -153,6 +154,8 @@ const AddTask = () => {
                   setTasks={setTasks}
                   selectedTaskType={selectedTaskType}
                   setSelectedTaskType={setSelectedTaskType}
+                  setCustomTypeText={setCustomTypeText}
+                  customTypeText={customTypeText}
                 />
                 {inputError.task && (
                   <p className="text-red-500">{inputError.task}</p>

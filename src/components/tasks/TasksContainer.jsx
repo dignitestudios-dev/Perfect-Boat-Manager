@@ -37,10 +37,6 @@ const TasksContainer = () => {
       const { data } = await axios.get(
         `/manager/task?page=${pageNumber}&pageSize=${rows}${searchFilter}${sortByFilter}`
       );
-
-      // const { data } = await axios.get(
-      //   filter !== "" ? `/owner/task?status=${filter}` : `/owner/task?page=${pageNumber}&pageSize=${rows}`
-      // );
       setTaskData(data?.data?.data || []);
       setPageDetails(data?.data?.paginationDetails || []);
     } catch (err) {
