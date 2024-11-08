@@ -5,6 +5,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
 import { RxCaretDown } from "react-icons/rx";
 import { GlobalContext } from "../contexts/GlobalContext";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
   const { navigate } = useContext(GlobalContext);
@@ -32,7 +33,9 @@ const Navbar = () => {
             <p className="text-[11px] font-normal text-white/50">
               Welcome back,
             </p>
-            <p className="text-[11px] font-medium text-white">Kevin Brian</p>
+            <p className="text-[11px] font-medium text-white">
+              {Cookies.get("name")}
+            </p>
           </div>
 
           {/* <button className="text-xl text-white">

@@ -127,6 +127,7 @@ export const GlobalContextProvider = ({ children }) => {
         setUpdateManager,
         setUpdateBoat,
         setUpdateDropDown,
+        getDropDown,
         dropDown,
         boatDropDown,
         taskDropDown,
