@@ -22,6 +22,7 @@ const DeactivatedEmployeesTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userId, setUserId] = useState();
   const [activateLoading, setActivateLoading] = useState(false);
+  const [userError, SetUserError] = useState(null);
 
   const handleReactivate = async () => {
     try {
@@ -43,6 +44,7 @@ const DeactivatedEmployeesTable = () => {
 
   const getUsersData = async () => {
     try {
+      SetUserError(null);
       setLoading(true);
       const { data } = await axios.get(`/manager/user?isDelete=false`);
       if (data.success === true) {
@@ -50,6 +52,7 @@ const DeactivatedEmployeesTable = () => {
       }
     } catch (error) {
       console.log("🚀 ~ getUsersData ~ error:", error);
+      SetUserError("No record found");
     } finally {
       setLoading(false);
     }
@@ -99,32 +102,38 @@ const DeactivatedEmployeesTable = () => {
           <ManagerListLoader />
         ) : (
           <>
-            {usersData?.map((user, index) => (
-              <div
-                key={index}
-                className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
-             leading-[14.85px] text-white justify-start items-center"
-              >
-                <span className="w-full flex justify-start items-center">
-                  {user?.name}
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  {user?.email}
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  {user?.userType}
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  {user?.jobtitle}
-                </span>
-                <button
-                  onClick={() => handleActionClick(user?._id)}
-                  className="text-white/50 font-medium w-full flex justify-center items-center"
-                >
-                  <TfiReload />
-                </button>
-              </div>
-            ))}
+            {userError ? (
+              <div className="pt-2">{userError}</div>
+            ) : (
+              <>
+                {usersData?.map((user, index) => (
+                  <div
+                    key={index}
+                    className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
+                     leading-[14.85px] text-white justify-start items-center"
+                  >
+                    <span className="w-full flex justify-start items-center">
+                      {user?.name}
+                    </span>
+                    <span className="w-full flex justify-start items-center">
+                      {user?.email}
+                    </span>
+                    <span className="w-full flex justify-start items-center">
+                      {user?.userType}
+                    </span>
+                    <span className="w-full flex justify-start items-center">
+                      {user?.jobtitle}
+                    </span>
+                    <button
+                      onClick={() => handleActionClick(user?._id)}
+                      className="text-white/50 font-medium w-full flex justify-center items-center"
+                    >
+                      <TfiReload />
+                    </button>
+                  </div>
+                ))}
+              </>
+            )}
           </>
         )}
 

@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import { AuthMockup } from "../../assets/export";
 import { FiEdit, FiEdit2 } from "react-icons/fi";
 import PhoneEditModal from "../../components/global/PhoneEditModal";
 import VerifyPhoneEditOtp from "../../components/global/VerifyPhoneEditOtp";
 import PhoneUpdateSuccess from "../../components/global/PhoneUpdateSuccess";
+import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
+import axios from "../../axios";
 
 const UserManagementPage = () => {
   const [edit, setEdit] = useState(false);
   const [verifyOtp, setVerifyOtp] = useState(false);
   const [phoneUpdated, setPhoneUpdated] = useState(false);
+  const [phoneNum, setPhoneNum] = useState("");
+  const [profileData, setProfileData] = useState("");
+  const [profileLoading, setProfileLoading] = useState(false);
+
+  const getUserProfile = async () => {
+    try {
+      setProfileLoading(true);
+      const response = await axios.get("/manager/profile");
+      if (response.status === 200) {
+        setProfileData(response?.data?.data);
+      }
+    } catch (err) {
+      console.log("🚀 ~ getUserProfile ~ err:", err);
+      ErrorToast(err?.response?.data?.message);
+    } finally {
+      setProfileLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   return (
     <div className="w-full flex flex-col gap-6 px-5 pb-5 md:px-0">
@@ -46,31 +70,70 @@ const UserManagementPage = () => {
             )} */}
           </div>
           <div className="w-full h-auto flex justify-start items-start gap-4">
-            <AddFleetInput
-              label={"First Name"}
-              disabled={true}
-              state={"Mike"}
-            />
-            <AddFleetInput
-              label={"Last Name"}
-              disabled={true}
-              state={"Smith"}
-            />
+            <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+              <label className="text-[16px] font-medium leading-[21.6px]">
+                First Name
+              </label>
+              <div
+                className={`w-full h-[52px] bg-[#1A293D] outline-none px-3 focus-within:border-[1px] focus-within:border-[#55C9FA] rounded-xl flex items-center`}
+              >
+                <input
+                  disabled
+                  className="w-full h-full bg-transparent outline-none text-white placeholder:text-gray-400"
+                  value={profileData?.name?.split(" ")[0] || ""}
+                />
+              </div>
+            </div>
+
+            <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+              <label className="text-[16px] font-medium leading-[21.6px]">
+                Last Name
+              </label>
+              <div
+                className={`w-full h-[52px] bg-[#1A293D] outline-none px-3 focus-within:border-[1px] focus-within:border-[#55C9FA] rounded-xl flex items-center`}
+              >
+                <input
+                  disabled
+                  className="w-full h-full bg-transparent outline-none text-white placeholder:text-gray-400"
+                  value={profileData?.name?.split(" ")[1] || ""}
+                />
+              </div>
+            </div>
           </div>
           <div className="w-full h-auto flex justify-start items-start gap-4">
-            <AddFleetInput
-              label={"Email"}
-              disabled={true}
-              state={"mikesmith@gmail.com"}
-            />
-            <AddFleetInput
-              label={"Phone Number"}
-              disabled={true}
-              state={"000 000 0000"}
-            />
+            <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+              <label className="text-[16px] font-medium leading-[21.6px]">
+                Email
+              </label>
+              <div
+                className={`w-full h-[52px] bg-[#1A293D] outline-none px-3 focus-within:border-[1px] focus-within:border-[#55C9FA] rounded-xl flex items-center`}
+              >
+                <input
+                  disabled
+                  className="w-full h-full bg-transparent outline-none text-white placeholder:text-gray-400"
+                  value={profileData?.email}
+                />
+              </div>
+            </div>
+
+            <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+              <label className="text-[16px] font-medium leading-[21.6px]">
+                Phone Number
+              </label>
+              <div
+                className={`w-full h-[52px] bg-[#1A293D] outline-none px-3 focus-within:border-[1px] focus-within:border-[#55C9FA] rounded-xl flex items-center`}
+              >
+                <input
+                  disabled
+                  className="w-full h-full bg-transparent outline-none text-white placeholder:text-gray-400"
+                  value={profileData?.phoneNumber}
+                />
+              </div>
+            </div>
           </div>
           {edit && (
             <PhoneEditModal
+              setPhoneNumber={setPhoneNum}
               isOpen={edit}
               setIsOpen={setEdit}
               setVerifyOtp={setVerifyOtp}
@@ -78,6 +141,8 @@ const UserManagementPage = () => {
           )}
           {verifyOtp && (
             <VerifyPhoneEditOtp
+              setPhoneNumber={setPhoneNum}
+              phoneNum={phoneNum}
               isOpen={verifyOtp}
               setIsOpen={setVerifyOtp}
               setPhoneUpdated={setPhoneUpdated}

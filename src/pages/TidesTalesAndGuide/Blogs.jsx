@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BlogsContainer } from "../../components/TidesTales&Guides/BlogsContainer";
+import axios from "../../axios";
 
 const Blogs = () => {
   return (
