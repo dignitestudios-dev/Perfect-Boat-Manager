@@ -5,6 +5,7 @@ import { FiSearch } from "react-icons/fi";
 import { getUnixDate } from "../../constants/DateFormat";
 import TaskType from "../../components/global/headerDropDowns/TaskType";
 import StatusType from "../../components/global/headerDropDowns/StatusType";
+import { useNavigate } from "react-router-dom";
 
 const statusColor = (status) => {
   switch (status) {
@@ -22,6 +23,7 @@ const statusColor = (status) => {
 };
 
 const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
+  const navigate = useNavigate();
   const [taskType, setTaskType] = useState("");
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
@@ -54,7 +56,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
   });
 
   const handleEditTaskClick = (taskId) => {
-    navigateTo(`/tasks/${taskId}`);
+    navigate(`/tasks/${taskId}`);
   };
 
   return (
@@ -85,7 +87,12 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
           </div>
           <div className="relative h-full overflow-auto">
             <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-              <div className="w-full h-8 grid grid-cols-6 text-[13px] font-medium border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-center mb-2">
+              <div
+                className={`w-full h-8 grid ${
+                  isEdit ? "grid-cols-6" : "grid-cols-5"
+                } text-[13px] font-medium
+               border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-center mb-2`}
+              >
                 <span className="w-full flex justify-start items-center">
                   Boat Name
                 </span>
@@ -120,7 +127,12 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
               {filteredData?.length > 0 ? (
                 <>
                   {filteredData?.map((task, index) => (
-                    <div className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
+                    <div
+                      className={`w-full h-10 grid ${
+                        isEdit ? "grid-cols-6" : "grid-cols-5"
+                      } border-b border-[#fff]/[0.14] py-1 
+                    text-[13px] font-medium leading-[14.85px] text-white justify-start items-center`}
+                    >
                       <span className="w-full flex justify-start items-center">
                         {task?.boat?.name ? task?.boat?.name : task?.boatName}
                       </span>

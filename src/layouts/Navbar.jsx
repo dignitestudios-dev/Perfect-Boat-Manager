@@ -8,8 +8,12 @@ import { GlobalContext } from "../contexts/GlobalContext";
 import Cookies from "js-cookie";
 
 const Navbar = () => {
-  const { navigate } = useContext(GlobalContext);
+  const { navigate, notifications } = useContext(GlobalContext);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const unreadCount = notifications.filter(
+    (notification) => !notification.isRead
+  ).length;
+
   return (
     <div className="w-full h-[60px] bg-[#001229] flex justify-end items-center px-4 absolute top-0 left-0">
       <div className="flex items-center gap-6 py-4 font-normal text-gray-900">
@@ -18,14 +22,16 @@ const Navbar = () => {
           className="w-[29px] h-[29px] rounded-lg flex items-center justify-center bg-[#1A293D] p-1 relative"
         >
           <IoNotificationsOutline className="text-white w-full h-full" />
-          <GoDotFill className="w-[20px] h-[20px] text-[#F44237] absolute -top-2 -right-2" />
+          {unreadCount > 0 && (
+            <GoDotFill className="w-[20px] h-[20px] text-[#F44237] absolute -top-2 -right-2" />
+          )}
         </Link>
         <button
           onClick={() => navigate("/profile", "Profile")}
           className="flex items-center gap-2 relative"
         >
           <img
-            src={AuthMockup}
+            src={`https://ui-avatars.com/api/?name=${Cookies.get("name")}`}
             alt=""
             className="w-[28px] h-[28px] rounded-full"
           />

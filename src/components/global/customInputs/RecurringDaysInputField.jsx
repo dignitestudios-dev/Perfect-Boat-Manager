@@ -72,7 +72,18 @@ const RecurringDaysInputField = ({
             <div className="w-full flex flex-col justify-start items-start">
               <input
                 placeholder="In count"
-                onChange={(e) => setCustomRecurring(e.target.value)}
+                value={customRecurring}
+                onChange={(e) => {
+                  let value = e.target.value;
+
+                  if (
+                    /^\d*$/.test(value) &&
+                    (value === "" ||
+                      (Number(value) <= 365 && Number(value) >= 0))
+                  ) {
+                    setCustomRecurring(value);
+                  }
+                }}
                 type="text"
                 className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
                                border-[1px] border-[#55C9FA] rounded-md"

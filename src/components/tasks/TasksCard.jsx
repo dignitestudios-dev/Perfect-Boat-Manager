@@ -22,6 +22,21 @@ const statusColor = (status) => {
   }
 };
 
+const sideColor = (status) => {
+  switch (status) {
+    case "newtask":
+      return "bg-[#FF007F]";
+    case "overdue":
+      return "bg-[#FF3B30]";
+    case "in-progress":
+      return "bg-[#36B8F3]";
+    case "completed":
+      return "bg-[#1FBA46]";
+    default:
+      return "bg-[#FFCC00]";
+  }
+};
+
 const TasksCard = ({ getTasks, data }) => {
   const { navigate } = useContext(GlobalContext);
 
@@ -63,7 +78,7 @@ const TasksCard = ({ getTasks, data }) => {
         className="w-full h-[172px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
         <div
-          className={`w-[6px] h-full rounded-l-[6px] ${statusColor(
+          className={`w-[6px] h-full rounded-l-[6px] ${sideColor(
             data?.status
           )}`}
         ></div>

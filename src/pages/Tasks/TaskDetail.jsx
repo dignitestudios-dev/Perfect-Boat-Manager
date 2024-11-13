@@ -5,7 +5,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats } from "react-icons/tb";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { AuthMockup } from "../../assets/export";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FiLoader } from "react-icons/fi";
 import axios from "../../axios";
 import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
@@ -18,12 +18,14 @@ import DateModal from "../../components/tasks/DateModal";
 import moment from "moment";
 
 const TaskDetail = () => {
-  const { navigate, taskDropDown } = useContext(GlobalContext);
+  const { taskDropDown } = useContext(GlobalContext);
+  const navigate = useNavigate();
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [updateLoad, setUpdateLoad] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [taskDetail, setTaskDetail] = useState({});
+  console.log("🚀 ~ TaskDetail ~ taskDetail:", taskDetail);
   const [tasks, setTasks] = useState([]);
   const [selectedTaskType, setSelectedTaskType] = useState(null);
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
@@ -32,7 +34,7 @@ const TaskDetail = () => {
   const [dueDate, setDueDate] = useState({});
   const [selectedDay, setSelectedDay] = useState("");
   const [recurringDays, setRecurringDays] = useState("");
-  console.log("🚀 ~ TaskDetail ~ recurringDays:", recurringDays);
+
   const [passSelectedEmployee, setPassSelectedEmployee] = useState("");
   const [passSelectedBoat, setPassSelectedBoat] = useState("");
 
@@ -307,9 +309,9 @@ const TaskDetail = () => {
                 {taskDetail?.status !== "completed" && (
                   <button
                     type="button"
-                    onClick={() =>
-                      navigate("/task-completed", { state: taskDetail })
-                    }
+                    onClick={() => {
+                      navigate("/task-completed", { state: taskDetail });
+                    }}
                     className="w-full lg:w-[208px] h-[52px] bg-[#1FBA46] text-white rounded-[12px] flex items-center justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
                   >
                     {"Mark As Completed"}

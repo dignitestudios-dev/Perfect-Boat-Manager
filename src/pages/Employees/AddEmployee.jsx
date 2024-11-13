@@ -55,7 +55,6 @@ const AddEmployee = () => {
       email: "",
       jobtitle: "",
       location: "",
-      manager: null,
       phone: "",
       password: "Test@123",
     },
@@ -74,7 +73,6 @@ const AddEmployee = () => {
             email: item.email || "",
             jobtitle: item.jobtitle || "",
             location: item.location || "",
-            manager: item.manager || null,
             phone: item.phoneNumber || "",
             password: "Test@123",
           }));

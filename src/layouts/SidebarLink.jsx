@@ -18,7 +18,11 @@ const SidebarLink = ({ link, onCloseDrawer }) => {
   return (
     <div className="w-full">
       <button
-        onClick={link.submenu ? toggleSubmenu : () => handleNavigation(link?.url, link?.title)}
+        onClick={
+          link.submenu
+            ? toggleSubmenu
+            : () => handleNavigation(link?.url, link?.title)
+        }
         className={`w-full h-[46px] outline-none rounded-[12px] ${
           activeLink === link?.title
             ? "bg-[#199BD1] text-white"
@@ -41,8 +45,12 @@ const SidebarLink = ({ link, onCloseDrawer }) => {
             <button
               key={index}
               onClick={() => handleNavigation(sublink.url, sublink.title)}
-              className={`block w-full h-[46px] outline-none rounded-[12px] 
-              bg-transparent text-white/50 
+              className={`block w-full h-[46px] outline-none rounded-[12px] mt-1
+               ${
+                 activeLink === sublink?.title
+                   ? "bg-[#199BD1] text-white"
+                   : "bg-transparent text-white/50 "
+               }
               font-medium flex items-center justify-start transition-all duration-500 hover:bg-[#199BD1] hover:text-white px-3 gap-2`}
             >
               <span className="capitalize text-sm">{sublink.title}</span>
@@ -55,4 +63,3 @@ const SidebarLink = ({ link, onCloseDrawer }) => {
 };
 
 export default SidebarLink;
-  

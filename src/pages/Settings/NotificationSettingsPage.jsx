@@ -12,7 +12,7 @@ const NotificationSettingsPage = () => {
     try {
       const { data } = await axios.get("/manager/notification/setting");
       console.log("🚀 ~ getSettings ~ data:", data);
-      // setSettings(data?.data);
+      setSettings(data?.data);
     } catch (err) {
       console.error("Error fetching settings:", err);
     } finally {
@@ -36,10 +36,10 @@ const NotificationSettingsPage = () => {
   const handleSaveChanges = async () => {
     setUpdateLoading(true);
     try {
-      const { data } = await axios.put("/manager/notification/setting", {
-        data: settings,
-      });
-      console.log("🚀 ~ handleSaveChanges ~ data:", data);
+      const { data } = await axios.put(
+        "/manager/notification/setting",
+        settings
+      );
       setSettingsUpdate((prev) => !prev); // Trigger re-fetch to ensure updates
       setUpdateLoading(false);
     } catch (err) {

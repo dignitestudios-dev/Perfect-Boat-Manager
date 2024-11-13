@@ -6,6 +6,8 @@ import TasksCard from "./TasksCard";
 import { TbCaretDownFilled } from "react-icons/tb";
 import axios from "../../axios";
 import TasksListLoader from "../global/Loaders/TasksListLoader";
+import Pagination from "../global/Pagination";
+import DateModal from "./DateModal";
 
 const TasksContainer = () => {
   const { navigate } = useContext(GlobalContext);
@@ -17,9 +19,20 @@ const TasksContainer = () => {
   const [sortDate, setSortDate] = useState("");
   const [sortFilter, setSortFilter] = useState("");
 
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [dueDate, setDueDate] = useState({});
+  const [inputError, setInputError] = useState({});
+
   const [pageDetails, setPageDetails] = useState({});
   const [taskData, setTaskData] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
+  const handleCheckboxChange = (sort) => {
+    setSortFilter(sort);
+  };
 
   const toggleModal = (e) => {
     if (dropDownRef.current && !dropDownRef.current.contains(e.target)) {
@@ -27,18 +40,21 @@ const TasksContainer = () => {
     }
   };
 
-  const getTasks = async (pageNumber = 1, rows = 9) => {
+  const getTasks = async () => {
     setLoading(true);
     try {
       const searchFilter = filter ? `&status=${filter}` : "";
-      // const sortByFilter = sortDate ? `&startDate=${sortDate}&endDate=${sortDate}` : "";
+      const sortByDate = sortDate
+        ? `&startDate=${dueDate?.normal}&endDate=${dueDate?.normal}`
+        : "";
       const sortByFilter = sortFilter === "earliest" ? `&isEarliest=true` : "";
 
       const { data } = await axios.get(
-        `/manager/task?page=${pageNumber}&pageSize=${rows}${searchFilter}${sortByFilter}`
+        `/manager/task?page=${currentPage}&pageSize=9${searchFilter}${sortByFilter}${sortByDate}`
       );
       setTaskData(data?.data?.data || []);
       setPageDetails(data?.data?.paginationDetails || []);
+      setTotalPages(data?.data?.paginationDetails?.totalPages);
     } catch (err) {
       console.error("Error fetching Task data:", err);
     } finally {
@@ -48,7 +64,7 @@ const TasksContainer = () => {
 
   useEffect(() => {
     getTasks();
-  }, [filter, sortFilter]);
+  }, [filter, sortFilter, currentPage]);
 
   const filteredData = taskData?.filter((item) =>
     item?.task?.toLowerCase()?.includes(search?.toLowerCase())
@@ -59,7 +75,9 @@ const TasksContainer = () => {
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           All Tasks{" "}
-          <span className="text-[12px] font-normal text-white/50 ">(723)</span>
+          <span className="text-[12px] font-normal text-white/50 ">
+            {filteredData?.length}
+          </span>
         </h3>
 
         <div className="w-full h-auto flex justify-between items-center">
@@ -87,7 +105,10 @@ const TasksContainer = () => {
         <div className="w-full flex justify-between items-center">
           <div className="w-full sm:w-auto flex flex-wrap gap-2 justify-start items-center">
             <button
-              onClick={() => setFilter("")}
+              onClick={() => {
+                setFilter("");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == ""
                   ? "bg-[#fff] text-[#001229]"
@@ -97,7 +118,10 @@ const TasksContainer = () => {
               All
             </button>
             <button
-              onClick={() => setFilter("newtask")}
+              onClick={() => {
+                setFilter("newtask");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "newtask"
                   ? "bg-[#fff] text-[#001229]"
@@ -107,7 +131,10 @@ const TasksContainer = () => {
               New
             </button>
             <button
-              onClick={() => setFilter("upcomingtask")}
+              onClick={() => {
+                setFilter("upcomingtask");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "upcomingtask"
                   ? "bg-[#fff] text-[#001229]"
@@ -117,7 +144,10 @@ const TasksContainer = () => {
               Upcoming
             </button>
             <button
-              onClick={() => setFilter("inprogress")}
+              onClick={() => {
+                setFilter("inprogress");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "inprogress"
                   ? "bg-[#fff] text-[#001229]"
@@ -127,7 +157,10 @@ const TasksContainer = () => {
               In-Progress
             </button>
             <button
-              onClick={() => setFilter("completed")}
+              onClick={() => {
+                setFilter("completed");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "completed"
                   ? "bg-[#fff] text-[#001229]"
@@ -137,7 +170,10 @@ const TasksContainer = () => {
               Completed
             </button>
             <button
-              onClick={() => setFilter("recurring")}
+              onClick={() => {
+                setFilter("recurring");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "recurring"
                   ? "bg-[#fff] text-[#001229]"
@@ -147,7 +183,10 @@ const TasksContainer = () => {
               Recurring
             </button>
             <button
-              onClick={() => setFilter("overdue")}
+              onClick={() => {
+                setFilter("overdue");
+                setCurrentPage(1);
+              }}
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "overdue"
                   ? "bg-[#fff] text-[#001229]"
@@ -170,25 +209,44 @@ const TasksContainer = () => {
               } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-9 right-0`}
             >
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
+                <input
+                  checked={sortFilter === "all"}
+                  onChange={() => handleCheckboxChange("all")}
+                  type="checkbox"
+                  className="w-3 h-3 accent-[#199BD1]"
+                />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   None
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
+                <input
+                  checked={sortFilter === "latest"}
+                  onChange={() => handleCheckboxChange("latest")}
+                  type="checkbox"
+                  className="w-3 h-3 accent-[#199BD1]"
+                />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Latest
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
+                <input
+                  checked={sortFilter === "earliest"}
+                  onChange={() => handleCheckboxChange("earliest")}
+                  type="checkbox"
+                  className="w-3 h-3 accent-[#199BD1]"
+                />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Earliest
                 </span>
               </div>
               <div className="w-full flex justify-start items-start gap-2">
-                <input type="checkbox" className="w-3 h-3 accent-[#1A293D]" />
+                <input
+                  onChange={() => setIsCalendarOpen(true)}
+                  type="checkbox"
+                  className="w-3 h-3 accent-[#199BD1]"
+                />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Calendar
                 </span>
@@ -218,7 +276,20 @@ const TasksContainer = () => {
             </>
           )}
         </div>
+        <DateModal
+          isOpen={isCalendarOpen}
+          setIsOpen={setIsCalendarOpen}
+          setDueDate={setDueDate}
+          setInputError={setInputError}
+          isRange={"range"}
+        />
       </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+        setTotalPages={setTotalPages}
+      />
     </div>
   );
 };

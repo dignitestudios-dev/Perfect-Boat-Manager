@@ -1,6 +1,7 @@
 import axios from "../axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { onMessageListener } from "../firebase/messages";
 
 export const GlobalContext = createContext();
 
@@ -114,6 +115,28 @@ export const GlobalContextProvider = ({ children }) => {
   }, [updateDropDown]);
 
   const test = "";
+
+  // for notifications
+  const [show, setShow] = useState(false);
+  const [notification, setNotification] = useState({ title: "", body: "" });
+  const [notifications, setNotifications] = useState([]);
+  const [notificationUpdate, setNotificationUpdate] = useState(false);
+
+  onMessageListener()
+    .then((payload) => {
+      setShow(true);
+      setNotification({
+        title: payload.notification.title,
+        body: payload.notification.body,
+      });
+      setNotificationUpdate((prev) => !prev);
+      setTimeout(() => {
+        setShow(false);
+        setNotification({ title: "", body: "" });
+      }, 3000);
+    })
+    .catch((err) => console.log("failed: ", err));
+
   return (
     <GlobalContext.Provider
       value={{
@@ -137,6 +160,14 @@ export const GlobalContextProvider = ({ children }) => {
         managers,
         boats,
         employees,
+        show,
+        setShow,
+        notification,
+        setNotification,
+        notifications,
+        setNotifications,
+        notificationUpdate,
+        setNotificationUpdate,
       }}
     >
       {children}

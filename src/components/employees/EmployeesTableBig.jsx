@@ -13,7 +13,7 @@ import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 import { ErrorToast } from "../global/Toaster";
 import axios from "../../axios";
 
-const EmployeesTableBig = ({ data, loading, getEmployees }) => {
+const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   const { navigate, setUpdateEmployee } = useContext(GlobalContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
@@ -82,7 +82,8 @@ const EmployeesTableBig = ({ data, loading, getEmployees }) => {
   };
 
   useEffect(() => {
-    getEmployees(1, 15, jobType, locationType);
+    setCurrentPage(1);
+    getEmployees(jobType, locationType);
   }, [jobType, locationType]);
 
   return (

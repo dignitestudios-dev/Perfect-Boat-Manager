@@ -22,8 +22,14 @@ const AddEmployeeCsv = ({ data, setData }) => {
   const submitEmployeeData = async (e) => {
     e.preventDefault();
     try {
+      const dataToSubmit = data.map((item) => ({
+        ...item,
+        phone: item.phone.startsWith("+1") ? item.phone : `+1${item.phone}`, // Add +1 only if not already present
+      }));
+
+      // Now use `dataToSubmit` to send your data
       setSubmitLoading(true);
-      const response = await axios.post("/owner/employees/csv", data);
+      const response = await axios.post("/manager/employees/csv", dataToSubmit);
       if (response.status === 200) {
         SuccessToast("Employees Created Successfully");
         navigate("/employees");

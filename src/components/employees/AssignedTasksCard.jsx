@@ -37,6 +37,10 @@ const AssignedTasksCard = ({
   const [taskType, setTaskType] = useState("");
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
 
+  const [dueDate, setDueDate] = useState({});
+  console.log("🚀 ~ dueDate:", dueDate);
+  const [inputError, setInputError] = useState({});
+
   const toggleTaskTypeDropdown = () => {
     setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
   };
@@ -95,7 +99,12 @@ const AssignedTasksCard = ({
             <CiCalendar className="text-lg" />
             <span>Due Date</span>
           </button>
-          <DateModal isOpen={isCalendarOpen} setIsOpen={setIsCalendarOpen} />
+          <DateModal
+            isOpen={isCalendarOpen}
+            setIsOpen={setIsCalendarOpen}
+            setDueDate={setDueDate}
+            setInputError={setInputError}
+          />
           <span className="w-full flex justify-start items-center">
             Recurring Days
           </span>
