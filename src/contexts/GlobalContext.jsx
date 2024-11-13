@@ -2,12 +2,13 @@ import axios from "../axios";
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { onMessageListener } from "../firebase/messages";
-
+import Cookies from "js-cookie";
 export const GlobalContext = createContext();
 
 export const GlobalContextProvider = ({ children }) => {
   const route = useNavigate();
   const [activeLink, setActiveLink] = useState("Home");
+  const token = Cookies.get("token");
   const navigate = (url, active) => {
     route(url);
     setActiveLink(active);
@@ -41,17 +42,21 @@ export const GlobalContextProvider = ({ children }) => {
   const [updateEmployee, setUpdateEmployee] = useState(false);
 
   const getEmployees = async (jobType = "all", locationType = "all") => {
-    setLoadingEmployees(true);
-    try {
-      const boatQuery = jobType !== "all" ? `jobTitle=${jobType}` : "";
-      const locationQuery =
-        locationType !== "all" ? `locations=${locationType}` : "";
-      const queryString = [boatQuery, locationQuery].filter(Boolean).join("&");
-      const { data } = await axios.get(`/manager/employees?${queryString}`);
-      setEmployees(data?.data);
-    } catch (err) {
-    } finally {
-      setLoadingEmployees(false);
+    if (token) {
+      setLoadingEmployees(true);
+      try {
+        const boatQuery = jobType !== "all" ? `jobTitle=${jobType}` : "";
+        const locationQuery =
+          locationType !== "all" ? `locations=${locationType}` : "";
+        const queryString = [boatQuery, locationQuery]
+          .filter(Boolean)
+          .join("&");
+        const { data } = await axios.get(`/manager/employees?${queryString}`);
+        setEmployees(data?.data);
+      } catch (err) {
+      } finally {
+        setLoadingEmployees(false);
+      }
     }
   };
   useEffect(() => {
@@ -63,18 +68,22 @@ export const GlobalContextProvider = ({ children }) => {
   const [updateBoat, setUpdateBoat] = useState(false);
 
   const getBoats = async (boatType = "all", locationType = "all") => {
-    setLoadingBoats(true);
-    try {
-      const boatQuery = boatType !== "all" ? `boatType=${boatType}` : "";
-      const locationQuery =
-        locationType !== "all" ? `locationType=${locationType}` : "";
-      const queryString = [boatQuery, locationQuery].filter(Boolean).join("&");
-      const { data } = await axios.get(`/manager/boat?${queryString}`);
+    if (token) {
+      setLoadingBoats(true);
+      try {
+        const boatQuery = boatType !== "all" ? `boatType=${boatType}` : "";
+        const locationQuery =
+          locationType !== "all" ? `locationType=${locationType}` : "";
+        const queryString = [boatQuery, locationQuery]
+          .filter(Boolean)
+          .join("&");
+        const { data } = await axios.get(`/manager/boat?${queryString}`);
 
-      setBoats(data?.data);
-    } catch (err) {
-    } finally {
-      setLoadingBoats(false);
+        setBoats(data?.data);
+      } catch (err) {
+      } finally {
+        setLoadingBoats(false);
+      }
     }
   };
   useEffect(() => {
@@ -88,26 +97,30 @@ export const GlobalContextProvider = ({ children }) => {
   const [updateDropDown, setUpdateDropDown] = useState(false);
 
   const getDropDown = async () => {
-    setLoadingBoats(true);
-    try {
-      const [companyResponse, boatResponse, taskResponse] = await Promise.all([
-        axios.get("/manager/dropdown/company"),
-        axios.get("/manager/dropdown/boat"),
-        axios.get("/manager/dropdown/task"),
-      ]);
-      if (
-        taskResponse.status === 200 ||
-        boatResponse.status === 200 ||
-        companyResponse.status === 200
-      ) {
-        setDropDown(companyResponse?.data?.data);
-        setBoatDropDown(boatResponse?.data?.data);
-        setTaskDropDown(taskResponse?.data?.data);
+    if (token) {
+      setLoadingBoats(true);
+      try {
+        const [companyResponse, boatResponse, taskResponse] = await Promise.all(
+          [
+            axios.get("/manager/dropdown/company"),
+            axios.get("/manager/dropdown/boat"),
+            axios.get("/manager/dropdown/task"),
+          ]
+        );
+        if (
+          taskResponse.status === 200 ||
+          boatResponse.status === 200 ||
+          companyResponse.status === 200
+        ) {
+          setDropDown(companyResponse?.data?.data);
+          setBoatDropDown(boatResponse?.data?.data);
+          setTaskDropDown(taskResponse?.data?.data);
+        }
+      } catch (err) {
+        console.error("Error fetching dropdown data", err);
+      } finally {
+        setLoadingBoats(false);
       }
-    } catch (err) {
-      console.error("Error fetching dropdown data", err);
-    } finally {
-      setLoadingBoats(false);
     }
   };
   useEffect(() => {
