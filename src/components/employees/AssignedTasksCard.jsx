@@ -38,7 +38,6 @@ const AssignedTasksCard = ({
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
 
   const [dueDate, setDueDate] = useState({});
-  console.log("🚀 ~ dueDate:", dueDate);
   const [inputError, setInputError] = useState({});
 
   const toggleTaskTypeDropdown = () => {
