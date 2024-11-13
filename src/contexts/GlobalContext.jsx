@@ -129,6 +129,30 @@ export const GlobalContextProvider = ({ children }) => {
 
   const test = "";
 
+  const [isTaskData, setIsTaskData] = useState(false);
+  const [isTaskLoading, setIsTaskLoading] = useState(false);
+  const getTasks = async () => {
+    if (token) {
+      try {
+        setIsTaskLoading(true);
+        const { data } = await axios.get(`/manager/task`);
+        if (data) {
+          setIsTaskData(data?.data?.length > 0 ? true : false);
+        }
+      } catch (err) {
+        console.error("Error fetching Task data:", err);
+      } finally {
+        setIsTaskLoading(false);
+      }
+    } else {
+      route("/login");
+    }
+  };
+
+  useEffect(() => {
+    getTasks();
+  }, []);
+
   // for notifications
   const [show, setShow] = useState(false);
   const [notification, setNotification] = useState({ title: "", body: "" });
@@ -181,6 +205,9 @@ export const GlobalContextProvider = ({ children }) => {
         setNotifications,
         notificationUpdate,
         setNotificationUpdate,
+        isTaskData,
+        setIsTaskData,
+        isTaskLoading,
       }}
     >
       {children}
