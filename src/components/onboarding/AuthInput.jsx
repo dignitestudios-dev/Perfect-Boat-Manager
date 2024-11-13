@@ -25,17 +25,16 @@ const AuthInput = ({ text, type, placeholder, register, error, maxLength }) => {
              placeholder:text-[#6B737E] text-white bg-transparent h-full px-3 text-sm font-medium pb-[2px]"
             {...register}
           />
-          <button
-            type="button"
+          <span
             onClick={() => setIsPassVisible((prev) => !prev)}
-            className="absolute top-4 text-lg right-2"
+            className="absolute top-4 text-lg right-2 cursor-pointer"
             style={{
               color: "#6B7373",
             }}
           >
             {type == "password" &&
               (!isPassVisible ? <BsEyeSlash /> : <BsEye />)}
-          </button>
+          </span>
         </div>
       </div>
       {error && <p className="text-red-500 text-sm">{error.message}</p>}
