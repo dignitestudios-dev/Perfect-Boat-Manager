@@ -26,8 +26,6 @@ const Login = () => {
   const handleLogin = async (formData) => {
     setLoading(true);
     try {
-      const fcmToken = await getFCMToken();
-      console.log(fcmToken);
       let obj = {
         email: formData.email,
         password: formData.password,
@@ -37,6 +35,8 @@ const Login = () => {
 
       const response = await axios.post("/auth/signIn", obj);
       if (response.status === 200) {
+        const fcmToken = await getFCMToken();
+        console.log(fcmToken);
         login(response.data);
         SuccessToast("Logged in successfully");
         navigate("/home", "Home");
