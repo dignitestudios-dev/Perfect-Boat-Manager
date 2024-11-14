@@ -25,7 +25,7 @@ const TaskType = ({
         onClick={toggleTaskTypeDropdown}
       />
       {taskTypeDropdownOpen && (
-        <div className="h-[300px] absolute top-full left-0 mt-1 w-52 bg-[#1A293D] text-white rounded-md shadow-lg z-10 overflow-auto pr-1">
+        <div className="max-h-[300px] absolute top-full left-0 mt-1 w-52 bg-[#1A293D] text-white rounded-md shadow-lg z-10 overflow-auto pr-1">
           <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
             <input
               checked={taskType === "all"}
