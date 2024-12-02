@@ -62,18 +62,18 @@ const UserManagementPage = () => {
           </div>
 
           <div className="w-full flex flex-col justify-start items-start gap-4">
-            <div className="w-[120px] h-[120px] rounded-full bg-[#1A293D] flex justify-center items-center relative">
+            {/* <div className="w-[120px] h-[120px] rounded-full bg-[#1A293D] flex justify-center items-center relative">
               <img
                 src={AuthMockup}
                 alt="user_image"
                 className="w-full h-full rounded-full"
               />
-              {/* {edit && (
+              {edit && (
               <button className="w-6 h-6 rounded-full bg-blue-600 absolute bottom-1 right-2 flex items-center justify-center text-sm">
                 <FiEdit />
               </button>
-            )} */}
-            </div>
+            )}
+            </div> */}
             <div className="w-full h-auto flex justify-start items-start gap-4">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                 <label className="text-[16px] font-medium leading-[21.6px]">

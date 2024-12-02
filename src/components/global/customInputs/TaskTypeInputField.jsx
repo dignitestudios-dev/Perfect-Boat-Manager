@@ -100,6 +100,7 @@ const TaskTypeInputField = ({
                     onClick={(e) => {
                       e.stopPropagation();
                       handleTaskTypeSelection(customTypeText);
+                      toggleTaskTypeDropdown();
                     }}
                     className="w-[95%] h-[42px] rounded-md bg-[#119bd1] text-white flex items-center 
                             justify-center text-sm font-medium"
