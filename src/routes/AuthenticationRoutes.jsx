@@ -2,6 +2,7 @@ import ForgotPassword from "../pages/onboarding/ForgotPassword";
 import Login from "../pages/onboarding/Login";
 import UpdatePassword from "../pages/onboarding/UpdatePassword";
 import VerifyOtp from "../pages/onboarding/VerifyOtp";
+import PrivacyPolicy from "../pages/Settings/PrivacyPolicy";
 
 export const AuthenticationRoutes = [
   {
@@ -23,5 +24,10 @@ export const AuthenticationRoutes = [
     title: "Update Password",
     url: "/update-password",
     page: <UpdatePassword />,
+  },
+  {
+    title: "Privacy Policy",
+    url: "/privacy-policy",
+    page: <PrivacyPolicy />
   },
 ];

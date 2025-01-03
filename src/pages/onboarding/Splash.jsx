@@ -7,10 +7,14 @@ import { GlobalContext } from "../../contexts/GlobalContext";
 const Splash = () => {
   const [isQrOpen, setIsQrOpen] = useState(false);
   const { navigate } = useContext(GlobalContext);
-  return (  
+  return (
     <div className="bg-[#001229] w-screen h-screen flex flex-col gap-32 pt-[136px]  justify-start items-center relative">
-      <span className="w-[396px] h-[396px] rounded-full bg-[#00638C] blur-[105px] flex items-center justify-center absolute top-16 left-[calc(50%-193px)]" />
-      <img src={SplashLogo} alt="splash_logo" className="z-50 w-[551.88px] " />
+      <span className="w-[406px] h-[406px] rounded-full bg-[#00638C] blur-[105px] flex items-center justify-center absolute top-16 left-[calc(50%-193px)]" />
+      <img
+        src={SplashLogo}
+        alt="splash_logo"
+        className="z-50 w-[331.88px] h-[195px] "
+      />
 
       <div className="w-auto flex flex-col gap-8 px-4 md:px-0 justify-center items-center">
         <div className="flex flex-col gap-4 justify-center items-center">

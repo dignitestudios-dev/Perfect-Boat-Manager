@@ -112,7 +112,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == ""
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               All
@@ -125,10 +125,10 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "newtask"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
-              New
+               New Task
             </button>
             <button
               onClick={() => {
@@ -138,7 +138,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "upcomingtask"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Upcoming
@@ -151,7 +151,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "inprogress"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               In-Progress
@@ -164,7 +164,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "completed"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Completed
@@ -177,7 +177,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "recurring"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Recurring
@@ -190,7 +190,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "overdue"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#fff]"
+                  : "bg-[#1A293D] text-[#FFFFFF80]"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Overdue
@@ -213,7 +213,9 @@ const TasksContainer = () => {
                   checked={sortFilter === "all"}
                   onChange={() => handleCheckboxChange("all")}
                   type="checkbox"
-                  className="w-3 h-3 accent-[#199BD1]"
+                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                     checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                     checked:after:text-md checked:after:p-1"
                 />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   None
@@ -224,7 +226,9 @@ const TasksContainer = () => {
                   checked={sortFilter === "latest"}
                   onChange={() => handleCheckboxChange("latest")}
                   type="checkbox"
-                  className="w-3 h-3 accent-[#199BD1]"
+                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                  checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                  checked:after:text-md checked:after:p-1"
                 />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Latest
@@ -235,7 +239,9 @@ const TasksContainer = () => {
                   checked={sortFilter === "earliest"}
                   onChange={() => handleCheckboxChange("earliest")}
                   type="checkbox"
-                  className="w-3 h-3 accent-[#199BD1]"
+                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                     checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                     checked:after:text-md checked:after:p-1"
                 />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Earliest
@@ -245,7 +251,9 @@ const TasksContainer = () => {
                 <input
                   onChange={() => setIsCalendarOpen(true)}
                   type="checkbox"
-                  className="w-3 h-3 accent-[#199BD1]"
+                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                  checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                  checked:after:text-md checked:after:p-1"
                 />
                 <span className="text-white text-[11px] font-medium leading-[14.85px]">
                   Calendar
