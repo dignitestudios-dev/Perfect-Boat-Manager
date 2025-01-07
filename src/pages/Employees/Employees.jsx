@@ -10,12 +10,14 @@ const Employees = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const getEmployees = async (jobTitle = "all", locations = "all") => {
+  const getEmployees = async (jobTitle = [], locations = []) => {
+    console.log(jobTitle, "jobTitle");
     setLoadingEmployees(true);
     try {
-      const jobQuery = jobTitle !== "all" ? `&jobTitle=${jobTitle}` : "";
+      const jobQuery = jobTitle?.length !== 0 ? `&jobTitle=${jobTitle}` : "";
+      console.log(jobTitle?.length, "jobTitle?.length");
       const locationQuery =
-        locations !== "all" ? `&locations=${locations}` : "";
+        locations?.length !== 0 ? `&locations=${locations}` : "";
       const { data } = await axios.get(
         `/manager/employees?page=${currentPage}&pageSize=15${jobQuery}${locationQuery}`
       );

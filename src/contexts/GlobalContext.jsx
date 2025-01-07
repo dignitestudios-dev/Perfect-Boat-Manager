@@ -151,7 +151,7 @@ export const GlobalContextProvider = ({ children }) => {
 
   useEffect(() => {
     getTasks();
-  }, []);
+  }, [token]);
 
   // for notifications
   const [show, setShow] = useState(false);

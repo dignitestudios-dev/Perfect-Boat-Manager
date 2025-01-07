@@ -90,7 +90,7 @@ export const BlogsContainer = () => {
         ) : (
           <>
             {blogs.length === 0 ? (
-              <div>No record found</div>
+              <div>Looks like smooth waters, no blogs here yet!</div>
             ) : (
               <div className="w-full h-auto grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                 {blogs.map((blog, index) => (

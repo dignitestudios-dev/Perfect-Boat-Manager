@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { GlobalContext } from "../../../contexts/GlobalContext";
 
@@ -9,13 +9,35 @@ const TaskType = ({
   taskType,
 }) => {
   const { dropDown } = useContext(GlobalContext);
+  const dropdownRef = useRef(null);
 
   const handleCheckboxChange = (task) => {
     setTaskType(task);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        taskTypeDropdownOpen
+      ) {
+        toggleTaskTypeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [taskTypeDropdownOpen, toggleTaskTypeDropdown]);
+
   return (
-    <span className="w-full flex justify-start items-center relative">
+    <span
+      className="w-full flex justify-start items-center relative"
+      ref={dropdownRef}
+    >
       Task Type
       <FaCaretDown
         type="button"

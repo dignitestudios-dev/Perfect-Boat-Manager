@@ -3,7 +3,7 @@ import moment from "moment/moment";
 // *Date Format
 export const getUnixDate = (date) => {
   if (date && moment(date).isValid()) {
-    return moment(date * 1000).format("DD/MM/YYYY");
+    return moment.unix(date).local().format("MM-DD-YYYY");
   }
   return undefined;
 };

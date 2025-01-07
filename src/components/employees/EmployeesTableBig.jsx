@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaCaretDown, FaRegEdit } from "react-icons/fa";
@@ -12,10 +12,17 @@ import LocationType from "../global/headerDropDowns/LocationType";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 import { ErrorToast } from "../global/Toaster";
 import axios from "../../axios";
+import { CiExport } from "react-icons/ci";
+import { TfiReload } from "react-icons/tfi";
+import ReactivateModal from "./ReactiveModal";
 
 const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   const { navigate, setUpdateEmployee } = useContext(GlobalContext);
+  const navigation = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [exportemployee, setExportemployee] = useState("");
+  const [exportLoader, setExportLoader] = useState(false);
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const [isAccountDeleteModalOpen, setIsAccountDeleteModalOpen] =
     useState(false);
@@ -25,9 +32,11 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [deactivateLoading, setDeactivateLoading] = useState(false);
 
-  const [locationType, setLocationType] = useState("all");
-  const [jobType, setJobType] = useState("all");
+  const [locationType, setLocationType] = useState([]);
+  const [jobType, setJobType] = useState([]);
   const [employeeId, setEmployeeId] = useState();
+  const [reactivateModalOpen, setIsReactivateModalOpen] = useState();
+  const [userId, setUserId] = useState();
 
   const toggleJobTitleDropdown = () => {
     setJobTitleDropdownOpen(!jobTitleDropdownOpen);
@@ -55,25 +64,9 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   };
 
   const handleDeactivate = async () => {
-    setDeactivateLoading(true);
-    try {
-      const obj = { reason: "Deactivate" };
-      const response = await axios.delete(
-        `/manager/employees/${employeeId}?deactivate=true`,
-        { data: obj }
-      );
-
-      if (response?.status === 200) {
-        setUpdateEmployee((prev) => !prev);
-        setIsDeactivateModalOpen(true);
-        setIsModalOpen(false);
-        getEmployees();
-        setDeactivateLoading(false);
-      }
-    } catch (err) {
-      ErrorToast(err?.response?.data?.message);
-      setDeactivateLoading(false);
-    }
+    navigation(`/delete-account/${employeeId}`, {
+      state: { reasonForDelete: "deactivation" },
+    });
   };
 
   const handleDelete = () => {
@@ -86,6 +79,61 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
     getEmployees(jobType, locationType);
   }, [jobType, locationType]);
 
+  const exportEmployee = async () => {
+    setExportLoader(true);
+    try {
+      const response = await axios.get("/manager/employees/csv");
+
+      if (response.status === 200) {
+        const result = await response?.data;
+
+        // Check if the data contains the download link
+        if (result?.success && result?.data) {
+          const downloadUrl = result?.data;
+
+          // Create an anchor element and trigger a download
+          const link = document.createElement("a");
+          link.href = downloadUrl;
+          link.download = "Employee.csv"; // Optional: Specify the download file name
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        } else {
+          console.error("Failed to fetch download link:", result?.message);
+        }
+      } else {
+        ErrorToast("Failed to download CSV");
+      }
+    } catch (err) {
+      ErrorToast(err?.response?.data?.message);
+      console.error("Error downloading file:", err);
+    } finally {
+      setExportLoader(false);
+    }
+  };
+
+  const handleActionClick = (id) => {
+    setUserId(id);
+    setIsReactivateModalOpen(true);
+  };
+
+  const [activateLoading, setActivateLoading] = useState(false);
+
+  const handleReactivate = async () => {
+    try {
+      setActivateLoading(true);
+      const response = await axios.put(`/manager/user/activate/${userId}`);
+
+      if (response.status === 200) {
+        setIsReactivateModalOpen(false);
+        getEmployees();
+        setActivateLoading(false);
+      }
+    } catch (err) {
+      ErrorToast(err?.response?.data?.message);
+      setActivateLoading(false);
+    }
+  };
   return (
     <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
       <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
@@ -104,19 +152,31 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
             className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full"
           />
         </div>
-
-        <button
-          onClick={() => navigate("/add-employee", "Employees")}
-          className="h-[35px] w-[114px] flex items-center gap-1 rounded-[10px] justify-center bg-[#199BD1] text-white text-[11px] font-bold leading-[14.85px]"
-        >
-          <span className="text-lg">+</span>
-          Add Employee
-        </button>
+        <div className="flex  items-center gap-5">
+          <button
+            disabled={exportLoader}
+            onClick={exportEmployee}
+            className="h-[35px] w-[125px] mr-1 px-1 flex items-center gap-1 rounded-[10px] justify-center
+             bg-[#4c585c] text-white text-[11px] font-bold leading-[14.85px] hover:bg-[#576367]"
+          >
+            <span className="text-[11px]">
+              <CiExport className="text-[16px]" />
+            </span>
+            {exportLoader ? "Exporting..." : "Export Employees"}
+          </button>
+          <button
+            onClick={() => navigate("/add-employee", "Employees")}
+            className="h-[35px] w-[114px] flex items-center gap-1 rounded-[10px] justify-center bg-[#199BD1] text-white text-[11px] font-bold leading-[14.85px]"
+          >
+            <span className="text-lg">+</span>
+            Add Employee
+          </button>
+        </div>
       </div>
 
       <div className="w-full overflow-x-auto lg:overflow-visible">
         <div className="min-w-[768px] flex flex-col gap-1 justify-start items-start">
-          <div className="w-full grid grid-cols-5 border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+          <div className="w-full grid grid-cols-[6fr_6fr_6fr_1fr_0fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
             <span className="w-full flex justify-start items-center">
               Employee Name
             </span>
@@ -136,7 +196,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               locationType={locationType}
               setLocationType={setLocationType}
             />
-            <span className="w-full flex justify-start items-center px-[170px]">
+            <span className="w-full flex justify-start items-center pl-[170px] pr-[60px]">
               Action
             </span>
           </div>
@@ -148,14 +208,12 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               {filteredData?.map((employee, index) => (
                 <div
                   key={index}
-                  className="w-full h-8 grid grid-cols-5 border-b cursor-pointer border-white/10  text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
+                  className="w-full h-8 grid grid-cols-[5fr_5fr_5fr_1.1fr_0fr] border-b cursor-pointer border-white/10  text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
+                  onClick={() =>
+                    navigate(`/employees/${employee._id}`, "Employees")
+                  }
                 >
-                  <span
-                    className="w-full flex justify-start items-center"
-                    onClick={() =>
-                      navigate(`/employees/${employee._id}`, "Employees")
-                    }
-                  >
+                  <span className="w-full flex justify-start items-center">
                     {employee?.name}
                   </span>
                   <span className="w-full flex justify-start items-center">
@@ -167,9 +225,9 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                   <span className="w-full flex justify-start items-center">
                     {employee?.location || "---"}
                   </span>
-                  <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
+                  <div className="w-full flex  text-[15px] text-white/40 justify-start items-center gap-2 pl-[170px] pr-[55px]">
                     <span
-                      className="flex justify-start items-center"
+                      className="flex justify-start items-center cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleEditClick(employee?._id);
@@ -177,21 +235,41 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                     >
                       <FaRegEdit />
                     </span>
-                    <span
-                      className="flex justify-start items-center"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleDeleteClick(employee?._id);
-                      }}
-                    >
-                      <RiDeleteBinLine />
-                    </span>
+                    {employee?.isActive === true ? (
+                      <span
+                        className="flex justify-start items-center cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteClick(employee?._id);
+                        }}
+                      >
+                        <RiDeleteBinLine />
+                      </span>
+                    ) : (
+                      <span
+                        className="flex justify-start items-center"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleActionClick(employee?._id);
+                        }}
+                      >
+                        <TfiReload />
+                      </span>
+                    )}
                   </div>
                 </div>
               ))}
             </>
           )}
         </div>
+        {reactivateModalOpen && (
+          <ReactivateModal
+            isOpen={reactivateModalOpen}
+            onClose={handleCloseModal}
+            reactivate={handleReactivate}
+            activateLoading={activateLoading}
+          />
+        )}
         <DeleteAccount
           isOpen={isModalOpen}
           onClose={handleCloseModal}

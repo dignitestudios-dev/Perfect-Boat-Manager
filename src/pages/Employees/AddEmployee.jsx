@@ -210,7 +210,7 @@ const AddEmployee = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    navigate(-1, "Employees");
+                    navigate('/employees', "Employees");
                   }}
                   className="w-full lg:w-[208px] h-[52px] bg-[#02203A] text-[#199BD1] rounded-[12px] flex items-center justify-center
                    text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"

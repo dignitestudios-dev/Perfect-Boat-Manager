@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { GlobalContext } from "../../../contexts/GlobalContext";
 
@@ -9,13 +9,39 @@ const LocationType = ({
   locationType,
 }) => {
   const { dropDown } = useContext(GlobalContext);
+  const dropdownRef = useRef(null);
 
   const handleCheckboxChange = (location) => {
-    setLocationType(location);
+    if (locationType.includes(location)) {
+      setLocationType(locationType.filter((item) => item !== location));
+    } else {
+      setLocationType([...locationType, location]);
+    }
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        locationDropdownOpen
+      ) {
+        toggleLocationDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [locationDropdownOpen, toggleLocationDropdown]);
+
   return (
-    <span className="w-full flex justify-start items-center relative">
+    <span
+      className="w-full flex justify-start items-center relative"
+      ref={dropdownRef}
+    >
       Location
       <FaCaretDown
         className={`ml-2 cursor-pointer ${
@@ -30,8 +56,14 @@ const LocationType = ({
         >
           <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
             <input
-              checked={locationType === "all"}
-              onChange={() => handleCheckboxChange("all")}
+              checked={locationType.length === 0}
+              onChange={() =>
+                setLocationType(
+                  locationType.length === 0
+                    ? dropDown?.locationDropDown || []
+                    : []
+                )
+              }
               type="checkbox"
               className="form-checkbox text-[#199BD1] mr-2"
             />
@@ -43,7 +75,7 @@ const LocationType = ({
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"
             >
               <input
-                checked={locationType === location}
+                checked={locationType.includes(location)}
                 onChange={() => handleCheckboxChange(location)}
                 type="checkbox"
                 className="form-checkbox text-[#199BD1] mr-2"

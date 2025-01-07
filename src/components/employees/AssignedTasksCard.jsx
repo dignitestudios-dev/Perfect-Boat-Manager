@@ -8,6 +8,7 @@ import AssignedModal from "../../pages/Tasks/AssignedModal";
 import TaskType from "../global/headerDropDowns/TaskType";
 import { getUnixDate } from "../../constants/DateFormat";
 import { useNavigate } from "react-router-dom";
+import { STATUS_ENUM } from "../../constants/data";
 
 const statusColor = (status) => {
   switch (status) {
@@ -60,6 +61,9 @@ const AssignedTasksCard = ({
     const newTasks = tasks?.filter((task) => task?._id !== taskID);
     setEmployeeTasks(newTasks);
     setUpdatedTasks(newTasks);
+  };
+const getFormattedStatus = (status) => {
+    return STATUS_ENUM[status] || status;
   };
 
   return (
@@ -133,16 +137,16 @@ const AssignedTasksCard = ({
                   {getUnixDate(task?.dueDate)}
                 </span>
                 <span className="w-full flex justify-start items-center ">
-                  {task?.reoccuringDays}
+                  {task?.reoccuringDays || 'Non-recurring'}
                 </span>
-                <span
-                  className={`text-[11px] rounded-full ${statusColor(
-                    task?.status
-                  )} font-medium leading-[14.85px]
-                 flex justify-center items-center w-[70px] h-[27px] `}
-                >
-                  {task?.status}
-                </span>
+                <div
+              className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
+                task?.status
+              )}
+            font-medium leading-[14.85px] flex items-center justify-center `}
+            >
+              {getFormattedStatus(task?.status)}
+            </div>
                 {isEdit && (
                   <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
                     <span

@@ -81,7 +81,7 @@ const Login = () => {
                   message: "Password must be at least 8 characters long.",
                 },
               })}
-              maxLength={12}
+              maxLength={18}
               text={"Password"}
               placeholder={"Enter your password here"}
               type={"password"}
@@ -90,7 +90,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => navigate("/forgot-password")}
-              className="text-[13px] font-medium text-[#fff]"
+              className="text-[16px] font-[500] leading-[21.6px] mt-2 text-[#fff]"
             >
               Forgot Password?
             </button>
@@ -116,9 +116,9 @@ const Login = () => {
             <button
               type="button"
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
-              // onClick={() => {
-              //   navigate("");
-              // }}
+              onClick={() => {
+                navigate("/privacy-policy");
+              }}
             >
               Privacy policy
             </button>

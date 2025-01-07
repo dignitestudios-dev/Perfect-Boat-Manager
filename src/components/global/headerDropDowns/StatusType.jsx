@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
 
 const StatusType = ({
@@ -14,15 +14,36 @@ const StatusType = ({
     "completed",
     "recurring",
     "overdue",
-    "newtask",
+    "new Task",
   ];
 
   const handleCheckboxChange = (status) => {
     setStatusFilter(status);
   };
+  const dropdownRef = useRef(null); // Ref for the dropdown container
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        statusDropdownOpen
+      ) {
+        toggleStatusDropdown(); // Close the dropdown
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [statusDropdownOpen, toggleStatusDropdown]);
   return (
-    <span className="w-full flex justify-start items-center relative">
+    <span
+      className="w-full flex justify-start items-center relative"
+      ref={dropdownRef}
+    >
       Status
       <FaCaretDown
         className={`ml-2 cursor-pointer ${

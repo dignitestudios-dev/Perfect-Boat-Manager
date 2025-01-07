@@ -7,7 +7,7 @@ import DateModal from "../../components/tasks/DateModal";
 import EmployeeDetailModal from "../Employees/EmployeeDetailModal"; // Ensure the correct path
 import BoatSelectModal from "../Fleet/BoatSelectModal";
 import { FaCaretDown } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import TaskAssignSucessModal from "./TaskAssignSuccessModal";
 import TaskTypeInputField from "../../components/global/customInputs/TaskTypeInputField";
 import TaskInputField from "../../components/global/customInputs/TaskInputField";
@@ -15,6 +15,7 @@ import RecurringDaysInputField from "../../components/global/customInputs/Recurr
 import { ErrorToast } from "../../components/global/Toaster";
 import axios from "../../axios";
 import { FiLoader } from "react-icons/fi";
+import moment from "moment";
 
 const AddTask = () => {
   const { taskDropDown } = useContext(GlobalContext);
@@ -24,8 +25,15 @@ const AddTask = () => {
   const [hasAssigned, setHasAssigned] = useState(false);
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false); // State for Employee Modal
   const [isBoatModalOpen, setIsBoatModalOpen] = useState(false); // State for Boat Modal
+  const location = useLocation();
 
-  const [passSelectedBoat, SetPassSelectedBoat] = useState("");
+  const boatname = location?.state?.boat || "";
+  console.log(boatname, "statename");
+
+  const [passSelectedBoat, SetPassSelectedBoat] = useState({
+    name: boatname?.name,
+    id: boatname?._id,
+  });
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
   const [customTypeText, setCustomTypeText] = useState("");
@@ -156,6 +164,7 @@ const AddTask = () => {
                   setSelectedTaskType={setSelectedTaskType}
                   setCustomTypeText={setCustomTypeText}
                   customTypeText={customTypeText}
+                  setDisplaySelectedTask={setDisplaySelectedTask}
                 />
                 {inputError.task && (
                   <p className="text-red-500">{inputError.task}</p>
@@ -168,6 +177,8 @@ const AddTask = () => {
                   tasks={tasks}
                   setDisplaySelectedTask={setDisplaySelectedTask}
                   displaySelectedTask={displaySelectedTask}
+                  customTypeText={customTypeText}
+                  setCustomTypeText={setCustomTypeText}
                 />
                 {inputError.dueDate && (
                   <p className="text-red-500">{inputError.dueDate}</p>
@@ -177,7 +188,7 @@ const AddTask = () => {
             <div className="w-full grid grid-cols-1 gap-12 mt-4">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                 <label className="text-[16px] font-medium leading-[21.6px]">
-                  {"Note"}
+                  {"Add Note"}
                 </label>
                 <textarea
                   onChange={(e) => {
@@ -205,7 +216,9 @@ const AddTask = () => {
                   onClick={() => setIsCalendarOpen(true)}
                   className="text-xs font-normal text-[#199BD1]"
                 >
-                  {dueDate?.normal || "Select Due Date"}
+                  {dueDate?.normal
+                    ? moment(dueDate?.normal).format("MM-DD-YYYY")
+                    : "Select Due Date"}
                 </button>
               </div>
               {inputError.dueDate && (

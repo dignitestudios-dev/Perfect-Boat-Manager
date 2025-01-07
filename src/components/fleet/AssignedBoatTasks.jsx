@@ -128,6 +128,9 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
                 key={index}
                 className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px]
              font-medium leading-[14.85px] text-white justify-start items-center"
+             onClick={() =>
+              navigate(`/tasks/${task?._id}`, "All Tasks")
+            }
               >
                 <span className="w-full flex justify-start items-center">
                   {task?.boat?.name}

@@ -11,14 +11,15 @@ import DateModal from "../../components/tasks/DateModal";
 import AssignedModal from "../Tasks/AssignedModal";
 import { MdOutlineDateRange } from "react-icons/md";
 import DeletedModal from "../../components/global/DeletedModal";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../axios";
 import { useForm } from "react-hook-form";
 import AssignedBoatTasks from "../../components/fleet/AssignedBoatTasks";
 import { FiLoader } from "react-icons/fi";
 
 const BoatDetail = () => {
-  const { navigate, boatDropDown } = useContext(GlobalContext);
+  const { boatDropDown } = useContext(GlobalContext);
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const {
@@ -54,7 +55,7 @@ const BoatDetail = () => {
   useEffect(() => {
     getBoats();
   }, []);
-
+  console.log(boatsData?.boat, "boatsData?.data?.boat?.name");
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       {loadingBoats ? (
@@ -72,7 +73,11 @@ const BoatDetail = () => {
               </div>
 
               <button
-                onClick={() => navigate("/add-task", "All Tasks")}
+                onClick={() =>
+                  navigate("/add-task", {
+                    state: { boat: boatsData?.boat },
+                  })
+                }
                 className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3] rounded-[10px] text-[#fff] text-[13px] font-medium"
               >
                 <span className="text-lg">+</span>
@@ -112,7 +117,7 @@ const BoatDetail = () => {
                     </div>
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-12">
                       <AddFleetInput
-                        label={"Model/Make/Size"}
+                        label={"Year/Make/Size"}
                         register={register("combined", {
                           required: "Combined value is required",
                         })}

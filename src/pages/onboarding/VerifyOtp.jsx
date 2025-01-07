@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
 import axios from "../../axios";
+import CountDown from "./CountDown";
 
 const VerifyOtp = () => {
   const { navigate } = useContext(GlobalContext);
@@ -88,7 +89,8 @@ const VerifyOtp = () => {
       };
       const response = await axios.post("/auth/forget/otp/email", obj);
       if (response.status === 200) {
-        SuccessToast("OTP Resend Successfully");
+        SuccessToast("OTP Sent");
+        handleRestart()
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -98,6 +100,13 @@ const VerifyOtp = () => {
     } finally {
       setResendLoading(false);
     }
+  };
+  const [isActive, setIsActive] = useState(true);
+  const [seconds, setSeconds] = useState(30);
+
+const handleRestart = () => {
+    setSeconds(30);
+    setIsActive(true);
   };
 
   return (
@@ -118,7 +127,7 @@ const VerifyOtp = () => {
             Update your Password
           </h1>
           <p className=" font-normal text-[16px] text-white leading-[21.6px] tracking-[-1.2px]">
-            Enter the code we just sent to owner@gmail.com
+            Enter the code we just sent to {email}
           </p>
         </div>
         <div className="w-full h-auto flex justify-start items-center gap-4 my-4 ">
@@ -130,6 +139,7 @@ const VerifyOtp = () => {
                 maxLength="1"
                 value={otp[index]}
                 onChange={(e) => handleChange(e, index)}
+                onPaste={(e) => e.preventDefault()}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 ref={(el) => (inputs.current[index] = el)}
                 className="w-[48px] h-[68px] rounded-lg bg-transparent outline-none text-center border-[1px] border-[#c2c6cb] text-white text-2xl focus-within:border-[#55C9FA] flex items-center justify-center"
@@ -144,14 +154,23 @@ const VerifyOtp = () => {
             <span className="text-[13px] font-medium text-[#C2C6CB]">
               Didn't recieve a code?
             </span>
-            <button
-              onClick={handleResendOtp}
-              type="button"
-              disabled={resendLoading}
-              className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
-            >
-              {resendLoading ? "Resending..." : "Resend now"}
-            </button>
+            {isActive ? (
+              <CountDown
+                isActive={isActive}
+                setIsActive={setIsActive}
+                seconds={seconds}
+                setSeconds={setSeconds}
+              />
+            ) : (
+              <button
+                type="button"
+                disabled={resendLoading}
+                onClick={handleResendOtp}
+                className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
+              >
+                {resendLoading ? "Resending..." : "Resend now"}
+              </button>
+            )}
           </div>
         </div>
       </form>
