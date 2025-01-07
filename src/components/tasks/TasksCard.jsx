@@ -127,7 +127,7 @@ const TasksCard = ({ getTasks, data }) => {
                 Due {data?.dueDate ? getUnixDate(data?.dueDate) : "No Due Date"}
               </button>
               <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-[27px] rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[14.85px] bg-[#9CA2AB]/[0.12] text-[#fff]/[0.5]">
-                Recurring {data?.recurringDays ? data?.recurringDays : 0} days
+                Recurring {data?.reoccuringDays ? data?.reoccuringDays : 0} days
               </button>
             </div>
             <button

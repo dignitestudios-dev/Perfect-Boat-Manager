@@ -35,7 +35,7 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   -webkit-background-clip: text;
   -webkit-text-fill-color: #ffffff;
-  caret-color: #ffffff; 
+  caret-color: #ffffff;
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 20px 20px #23232329;
 }
@@ -47,7 +47,19 @@ body {
   font-family: "Manrope", sans-serif;
   overflow-x: hidden;
 }
-
+.rainbow-calendar_month-text {
+  color: white !important;
+}
+.rainbow-calendar_day-adjacent {
+  color: #7e7e7e !important;
+}
+.rainbow-calendar_day-button {
+  color: #fff !important;
+}
+.rainbow-select {
+  background-color: rgb(26 41 61) !important;
+  color: white !important;
+}
 .rainbow-p-around_large {
   background-color: #243347 !important;
 }

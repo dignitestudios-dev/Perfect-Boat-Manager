@@ -15,6 +15,7 @@ const theme = {
 
 const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
   const today = moment();
+  const startOf2023 = moment("01-01-2023");
   const [date, setDate] = useState(today.toDate());
   const dateRef = useRef();
 
@@ -25,11 +26,15 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
   };
 
   const handleDueDate = () => {
-    const formattedDate = date.toISOString().slice(0, 10);
-    setDueDate({ normal: formattedDate });
+    const utcDate = new Date();
 
-    const unixTimestamp = Math.floor(date.getTime() / 1000);
-    setDueDate((prev) => ({ ...prev, unix: unixTimestamp }));
+    // Convert the UTC time to Unix timestamp (epoch time) in seconds
+    const epochTime = Math.floor(utcDate.getTime() / 1000);
+
+    // Format the UTC date into YYYY-MM-DD format
+    const formattedDate = utcDate.toISOString().slice(0, 10);
+
+    setDueDate({ normal: formattedDate, unix: epochTime });
     setInputError({});
     setIsOpen(false);
   };
@@ -89,10 +94,9 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
                   className="h-full"
                   id="calendar-1"
                   value={date}
-                  minDate={today.toDate()}
+                  minDate={startOf2023.toDate()}
                   onChange={(value) => {
                     setDate(value);
-                    console.log(value);
                   }}
                 />
               </Card>

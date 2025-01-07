@@ -11,6 +11,7 @@ const TaskTypeInputField = ({
   setSelectedTaskType,
   setCustomTypeText,
   customTypeText,
+  setDisplaySelectedTask
 }) => {
   const taskTypeDropdownRef = useRef();
   const [isTaskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
@@ -34,6 +35,7 @@ const TaskTypeInputField = ({
       );
       setTaskDropdownOpen(false);
     }
+    setDisplaySelectedTask(null)
   };
 
   return (
@@ -78,7 +80,7 @@ const TaskTypeInputField = ({
                 {item?.taskType?.replace(/([A-Z])/g, " $1")?.trim()}
               </button>
             ))}
-            <button
+            {/* <button
               onClick={(e) => {
                 e.stopPropagation();
                 handleTaskTypeSelection("custom");
@@ -109,7 +111,7 @@ const TaskTypeInputField = ({
                   </button>
                 </div>
               )}
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

@@ -111,7 +111,7 @@ export const normalRoutes = [
   },
   {
     title: "Privacy Policy",
-    url: "/privacy-policy",
+    url: "/privacy-policies",
     page: <GlobalLayout page={<PrivacyPolicy />} />,
   },
   {

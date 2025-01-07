@@ -64,7 +64,7 @@ export const sidebarArr = [
   },
   {
     title: "Privacy Policy",
-    url: "/privacy-policy",
+    url: "/privacy-policies",
     icon: <MdOutlinePrivacyTip />,
   },
   {

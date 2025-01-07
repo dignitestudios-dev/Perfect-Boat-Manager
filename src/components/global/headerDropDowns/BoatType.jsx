@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { FaCaretDown } from "react-icons/fa";
 import { GlobalContext } from "../../../contexts/GlobalContext";
 
@@ -9,12 +9,35 @@ const BoatType = ({
   setBoatType,
 }) => {
   const { dropDown } = useContext(GlobalContext);
+  const dropdownRef = useRef(null);
 
   const handleCheckboxChange = (boat) => {
     setBoatType(boat);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        boatTypeDropdownOpen
+      ) {
+        toggleBoatTypeDropdown();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [boatTypeDropdownOpen, toggleBoatTypeDropdown]);
+
   return (
-    <span className="w-full flex justify-start items-center relative">
+    <span
+      className="w-full flex justify-start items-center relative"
+      ref={dropdownRef}
+    >
       Boat Type
       <FaCaretDown
         className={`ml-2 cursor-pointer ${

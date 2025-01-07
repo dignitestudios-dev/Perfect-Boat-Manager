@@ -115,7 +115,8 @@ const TaskDetail = () => {
       setUpdateLoad(false);
     }
   };
-
+  const [hide, sethide] = useState(false);
+  const [customTypeText , setCustomTypeText] = useState('');
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       {isLoading ? (
@@ -130,18 +131,23 @@ const TaskDetail = () => {
                 <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
                   {isEdit ? "Edit Task" : "Task"}
                 </h3>
-                <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px] ">
+                <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center p-2 ">
                   {taskDetail?.status}
                 </span>
               </div>
-
-              <button
-                onClick={() => setIsEdit(true)}
-                className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3]/[0.12] rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
-              >
-                <TiPencil className="text-lg" />
-                <span>Edit</span>
-              </button>
+              {isEdit === true ? (
+                <></>
+              ) : (
+                <>
+                  <button
+                    onClick={() => setIsEdit(true)}
+                    className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3]/[0.12] rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
+                  >
+                    <TiPencil className="text-lg" />
+                    <span>Edit</span>
+                  </button>
+                </>
+              )}
             </div>
             <div className="w-full h-auto flex flex-col justify-start items-start gap-4 ">
               <div className="w-full h-auto grid grid-cols-2 gap-12">
@@ -191,6 +197,8 @@ const TaskDetail = () => {
                     tasks={tasks}
                     setDisplaySelectedTask={setDisplaySelectedTask}
                     displaySelectedTask={displaySelectedTask}
+                    customTypeText={customTypeText}
+                    setCustomTypeText={setCustomTypeText}
                   />
                   {/* {inputError.dueDate && (
                   <p className="text-red-500">{inputError.dueDate}</p>

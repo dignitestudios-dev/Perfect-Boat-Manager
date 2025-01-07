@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { AuthContext } from "../../contexts/AuthContext";
 import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
 import axios from "../../axios";
+import CountDown from "./CountDown";
 
 const VerifyOtp = () => {
   const { navigate } = useContext(GlobalContext);
@@ -89,6 +90,7 @@ const VerifyOtp = () => {
       const response = await axios.post("/auth/forget/otp/email", obj);
       if (response.status === 200) {
         SuccessToast("OTP Sent");
+        handleRestart()
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -98,6 +100,13 @@ const VerifyOtp = () => {
     } finally {
       setResendLoading(false);
     }
+  };
+  const [isActive, setIsActive] = useState(true);
+  const [seconds, setSeconds] = useState(30);
+
+const handleRestart = () => {
+    setSeconds(30);
+    setIsActive(true);
   };
 
   return (
@@ -145,14 +154,23 @@ const VerifyOtp = () => {
             <span className="text-[13px] font-medium text-[#C2C6CB]">
               Didn't recieve a code?
             </span>
-            <button
-              onClick={handleResendOtp}
-              type="button"
-              disabled={resendLoading}
-              className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
-            >
-              {resendLoading ? "Resending..." : "Resend now"}
-            </button>
+            {isActive ? (
+              <CountDown
+                isActive={isActive}
+                setIsActive={setIsActive}
+                seconds={seconds}
+                setSeconds={setSeconds}
+              />
+            ) : (
+              <button
+                type="button"
+                disabled={resendLoading}
+                onClick={handleResendOtp}
+                className="outline-none text-[13px] border-none text-[#199BD1] font-bold"
+              >
+                {resendLoading ? "Resending..." : "Resend now"}
+              </button>
+            )}
           </div>
         </div>
       </form>

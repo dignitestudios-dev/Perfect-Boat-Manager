@@ -53,7 +53,7 @@ const SidebarLink = ({ link, onCloseDrawer }) => {
                }
               font-medium flex items-center justify-start transition-all duration-500 hover:bg-[#199BD1] hover:text-white px-3 gap-2`}
             >
-              <span className="capitalize text-sm">{sublink.title}</span>
+              <span className="capitalize text-sm mx-4">{sublink.title}</span>
             </button>
           ))}
         </div>
