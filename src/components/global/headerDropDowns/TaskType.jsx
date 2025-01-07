@@ -12,7 +12,17 @@ const TaskType = ({
   const dropdownRef = useRef(null);
 
   const handleCheckboxChange = (task) => {
-    setTaskType(task);
+    if (task === "all") {
+      setTaskType([]);
+    } else {
+      setTaskType((prev) => {
+        if (prev.includes(task)) {
+          return prev.filter((t) => t !== task);
+        } else {
+          return [...prev, task];
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -50,7 +60,7 @@ const TaskType = ({
         <div className="max-h-[300px] absolute top-full left-0 mt-1 w-52 bg-[#1A293D] text-white rounded-md shadow-lg z-10 overflow-auto pr-1">
           <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
             <input
-              checked={taskType === "all"}
+              checked={taskType.length === 0}
               onChange={() => handleCheckboxChange("all")}
               type="checkbox"
               className="form-checkbox text-[#199BD1] mr-2"
@@ -63,8 +73,8 @@ const TaskType = ({
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"
             >
               <input
-                checked={taskType === task}
-                onChange={() => handleCheckboxChange(task)}
+                checked={taskType.includes(task?.toLowerCase())}
+                onChange={() => handleCheckboxChange(task?.toLowerCase())}
                 type="checkbox"
                 className="form-checkbox text-[#199BD1] mr-2"
               />

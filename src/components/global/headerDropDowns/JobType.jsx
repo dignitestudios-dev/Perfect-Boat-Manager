@@ -7,17 +7,24 @@ const JobType = ({
   toggleJobTitleDropdown,
   jobType,
   setJobType,
+  setCurrentPage = () => {},
 }) => {
   const { dropDown } = useContext(GlobalContext);
-  console.log(dropDown, "dropDown");
   const dropdownRef = useRef(null);
 
   const handleCheckboxChange = (job) => {
-    if (jobType.includes(job)) {
-      setJobType(jobType.filter((item) => item !== job));
+    if (job === "all") {
+      setJobType([]);
     } else {
-      setJobType([...jobType, job]);
+      setJobType((prev) => {
+        if (prev.includes(job)) {
+          return prev.filter((t) => t !== job);
+        } else {
+          return [...prev, job];
+        }
+      });
     }
+    setCurrentPage(1);
   };
 
   useEffect(() => {
@@ -55,13 +62,7 @@ const JobType = ({
           <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
             <input
               checked={jobType.length === 0}
-              onChange={() =>
-                setJobType(
-                  jobType.length === 0
-                    ? dropDown?.employeeJobtitleDropDown || []
-                    : []
-                )
-              }
+              onChange={() => handleCheckboxChange("all")}
               type="checkbox"
               className="form-checkbox text-[#199BD1] mr-2"
             />
@@ -73,8 +74,8 @@ const JobType = ({
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"
             >
               <input
-                checked={jobType.includes(job)}
-                onChange={() => handleCheckboxChange(job)}
+                checked={jobType?.includes(job?.toLowerCase())}
+                onChange={() => handleCheckboxChange(job?.toLowerCase())}
                 type="checkbox"
                 className="form-checkbox text-[#199BD1] mr-2"
               />

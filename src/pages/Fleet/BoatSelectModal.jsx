@@ -14,12 +14,14 @@ const BoatSelectModal = ({
   setInputError,
 }) => {
   const { navigate, boats } = useContext(GlobalContext);
-  const [boatType, setBoatType] = useState("");
-  const [locationType, setLocationType] = useState("");
+
+  const [boatType, setBoatType] = useState([]);
+  console.log("🚀 ~ boatType:", boatType);
+  const [locationType, setLocationType] = useState([]);
 
   const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  const [selectAll, setSelectAll] = useState(false);
+  // const [selectAll, setSelectAll] = useState(false);
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [selectedBoats, setSelectedBoats] = useState([]);
   const [search, setSearch] = useState("");
@@ -78,15 +80,19 @@ const BoatSelectModal = ({
 
   const filteredData = boats?.filter((item) => {
     const matchesSearch = search
-      ? item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+      ? item?.boatType?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.make?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(search?.toLowerCase())
       : true;
     const boatTypeMatch =
-      boatType && boatType !== "all"
-        ? item?.boatType?.toLowerCase() === boatType?.toLowerCase()
+      boatType && boatType.length !== 0
+        ? boatType?.includes(item?.name?.toLowerCase())
         : true;
+    console.log("🚀 ~ filteredData ~ boatTypeMatch:", boatTypeMatch);
     const locationTypeMatch =
-      locationType && locationType !== "all"
-        ? item?.location?.toLowerCase() === locationType?.toLowerCase()
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
         : true;
     return matchesSearch && locationTypeMatch && boatTypeMatch;
   });

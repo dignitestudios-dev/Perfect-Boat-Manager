@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaCaretDown } from "react-icons/fa";
+import { STATUS_ENUM } from "../../../constants/data";
 
 const StatusType = ({
   statusDropdownOpen,
@@ -8,18 +9,33 @@ const StatusType = ({
   statusFilter,
 }) => {
   const statuses = [
-    "all",
-    "upcoming",
-    "in-progress",
+    "upcomingtask",
+    "inprogress",
     "completed",
     "recurring",
     "overdue",
-    "new Task",
+    "newtask",
   ];
 
-  const handleCheckboxChange = (status) => {
-    setStatusFilter(status);
+  const getFormattedStatus = (status) => {
+    return STATUS_ENUM[status] || status;
   };
+
+  const handleCheckboxChange = (status) => {
+    // setStatusFilter(status);
+    if (status === "all") {
+      setStatusFilter([]);
+    } else {
+      setStatusFilter((prev) => {
+        if (prev.includes(status)) {
+          return prev.filter((t) => t !== status);
+        } else {
+          return [...prev, status];
+        }
+      });
+    }
+  };
+
   const dropdownRef = useRef(null); // Ref for the dropdown container
 
   useEffect(() => {
@@ -52,19 +68,31 @@ const StatusType = ({
         onClick={toggleStatusDropdown}
       />
       {statusDropdownOpen && (
-        <div className="max-h-[300px] overflow-auto absolute top-full left-0 mt-1 w-48 bg-[#1A293D] text-white rounded-md shadow-lg z-10">
+        <div
+          className="max-h-[300px] overflow-auto absolute top-full left-0 mt-1 w-48 bg-[#1A293D]
+           text-white rounded-md shadow-lg z-10"
+        >
+          <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
+            <input
+              checked={statusFilter.length === 0}
+              onChange={() => handleCheckboxChange("all")}
+              type="checkbox"
+              className="form-checkbox text-[#199BD1] mr-2"
+            />
+            All
+          </label>
           {statuses.map((status, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"
             >
               <input
-                checked={statusFilter === status}
+                checked={statusFilter.includes(status)}
                 onChange={() => handleCheckboxChange(status)}
                 type="checkbox"
                 className="form-checkbox text-[#199BD1] mr-2"
               />
-              {status.charAt(0).toUpperCase() + status.slice(1)}
+              {getFormattedStatus(status)}
             </label>
           ))}
         </div>

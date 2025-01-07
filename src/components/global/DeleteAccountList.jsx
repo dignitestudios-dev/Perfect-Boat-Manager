@@ -45,8 +45,9 @@ const DeleteAccountList = () => {
 
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const [statusFilter, setStatusFilter] = useState("all");
-  const [taskType, setTaskType] = useState("");
+  const [statusFilter, setStatusFilter] = useState([]);
+  console.log("🚀 ~ DeleteAccountList ~ statusFilter:", statusFilter);
+  const [taskType, setTaskType] = useState([]);
 
   const [isBoatModalOpen, setIsBoatModalOpen] = useState(false);
   const [isAssignEmployeeModalOpen, setIsAssignEmployeeModalOpen] =
@@ -70,13 +71,14 @@ const DeleteAccountList = () => {
   };
 
   const filteredData = userData?.tasks?.filter((item) => {
+    console.log("🚀 ~ filteredData ~ item:", item);
     const matchesStatus =
-      statusFilter && statusFilter !== "all"
-        ? item?.status === statusFilter
+      statusFilter && statusFilter.length !== 0
+        ? statusFilter?.includes(item?.status?.toLowerCase())
         : true;
     const taskTypeMatch =
-      taskType && taskType !== "all"
-        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+      taskType && taskType.length !== 0
+        ? taskType?.includes(item?.taskType?.toLowerCase())
         : true;
     return matchesStatus && taskTypeMatch;
   });
