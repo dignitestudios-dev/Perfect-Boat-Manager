@@ -3,6 +3,7 @@ import Login from "../pages/onboarding/Login";
 import UpdatePassword from "../pages/onboarding/UpdatePassword";
 import VerifyOtp from "../pages/onboarding/VerifyOtp";
 import PrivacyPolicy from "../pages/Settings/PrivacyPolicy";
+import TermsOfServices from "../pages/Settings/TermsOfServices";
 
 export const AuthenticationRoutes = [
   {
@@ -28,6 +29,11 @@ export const AuthenticationRoutes = [
   {
     title: "Privacy Policy",
     url: "/privacy-policy",
-    page: <PrivacyPolicy />
+    page: <PrivacyPolicy />,
+  },
+  {
+    title: "Terms & Conditions",
+    url: "/terms-and-condition",
+    page: <TermsOfServices />,
   },
 ];

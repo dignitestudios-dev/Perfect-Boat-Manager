@@ -62,7 +62,7 @@ const ForgotPassword = () => {
           <h1 className=" text-[48px] font-bold text-white leading-[64.8px] tracking-[-1.2px]">
             Forgot Password
           </h1>
-          <p className="w-[90%] font-normal text-[16px] text-white leading-[21.6px] tracking-[-1.2px]">
+          <p className="w-[90%] font-[300] text-[15px] text-white leading-[21.6px] tracking-[0.5px]">
             No worries, we’ve got you covered. Enter your registered email
             address below, and we will send you a code to reset your password.
             Get back to enjoying a seamless experience in just a few simple
@@ -89,7 +89,11 @@ const ForgotPassword = () => {
       </form>
       <div className="w-1/2 lg:flex hidden relative h-full">
         <span className="w-20 h-full grad-blur2 absolute top-0 -left-4"></span>
-        <img src={AuthMockup} alt="auth_mockup" className="w-full h-full" />
+        <img
+          src={AuthMockup}
+          alt="auth_mockup"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
   );

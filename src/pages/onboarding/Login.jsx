@@ -106,9 +106,9 @@ const Login = () => {
             <button
               type="button"
               className="outline-none text-[16px] border-none text-[#199BD1] font-bold"
-              // onClick={() => {
-              //   navigate("");
-              // }}
+              onClick={() => {
+                navigate("/terms-and-condition");
+              }}
             >
               Terms & conditions
             </button>
@@ -137,7 +137,11 @@ const Login = () => {
       </form>
       <div className="w-1/2 lg:flex hidden relative h-full">
         <span className="w-20 h-full grad-blur2 absolute top-0 -left-4"></span>
-        <img src={AuthMockup} alt="auth_mockup" className="w-full h-full" />
+        <img
+          src={AuthMockup}
+          alt="auth_mockup"
+          className="w-full h-full object-cover"
+        />
       </div>
     </div>
   );
