@@ -16,7 +16,6 @@ const BoatSelectModal = ({
   const { navigate, boats } = useContext(GlobalContext);
 
   const [boatType, setBoatType] = useState([]);
-  console.log("🚀 ~ boatType:", boatType);
   const [locationType, setLocationType] = useState([]);
 
   const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
@@ -89,7 +88,6 @@ const BoatSelectModal = ({
       boatType && boatType.length !== 0
         ? boatType?.includes(item?.name?.toLowerCase())
         : true;
-    console.log("🚀 ~ filteredData ~ boatTypeMatch:", boatTypeMatch);
     const locationTypeMatch =
       locationType && locationType.length !== 0
         ? locationType?.includes(item?.location?.toLowerCase())

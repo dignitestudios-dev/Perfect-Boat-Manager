@@ -6,17 +6,20 @@ import { getUnixDate } from "../../constants/DateFormat";
 import TaskType from "../../components/global/headerDropDowns/TaskType";
 import StatusType from "../../components/global/headerDropDowns/StatusType";
 import { useNavigate } from "react-router-dom";
+import { STATUS_ENUM } from "../../constants/data";
 
 const statusColor = (status) => {
   switch (status) {
     case "newtask":
       return "bg-[#FF007F]/[0.12] text-[#FF007F]";
     case "overdue":
-      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
-    case "in-progress":
-      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+      return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+    case "inprogress":
+      return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
     case "completed":
       return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    case "upcomingtask":
+      return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
     default:
       return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
   }
@@ -24,11 +27,14 @@ const statusColor = (status) => {
 
 const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
   const navigate = useNavigate();
-  const [taskType, setTaskType] = useState("");
+  const [taskType, setTaskType] = useState([]);
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
   const [statusDropdownOpen, setStatusDropdownOpen] = useState(false);
-  const [statusFilter, setStatusFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState([]);
   const [search, setSearch] = useState("");
+  const getFormattedStatus = (status) => {
+    return STATUS_ENUM[status] || status;
+  };
 
   const toggleTaskTypeDropdown = () => {
     setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
@@ -40,17 +46,17 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
 
   const filteredData = tasks?.filter((item) => {
     const matchesSearch = search
-      ? item?.boat?.name
-        ? item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase())
-        : item?.name?.toLowerCase()?.includes(search?.toLowerCase())
+      ? item?.boatName?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.taskType?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.status?.toLowerCase()?.includes(search?.toLowerCase())
       : true;
     const matchesStatus =
-      statusFilter && statusFilter !== "all"
-        ? item?.status === statusFilter
+      statusFilter && statusFilter.length !== 0
+        ? statusFilter?.includes(item?.status?.toLowerCase())
         : true;
     const taskTypeMatch =
-      taskType && taskType !== "all"
-        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+      taskType && taskType.length !== 0
+        ? taskType?.includes(item?.taskType?.toLowerCase())
         : true;
     return matchesSearch && matchesStatus && taskTypeMatch;
   });
@@ -152,7 +158,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
                           className={`w-auto h-[27px] rounded-full flex items-center justify-center
               ${statusColor(task?.status)} px-2`}
                         >
-                          {task?.status}
+                          {getFormattedStatus(task?.status)}
                         </span>
                       </span>
                       {isEdit && (

@@ -9,17 +9,20 @@ import TaskType from "../global/headerDropDowns/TaskType";
 import { getUnixDate } from "../../constants/DateFormat";
 import { useNavigate } from "react-router-dom";
 import { STATUS_ENUM } from "../../constants/data";
+import moment from "moment";
 
 const statusColor = (status) => {
   switch (status) {
     case "newtask":
       return "bg-[#FF007F]/[0.12] text-[#FF007F]";
     case "overdue":
-      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
-    case "in-progress":
-      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+      return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+    case "inprogress":
+      return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
     case "completed":
       return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    case "upcomingtask":
+      return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
     default:
       return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
   }
@@ -31,11 +34,12 @@ const AssignedTasksCard = ({
   setEmployeeTasks,
   isEdit = "false",
 }) => {
+  const today = moment("01-01-2024");
   const navigate = useNavigate();
   const [isAssignedModalOpen, setIsAssignedModalOpen] = useState(false);
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [taskType, setTaskType] = useState("");
+  const [taskType, setTaskType] = useState([]);
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
 
   const [dueDate, setDueDate] = useState({});
@@ -47,8 +51,8 @@ const AssignedTasksCard = ({
 
   const filteredData = tasks?.filter((item) => {
     const taskTypeMatch =
-      taskType && taskType !== "all"
-        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+      taskType && taskType.length !== 0
+        ? taskType?.includes(item?.taskType?.toLowerCase())
         : true;
     return taskTypeMatch;
   });
@@ -62,7 +66,7 @@ const AssignedTasksCard = ({
     setEmployeeTasks(newTasks);
     setUpdatedTasks(newTasks);
   };
-const getFormattedStatus = (status) => {
+  const getFormattedStatus = (status) => {
     return STATUS_ENUM[status] || status;
   };
 
@@ -84,7 +88,7 @@ const getFormattedStatus = (status) => {
       </div>
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">
-        <div className="w-full h-6 grid grid-cols-6 text-[13px] font-medium  border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
+        <div className="w-full h-6 grid grid-cols-[4fr_4fr_4fr_4fr_4fr_4fr] text-[13px] font-medium  border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
           <span className="w-full flex justify-start items-center">
             Boat Name
           </span>
@@ -107,6 +111,7 @@ const getFormattedStatus = (status) => {
             setIsOpen={setIsCalendarOpen}
             setDueDate={setDueDate}
             setInputError={setInputError}
+            minDate={today.toDate()}
           />
           <span className="w-full flex justify-start items-center">
             Recurring Days
@@ -137,16 +142,16 @@ const getFormattedStatus = (status) => {
                   {getUnixDate(task?.dueDate)}
                 </span>
                 <span className="w-full flex justify-start items-center ">
-                  {task?.reoccuringDays || 'Non-recurring'}
+                  {task?.reoccuringDays || "Non-recurring"}
                 </span>
                 <div
-              className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
-                task?.status
-              )}
+                  className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
+                    task?.status
+                  )}
             font-medium leading-[14.85px] flex items-center justify-center `}
-            >
-              {getFormattedStatus(task?.status)}
-            </div>
+                >
+                  {getFormattedStatus(task?.status)}
+                </div>
                 {isEdit && (
                   <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2">
                     <span

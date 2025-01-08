@@ -8,15 +8,17 @@ import axios from "../../axios";
 import TasksListLoader from "../global/Loaders/TasksListLoader";
 import Pagination from "../global/Pagination";
 import DateModal from "./DateModal";
+import moment from "moment";
 
 const TasksContainer = () => {
   const { navigate } = useContext(GlobalContext);
+  const today = moment("01-01-2024");
+
   const dropDownRef = useRef(null);
   const [openDropDownFilter, setOpenDropdownFilter] = useState(false);
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
-  const [sortDate, setSortDate] = useState("");
   const [sortFilter, setSortFilter] = useState("");
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -32,6 +34,9 @@ const TasksContainer = () => {
 
   const handleCheckboxChange = (sort) => {
     setSortFilter(sort);
+    // setIsCalendarOpen(false);
+    setDueDate({ calendar: undefined });
+    setCurrentPage(1);
   };
 
   const toggleModal = (e) => {
@@ -44,8 +49,8 @@ const TasksContainer = () => {
     setLoading(true);
     try {
       const searchFilter = filter ? `&status=${filter}` : "";
-      const sortByDate = sortDate
-        ? `&startDate=${dueDate?.normal}&endDate=${dueDate?.normal}`
+      const sortByDate = dueDate?.calendar
+        ? `&startDate=${dueDate?.calendar}&endDate=${dueDate?.calendar}&isdue=true`
         : "";
       const sortByFilter = sortFilter === "earliest" ? `&isEarliest=true` : "";
 
@@ -64,7 +69,7 @@ const TasksContainer = () => {
 
   useEffect(() => {
     getTasks();
-  }, [filter, sortFilter, currentPage]);
+  }, [filter, sortFilter, currentPage, dueDate]);
 
   const filteredData = taskData?.filter((item) =>
     item?.task?.toLowerCase()?.includes(search?.toLowerCase())
@@ -76,7 +81,7 @@ const TasksContainer = () => {
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           All Tasks{" "}
           <span className="text-[12px] font-normal text-white/50 ">
-            {filteredData?.length}
+            ({filteredData?.length})
           </span>
         </h3>
 
@@ -112,7 +117,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == ""
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               All
@@ -125,10 +130,10 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "newtask"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
-               New Task
+              New Task
             </button>
             <button
               onClick={() => {
@@ -138,7 +143,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "upcomingtask"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Upcoming
@@ -151,7 +156,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "inprogress"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               In-Progress
@@ -164,7 +169,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "completed"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Completed
@@ -177,7 +182,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "recurring"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Recurring
@@ -190,7 +195,7 @@ const TasksContainer = () => {
               className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                 filter == "overdue"
                   ? "bg-[#fff] text-[#001229]"
-                  : "bg-[#1A293D] text-[#FFFFFF80]"
+                  : "bg-[#1A293D] text-white/50"
               } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
             >
               Overdue
@@ -198,7 +203,7 @@ const TasksContainer = () => {
           </div>
           <button
             onClick={toggleModal}
-            className="w-auto outline-none relative  min-w-12 h-8 rounded-full px-2 flex gap-2 items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]"
+            className="w-auto outline-none relative min-w-12 h-8 rounded-full px-2 flex gap-2 items-center justify-center text-[11px] font-medium leading-[28px] bg-[#1A293D] text-[#fff]"
           >
             <span>Sort By</span>
             <TbCaretDownFilled className="text-md text-white" />
@@ -206,58 +211,69 @@ const TasksContainer = () => {
               ref={dropDownRef}
               className={`w-[164px] h-auto rounded-md bg-[#1A293D] transition-all duration-300 z-[1000] ${
                 openDropDownFilter ? "scale-100" : "scale-0"
-              } flex  flex-col gap-3 shadow-lg p-3 justify-start items-start absolute top-9 right-0`}
+              } flex flex-col gap-1 shadow-lg p-3 justify-start items-start absolute top-9 right-0`}
             >
-              <div className="w-full flex justify-start items-start gap-2">
-                <input
-                  checked={sortFilter === "all"}
-                  onChange={() => handleCheckboxChange("all")}
-                  type="checkbox"
-                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+              <div className="w-auto flex gap-2 justify-start items-center">
+                <span className="text-white/50">Sort By</span>
+                <TbCaretDownFilled className="text-md text-white/50" />
+              </div>
+              <div className="w-full flex flex-col justify-start items-start gap-3">
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input
+                    checked={sortFilter === "all"}
+                    onChange={() => handleCheckboxChange("all")}
+                    type="checkbox"
+                    className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
                      checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
                      checked:after:text-md checked:after:p-1"
-                />
-                <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                  None
-                </span>
-              </div>
-              <div className="w-full flex justify-start items-start gap-2">
-                <input
-                  checked={sortFilter === "latest"}
-                  onChange={() => handleCheckboxChange("latest")}
-                  type="checkbox"
-                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
-                  checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
-                  checked:after:text-md checked:after:p-1"
-                />
-                <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                  Latest
-                </span>
-              </div>
-              <div className="w-full flex justify-start items-start gap-2">
-                <input
-                  checked={sortFilter === "earliest"}
-                  onChange={() => handleCheckboxChange("earliest")}
-                  type="checkbox"
-                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                  />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    None
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input
+                    checked={sortFilter === "latest"}
+                    onChange={() => handleCheckboxChange("latest")}
+                    type="checkbox"
+                    className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
                      checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
                      checked:after:text-md checked:after:p-1"
-                />
-                <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                  Earliest
-                </span>
-              </div>
-              <div className="w-full flex justify-start items-start gap-2">
-                <input
-                  onChange={() => setIsCalendarOpen(true)}
-                  type="checkbox"
-                  className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
-                  checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
-                  checked:after:text-md checked:after:p-1"
-                />
-                <span className="text-white text-[11px] font-medium leading-[14.85px]">
-                  Calendar
-                </span>
+                  />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Latest
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input
+                    checked={sortFilter === "earliest"}
+                    onChange={() => handleCheckboxChange("earliest")}
+                    type="checkbox"
+                    className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                     checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                     checked:after:text-md checked:after:p-1"
+                  />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Earliest
+                  </span>
+                </div>
+                <div className="w-full flex justify-start items-start gap-2">
+                  <input
+                    checked={sortFilter === "calendar"}
+                    onChange={() => {
+                      setIsCalendarOpen(true);
+                      setSortFilter("calendar");
+                      setOpenDropdownFilter(false);
+                    }}
+                    type="checkbox"
+                    className="w-3 h-3 border-2 border-[#324865] bg-[#324865] rounded-sm appearance-none
+                     checked:bg-[#199BD1] checked:border-[#199BD1] checked:ring-1 checked:after:font-[500] checked:ring-[#199BD1]
+                     checked:after:text-md checked:after:p-1"
+                  />
+                  <span className="text-white text-[11px] font-medium leading-[14.85px]">
+                    Calendar
+                  </span>
+                </div>
               </div>
             </div>
           </button>
@@ -290,6 +306,7 @@ const TasksContainer = () => {
           setDueDate={setDueDate}
           setInputError={setInputError}
           isRange={"range"}
+          minDate={today.toDate()}
         />
       </div>
       <Pagination

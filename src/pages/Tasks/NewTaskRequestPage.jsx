@@ -12,11 +12,13 @@ const statusColor = (status) => {
     case "newtask":
       return "bg-[#FF007F]/[0.12] text-[#FF007F]";
     case "overdue":
-      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
-    case "in-progress":
-      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+      return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+    case "inprogress":
+      return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
     case "completed":
       return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    case "upcomingtask":
+      return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
     default:
       return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
   }

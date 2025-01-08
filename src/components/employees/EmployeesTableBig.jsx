@@ -21,7 +21,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   const navigation = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [exportemployee, setExportemployee] = useState("");
+  // const [exportemployee, setExportemployee] = useState("");
   const [exportLoader, setExportLoader] = useState(false);
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const [isAccountDeleteModalOpen, setIsAccountDeleteModalOpen] =
@@ -208,10 +208,15 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               {filteredData?.map((employee, index) => (
                 <div
                   key={index}
-                  className="w-full h-8 grid grid-cols-[5fr_5fr_5fr_1.1fr_0fr] border-b cursor-pointer border-white/10  text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
-                  onClick={() =>
-                    navigate(`/employees/${employee._id}`, "Employees")
-                  }
+                  className={` ${
+                    employee?.isActive === true ? "cursor-pointer" : ""
+                  } w-full h-8 grid grid-cols-[5fr_5fr_5fr_1.1fr_1fr] border-b border-white/10  text-[11px]
+          font-medium leading-[14.85px] text-white justify-start items-center`}
+                  onClick={() => {
+                    if (employee?.isActive) {
+                      handleEditClick(employee?._id);
+                    }
+                  }}
                 >
                   <span className="w-full flex justify-start items-center">
                     {employee?.name}
@@ -230,7 +235,9 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                       className="flex justify-start items-center cursor-pointer"
                       onClick={(e) => {
                         e.stopPropagation();
-                        handleEditClick(employee?._id);
+                        if (employee?.isActive) {
+                          handleEditClick(employee?._id);
+                        }
                       }}
                     >
                       <FaRegEdit />
@@ -247,7 +254,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                       </span>
                     ) : (
                       <span
-                        className="flex justify-start items-center"
+                        className="flex justify-start items-center cursor-pointer"
                         onClick={(e) => {
                           e.stopPropagation();
                           handleActionClick(employee?._id);
@@ -265,7 +272,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
         {reactivateModalOpen && (
           <ReactivateModal
             isOpen={reactivateModalOpen}
-            onClose={handleCloseModal}
+            onClose={() => setIsReactivateModalOpen(false)}
             reactivate={handleReactivate}
             activateLoading={activateLoading}
           />

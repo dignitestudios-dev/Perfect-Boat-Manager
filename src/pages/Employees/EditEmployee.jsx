@@ -10,6 +10,7 @@ import ResendModal from "../onboarding/ResendModal";
 import DateModal from "../../components/tasks/DateModal";
 import { MdOutlineDateRange } from "react-icons/md";
 import DeletedModal from "../../components/global/DeletedModal";
+import moment from "moment";
 
 const Dropdown = ({ options, label }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,6 +67,7 @@ const Dropdown = ({ options, label }) => {
 };
 
 const EditEmployee = () => {
+  const today = moment();
   const { navigate } = useContext(GlobalContext);
   const navigateTo = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -353,7 +355,11 @@ const EditEmployee = () => {
         />
       )}
 
-      <DateModal isOpen={isDateModalOpen} setIsOpen={setIsDateModalOpen} />
+      <DateModal
+        isOpen={isDateModalOpen}
+        setIsOpen={setIsDateModalOpen}
+        minDate={today.toDate()}
+      />
       <DeletedModal
         isOpen={isDeletedModalOpen}
         onClose={() => setIsDeletedModalOpen(false)}

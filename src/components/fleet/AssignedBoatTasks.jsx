@@ -17,11 +17,13 @@ const statusColor = (status) => {
     case "newtask":
       return "bg-[#FF007F]/[0.12] text-[#FF007F]";
     case "overdue":
-      return "bg-[#FF3B30]/[0.12] text-[#FF3B30]";
-    case "in-progress":
-      return "bg-[#36B8F3]/[0.12] text-[#36B8F3]";
+      return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+    case "inprogress":
+      return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
     case "completed":
       return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+    case "upcomingtask":
+      return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
     default:
       return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
   }
@@ -35,13 +37,13 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [deleteLoad, setDeleteLoad] = useState(false);
 
-  const [taskType, setTaskType] = useState("");
+  const [taskType, setTaskType] = useState([]);
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
 
   const filteredData = tasks?.filter((item) => {
     const taskTypeMatch =
-      taskType && taskType !== "all"
-        ? item?.taskType?.toLowerCase() === taskType?.toLowerCase()
+      taskType && taskType.length !== 0
+        ? taskType?.includes(item?.taskType?.toLowerCase())
         : true;
     return taskTypeMatch;
   });
@@ -128,9 +130,7 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
                 key={index}
                 className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px]
              font-medium leading-[14.85px] text-white justify-start items-center"
-             onClick={() =>
-              navigate(`/tasks/${task?._id}`, "All Tasks")
-            }
+                onClick={() => navigate(`/tasks/${task?._id}`, "All Tasks")}
               >
                 <span className="w-full flex justify-start items-center">
                   {task?.boat?.name}
@@ -150,7 +150,7 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
                   className={`text-[11px] ${statusColor(
                     task?.status
                   )} rounded-full font-medium 
-            leading-[14.85px] flex justify-center items-center w-[70px] h-[27px]`}
+            leading-[14.85px] flex justify-center items-center w-[100px] h-[27px]`}
                 >
                   {getFormattedStatus(task?.status)}
                 </span>

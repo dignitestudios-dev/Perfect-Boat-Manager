@@ -149,16 +149,12 @@ const EmployeeDetailModal = ({
                   </>
                 ) : (
                   <tr>
-                    <td className="px-0 py-2">
-                      <input
-                        // type="checkbox"
-                        className="w-4 h-4 accent-[#199BD1] hidden"
-                      />
+                    <td
+                      colSpan="6"
+                      className="text-center py-4 text-sm font-medium text-white"
+                    >
+                      No record found
                     </td>
-                    <td className="px-4 py-2"></td>
-                    <td className="px-4 py-2 text-start">No record found</td>
-                    <td className="px-4 py-2"></td>
-                    <td className="px-4 py-2"></td>
                   </tr>
                 )}
               </tbody>

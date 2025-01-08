@@ -10,14 +10,14 @@ const Boats = () => {
   const getBoats = async (
     pageNumber = 1,
     rows = 15,
-    boatType = "all",
-    locationType = "all"
+    boatType = [],
+    locationType = []
   ) => {
     setLoadingBoats(true);
     try {
-      const boatQuery = boatType !== "all" ? `&boatType=${boatType}` : "";
+      const boatQuery = boatType.length !== 0 ? `&boatType=${boatType}` : "";
       const locationQuery =
-        locationType !== "all" ? `&location=${locationType}` : "";
+        locationType.length !== 0 ? `&location=${locationType}` : "";
       const { data } = await axios.get(
         `/manager/boat?page=${pageNumber}&pageSize=${rows}${boatQuery}${locationQuery}`
       );

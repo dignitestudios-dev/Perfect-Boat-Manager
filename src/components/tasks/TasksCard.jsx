@@ -8,7 +8,6 @@ import { ErrorToast, SuccessToast } from "../global/Toaster";
 import { STATUS_ENUM } from "../../constants/data";
 
 const statusColor = (status) => {
-  console.log(status, "status");
   switch (status) {
     case "newtask":
       return "bg-[#FF007F]/[0.12] text-[#FF007F]";
@@ -36,7 +35,7 @@ const sideColor = (status) => {
     case "completed":
       return "bg-[#1FBA46]";
     case "upcomingtask":
-      return "bg-[#FF007F1F]";
+      return "bg-[#FF007F]";
     default:
       return "bg-[#FFCC00]";
   }

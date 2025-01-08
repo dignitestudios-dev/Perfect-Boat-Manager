@@ -6,6 +6,8 @@ import ReactivateModal from "./ReactiveModal";
 import axios from "../../axios";
 import AssignModalLoader from "../global/Loaders/AssignModalLoader";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
+import JobType from "../global/headerDropDowns/JobType";
+import LocationType from "../global/headerDropDowns/LocationType";
 
 const DeactivatedEmployeesTable = () => {
   const { navigate } = useContext(GlobalContext);
@@ -23,6 +25,19 @@ const DeactivatedEmployeesTable = () => {
   const [userId, setUserId] = useState();
   const [activateLoading, setActivateLoading] = useState(false);
   const [userError, SetUserError] = useState(null);
+  const [locationType, setLocationType] = useState([]);
+  const [jobType, setJobType] = useState([]);
+
+  const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
+  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
+
+  const toggleJobTitleDropdown = () => {
+    setJobTitleDropdownOpen(!jobTitleDropdownOpen);
+  };
+
+  const toggleLocationDropdown = () => {
+    setLocationDropdownOpen(!locationDropdownOpen);
+  };
 
   const handleReactivate = async () => {
     try {
@@ -62,6 +77,24 @@ const DeactivatedEmployeesTable = () => {
     getUsersData();
   }, []);
 
+  const filteredData = usersData?.filter((item) => {
+    const matchesSearch = searchTerm
+      ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.email?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.jobtitle?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+      : true;
+    const jobTypeMatch =
+      jobType && jobType.length !== 0
+        ? jobType?.includes(item?.jobtitle?.toLowerCase())
+        : true;
+    const locationTypeMatch =
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
+        : true;
+    return matchesSearch && locationTypeMatch && jobTypeMatch && managers;
+  });
+
   return (
     <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
       <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
@@ -88,12 +121,18 @@ const DeactivatedEmployeesTable = () => {
         <div className="w-full grid grid-cols-5 text-[13px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
           <span className="w-full flex justify-start items-center">Name</span>
           <span className="w-full flex justify-start items-center">Email</span>
-          <span className="w-full flex justify-start items-center">
-            Job Title
-          </span>
-          <span className="w-full flex justify-start items-center">
-            Location
-          </span>
+          <JobType
+            jobTitleDropdownOpen={jobTitleDropdownOpen}
+            toggleJobTitleDropdown={toggleJobTitleDropdown}
+            jobType={jobType}
+            setJobType={setJobType}
+          />
+          <LocationType
+            locationDropdownOpen={locationDropdownOpen}
+            toggleLocationDropdown={toggleLocationDropdown}
+            locationType={locationType}
+            setLocationType={setLocationType}
+          />
           <span className="w-full flex justify-center items-center">
             Action
           </span>
@@ -106,7 +145,7 @@ const DeactivatedEmployeesTable = () => {
               <div className="pt-2">{userError}</div>
             ) : (
               <>
-                {usersData?.map((user, index) => (
+                {filteredData?.map((user, index) => (
                   <div
                     key={index}
                     className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium

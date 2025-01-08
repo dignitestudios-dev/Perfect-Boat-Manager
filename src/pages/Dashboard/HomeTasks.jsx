@@ -8,9 +8,11 @@ import axios from "../../axios";
 import TasksListLoader from "../../components/global/Loaders/TasksListLoader";
 import Pagination from "../../components/global/Pagination";
 import DateModal from "../../components/tasks/DateModal";
+import moment from "moment";
 
 const HomeTasks = () => {
   const { navigate, setIsTaskData } = useContext(GlobalContext);
+  const today = moment("01-01-2024");
   const dropDownRef = useRef(null);
   const [openDropDownFilter, setOpenDropdownFilter] = useState(false);
 
@@ -266,6 +268,7 @@ const HomeTasks = () => {
             setDueDate={setDueDate}
             setInputError={setInputError}
             isRange={"range"}
+            minDate={today.toDate()}
           />
         </div>
         {/* <Pagination

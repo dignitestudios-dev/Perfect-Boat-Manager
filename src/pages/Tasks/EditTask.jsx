@@ -7,16 +7,20 @@ import DateModal from "../../components/tasks/DateModal";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { AuthMockup } from "../../assets/export";
 import EmployeeDetailModal from "../Employees/EmployeeDetailModal";
+import moment from "moment";
 
 const EditTask = () => {
+  const today = moment();
+
   const { navigate } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [customInput, setCustomInput] = useState(false);
-  const [isTaskDropdownOpen, setIsTaskDropdownOpen ] = useState(false);
+  const [isTaskDropdownOpen, setIsTaskDropdownOpen] = useState(false);
   const [isTaskTypeDropdownOpen, setIsTaskTypeDropdownOpen] = useState(false);
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState("Inspect bottom paint for growth");
-
+  const [selectedTask, setSelectedTask] = useState(
+    "Inspect bottom paint for growth"
+  );
 
   // Declare refs
   const dropdownRef = useRef(null);
@@ -25,7 +29,7 @@ const EditTask = () => {
 
   // Event handler for toggling task dropdown
   const toggleDropdown = (e) => {
-    console.log("first")
+    console.log("first");
     if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
       setIsTaskDropdownOpen((prev) => !prev);
     }
@@ -33,7 +37,10 @@ const EditTask = () => {
 
   // Event handler for toggling task type dropdown
   const toggleTaskTypeDropdown = (e) => {
-    if (taskTypeDropdownRef.current && !taskTypeDropdownRef.current.contains(e.target)) {
+    if (
+      taskTypeDropdownRef.current &&
+      !taskTypeDropdownRef.current.contains(e.target)
+    ) {
       setIsTaskTypeDropdownOpen((prev) => !prev);
     }
   };
@@ -41,10 +48,8 @@ const EditTask = () => {
   // Event handler for toggling employee modal
   const toggleEmployeeModal = () => {
     console.log("Toggling Employee Modal", isEmployeeModalOpen);
-    setIsEmployeeModalOpen(prev => !prev);
+    setIsEmployeeModalOpen((prev) => !prev);
   };
-
-  
 
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
@@ -83,17 +88,23 @@ const EditTask = () => {
             </div>
             <div className="w-full grid grid-cols-2 gap-12">
               <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
-                <label className="text-[16px] font-medium leading-[21.6px]">{"Task Type"}</label>
+                <label className="text-[16px] font-medium leading-[21.6px]">
+                  {"Task Type"}
+                </label>
                 <div
                   onClick={toggleTaskTypeDropdown}
                   className={`group transition-all duration-500 w-full ${
-                    isTaskTypeDropdownOpen ? "rounded-t-xl rounded-b-none" : "rounded-xl"
+                    isTaskTypeDropdownOpen
+                      ? "rounded-t-xl rounded-b-none"
+                      : "rounded-xl"
                   } h-[52px] cursor-pointer bg-[#1A293D] outline-none flex justify-between items-center px-3 focus:border-[1px] focus:border-[#55C9FA] relative`}
                 >
                   <span className="text-gray-400">Oil Cleaning</span>
                   <span className="text-gray-400">
                     <TbCaretDownFilled
-                      className={`${isTaskTypeDropdownOpen ? "rotate-180" : "rotate-0"}`}
+                      className={`${
+                        isTaskTypeDropdownOpen ? "rotate-180" : "rotate-0"
+                      }`}
                     />
                   </span>
 
@@ -138,17 +149,23 @@ const EditTask = () => {
                 </div>
               </div>
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-                <label className="text-[16px] font-medium leading-[21.6px]">{"Task"}</label>
+                <label className="text-[16px] font-medium leading-[21.6px]">
+                  {"Task"}
+                </label>
                 <div
                   onClick={toggleDropdown}
                   className={`group transition-all duration-500 w-full ${
-                    isTaskDropdownOpen ? "rounded-t-xl rounded-b-none" : "rounded-xl"
+                    isTaskDropdownOpen
+                      ? "rounded-t-xl rounded-b-none"
+                      : "rounded-xl"
                   } h-[52px] cursor-pointer bg-[#1A293D] outline-none flex justify-between items-center px-3 focus:border-[1px] focus:border-[#55C9FA] relative`}
                 >
                   <span className="text-gray-400">{selectedTask}</span>
                   <span className="text-gray-400">
                     <TbCaretDownFilled
-                      className={`${isTaskDropdownOpen ? "rotate-180" : "rotate-0"}`}
+                      className={`${
+                        isTaskDropdownOpen ? "rotate-180" : "rotate-0"
+                      }`}
                     />
                   </span>
 
@@ -190,7 +207,9 @@ const EditTask = () => {
             </div>
             <div className="w-full grid grid-cols-1 gap-12">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-                <label className="text-[16px] font-medium leading-[21.6px]">{"Add Note"}</label>
+                <label className="text-[16px] font-medium leading-[21.6px]">
+                  {"Add Note"}
+                </label>
                 <textarea
                   type="text"
                   value={
@@ -208,7 +227,9 @@ const EditTask = () => {
             <div className="w-auto flex justify-start items-start gap-3">
               <IoCalendarOutline className="text-2xl text-white/40" />
               <div className="flex flex-col justify-start items-start">
-                <span className="text-[16px] font-bold text-white">Due Date</span>
+                <span className="text-[16px] font-bold text-white">
+                  Due Date
+                </span>
                 <span className="text-[12px] font-normal">12/09/2023</span>
               </div>
               <button
@@ -221,7 +242,9 @@ const EditTask = () => {
             <div className="w-auto flex justify-start items-start gap-3">
               <TbCalendarStats className="text-2xl text-white/40" />
               <div className="flex flex-col justify-start items-start">
-                <span className="text-[16px] font-bold text-white">Recurring Days</span>
+                <span className="text-[16px] font-bold text-white">
+                  Recurring Days
+                </span>
                 <span className="text-[12px] font-normal">90 days</span>
               </div>
               <button className="text-xs font-normal text-[#199BD1]">
@@ -230,13 +253,16 @@ const EditTask = () => {
               <DateModal
                 isOpen={isCalendarOpen}
                 setIsOpen={setIsCalendarOpen}
+                minDate={today.toDate()}
               />
             </div>
           </div>
         </div>
         <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
           <div className="w-auto flex justify-start items-center gap-2">
-            <h3 className="text-[18px] font-bold leading-[24.3px] text-white">Assigned Employee</h3>
+            <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
+              Assigned Employee
+            </h3>
             <button
               onClick={toggleEmployeeModal}
               className="w-[42px] h-[42px] rounded-[8px] text-[#55C9FA] flex justify-center items-center"
@@ -247,18 +273,38 @@ const EditTask = () => {
 
           <div className="w-full flex flex-col gap-1 justify-start items-start">
             <div className="w-full h-6 grid grid-cols-5 text-[13px] font-medium border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
-              <span className="w-full flex justify-start items-center">Employee Name</span>
-              <span className="w-full flex justify-start items-center">Email</span>
-              <span className="w-full flex justify-start items-center">Job Title</span>
-              <span className="w-full flex justify-start items-center">Phone Number</span>
-              <span className="w-full flex justify-start items-center">Location</span>
+              <span className="w-full flex justify-start items-center">
+                Employee Name
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Email
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Job Title
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Phone Number
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Location
+              </span>
             </div>
             <div className="w-full h-10 grid grid-cols-5 py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-              <span className="w-full flex justify-start items-center">Mike Smith</span>
-              <span className="w-full flex justify-start items-center">mikesmith@gmail.com</span>
-              <span className="w-full flex justify-start items-center">Dock Guard</span>
-              <span className="w-full flex justify-start items-center ">+1 (295) 731-4314</span>
-              <span className="w-full flex justify-start items-center ">East California Dock</span>
+              <span className="w-full flex justify-start items-center">
+                Mike Smith
+              </span>
+              <span className="w-full flex justify-start items-center">
+                mikesmith@gmail.com
+              </span>
+              <span className="w-full flex justify-start items-center">
+                Dock Guard
+              </span>
+              <span className="w-full flex justify-start items-center ">
+                +1 (295) 731-4314
+              </span>
+              <span className="w-full flex justify-start items-center ">
+                East California Dock
+              </span>
             </div>
           </div>
         </div>

@@ -18,6 +18,7 @@ import { FiLoader } from "react-icons/fi";
 import moment from "moment";
 
 const AddTask = () => {
+  const today = moment();
   const { taskDropDown } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
@@ -242,6 +243,7 @@ const AddTask = () => {
           setIsOpen={setIsCalendarOpen}
           setDueDate={setDueDate}
           setInputError={setInputError}
+          minDate={today.toDate()}
         />
         {isEmployeeModalOpen && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]">
