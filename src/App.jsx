@@ -3,10 +3,11 @@ import "./App.css";
 import Splash from "./pages/onboarding/Splash";
 import { AuthenticationRoutes } from "./routes/AuthenticationRoutes";
 import { normalRoutes } from "./routes/normalRoutes";
+
 function App() {
   return (
     <Routes>
-      <Route path="/"  element={<Splash />} />
+      <Route path="/" exact element={<Splash />} />
       {AuthenticationRoutes.map((route) => {
         return (
           <Route path={route?.url} element={route?.page} key={route?.title} />

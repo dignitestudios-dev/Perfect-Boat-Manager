@@ -98,7 +98,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == ""
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 All
@@ -111,10 +111,10 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "newtask"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
-                New
+                New Task
               </button>
               <button
                 onClick={() => {
@@ -124,7 +124,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "upcomingtask"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 Upcoming
@@ -137,7 +137,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "inprogress"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 In-Progress
@@ -150,7 +150,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "completed"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 Completed
@@ -163,7 +163,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "recurring"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 Recurring
@@ -176,7 +176,7 @@ const HomeTasks = () => {
                 className={`w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] ${
                   filter == "overdue"
                     ? "bg-[#fff] text-[#001229]"
-                    : "bg-[#1A293D] text-[#fff]"
+                    : "bg-[#1A293D] text-white/50"
                 } min-w-12 h-8 rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[28px] /[0.5]`}
               >
                 Overdue

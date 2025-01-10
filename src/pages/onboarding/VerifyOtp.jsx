@@ -66,8 +66,9 @@ const VerifyOtp = () => {
 
       const response = await axios.post("/auth/forget/verify/email", obj);
       if (response.status === 200) {
-        login(response?.data);
+        // login(response?.data);
         setLoading(false);
+        sessionStorage.setItem("authToken", response?.data?.data?.token);
         navigate("/update-password");
         SuccessToast("Otp Verified");
       } else {
@@ -90,7 +91,7 @@ const VerifyOtp = () => {
       const response = await axios.post("/auth/forget/otp/email", obj);
       if (response.status === 200) {
         SuccessToast("OTP Sent");
-        handleRestart()
+        handleRestart();
       } else {
         ErrorToast(response?.data?.message);
       }
@@ -104,7 +105,7 @@ const VerifyOtp = () => {
   const [isActive, setIsActive] = useState(true);
   const [seconds, setSeconds] = useState(30);
 
-const handleRestart = () => {
+  const handleRestart = () => {
     setSeconds(30);
     setIsActive(true);
   };
@@ -126,7 +127,7 @@ const handleRestart = () => {
           <h1 className=" text-[48px] font-bold text-white leading-[64.8px] tracking-[-1.2px]">
             Update your Password
           </h1>
-          <p className=" font-normal text-[16px] text-white leading-[21.6px] tracking-[-1.2px]">
+          <p className=" font-normal text-[16px] text-white leading-[21.6px] tracking-[0.5px]">
             Enter the code we just sent to {email}
           </p>
         </div>

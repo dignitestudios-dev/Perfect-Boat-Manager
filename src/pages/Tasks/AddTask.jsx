@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { IoCalendarOutline } from "react-icons/io5";
@@ -31,12 +31,9 @@ const AddTask = () => {
 
   const boatname = location?.state?.boat || "";
 
-  const [passSelectedBoat, SetPassSelectedBoat] = useState([
-    {
-      name: boatname?.name,
-      id: boatname?._id,
-    },
-  ]);
+  const [passSelectedBoat, SetPassSelectedBoat] = useState([]);
+  console.log("🚀 ~ AddTask ~ passSelectedBoat:", passSelectedBoat);
+
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
   const [customTypeText, setCustomTypeText] = useState("");
@@ -55,7 +52,7 @@ const AddTask = () => {
     const errors = {};
 
     // Validation for each field
-    if (!passSelectedBoat?.id) {
+    if (!passSelectedBoat[0]?.id) {
       errors.boat = "Please select a boat";
     }
     if (!passSelectedEmployee?.id) {
@@ -107,6 +104,17 @@ const AddTask = () => {
       setSubmitLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (boatname?._id) {
+      SetPassSelectedBoat([
+        {
+          name: boatname?.name,
+          id: boatname?._id,
+        },
+      ]);
+    }
+  }, [boatname]);
 
   return (
     <div className="w-full h-auto min-h-screen overflow-y-auto bg-[#1A293D] text-white p-4 pb-20 flex flex-col justify-start items-start">

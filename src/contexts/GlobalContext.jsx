@@ -41,13 +41,13 @@ export const GlobalContextProvider = ({ children }) => {
   const [loadingEmployees, setLoadingEmployees] = useState(false);
   const [updateEmployee, setUpdateEmployee] = useState(false);
 
-  const getEmployees = async (jobType = "all", locationType = "all") => {
+  const getEmployees = async (jobType = [], locationType = []) => {
     if (token) {
       setLoadingEmployees(true);
       try {
-        const boatQuery = jobType !== "all" ? `jobTitle=${jobType}` : "";
+        const boatQuery = jobType !== 0 ? `jobTitle=${jobType}` : "";
         const locationQuery =
-          locationType !== "all" ? `locations=${locationType}` : "";
+          locationType !== 0 ? `locations=${locationType}` : "";
         const queryString = [boatQuery, locationQuery]
           .filter(Boolean)
           .join("&");
@@ -67,13 +67,13 @@ export const GlobalContextProvider = ({ children }) => {
   const [loadingBoats, setLoadingBoats] = useState(false);
   const [updateBoat, setUpdateBoat] = useState(false);
 
-  const getBoats = async (boatType = "all", locationType = "all") => {
+  const getBoats = async (boatType = [], locationType = []) => {
     if (token) {
       setLoadingBoats(true);
       try {
-        const boatQuery = boatType !== "all" ? `boatType=${boatType}` : "";
+        const boatQuery = boatType !== 0 ? `boatType=${boatType}` : "";
         const locationQuery =
-          locationType !== "all" ? `locationType=${locationType}` : "";
+          locationType !== 0 ? `locationType=${locationType}` : "";
         const queryString = [boatQuery, locationQuery]
           .filter(Boolean)
           .join("&");
@@ -144,9 +144,10 @@ export const GlobalContextProvider = ({ children }) => {
       } finally {
         setIsTaskLoading(false);
       }
-    } else {
-      route("/login");
     }
+    // } else {
+    //   route("/login");
+    // }
   };
 
   useEffect(() => {

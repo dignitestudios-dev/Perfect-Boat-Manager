@@ -9,11 +9,11 @@ const Splash = () => {
   const { navigate } = useContext(GlobalContext);
   return (
     <div className="bg-[#001229] w-screen h-screen flex flex-col gap-32 pt-[136px]  justify-start items-center relative">
-      <span className="w-[406px] h-[406px] rounded-full bg-[#00638C] blur-[105px] flex items-center justify-center absolute top-16 left-[calc(50%-193px)]" />
+      <span className="w-[386px] h-[386px] rounded-full bg-[#00638C] blur-[95px] flex items-center justify-center absolute top-16 left-[calc(50%-180px)]" />
       <img
         src={SplashLogo}
         alt="splash_logo"
-        className="z-50 w-[331.88px] h-[195px] "
+        className="z-50 w-[326.88px] h-[192px] "
       />
 
       <div className="w-auto flex flex-col gap-8 px-4 md:px-0 justify-center items-center">
