@@ -7,9 +7,12 @@ const LocationType = ({
   toggleLocationDropdown,
   setLocationType,
   locationType,
+  employeesLocTitles,
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
+
+  const uniqueLocTitles = [...new Set(employeesLocTitles)];
 
   const handleCheckboxChange = (location) => {
     if (location === "all") {
@@ -69,7 +72,7 @@ const LocationType = ({
             />
             All
           </label>
-          {dropDown?.locationDropDown?.map((location, index) => (
+          {uniqueLocTitles?.map((location, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"

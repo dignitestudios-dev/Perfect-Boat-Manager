@@ -7,6 +7,7 @@ const StatusType = ({
   toggleStatusDropdown,
   setStatusFilter,
   statusFilter,
+  taskStatus,
 }) => {
   const statuses = [
     "upcomingtask",
@@ -16,6 +17,8 @@ const StatusType = ({
     "overdue",
     "new Task",
   ];
+
+  const uniqueTaskStatus = [...new Set(taskStatus)];
 
   const getFormattedStatus = (status) => {
     return STATUS_ENUM[status] || status;
@@ -81,7 +84,7 @@ const StatusType = ({
             />
             All
           </label>
-          {statuses.map((status, index) => (
+          {uniqueTaskStatus.map((status, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"

@@ -7,9 +7,12 @@ const BoatType = ({
   toggleBoatTypeDropdown,
   boatType,
   setBoatType,
+  managerBoats,
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
+
+  const uniqueBoatTitles = [...new Set(managerBoats)];
 
   const handleCheckboxChange = (boat) => {
     if (boat === "all") {
@@ -66,7 +69,7 @@ const BoatType = ({
             />
             All
           </label>
-          {dropDown?.boatTypeDropDown?.map((boat, index) => (
+          {uniqueBoatTitles?.map((boat, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"

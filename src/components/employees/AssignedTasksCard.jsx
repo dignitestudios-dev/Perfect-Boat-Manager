@@ -9,6 +9,7 @@ import TaskType from "../global/headerDropDowns/TaskType";
 import { getUnixDate } from "../../constants/DateFormat";
 import { useNavigate } from "react-router-dom";
 import { STATUS_ENUM } from "../../constants/data";
+import moment from "moment";
 
 const statusColor = (status) => {
   switch (status) {
@@ -99,6 +100,7 @@ const AssignedTasksCard = ({
             toggleTaskTypeDropdown={toggleTaskTypeDropdown}
             setTaskType={setTaskType}
             taskType={taskType}
+            boatTasks={tasks?.map((item) => item.taskType)}
           />
           <button
             type="button"

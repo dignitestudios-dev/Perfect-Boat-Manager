@@ -67,7 +67,10 @@ const ResetPasswordModal = ({ isOpen, onClose, id, getEmployeeData }) => {
         newPassword: password.new,
         confirmPassword: password.confirm,
       };
-      const response = await axios.put(`/owner/manager/${id}/credentials`, obj);
+      const response = await axios.put(
+        `/manager/employees/${id}/credentials`,
+        obj
+      );
       if (response.status === 200) {
         SuccessToast("Password Reset Success");
         getEmployeeData();

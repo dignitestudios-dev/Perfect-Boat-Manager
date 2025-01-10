@@ -26,7 +26,7 @@ const TaskDetail = () => {
   const [updateLoad, setUpdateLoad] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [taskDetail, setTaskDetail] = useState({});
-  console.log("🚀 ~ TaskDetail ~ taskDetail:", taskDetail);
+
   const [tasks, setTasks] = useState([]);
   const [selectedTaskType, setSelectedTaskType] = useState(null);
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
@@ -209,7 +209,7 @@ const TaskDetail = () => {
               <div className="w-full grid grid-cols-1 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                   <label className="text-[16px] font-medium leading-[21.6px]">
-                    {"Add Note"}
+                    {"Note"}
                   </label>
                   <textarea
                     disabled={!isEdit}

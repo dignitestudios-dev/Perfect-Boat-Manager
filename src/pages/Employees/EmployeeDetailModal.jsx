@@ -12,6 +12,7 @@ const EmployeeDetailModal = ({
   employeeId = "",
 }) => {
   const { employees } = useContext(GlobalContext);
+  console.log("🚀 ~ employees:", employees);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
@@ -107,6 +108,9 @@ const EmployeeDetailModal = ({
                       toggleJobTitleDropdown={toggleJobTitleDropdown}
                       jobType={jobType}
                       setJobType={setJobType}
+                      employeesJobTitles={employees?.map(
+                        (item) => item.jobtitle
+                      )}
                     />
                   </th>
                   <th className="px-4 py-2 relative">
@@ -115,6 +119,9 @@ const EmployeeDetailModal = ({
                       toggleLocationDropdown={toggleLocationDropdown}
                       locationType={locationType}
                       setLocationType={setLocationType}
+                      employeesLocTitles={employees?.map(
+                        (item) => item.location
+                      )}
                     />
                   </th>
                 </tr>

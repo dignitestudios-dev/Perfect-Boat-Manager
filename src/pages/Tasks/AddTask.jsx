@@ -30,9 +30,7 @@ const AddTask = () => {
   const location = useLocation();
 
   const boatname = location?.state?.boat || "";
-
   const [passSelectedBoat, SetPassSelectedBoat] = useState([]);
-  console.log("🚀 ~ AddTask ~ passSelectedBoat:", passSelectedBoat);
 
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -80,7 +78,7 @@ const AddTask = () => {
     try {
       setSubmitLoading(true);
       const obj = {
-        boat: passSelectedBoat?.id,
+        boat: passSelectedBoat?.map((item) => item?.id),
         task: displaySelectedTask ? displaySelectedTask : selectedTaskType,
         taskType: selectedTaskType?.replace(/([A-Z])/g, " $1")?.trim(),
         dueDate: dueDate?.unix,

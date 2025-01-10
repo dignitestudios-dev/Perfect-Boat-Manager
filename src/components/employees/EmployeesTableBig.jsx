@@ -46,9 +46,23 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
     setLocationDropdownOpen(!locationDropdownOpen);
   };
 
-  const filteredData = data?.filter((item) =>
-    item?.name?.toLowerCase()?.includes(search?.toLowerCase())
-  );
+  const filteredData = data?.filter((item) => {
+    const matchesSearch = search
+      ? item?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.email?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.jobtitle?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    const jobTypeMatch =
+      jobType && jobType.length !== 0
+        ? jobType?.includes(item?.jobtitle?.toLowerCase())
+        : true;
+    const locationTypeMatch =
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
+        : true;
+    return matchesSearch && locationTypeMatch && jobTypeMatch;
+  });
 
   const handleEditClick = (id) => {
     navigate(`/employees/${id}`);
@@ -74,10 +88,10 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
     // setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-    getEmployees(jobType, locationType);
-  }, [jobType, locationType]);
+  // useEffect(() => {
+  //   setCurrentPage(1);
+  //   getEmployees(jobType, locationType);
+  // }, [jobType, locationType]);
 
   const exportEmployee = async () => {
     setExportLoader(true);
@@ -188,6 +202,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               toggleJobTitleDropdown={toggleJobTitleDropdown}
               jobType={jobType}
               setJobType={setJobType}
+              employeesJobTitles={data?.map((item) => item.jobtitle)}
             />
 
             <LocationType
@@ -195,6 +210,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               toggleLocationDropdown={toggleLocationDropdown}
               locationType={locationType}
               setLocationType={setLocationType}
+              employeesLocTitles={data?.map((item) => item.location)}
             />
             <span className="w-full flex justify-start items-center pl-[170px] pr-[60px]">
               Action

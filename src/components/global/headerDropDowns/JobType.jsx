@@ -7,10 +7,13 @@ const JobType = ({
   toggleJobTitleDropdown,
   jobType,
   setJobType,
+  employeesJobTitles,
   setCurrentPage = () => {},
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
+
+  const uniqueJobTitles = [...new Set(employeesJobTitles)];
 
   const handleCheckboxChange = (job) => {
     if (job === "all") {
@@ -68,7 +71,7 @@ const JobType = ({
             />
             All
           </label>
-          {dropDown?.employeeJobtitleDropDown?.map((job, index) => (
+          {uniqueJobTitles?.map((job, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"

@@ -16,10 +16,11 @@ const AddTaskBoatModal = ({
   setInputError,
 }) => {
   const { boats } = useContext(GlobalContext);
+  console.log("🚀 ~ boats:", boats);
   const [allSelected, setAllSelected] = useState(false);
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [selectedBoats, setSelectedBoats] = useState([]);
-  console.log("🚀 ~ selectedBoats:", selectedBoats);
+
   const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [locationType, setLocationType] = useState([]);
@@ -153,7 +154,7 @@ const AddTaskBoatModal = ({
               Done
             </button>
           </div>
-          <div className="mt-4 mb-2">
+          <div className="mt-4 mb-2 w-28">
             {isMultiple && (
               <label className="flex items-center text-white/50">
                 <input
@@ -180,6 +181,7 @@ const AddTaskBoatModal = ({
                 toggleBoatTypeDropdown={toggleBoatTypeDropdown}
                 boatType={boatType}
                 setBoatType={setBoatType}
+                managerBoats={boats?.map((item) => item.boatType)}
               />
               <span className="w-full flex justify-start items-center">
                 Name
@@ -193,6 +195,7 @@ const AddTaskBoatModal = ({
                 toggleLocationDropdown={toggleLocationDropdown}
                 locationType={locationType}
                 setLocationType={setLocationType}
+                employeesLocTitles={boats?.map((item) => item?.location)}
               />
             </div>
 

@@ -153,6 +153,7 @@ const BoatSelectModal = ({
                 toggleBoatTypeDropdown={toggleBoatTypeDropdown}
                 boatType={boatType}
                 setBoatType={setBoatType}
+                managerBoats={boats?.map((item) => item.boatType)}
               />
               <span className="w-full flex justify-start items-center">
                 Name
@@ -165,6 +166,7 @@ const BoatSelectModal = ({
                 toggleLocationDropdown={toggleLocationDropdown}
                 locationType={locationType}
                 setLocationType={setLocationType}
+                employeesLocTitles={boats?.map((item) => item.location)}
               />
             </div>
             {filteredData?.length ? (

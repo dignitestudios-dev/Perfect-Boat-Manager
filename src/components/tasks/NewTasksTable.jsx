@@ -19,12 +19,20 @@ const NewTaskTable = () => {
   };
 
   const [data, setData] = useState([]);
+  console.log("🚀 ~ NewTaskTable ~ data:", data);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
-  const filteredData = data.filter((item) =>
-    item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase())
-  );
+  const filteredData = data.filter((item) => {
+    const matchesSearch = search
+      ? item?.boat?.boatType?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boat?.make?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boat?.model?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boat?.location?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    return matchesSearch;
+  });
 
   const getData = async (locationType = []) => {
     setLoading(true);
@@ -45,7 +53,7 @@ const NewTaskTable = () => {
 
   useEffect(() => {
     getData(locationType);
-  }, [locationType]);
+  }, []);
 
   return (
     <div className="w-full h-auto flex flex-col gap-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -83,6 +91,7 @@ const NewTaskTable = () => {
             toggleLocationDropdown={toggleLocationDropdown}
             locationType={locationType}
             setLocationType={setLocationType}
+            employeesLocTitles={data?.map((item) => item?.boat?.location)}
           />
           <span className="w-full flex justify-start items-center px-[60px]">
             Requested By

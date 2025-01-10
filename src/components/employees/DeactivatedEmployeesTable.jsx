@@ -126,12 +126,14 @@ const DeactivatedEmployeesTable = () => {
             toggleJobTitleDropdown={toggleJobTitleDropdown}
             jobType={jobType}
             setJobType={setJobType}
+            employeesJobTitles={usersData?.map((item) => item.jobtitle)}
           />
           <LocationType
             locationDropdownOpen={locationDropdownOpen}
             toggleLocationDropdown={toggleLocationDropdown}
             locationType={locationType}
             setLocationType={setLocationType}
+            employeesLocTitles={usersData?.map((item) => item.location)}
           />
           <span className="w-full flex justify-center items-center">
             Action

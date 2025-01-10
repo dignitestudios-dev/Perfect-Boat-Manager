@@ -7,9 +7,12 @@ const TaskType = ({
   toggleTaskTypeDropdown,
   setTaskType,
   taskType,
+  boatTasks,
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
+
+  const uniqueBoatTasks = [...new Set(boatTasks)];
 
   const handleCheckboxChange = (task) => {
     if (task === "all") {
@@ -67,7 +70,7 @@ const TaskType = ({
             />
             All
           </label>
-          {dropDown?.taskDownDropDown?.map((task, index) => (
+          {uniqueBoatTasks?.map((task, index) => (
             <label
               key={index}
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"

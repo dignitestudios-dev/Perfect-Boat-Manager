@@ -30,6 +30,7 @@ const statusColor = (status) => {
 };
 
 const AssignedBoatTasks = ({ tasks, getBoats }) => {
+  console.log("🚀 ~ AssignedBoatTasks ~ tasks:", tasks);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
@@ -88,6 +89,9 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
       <div className="w-auto flex justify-between items-center gap-2">
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           Assigned Tasks{" "}
+          <span className="text-[14px] leading-[24.3px] text-[#ffffffa8]">
+            ({tasks?.length})
+          </span>
         </h3>
         <button
           onClick={handleViewAllClick}
@@ -107,6 +111,7 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
             toggleTaskTypeDropdown={toggleTaskTypeDropdown}
             setTaskType={setTaskType}
             taskType={taskType}
+            boatTasks={tasks?.map((item) => item.taskType)}
           />
           <div
             className="w-full flex justify-start items-center cursor-pointer"

@@ -15,6 +15,7 @@ import BoatType from "../global/headerDropDowns/BoatType";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 
 const BoatsTable = ({ data, loading, getBoats }) => {
+  console.log("🚀 ~ BoatsTable ~ data:", data);
   const navigate = useNavigate();
 
   const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
@@ -32,13 +33,28 @@ const BoatsTable = ({ data, loading, getBoats }) => {
 
   const [search, setSearch] = useState("");
 
-  const filteredData = data?.filter((item) =>
-    item?.name?.toLowerCase()?.includes(search?.toLowerCase())
-  );
+  const filteredData = data?.filter((item) => {
+    const matchesSearch = search
+      ? item?.boatType?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.make?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.model?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    const boatTypeMatch =
+      boatType && boatType.length !== 0
+        ? boatType?.includes(item?.boatType?.toLowerCase())
+        : true;
+    const locationTypeMatch =
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
+        : true;
+    return matchesSearch && locationTypeMatch && boatTypeMatch;
+  });
 
-  useEffect(() => {
-    getBoats(1, 15, boatType, locationType);
-  }, [boatType, locationType]);
+  // useEffect(() => {
+  //   getBoats(1, 15, boatType, locationType);
+  // }, [boatType, locationType]);
 
   return (
     <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
@@ -73,6 +89,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             toggleBoatTypeDropdown={toggleBoatTypeDropdown}
             boatType={boatType}
             setBoatType={setBoatType}
+            managerBoats={data?.map((item) => item.boatType)}
           />
           <span className="w-full flex justify-start items-center">Name</span>
           <span className="w-full flex justify-start items-center">
@@ -83,6 +100,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             toggleLocationDropdown={toggleLocationDropdown}
             locationType={locationType}
             setLocationType={setLocationType}
+            employeesLocTitles={data?.map((item) => item.location)}
           />
         </div>
 

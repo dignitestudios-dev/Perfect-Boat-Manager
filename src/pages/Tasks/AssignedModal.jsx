@@ -108,6 +108,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
                     toggleTaskTypeDropdown={toggleTaskTypeDropdown}
                     setTaskType={setTaskType}
                     taskType={taskType}
+                    boatTasks={tasks?.map((item) => item.taskType)}
                   />
                 </div>
                 <span className="w-full flex justify-start items-center">
@@ -122,6 +123,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
                     statusFilter={statusFilter}
                     toggleStatusDropdown={toggleStatusDropdown}
                     setStatusFilter={setStatusFilter}
+                    taskStatus={tasks?.map((item) => item.status)}
                   />
                 </div>
                 {isEdit && (
@@ -151,7 +153,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
                         {getUnixDate(task?.dueDate)}
                       </span>
                       <span className="w-full flex justify-start items-center ">
-                        {task?.reoccuringDays}
+                        {task?.reoccuringDays || "Non-recurring"}
                       </span>
                       <span className="w-full flex justify-start items-center ">
                         <span
