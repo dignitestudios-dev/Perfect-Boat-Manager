@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ResendModal from "../../pages/onboarding/ResendModal";
 import ResetPasswordModal from "../../pages/onboarding/ResetPassModal";
 
-const ResendPasswordCard = ({ employee }) => {
+const ResendPasswordCard = ({ employee, getEmployeeData }) => {
   const [isResendModalOpen, setIsResendModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -46,6 +46,12 @@ const ResendPasswordCard = ({ employee }) => {
         </div>
       </div>
       <ResetPasswordModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <ResetPasswordModal
+        id={employee?._id}
+        getEmployeeData={getEmployeeData}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
       {isResendModalOpen && (
         <ResendModal
           id={employee?._id}

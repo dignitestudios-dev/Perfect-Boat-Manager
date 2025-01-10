@@ -10,7 +10,7 @@ const TasksListLoader = () => {
             key={index}
             className="w-full h-[162px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D] animate-pulse"
           >
-            <div className="w-[6px] h-full rounded-l-[6px] bg-[#FFCC00]"></div>
+            <div className="w-[6px] h-full rounded-l-[6px] bg-gray-600"></div>
             <div className="w-[calc(100%-6px)] h-full py-4 px-6 flex flex-col gap-2 justify-start items-start relative">
               {/* Title and Status */}
               <div className="w-full h-auto flex justify-between items-center">

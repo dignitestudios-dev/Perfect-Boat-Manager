@@ -16,27 +16,28 @@ const EmployeeDetailModal = ({
   const [searchTerm, setSearchTerm] = useState("");
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  const [jobType, setJobType] = useState("all");
-  const [locationType, setLocationType] = useState("all");
+  const [jobType, setJobType] = useState([]);
+  const [locationType, setLocationType] = useState([]);
 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
 
   const filteredData = employees?.filter((item) => {
+    const managers = employeeId ? employeeId !== item._id : true;
     const matchesSearch = searchTerm
-      ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+      ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.email?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.jobtitle?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(searchTerm?.toLowerCase())
       : true;
-    const matchesEmployeeId = item._id !== employeeId;
     const jobTypeMatch =
-      jobType && jobType !== "all"
-        ? item?.jobtitle?.toLowerCase() === jobType?.toLowerCase()
+      jobType && jobType.length !== 0
+        ? jobType?.includes(item?.jobtitle?.toLowerCase())
         : true;
     const locationTypeMatch =
-      locationType && locationType !== "all"
-        ? item?.location?.toLowerCase() === locationType?.toLowerCase()
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
         : true;
-    return (
-      matchesSearch && locationTypeMatch && jobTypeMatch && matchesEmployeeId
-    );
+    return matchesSearch && locationTypeMatch && jobTypeMatch && managers;
   });
 
   const toggleJobTitleDropdown = () => {
@@ -148,16 +149,12 @@ const EmployeeDetailModal = ({
                   </>
                 ) : (
                   <tr>
-                    <td className="px-0 py-2">
-                      <input
-                        // type="checkbox"
-                        className="w-4 h-4 accent-[#199BD1] hidden"
-                      />
+                    <td
+                      colSpan="6"
+                      className="text-center py-4 text-sm font-medium text-white"
+                    >
+                      No record found
                     </td>
-                    <td className="px-4 py-2"></td>
-                    <td className="px-4 py-2 text-start">No record found</td>
-                    <td className="px-4 py-2"></td>
-                    <td className="px-4 py-2"></td>
                   </tr>
                 )}
               </tbody>

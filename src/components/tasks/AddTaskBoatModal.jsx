@@ -1,29 +1,29 @@
 import React, { useContext, useRef, useState, useEffect } from "react";
 import { FiSearch } from "react-icons/fi";
-import { FaCaretDown, FaTimes } from "react-icons/fa";
-import { GlobalContext } from "../../contexts/GlobalContext";
-import { AuthMockup } from "../../assets/export";
-import BoatType from "../../components/global/headerDropDowns/BoatType";
-import LocationType from "../../components/global/headerDropDowns/LocationType";
 
-const BoatSelectModal = ({
+import { ErrorToast } from "../../components/global/Toaster";
+import BoatType from "../global/headerDropDowns/BoatType";
+import LocationType from "../global/headerDropDowns/LocationType";
+import { GlobalContext } from "../../contexts/GlobalContext";
+import ManagerListLoader from "../global/Loaders/ManagerListLoader";
+
+const AddTaskBoatModal = ({
   isOpen,
   setIsOpen,
   SetPassSelectedBoat,
+  passSelectedBoat,
   isMultiple = false,
   setInputError,
 }) => {
-  const { navigate, boats } = useContext(GlobalContext);
-
-  const [boatType, setBoatType] = useState([]);
-  const [locationType, setLocationType] = useState([]);
-
-  const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
-  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
-  // const [selectAll, setSelectAll] = useState(false);
+  const { boats } = useContext(GlobalContext);
+  const [allSelected, setAllSelected] = useState(false);
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [selectedBoats, setSelectedBoats] = useState([]);
-  const [search, setSearch] = useState("");
+  console.log("🚀 ~ selectedBoats:", selectedBoats);
+  const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);
+  const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
+  const [locationType, setLocationType] = useState([]);
+  const [boatType, setBoatType] = useState([]);
 
   const toggleBoatTypeDropdown = () => {
     setBoatTypeDropdownOpen(!boatTypeDropdownOpen);
@@ -33,27 +33,45 @@ const BoatSelectModal = ({
     setLocationDropdownOpen(!locationDropdownOpen);
   };
 
-  // const handleSelectAll = () => {
-  //   if (selectAll) {
-  //     setSelectedBoats([]);
-  //   } else {
-  //     setSelectedBoats(Array(5).fill(true));
-  //   }
-  //   setSelectAll(!selectAll);
-  // };
+  const [search, setSearch] = useState("");
 
-  if (!isOpen) return null;
+  const filteredData = boats?.filter((item) => {
+    const matchesSearch = search
+      ? item?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boatType?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.make?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.model?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.location?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    const boatTypeMatch =
+      boatType && boatType.length !== 0
+        ? boatType?.includes(item?.boatType?.toLowerCase())
+        : true;
+    const locationTypeMatch =
+      locationType && locationType.length !== 0
+        ? locationType?.includes(item?.location?.toLowerCase())
+        : true;
+    return matchesSearch && locationTypeMatch && boatTypeMatch;
+  });
 
-  const handleBoatSelection = () => {
-    if (isMultiple) {
-      SetPassSelectedBoat(selectedBoats);
-      setIsOpen(false);
+  const handleSelectAll = () => {
+    setInputError({});
+    if (allSelected) {
+      // Deselect all employee
+      setSelectedBoats([]);
     } else {
-      if (selectedBoat) {
-        SetPassSelectedBoat(selectedBoat);
-        setIsOpen(false);
-      }
+      // Select all employee
+      setSelectedBoats(
+        filteredData?.map((data) => ({
+          id: data?._id,
+          name: data?.name,
+          type: data?.boatType,
+          make: data?.make,
+          location: data?.location,
+        }))
+      );
     }
+    setAllSelected(!allSelected);
   };
 
   const handleSelectBoat = (boatId, boatName, boatType, make, location) => {
@@ -77,23 +95,27 @@ const BoatSelectModal = ({
     }
   };
 
-  const filteredData = boats?.filter((item) => {
-    const matchesSearch = search
-      ? item?.boatType?.toLowerCase()?.includes(search?.toLowerCase()) ||
-        item?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
-        item?.make?.toLowerCase()?.includes(search?.toLowerCase()) ||
-        item?.location?.toLowerCase()?.includes(search?.toLowerCase())
-      : true;
-    const boatTypeMatch =
-      boatType && boatType.length !== 0
-        ? boatType?.includes(item?.name?.toLowerCase())
-        : true;
-    const locationTypeMatch =
-      locationType && locationType.length !== 0
-        ? locationType?.includes(item?.location?.toLowerCase())
-        : true;
-    return matchesSearch && locationTypeMatch && boatTypeMatch;
-  });
+  const handleBoatSelection = () => {
+    if (isMultiple) {
+      SetPassSelectedBoat(selectedBoats);
+      setIsOpen(false);
+    } else {
+      if (selectedBoat) {
+        SetPassSelectedBoat(selectedBoat);
+        setIsOpen(false);
+      } else {
+        ErrorToast("Select Boat");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isMultiple) {
+      setSelectedBoats(passSelectedBoat);
+    }
+  }, [passSelectedBoat]);
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[#000000a0] z-50">
@@ -106,9 +128,9 @@ const BoatSelectModal = ({
             ✕
           </button>
           <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-            Select Boats{" "}
+            Boats List{" "}
             <span className="text-[12px] font-normal text-white/50 ">
-              ({boats?.length})
+              ({filteredData?.length})
             </span>
           </h3>
 
@@ -131,17 +153,21 @@ const BoatSelectModal = ({
               Done
             </button>
           </div>
-          {/* <div className="mt-4">
-            <label className="flex items-center text-white/50">
-              <input
-                type="checkbox"
-                className="accent-[#199BD1] mr-2"
-                checked={selectAll}
-                onChange={handleSelectAll}
-              />
-              Select All
-            </label>
-          </div> */}
+          <div className="mt-4 mb-2">
+            {isMultiple && (
+              <label className="flex items-center text-white/50">
+                <input
+                  type="checkbox"
+                  className="w-5 h-5 border-2 border-[#FFFFFF80] rounded-sm bg-transparent appearance-none checked:bg-white
+                                 checked:border-[#FFFFFF80] checked:ring-1 checked:after:font-[500] mr-2
+                                checked:ring-[#FFFFFF80] checked:after:content-['✓'] checked:after:text-[#001229] checked:after:text-md checked:after:p-1"
+                  checked={allSelected}
+                  onChange={handleSelectAll}
+                />
+                Select All
+              </label>
+            )}
+          </div>
 
           <div className="w-full h-[80%] overflow-y-auto flex flex-col gap-1 justify-start items-start mt-4">
             <div className="w-full grid grid-cols-5 text-[13px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
@@ -149,6 +175,7 @@ const BoatSelectModal = ({
                 Boat Image
               </span>
               <BoatType
+                setBoatTypeDropdownOpen={setBoatTypeDropdownOpen}
                 boatTypeDropdownOpen={boatTypeDropdownOpen}
                 toggleBoatTypeDropdown={toggleBoatTypeDropdown}
                 boatType={boatType}
@@ -158,31 +185,37 @@ const BoatSelectModal = ({
                 Name
               </span>
               <span className="w-full flex justify-start items-center">
-                Model/Make/Size
+                Year/Make/Size
               </span>
               <LocationType
+                setLocationDropdownOpen={setLocationDropdownOpen}
                 locationDropdownOpen={locationDropdownOpen}
                 toggleLocationDropdown={toggleLocationDropdown}
                 locationType={locationType}
                 setLocationType={setLocationType}
               />
             </div>
-            {filteredData?.length ? (
+
+            {filteredData?.length > 0 ? (
               <>
                 {filteredData?.map((boat, index) => {
                   const isSelected = selectedBoat?.id === boat._id;
                   const isMultiSelected = selectedBoats.some(
                     (selected) => selected.id === boat._id
                   );
+
                   return (
                     <div
                       key={index}
-                      className="w-full h-auto grid grid-cols-5 cursor-pointer border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+                      className="w-full h-auto grid grid-cols-5 border-b border-[#fff]/[0.14] py-3 text-[13px] font-medium 
+                  leading-[14.85px] text-white justify-start items-center"
                     >
                       <div className="flex items-center">
                         <input
                           type="checkbox"
-                          className="accent-[#199BD1] mr-2"
+                          className="w-5 h-5 border-2 border-[#FFFFFF80] rounded-sm bg-transparent appearance-none checked:bg-white
+                                 checked:border-[#FFFFFF80] checked:ring-1 checked:after:font-[500] mr-2
+                                checked:ring-[#FFFFFF80] checked:after:content-['✓'] checked:after:text-[#001229] checked:after:text-md checked:after:p-1"
                           checked={isMultiple ? isMultiSelected : isSelected}
                           onChange={() =>
                             handleSelectBoat(
@@ -194,9 +227,9 @@ const BoatSelectModal = ({
                             )
                           }
                         />
-                        <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+                        <span className="w-[106px] h-[76px] flex justify-start items-center relative ml-1">
                           <img
-                            src={boat?.cover || AuthMockup}
+                            src={boat?.cover}
                             alt="boat_image"
                             style={{
                               width: "100%",
@@ -204,6 +237,7 @@ const BoatSelectModal = ({
                               borderRadius: "15px 0 0 15px",
                               objectFit: "cover",
                             }}
+                            className="bg-gray-600"
                           />
                           <div
                             className="w-24"
@@ -245,4 +279,4 @@ const BoatSelectModal = ({
   );
 };
 
-export default BoatSelectModal;
+export default AddTaskBoatModal;

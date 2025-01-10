@@ -16,6 +16,7 @@ import axios from "../../axios";
 import { ErrorToast } from "../../components/global/Toaster";
 
 const AssignReportedTask = () => {
+  const today = moment();
   const { navigate } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for TaskAssignedModal
@@ -251,7 +252,12 @@ const AssignReportedTask = () => {
                 </button>
               </div>
             </div>
-            <DateModal isOpen={isCalendarOpen} setIsOpen={setIsCalendarOpen} />
+
+            <DateModal
+              isOpen={isCalendarOpen}
+              setIsOpen={setIsCalendarOpen}
+              minDate={today.toDate()}
+            />
           </div>
         </div>
         <div className="w-full flex justify-end mt-10 items-center gap-4">

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { FiSearch } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FaCaretDown, FaRegEdit } from "react-icons/fa";
@@ -17,10 +17,11 @@ import { TfiReload } from "react-icons/tfi";
 import ReactivateModal from "./ReactiveModal";
 
 const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
-  console.log(data,"datadata")
   const { navigate, setUpdateEmployee } = useContext(GlobalContext);
+  const navigation = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [exportemployee, setExportemployee] = useState('');
+  // const [exportemployee, setExportemployee] = useState("");
   const [exportLoader, setExportLoader] = useState(false);
   const [isDeactivateModalOpen, setIsDeactivateModalOpen] = useState(false);
   const [isAccountDeleteModalOpen, setIsAccountDeleteModalOpen] =
@@ -36,7 +37,6 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   const [employeeId, setEmployeeId] = useState();
   const [reactivateModalOpen, setIsReactivateModalOpen] = useState();
   const [userId, setUserId] = useState();
-
 
   const toggleJobTitleDropdown = () => {
     setJobTitleDropdownOpen(!jobTitleDropdownOpen);
@@ -64,25 +64,9 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   };
 
   const handleDeactivate = async () => {
-    setDeactivateLoading(true);
-    try {
-      const obj = { reason: "Deactivate" };
-      const response = await axios.delete(
-        `/manager/employees/${employeeId}?deactivate=true`,
-        { data: obj }
-      );
-
-      if (response?.status === 200) {
-        setUpdateEmployee((prev) => !prev);
-        setIsDeactivateModalOpen(true);
-        setIsModalOpen(false);
-        getEmployees();
-        setDeactivateLoading(false);
-      }
-    } catch (err) {
-      ErrorToast(err?.response?.data?.message);
-      setDeactivateLoading(false);
-    }
+    navigation(`/delete-account/${employeeId}`, {
+      state: { reasonForDelete: "deactivation" },
+    });
   };
 
   const handleDelete = () => {
@@ -129,13 +113,12 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
   };
 
   const handleActionClick = (id) => {
-    setUserId(id)
+    setUserId(id);
     setIsReactivateModalOpen(true);
   };
 
   const [activateLoading, setActivateLoading] = useState(false);
 
-  
   const handleReactivate = async () => {
     try {
       setActivateLoading(true);
@@ -193,7 +176,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
 
       <div className="w-full overflow-x-auto lg:overflow-visible">
         <div className="min-w-[768px] flex flex-col gap-1 justify-start items-start">
-          <div className="w-full grid grid-cols-5 border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+          <div className="w-full grid grid-cols-[6fr_6fr_6fr_1fr_0fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
             <span className="w-full flex justify-start items-center">
               Employee Name
             </span>
@@ -213,7 +196,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               locationType={locationType}
               setLocationType={setLocationType}
             />
-            <span className="w-full flex justify-start items-center px-[170px]">
+            <span className="w-full flex justify-start items-center pl-[170px] pr-[60px]">
               Action
             </span>
           </div>
@@ -225,10 +208,15 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               {filteredData?.map((employee, index) => (
                 <div
                   key={index}
-                  className="w-full h-8 grid grid-cols-5 border-b cursor-pointer border-white/10  text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
-                  onClick={() =>
-                    navigate(`/employees/${employee._id}`, "Employees")
-                  }
+                  className={` ${
+                    employee?.isActive === true ? "cursor-pointer" : ""
+                  } w-full h-8 grid grid-cols-[5fr_5fr_5fr_1.1fr_1fr] border-b border-white/10  text-[11px]
+          font-medium leading-[14.85px] text-white justify-start items-center`}
+                  onClick={() => {
+                    if (employee?.isActive) {
+                      handleEditClick(employee?._id);
+                    }
+                  }}
                 >
                   <span className="w-full flex justify-start items-center">
                     {employee?.name}
@@ -242,38 +230,40 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                   <span className="w-full flex justify-start items-center">
                     {employee?.location || "---"}
                   </span>
-                  <div className="w-full flex  text-[15px] text-white/40 justify-start items-center gap-2 px-[170px]">
+                  <div className="w-full flex  text-[15px] text-white/40 justify-start items-center gap-2 pl-[170px] pr-[55px]">
+                    <span
+                      className="flex justify-start items-center cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (employee?.isActive) {
+                          handleEditClick(employee?._id);
+                        }
+                      }}
+                    >
+                      <FaRegEdit />
+                    </span>
+                    {employee?.isActive === true ? (
                       <span
                         className="flex justify-start items-center cursor-pointer"
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleEditClick(employee?._id);
+                          handleDeleteClick(employee?._id);
                         }}
                       >
-                        <FaRegEdit />
+                        <RiDeleteBinLine />
                       </span>
-                      {employee?.isActive === true ? (
-                        <span
-                          className="flex justify-start items-center cursor-pointer"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteClick(employee?._id);
-                          }}
-                        >
-                          <RiDeleteBinLine />
-                        </span>
-                      ) : (
-                        <span
-                          className="flex justify-start items-center"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleActionClick(employee?._id);
-                          }}
-                        >
-                          <TfiReload />
-                        </span>
-                      )}
-                    </div>
+                    ) : (
+                      <span
+                        className="flex justify-start items-center cursor-pointer"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleActionClick(employee?._id);
+                        }}
+                      >
+                        <TfiReload />
+                      </span>
+                    )}
+                  </div>
                 </div>
               ))}
             </>
@@ -282,7 +272,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
         {reactivateModalOpen && (
           <ReactivateModal
             isOpen={reactivateModalOpen}
-            onClose={handleCloseModal}
+            onClose={() => setIsReactivateModalOpen(false)}
             reactivate={handleReactivate}
             activateLoading={activateLoading}
           />

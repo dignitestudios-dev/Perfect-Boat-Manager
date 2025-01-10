@@ -13,7 +13,13 @@ const theme = {
   },
 };
 
-const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
+const DateModal = ({
+  isOpen,
+  setIsOpen,
+  setDueDate,
+  setInputError,
+  minDate,
+}) => {
   const today = moment();
   const startOf2023 = moment("01-01-2023");
   const [date, setDate] = useState(today.toDate());
@@ -26,7 +32,8 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
   };
 
   const handleDueDate = () => {
-    const utcDate = new Date();
+    const utcDate = date;
+    const calendarDate = moment(utcDate).format("MM DD YYYY");
 
     // Convert the UTC time to Unix timestamp (epoch time) in seconds
     const epochTime = Math.floor(utcDate.getTime() / 1000);
@@ -34,7 +41,11 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
     // Format the UTC date into YYYY-MM-DD format
     const formattedDate = utcDate.toISOString().slice(0, 10);
 
-    setDueDate({ normal: formattedDate, unix: epochTime });
+    setDueDate({
+      normal: formattedDate,
+      unix: epochTime,
+      calendar: moment(calendarDate).format("DD-MM-YYYY"),
+    });
     setInputError({});
     setIsOpen(false);
   };
@@ -94,7 +105,7 @@ const DateModal = ({ isOpen, setIsOpen, setDueDate, setInputError }) => {
                   className="h-full"
                   id="calendar-1"
                   value={date}
-                  minDate={startOf2023.toDate()}
+                  minDate={minDate}
                   onChange={(value) => {
                     setDate(value);
                   }}

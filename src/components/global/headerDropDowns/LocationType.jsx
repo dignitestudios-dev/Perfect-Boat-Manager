@@ -10,15 +10,21 @@ const LocationType = ({
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
-  
+
   const handleCheckboxChange = (location) => {
-    if (locationType.includes(location)) {
-      setLocationType(locationType.filter((item) => item !== location));
+    if (location === "all") {
+      setLocationType([]);
     } else {
-      setLocationType([...locationType, location]);
+      setLocationType((prev) => {
+        if (prev.includes(location)) {
+          return prev.filter((t) => t !== location);
+        } else {
+          return [...prev, location];
+        }
+      });
     }
   };
- 
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -56,14 +62,8 @@ const LocationType = ({
         >
           <label className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10">
             <input
-               checked={locationType.length === 0}
-              onChange={() =>
-                setLocationType(
-                  locationType.length === 0
-                    ? dropDown?.locationDropDown || []
-                    : []
-                )
-              }
+              checked={locationType.length === 0}
+              onChange={() => handleCheckboxChange("all")}
               type="checkbox"
               className="form-checkbox text-[#199BD1] mr-2"
             />
@@ -75,8 +75,8 @@ const LocationType = ({
               className="flex items-center p-2 cursor-pointer hover:bg-[#000]/10"
             >
               <input
-               checked={locationType.includes(location)}
-               onChange={() => handleCheckboxChange(location)}
+                checked={locationType.includes(location?.toLowerCase())}
+                onChange={() => handleCheckboxChange(location?.toLowerCase())}
                 type="checkbox"
                 className="form-checkbox text-[#199BD1] mr-2"
               />

@@ -11,7 +11,7 @@ import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 
 const NewTaskTable = () => {
   const navigate = useNavigate();
-  const [locationType, setLocationType] = useState("all");
+  const [locationType, setLocationType] = useState([]);
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
 
   const toggleLocationDropdown = () => {
@@ -26,11 +26,11 @@ const NewTaskTable = () => {
     item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase())
   );
 
-  const getData = async (locationType = "all") => {
+  const getData = async (locationType = []) => {
     setLoading(true);
     try {
       const locationQuery =
-        locationType !== "all" ? `location=${locationType}` : "";
+        locationType.length !== 0 ? `location=${locationType}` : "";
       const { data } = await axios.get(
         `/manager/task/requests?${locationQuery}`
       );

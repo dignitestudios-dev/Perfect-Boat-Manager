@@ -226,7 +226,10 @@ const EmployeeDetail = () => {
                 </div>
               </div>
 
-              <ResendPasswordCard employee={employee} />
+              <ResendPasswordCard
+                employee={employee}
+                getEmployeeData={getEmployeeData}
+              />
             </div>
           </div>
 
