@@ -7,6 +7,7 @@ import { FiLoader } from "react-icons/fi";
 import NotificationRow from "./NotificationRow";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import axios from "../../axios";
+import { ErrorToast } from "../../components/global/Toaster";
 
 const Notifications = () => {
   const navigate = useNavigate();
@@ -63,8 +64,12 @@ const Notifications = () => {
   const readAll = async () => {
     setUpdateLoading(true);
     try {
-      const response = await axios.put("/manager/notification/read");
-      if (response?.status == 200) {
+      const [DeleteResponse, readResponse] = await Promise.all([
+        axios.delete(`/manager/notification`),
+        axios.put("/manager/notification/read"),
+      ]);
+      console.log("🚀 ~ readAll ~ DeleteResponse:", DeleteResponse);
+      if (DeleteResponse?.status == 200) {
         setNotificationUpdate((prev) => !prev);
         SuccessToast("Notification cleared successfully.");
       }
@@ -116,7 +121,7 @@ const Notifications = () => {
           </div>
           <button
             onClick={readAll}
-            className={`w-[107px] h-[32px] mb-2 text-[11px] font-bold rounded-[10px] text-white bg-[#199BD1]`}
+            className={`w-[107px] h-[32px] mb-2 text-[11px] flex items-center justify-center gap-1 font-bold rounded-[10px] text-white bg-[#199BD1]`}
           >
             Clear All
             {updateLoading && (

@@ -95,19 +95,27 @@ const DeleteAccountList = () => {
   const handleDeactivate = async () => {
     try {
       setDeactivateLoading(true);
-      const obj = { reason: "Deactivate" };
-      const response = await axios.delete(
-        `/manager/employees/${id}?deactivate=true`,
-        { data: obj }
+      const taskData = {
+        task: userData?.tasks?.map((task) => task?._id),
+      };
+      const putResponse = await axios.put(
+        `/manager/employees/${passSelectedEmployee.id}/task/assign`,
+        taskData
       );
+      if (putResponse?.status === 200) {
+        const obj = { reason: "Deactivate" };
+        const response = await axios.delete(
+          `/manager/employees/${id}?deactivate=true`,
+          { data: obj }
+        );
 
-      if (response?.status === 200) {
-        setUpdateEmployee((prev) => !prev);
-        navigate("/employees");
+        if (response?.status === 200) {
+          setUpdateEmployee((prev) => !prev);
+          navigate("/employees");
+        }
       }
     } catch (err) {
       console.log("🚀 ~ handleDeactivate ~ err:", err);
-      console.log("error call");
       ErrorToast(err?.response?.data?.message);
     } finally {
       setDeactivateLoading(false);

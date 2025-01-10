@@ -16,6 +16,7 @@ import { ErrorToast } from "../../components/global/Toaster";
 import axios from "../../axios";
 import { FiLoader } from "react-icons/fi";
 import moment from "moment";
+import AddTaskBoatModal from "../../components/tasks/AddTaskBoatModal";
 
 const AddTask = () => {
   const today = moment();
@@ -29,12 +30,13 @@ const AddTask = () => {
   const location = useLocation();
 
   const boatname = location?.state?.boat || "";
-  console.log(boatname, "statename");
 
-  const [passSelectedBoat, SetPassSelectedBoat] = useState({
-    name: boatname?.name,
-    id: boatname?._id,
-  });
+  const [passSelectedBoat, SetPassSelectedBoat] = useState([
+    {
+      name: boatname?.name,
+      id: boatname?._id,
+    },
+  ]);
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
   const [customTypeText, setCustomTypeText] = useState("");
@@ -120,16 +122,29 @@ const AddTask = () => {
           <div className="w-full h-auto flex flex-col justify-start items-start gap-4">
             <div className="w-full grid grid-cols-2 gap-5 lg:gap-32">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-                <label className="text-[16px] font-medium leading-[21.6px]">
-                  Select Boat
-                </label>
+                <div className="w-full justify-between flex">
+                  <span className="text-[16px] font-medium leading-[21.6px]">
+                    Select Boat
+                  </span>
+                  <span className="text-[12px] text-gray-400 -mb-2">
+                    {!passSelectedEmployee?.id && "*select an employee first"}{" "}
+                  </span>
+                </div>
                 <button
+                  disabled={!passSelectedEmployee?.id ? true : false}
                   onClick={() => setIsBoatModalOpen(true)}
                   className="w-full h-[52px] bg-[#1A293D] disabled:text-white/50 outline-none px-3 
                   focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
                 >
-                  <span className="w-full text-gray-400 flex justify-start">
-                    {passSelectedBoat?.name || "Select Boat"}
+                  <span
+                    className={`w-full ${
+                      passSelectedBoat?.length ? "text-white" : "text-gray-400"
+                    }  flex justify-start`}
+                  >
+                    {/* Display text or selected boat name here */}
+                    {passSelectedBoat[0]?.id
+                      ? `${passSelectedBoat?.length} boats selected`
+                      : "Select Boat"}
                   </span>
                 </button>
                 {inputError.boat && (
@@ -257,11 +272,13 @@ const AddTask = () => {
         )}
         {isBoatModalOpen && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]">
-            <BoatSelectModal
+            <AddTaskBoatModal
               isOpen={isBoatModalOpen}
               setIsOpen={setIsBoatModalOpen}
               SetPassSelectedBoat={SetPassSelectedBoat}
+              passSelectedBoat={passSelectedBoat}
               setInputError={setInputError}
+              isMultiple={true}
             />
           </div>
         )}

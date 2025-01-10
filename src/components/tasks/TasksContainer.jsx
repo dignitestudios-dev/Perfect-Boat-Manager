@@ -50,12 +50,12 @@ const TasksContainer = () => {
     try {
       const searchFilter = filter ? `&status=${filter}` : "";
       const sortByDate = dueDate?.calendar
-        ? `&startDate=${dueDate?.calendar}&endDate=${dueDate?.calendar}&isdue=true`
+        ? `&startDate=${dueDate?.calendar}&endDate=${dueDate?.calendar}`
         : "";
       const sortByFilter = sortFilter === "earliest" ? `&isEarliest=true` : "";
 
       const { data } = await axios.get(
-        `/manager/task?page=${currentPage}&pageSize=9${searchFilter}${sortByFilter}${sortByDate}`
+        `/manager/task?page=${currentPage}&pageSize=18${searchFilter}${sortByFilter}${sortByDate}`
       );
       setTaskData(data?.data?.data || []);
       setPageDetails(data?.data?.paginationDetails || []);

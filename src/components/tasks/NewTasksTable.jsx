@@ -30,7 +30,7 @@ const NewTaskTable = () => {
     setLoading(true);
     try {
       const locationQuery =
-        locationType.length() !== 0 ? `location=${locationType}` : "";
+        locationType.length !== 0 ? `location=${locationType}` : "";
       const { data } = await axios.get(
         `/manager/task/requests?${locationQuery}`
       );

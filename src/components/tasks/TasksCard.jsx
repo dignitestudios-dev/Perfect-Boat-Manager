@@ -6,6 +6,7 @@ import { getUnixDate } from "../../constants/DateFormat";
 import axios from "../../axios";
 import { ErrorToast, SuccessToast } from "../global/Toaster";
 import { STATUS_ENUM } from "../../constants/data";
+import moment from "moment";
 
 const statusColor = (status) => {
   switch (status) {
@@ -79,7 +80,7 @@ const TasksCard = ({ getTasks, data }) => {
       />
       <button
         onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
-        className="w-full h-[172px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
+        className="w-full h-[196px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
         <div
           className={`w-[6px] h-full rounded-l-[6px] ${sideColor(
@@ -118,6 +119,12 @@ const TasksCard = ({ getTasks, data }) => {
             <span className="text-[15px] font-normal leading-[21.6px] text-white/50">
               Assigned To:{" "}
               <span className="font-medium">{data?.assignTo[0]?.name}</span>
+            </span>
+            <span className="text-[15px] font-normal leading-[21.6px] text-white/50">
+              Created At:
+              <span className="font-medium">
+                {moment(data?.createdAt).format("MM-DD-YYYY")}
+              </span>
             </span>
           </div>
           <div className="absolute bottom-2 left-3 w-[calc(100%-1.5rem)] flex justify-between items-center">
