@@ -262,7 +262,7 @@ const AddTask = () => {
         <DateModal
           isOpen={isCalendarOpen}
           setIsOpen={setIsCalendarOpen}
-          setDueDate={setDueDate}
+          setDueDate={today.toDate()}
           setInputError={setInputError}
           minDate={today.toDate()}
         />

@@ -53,6 +53,7 @@ const DeactivatedEmployeesTable = () => {
       setActivateLoading(false);
     }
   };
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [usersData, setUsersData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -78,6 +79,7 @@ const DeactivatedEmployeesTable = () => {
   }, []);
 
   const filteredData = usersData?.filter((item) => {
+    
     const matchesSearch = searchTerm
       ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
         item?.email?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
@@ -92,7 +94,7 @@ const DeactivatedEmployeesTable = () => {
       locationType && locationType.length !== 0
         ? locationType?.includes(item?.location?.toLowerCase())
         : true;
-    return matchesSearch && locationTypeMatch && jobTypeMatch && managers;
+    return matchesSearch && locationTypeMatch && jobTypeMatch;
   });
 
   return (
@@ -160,10 +162,10 @@ const DeactivatedEmployeesTable = () => {
                       {user?.email}
                     </span>
                     <span className="w-full flex justify-start items-center">
-                      {user?.userType}
+                      {user?.jobtitle}
                     </span>
                     <span className="w-full flex justify-start items-center">
-                      {user?.jobtitle}
+                      {user?.location}
                     </span>
                     <button
                       onClick={() => handleActionClick(user?._id)}
