@@ -44,17 +44,30 @@ const AssignedTasksCard = ({
 
   const [dueDate, setDueDate] = useState({});
   const [inputError, setInputError] = useState({});
+  console.log(dueDate, "due date");
 
   const toggleTaskTypeDropdown = () => {
     setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
   };
 
   const filteredData = tasks?.filter((item) => {
+    // Filter by taskType
     const taskTypeMatch =
       taskType && taskType.length !== 0
         ? taskType?.includes(item?.taskType?.toLowerCase())
         : true;
-    return taskTypeMatch;
+    const dueDateMatch =
+      !dueDate.calendar ||
+      getUnixDate(item?.dueDate) ===
+        moment(dueDate.calendar).format("DD-MM-YYYY"); 
+
+    console.log(
+      dueDateMatch,
+      getUnixDate(item?.dueDate),
+      moment(dueDate.calendar).format("DD-MM-YYYY"),
+      "data"
+    );
+    return taskTypeMatch && dueDateMatch;
   });
 
   const handleEditTaskClick = (taskId) => {
