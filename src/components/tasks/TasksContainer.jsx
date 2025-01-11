@@ -36,6 +36,7 @@ const TasksContainer = () => {
     setSortFilter(sort);
     // setIsCalendarOpen(false);
     setDueDate({ calendar: undefined });
+    console.log(dueDate,"dueDate")
     setCurrentPage(1);
   };
 

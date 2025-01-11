@@ -27,7 +27,7 @@ const Login = () => {
     setLoading(true);
     try {
       const fcmToken = await getFCMToken();
-      console.log(fcmToken);
+      
       let obj = {
         email: formData.email,
         password: formData.password,
