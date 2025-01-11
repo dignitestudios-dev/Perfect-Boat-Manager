@@ -233,7 +233,7 @@ const AddTask = () => {
             <div>
               <div className="w-auto flex justify-start items-center gap-3">
                 <IoCalendarOutline className="text-2xl text-white/40" />
-                <span className="text-md font-normal text-white"></span>
+                <span className="text-md font-normal text-white">Due Date</span>
                 <button
                   onClick={() => setIsCalendarOpen(true)}
                   className="text-xs font-normal text-[#199BD1]"
@@ -262,7 +262,7 @@ const AddTask = () => {
         <DateModal
           isOpen={isCalendarOpen}
           setIsOpen={setIsCalendarOpen}
-          setDueDate={today.toDate()}
+          setDueDate={setDueDate}
           setInputError={setInputError}
           minDate={today.toDate()}
         />
