@@ -7,12 +7,13 @@ import axios from "../../axios";
 import { ErrorToast, SuccessToast } from "../global/Toaster";
 import { STATUS_ENUM } from "../../constants/data";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
 
 const statusColor = (status) => {
   console.log(status, "status");
   switch (status) {
     case "newtask":
-      return "bg-[#FF007F]/[0.12] text-[#FF007F]";
+      return "bg-[#FF69B41F]/[0.12] text-[#FF69B4]";
     case "overdue":
       return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
     case "inprogress":
@@ -29,7 +30,7 @@ const statusColor = (status) => {
 const sideColor = (status) => {
   switch (status) {
     case "newtask":
-      return "bg-[#FF007F]";
+      return "bg-[#FF69B41F]";
     case "overdue":
       return "bg-[#FF3B30]";
     case "inprogress":
@@ -45,7 +46,7 @@ const sideColor = (status) => {
 
 const TasksCard = ({ getTasks, data }) => {
   const { navigate } = useContext(GlobalContext);
-
+const navigation =useNavigate()
   const getFormattedStatus = (status) => {
     return STATUS_ENUM[status] || status;
   };
@@ -80,7 +81,14 @@ const TasksCard = ({ getTasks, data }) => {
         onConfirm={handleDeleteConfirm}
       />
       <button
-        onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
+       onClick={() => {
+        const state = { showButton: false };
+        console.log("Passing State:", state);
+        navigation(`/tasks/${data?._id}`, {
+          state: state,
+        });
+      }}
+        // onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
         className="w-full h-[196px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
         <div

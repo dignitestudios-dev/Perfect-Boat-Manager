@@ -7,6 +7,7 @@ const AssignedEmployeesList = ({
   setPassSelectedEmployee,
   taskDetail,
   setInputError,
+  showButton,
 }) => {
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false);
 
@@ -20,16 +21,16 @@ const AssignedEmployeesList = ({
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           Assigned Employee
         </h3>
-        {isEdit ? (
+       
+        {(showButton === true && !isEdit) ||
+        (showButton === false && isEdit) ? (
           <button
             onClick={() => setIsEmployeeModalOpen(true)}
-            className="w-[42px] h-[42px] rounded-[8px] text-xs font-normal text-[#199BD1] flex justify-center items-center"
+            className="pt-1 text-xs flex font-normal text-[#199BD1]"
           >
-            Change
+            <span>Change</span>
           </button>
-        ) : (
-          <span></span>
-        )}
+        ) : null}
       </div>
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">

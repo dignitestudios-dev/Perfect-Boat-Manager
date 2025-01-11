@@ -30,8 +30,8 @@ const statusColor = (status) => {
 };
 
 const AssignedBoatTasks = ({ tasks, getBoats }) => {
-  console.log("🚀 ~ AssignedBoatTasks ~ tasks:", tasks);
-  const navigate = useNavigate();
+  const navigation = useNavigate();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDateModalOpen, setIsDateModalOpen] = useState(false);
   const [isAssignedModalOpen, setIsAssignedModalOpen] = useState(false);
@@ -134,21 +134,45 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
               <button
                 key={index}
                 className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px]
-             font-medium leading-[14.85px] text-white justify-start items-center"
-                onClick={() => navigate(`/tasks/${task?._id}`, "All Tasks")}
+             font-medium leading-[14.85px] text-white justify-start items-center cursor-pointer"
+               
               >
-                <span className="w-full flex justify-start items-center">
+                <span className="w-full flex justify-start items-center"  onClick={() => {
+                  const state = { showButton: false };
+                  console.log("Passing State:", state);
+                  navigation(`/tasks/${task?._id}`, {
+                    state: state,
+                  });
+                }}>
                   {task?.boat?.name}
                 </span>
-                <span className="w-full flex justify-start items-center">
+                <span className="w-full flex justify-start items-center"  onClick={() => {
+                  const state = { showButton: false };
+                  console.log("Passing State:", state);
+                  navigation(`/tasks/${task?._id}`, {
+                    state: state,
+                  });
+                }}>
                   {task?.taskType?.length > 15
                     ? task?.taskType?.slice(0, 24) + "..."
                     : task?.taskType}
                 </span>
-                <span className="w-full flex justify-start items-center">
+                <span className="w-full flex justify-start items-center"  onClick={() => {
+                  const state = { showButton: false };
+                  console.log("Passing State:", state);
+                  navigation(`/tasks/${task?._id}`, {
+                    state: state,
+                  });
+                }}>
                   {getUnixDate(task?.dueDate)}
                 </span>
-                <span className="w-full flex justify-start items-center ">
+                <span className="w-full flex justify-start items-center "  onClick={() => {
+                  const state = { showButton: false };
+                  console.log("Passing State:", state);
+                  navigation(`/tasks/${task?._id}`, {
+                    state: state,
+                  });
+                }}>
                   {task?.reoccuringDays}
                 </span>
                 <span
@@ -156,15 +180,27 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
                     task?.status
                   )} rounded-full font-medium 
             leading-[14.85px] flex justify-center items-center w-[100px] h-[27px]`}
+
+            onClick={() => {
+              const state = { showButton: false };
+              console.log("Passing State:", state);
+              navigation(`/tasks/${task?._id}`, {
+                state: state,
+              });
+            }}
                 >
                   {getFormattedStatus(task?.status)}
                 </span>
                 <div className="w-full flex text-[15px] text-white/40 justify-start items-center gap-2 px-[80px]">
                   <span className=" flex justify-start items-center ">
                     <FaRegEdit
-                      onClick={() =>
-                        navigate(`/tasks/${task?._id}`, "All Tasks")
-                      }
+                      onClick={() => {
+                        const state = { showButton: true };
+                        console.log("Passing State:", state);
+                        navigation(`/tasks/${task?._id}`, {
+                          state: state,
+                        });
+                      }}
                     />
                   </span>
                   <span className=" flex justify-start items-center ">
@@ -190,6 +226,7 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
           setIsOpen={setIsAssignedModalOpen}
           tasks={tasks}
           isEdit={true}
+          showButton={true}
           handleRemoveTask={(taskID) => handleDeleteConfirm(taskID)}
         />
       )}

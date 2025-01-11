@@ -61,6 +61,7 @@ const Notifications = () => {
   }, [activeTab, notifications]);
 
   const [updateLoading, setUpdateLoading] = useState(false);
+  
   const readAll = async () => {
     setUpdateLoading(true);
     try {

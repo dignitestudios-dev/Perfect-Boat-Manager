@@ -11,7 +11,7 @@ import AddFleetInput from "../../components/fleet/AddFleetInput";
 
 import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
 import axios from "../../axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { FiLoader } from "react-icons/fi";
 import ResendPasswordCard from "../../components/employees/ResendPasswordCard";
@@ -36,6 +36,11 @@ const EmployeeDetail = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
+  const location = useLocation();
+  // console.log(location, "location");
+
+  const editBtnshow = location?.state;
+  console.log(editBtnshow, "editBtnshow");
   const getEmployeeData = async () => {
     setIsLoading(true);
     try {
@@ -110,14 +115,16 @@ const EmployeeDetail = () => {
                   </h3>
                 </div>
                 <div className="w-auto flex justify-end items-center gap-2">
-                  {isEditing ? (
+                  {editBtnshow === true ? (
+                    ""
+                  ) : isEditing ? (
                     <div></div>
                   ) : (
                     <button
                       type="button"
                       onClick={() => setIsEditing(true)}
                       className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3]/[0.12]
-                       rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
+                         rounded-[10px] text-[#36B8F3] text-[13px] font-bold"
                     >
                       <TiPencil className="text-lg" />
                       <span>Edit</span>
@@ -137,7 +144,7 @@ const EmployeeDetail = () => {
                   <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                        isDisabled={!isEditing}
+                        isDisabled={editBtnshow === true ? isEditing : !isEditing}
                         label="Name"
                         type="text"
                         placeholder="Enter Name"
@@ -157,7 +164,8 @@ const EmployeeDetail = () => {
                         }}
                       />
                       <AddFleetInput
-                        isDisabled={!isEditing}
+                                             isDisabled={editBtnshow === true ? isEditing : !isEditing}
+
                         label="Email"
                         type="email"
                         placeholder="Enter Email"
@@ -173,7 +181,8 @@ const EmployeeDetail = () => {
                     </div>
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                        isDisabled={!isEditing}
+                                           isDisabled={editBtnshow === true ? isEditing : !isEditing}
+
                         label="Job Title"
                         type="text"
                         placeholder="Enter Job Title"
@@ -183,7 +192,8 @@ const EmployeeDetail = () => {
                         error={errors.jobtitle}
                       />
                       <AddFleetInput
-                        isDisabled={!isEditing}
+                                            isDisabled={editBtnshow === true ? isEditing : !isEditing}
+
                         label="Location"
                         type="text"
                         placeholder="Enter Location"
@@ -200,7 +210,8 @@ const EmployeeDetail = () => {
                     </div>
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                        isDisabled={!isEditing}
+                                             isDisabled={editBtnshow === true ? isEditing : !isEditing}
+
                         label="Phone Number"
                         type="text"
                         placeholder="Enter Phone Number"

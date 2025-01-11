@@ -9,6 +9,7 @@ const RecurringDaysInputField = ({
   isEdit,
   setRecurringDays,
   setInputError,
+  showButton
 }) => {
   const RecurringRef = useRef(null);
   const [customRecurring, setCustomRecurring] = useState("");
@@ -19,7 +20,6 @@ const RecurringDaysInputField = ({
   const toggleRecurringDropdown = (e) => {
     if (RecurringRef.current && !RecurringRef.current.contains(e.target)) {
       setRecurringDropdown((prev) => !prev);
-      // setRecurringDropdown(!RecurringDropdown);
     }
   };
 
@@ -37,20 +37,24 @@ const RecurringDaysInputField = ({
     }
   };
 
+  // Adjust `isEdit` based on `showButton`
+  const adjustedIsEdit = showButton ? true : isEdit;
+console.log(adjustedIsEdit,"adjustedIsEdit")
+  const isDisabled = showButton === true ? adjustedIsEdit : !adjustedIsEdit;
+
   return (
     <div className="w-auto flex justify-start items-center gap-3">
       <TbCalendarStats className="text-2xl text-white/40" />
       <span className="text-md font-normal text-white">Recurring Days</span>
-      {isEdit === true ? (
+      {adjustedIsEdit === true ? (
         <>
           <button
-            disabled={!isEdit}
+            disabled={!adjustedIsEdit} // Disable button based on adjustedIsEdit logic
             onClick={toggleRecurringDropdown}
             className="text-xs flex flex-col justify-start items-start font-normal text-[#199BD1] relative"
           >
             <span className="flex gap-1 justify-start items-center">
               <span>{selectedDay || "Select Days"}</span>{" "}
-              {/* Display selected day */}
               <FaCaretDown />
             </span>
             <div
@@ -90,7 +94,7 @@ const RecurringDaysInputField = ({
                     className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
                          border-[1px] border-[#55C9FA] rounded-md"
                   />
-                  <div class="absolute right-9 top-60">days</div>
+                  <div className="absolute right-9 top-60">days</div>
 
                   <button
                     type="button"

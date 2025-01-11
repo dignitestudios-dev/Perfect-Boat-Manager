@@ -25,7 +25,7 @@ const statusColor = (status) => {
   }
 };
 
-const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
+const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }) => {
   const navigate = useNavigate();
   const [taskType, setTaskType] = useState([]);
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
@@ -62,9 +62,10 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask }) => {
   });
 
   const handleEditTaskClick = (taskId) => {
-    navigate(`/tasks/${taskId}`);
+    navigate(`/tasks/${taskId}`, {
+      state: { showButton: showButton }, 
+    });
   };
-
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
       <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">

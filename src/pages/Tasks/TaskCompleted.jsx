@@ -12,10 +12,50 @@ import { FiDownload, FiLoader } from "react-icons/fi";
 import { getUnixDate } from "../../constants/DateFormat";
 import axios from "../../axios";
 import { ErrorToast } from "../../components/global/Toaster";
+import { STATUS_ENUM } from "../../constants/data";
 
 const TaskCompleted = () => {
+  const statusColor = (status) => {
+    console.log(status, "status");
+    switch (status) {
+      case "newtask":
+        return "bg-[#FF69B41F]/[0.12] text-[#FF69B4]";
+      case "overdue":
+        return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+      case "inprogress":
+        return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
+      case "completed":
+        return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+      case "upcomingtask":
+        return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
+      default:
+        return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
+    }
+  };
+
+  const sideColor = (status) => {
+    switch (status) {
+      case "newtask":
+        return "bg-[#FF69B41F]";
+      case "overdue":
+        return "bg-[#FF3B30]";
+      case "inprogress":
+        return "bg-[#36B8F3]";
+      case "completed":
+        return "bg-[#1FBA46]";
+      case "upcomingtask":
+        return "bg-[#FF007F]";
+      default:
+        return "bg-[#FFCC00]";
+    }
+  };
   const { navigate } = useContext(GlobalContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const getFormattedStatus = (status) => {
+    return STATUS_ENUM[status] || status;
+  };
+
 
   const location = useLocation();
   const taskDetail = location.state || {};
@@ -83,9 +123,14 @@ const TaskCompleted = () => {
                 <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
                   Task
                 </h3>
-                <span className="capitalize text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center w-[70px] h-[27px]">
-                  {taskDetail?.status}
-                </span>
+               <div
+              className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
+                taskDetail?.status
+              )}
+            font-medium leading-[14.85px] flex items-center justify-center `}
+            >
+              {getFormattedStatus(taskDetail?.status)}
+            </div>
               </div>
             </div>
             <div className="w-full h-auto flex flex-col justify-start items-start gap-4">

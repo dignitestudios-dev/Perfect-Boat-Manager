@@ -46,7 +46,7 @@ const AssignReportedTask = () => {
     try {
       setSubmitLoading(true);
       const obj = {
-        boat: data.boatId,
+        boat: [data.boatId],
         task: selectedTaskType,
         taskType: selectedTaskType,
         dueDate: dueDate?.unix,
@@ -151,7 +151,7 @@ const AssignReportedTask = () => {
               <div className="w-full grid grid-cols-2 gap-12">
                 <AddFleetInput
                   isDisabled={true}
-                  label={"Modal/Make/Size"}
+                  label={"Year/Make/Size"}
                   register={register("combined", {
                     required: "Please enter boat type",
                   })}
@@ -182,9 +182,16 @@ const AssignReportedTask = () => {
                       Change
                     </p>
                   </div>
-                  {/* <div className="w-full grid grid-cols-2 gap-12">
-                  <AddFleetInput />
-                </div> */}
+                  <div className="w-full grid grid-cols-2 gap-12">
+                    <div
+                      className="group transition-all duration-500 w-full h-[52px] bg-[#1A293D] outline-none flex justify-between 
+          items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl  relative"
+                    >
+                      <span className="text-gray-400">
+                        {passSelectedEmployee?.name || "Assign Employee"}
+                      </span>
+                    </div>
+                  </div>
                   {/* Horizontal line above the Note label */}
                   <hr className="w-full border-t border-gray-600 my-4" />
                   <label className="text-[16px] font-medium leading-[21.6px]">

@@ -5,7 +5,7 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { TbCalendarStats } from "react-icons/tb";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { AuthMockup } from "../../assets/export";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FiLoader } from "react-icons/fi";
 import axios from "../../axios";
 import { ErrorToast, SuccessToast } from "../../components/global/Toaster";
@@ -16,9 +16,49 @@ import TaskTypeInputField from "../../components/global/customInputs/TaskTypeInp
 import TaskInputField from "../../components/global/customInputs/TaskInputField";
 import DateModal from "../../components/tasks/DateModal";
 import moment from "moment";
+import { STATUS_ENUM } from "../../constants/data";
 
 const TaskDetail = () => {
+  const statusColor = (status) => {
+    console.log(status, "status");
+    switch (status) {
+      case "newtask":
+        return "bg-[#FF69B41F]/[0.12] text-[#FF69B4]";
+      case "overdue":
+        return "bg-[#FF3B301F]/[0.12] text-[#FF3B30]";
+      case "inprogress":
+        return "bg-[#36B8F31F]/[0.12] text-[#36B8F3]";
+      case "completed":
+        return "bg-[#1FBA46]/[0.12] text-[#1FBA46]";
+      case "upcomingtask":
+        return "bg-[#FF007F1F]/[0.12] text-[#FF007F]";
+      default:
+        return "bg-[#FFCC00]/[0.12] text-[#FFCC00]";
+    }
+  };
+
+  const sideColor = (status) => {
+    switch (status) {
+      case "newtask":
+        return "bg-[#FF69B41F]";
+      case "overdue":
+        return "bg-[#FF3B30]";
+      case "inprogress":
+        return "bg-[#36B8F3]";
+      case "completed":
+        return "bg-[#1FBA46]";
+      case "upcomingtask":
+        return "bg-[#FF007F]";
+      default:
+        return "bg-[#FFCC00]";
+    }
+  };
+
   const { taskDropDown } = useContext(GlobalContext);
+  const getFormattedStatus = (status) => {
+    return STATUS_ENUM[status] || status;
+  };
+
   const today = moment();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -118,6 +158,10 @@ const TaskDetail = () => {
   };
   const [hide, sethide] = useState(false);
   const [customTypeText, setCustomTypeText] = useState("");
+
+  const location = useLocation();
+  const showButton = location?.state?.showButton;
+
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       {isLoading ? (
@@ -130,13 +174,21 @@ const TaskDetail = () => {
             <div className="w-full flex justify-between items-center h-12">
               <div className="w-auto flex justify-start items-center gap-2">
                 <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-                  {isEdit ? "Edit Task" : "Task"}
+                {isEdit || showButton ? "Edit Task" : "Task"}
+
                 </h3>
-                <span className="text-[11px] bg-[#36B8F3]/[0.12] rounded-full text-[#36B8F3] font-medium leading-[14.85px] flex justify-center items-center p-2 ">
-                  {taskDetail?.status}
-                </span>
+                <div
+                  className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
+                    taskDetail?.status
+                  )}
+            font-medium leading-[14.85px] flex items-center justify-center `}
+                >
+                  {getFormattedStatus(taskDetail?.status)}
+                </div>
               </div>
-              {isEdit === true ? (
+              {showButton === true ? (
+                ""
+              ) : isEdit === true ? (
                 <></>
               ) : (
                 <>
@@ -186,6 +238,7 @@ const TaskDetail = () => {
                     setTasks={setTasks}
                     setSelectedTaskType={setSelectedTaskType}
                     setInputError={setInputError}
+                    showButton={showButton}
                   />
                   {inputError.task && (
                     <p className="text-red-500">{inputError.task}</p>
@@ -200,6 +253,7 @@ const TaskDetail = () => {
                     displaySelectedTask={displaySelectedTask}
                     customTypeText={customTypeText}
                     setCustomTypeText={setCustomTypeText}
+                    showButton={showButton}
                   />
                   {/* {inputError.dueDate && (
                   <p className="text-red-500">{inputError.dueDate}</p>
@@ -212,7 +266,7 @@ const TaskDetail = () => {
                     {"Note"}
                   </label>
                   <textarea
-                    disabled={!isEdit}
+                    disabled={showButton === true ? isEdit : !isEdit}
                     value={noteText}
                     onChange={(e) => {
                       setNoteText(e.target.value);
@@ -229,23 +283,27 @@ const TaskDetail = () => {
               <div className="w-auto flex justify-start items-start gap-3">
                 <div className="flex gap-2">
                   <IoCalendarOutline className="text-2xl text-white/40" />
-                  <div className="flex flex-col justify-start items-start">
+                  <div className="flex gap-9 justify-start items-start">
                     <span className="text-[16px] font-bold text-white">
                       Due Date
                     </span>
                     <span className="text-[12px] font-normal pt-1">
-                      {" "}
-                      {dueDate?.normal}{" "}
+             
+                      {dueDate?.normal
+                        ? moment(dueDate?.normal).format("MM-DD-YYYY")
+                        : "Select Due Date"}
                     </span>
                   </div>
-                  {isEdit && (
+                  {(showButton === true && !isEdit) ||
+                  (showButton === false && isEdit) ? (
                     <button
                       onClick={() => setIsCalendarOpen(true)}
                       className="pt-1 text-xs flex font-normal text-[#199BD1]"
                     >
                       <span>Change</span>
                     </button>
-                  )}
+                  ) : null}
+
                   {inputError.dueDate && (
                     <p className="text-red-500">{inputError.dueDate}</p>
                   )}
@@ -258,6 +316,7 @@ const TaskDetail = () => {
                 setRecurringDays={setRecurringDays}
                 isEdit={isEdit}
                 setInputError={setInputError}
+                showButton={showButton}
               />
               {inputError.reoccuringDays && (
                 <p className="text-red-500 -mt-1">
@@ -279,6 +338,7 @@ const TaskDetail = () => {
             passSelectedEmployee={passSelectedEmployee}
             setPassSelectedEmployee={setPassSelectedEmployee}
             setInputError={setInputError}
+            showButton={showButton}
           />
           <div className="w-full flex justify-end py-4 items-center gap-4">
             {isEdit ? (

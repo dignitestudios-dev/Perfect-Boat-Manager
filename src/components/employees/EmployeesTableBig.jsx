@@ -64,8 +64,9 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
     return matchesSearch && locationTypeMatch && jobTypeMatch;
   });
 
-  const handleEditClick = (id) => {
-    navigate(`/employees/${id}`);
+  const handleEditClick = (id, editshow) => {
+    console.log(editshow, "editshow");
+    navigation(`/employees/${id}`, { state: editshow });
   };
 
   const handleDeleteClick = (id) => {
@@ -230,7 +231,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
           font-medium leading-[14.85px] text-white justify-start items-center`}
                   onClick={() => {
                     if (employee?.isActive) {
-                      handleEditClick(employee?._id);
+                      handleEditClick(employee?._id, false);
                     }
                   }}
                 >
@@ -252,7 +253,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                       onClick={(e) => {
                         e.stopPropagation();
                         if (employee?.isActive) {
-                          handleEditClick(employee?._id);
+                          handleEditClick(employee?._id, true);
                         }
                       }}
                     >

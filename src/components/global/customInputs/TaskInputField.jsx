@@ -9,6 +9,7 @@ const TaskInputField = ({
   displaySelectedTask,
   customTypeText,
   setCustomTypeText,
+  showButton
 }) => {
   const additionalDropdownRef = useRef();
   const [isTaskDropdownOpen, setTaskDropdownOpen] = useState(false);
@@ -32,16 +33,16 @@ const TaskInputField = ({
       // );
     }
   };
-
+  const isDisabled = showButton === true ? isEdit : !isEdit;
   return (
     <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
       <label className="text-[16px] font-medium leading-[21.6px]">Task</label>
       <div
-        onClick={isEdit ? toggleTaskDropdown : null}
+        onClick={isDisabled  ? null : toggleTaskDropdown}
         className={`group transition-all duration-500 w-full ${
           isTaskDropdownOpen ? "rounded-t-xl rounded-b-none" : "rounded-xl"
         } h-[52px] ${
-          isEdit && "cursor-pointer"
+          isDisabled && "cursor-pointer"
         } bg-[#1A293D] outline-none flex justify-between items-center px-3 relative`}
       >
         <span className="text-gray-400">
