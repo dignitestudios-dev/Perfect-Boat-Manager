@@ -50,6 +50,8 @@ const DateModal = ({
     setIsOpen(false);
   };
 
+  console.log(minDate,"mindate")
+
   return (
     <div
       type="button"
@@ -105,7 +107,9 @@ const DateModal = ({
                   className="h-full"
                   id="calendar-1"
                   value={date}
+                  locale={"en-US"}
                   minDate={minDate}
+                  
                   onChange={(value) => {
                     setDate(value);
                   }}
