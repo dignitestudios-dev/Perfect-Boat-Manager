@@ -105,7 +105,7 @@ const DateModal = ({
                   className="h-full"
                   id="calendar-1"
                   value={date}
-                  // minDate={minDate}
+                  minDate={minDate}
                   onChange={(value) => {
                     setDate(value);
                   }}
