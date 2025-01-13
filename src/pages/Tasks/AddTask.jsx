@@ -268,7 +268,7 @@ const AddTask = () => {
           setIsOpen={setIsCalendarOpen}
           setDueDate={setDueDate}
           setInputError={setInputError}
-          minDate={new Date(MinDateTime.getDay()+MinDateTime.getMonth()+MinDateTime.getDay())}
+          minDate={new Date(s)}
           
         />
         {isEmployeeModalOpen && (
