@@ -44,7 +44,7 @@ const DateModal = ({
     setDueDate({
       normal: formattedDate,
       unix: epochTime,
-      calendar: moment(calendarDate).format("DD-MM-YYYY"),
+      calendar: moment("01-11-2025").format("DD-MM-YYYY"),
     });
     setInputError({});
     setIsOpen(false);

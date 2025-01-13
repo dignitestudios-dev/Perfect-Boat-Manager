@@ -109,7 +109,13 @@ const VerifyOtp = () => {
     setSeconds(30);
     setIsActive(true);
   };
-
+  const handlePaste = (e) => {
+    const pastedData = e.clipboardData.getData("Text");
+    if (pastedData.length === otp.length) {
+      setOtp(pastedData.split("")); // Populate OTP array with the pasted data
+    }
+    e.preventDefault(); // Prevent the default paste behavior
+  };
   return (
     <div className="w-screen h-screen flex items-start justify-start">
       <form
@@ -140,8 +146,8 @@ const VerifyOtp = () => {
                 maxLength="1"
                 value={otp[index]}
                 onChange={(e) => handleChange(e, index)}
-                onPaste={(e) => e.preventDefault()}
                 onKeyDown={(e) => handleKeyDown(e, index)}
+                onPaste={handlePaste} // Attach the paste event handler
                 ref={(el) => (inputs.current[index] = el)}
                 className="w-[48px] h-[68px] rounded-lg bg-transparent outline-none text-center border-[1px] border-[#c2c6cb] text-white text-2xl focus-within:border-[#55C9FA] flex items-center justify-center"
               />

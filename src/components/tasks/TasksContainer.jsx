@@ -36,7 +36,7 @@ const TasksContainer = () => {
     setSortFilter(sort);
     // setIsCalendarOpen(false);
     setDueDate({ calendar: undefined });
-    console.log(dueDate,"dueDate")
+    console.log(dueDate, "dueDate");
     setCurrentPage(1);
   };
 
@@ -45,13 +45,18 @@ const TasksContainer = () => {
       setOpenDropdownFilter((prev) => !prev);
     }
   };
-
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  };
   const getTasks = async () => {
     setLoading(true);
     try {
       const searchFilter = filter ? `&status=${filter}` : "";
       const sortByDate = dueDate?.calendar
-        ? `&startDate=${dueDate?.calendar}&endDate=${dueDate?.calendar}&isdue=true`
+        ? `&startDate=${formatDate(dueDate?.calendar)}&endDate=${formatDate(
+            dueDate?.calendar
+          )}&isdue=true`
         : "";
       const sortByFilter = sortFilter === "earliest" ? `&isEarliest=true` : "";
 
