@@ -108,8 +108,8 @@ const DateModal = ({
                   id="calendar-1"
                   value={date}
                   locale={"en-US"}
-                  minDate={minDate}
-                  
+                  // minDate={minDate}
+
                   onChange={(value) => {
                     setDate(value);
                   }}
