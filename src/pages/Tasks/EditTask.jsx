@@ -261,7 +261,7 @@ const EditTask = () => {
         <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
           <div className="w-auto flex justify-start items-center gap-2">
             <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-              Assigned Employee
+              Assigned Employees
             </h3>
             <button
               onClick={toggleEmployeeModal}

@@ -33,7 +33,7 @@ const DateModal = ({
 
   const handleDueDate = () => {
     const utcDate = date;
-    const calendarDate = moment(utcDate).format("MM DD YYYY");
+    const calendarDate = moment(utcDate).format("YYYY-MM-DD");
 
     // Convert the UTC time to Unix timestamp (epoch time) in seconds
     const epochTime = Math.floor(utcDate.getTime() / 1000);
@@ -44,7 +44,7 @@ const DateModal = ({
     setDueDate({
       normal: formattedDate,
       unix: epochTime,
-      calendar: moment("01-11-2025").format("DD-MM-YYYY"),
+      calendar: calendarDate,
     });
     setInputError({});
     setIsOpen(false);

@@ -45,10 +45,10 @@ const TasksContainer = () => {
       setOpenDropdownFilter((prev) => !prev);
     }
   };
-  const formatDate = (dateStr) => {
-    const date = new Date(dateStr);
-    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-  };
+  // const formatDate = (dateStr) => {
+  //   const date = new Date(dateStr);
+  //   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+  // };
   const getTasks = async () => {
     setLoading(true);
     try {
