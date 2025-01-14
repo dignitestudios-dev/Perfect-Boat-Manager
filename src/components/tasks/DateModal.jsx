@@ -50,7 +50,7 @@ const DateModal = ({
     setIsOpen(false);
   };
 
-  console.log(minDate,"mindate")
+  console.log(minDate, "mindate");
 
   return (
     <div
@@ -109,7 +109,6 @@ const DateModal = ({
                   value={date}
                   locale={"en-US"}
                   minDate={minDate}
-
                   onChange={(value) => {
                     setDate(value);
                   }}
