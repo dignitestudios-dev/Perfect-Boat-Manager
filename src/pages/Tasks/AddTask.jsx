@@ -113,7 +113,7 @@ const AddTask = () => {
       ]);
     }
   }, [boatname]);
- 
+
   // const MinDateTime=new Date();
 
   // const date=`${MinDateTime.getDate() , MinDateTime.getMonth()+1 , MinDateTime.getFullYear()}`
@@ -268,8 +268,7 @@ const AddTask = () => {
           setIsOpen={setIsCalendarOpen}
           setDueDate={setDueDate}
           setInputError={setInputError}
-          minDate={new Date()}
-          
+          minDate={today.toDate()}
         />
         {isEmployeeModalOpen && (
           <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-[1000]">
