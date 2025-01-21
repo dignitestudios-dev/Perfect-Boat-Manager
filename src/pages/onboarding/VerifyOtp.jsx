@@ -70,7 +70,7 @@ const VerifyOtp = () => {
         setLoading(false);
         sessionStorage.setItem("authToken", response?.data?.data?.token);
         navigate("/update-password");
-        SuccessToast("Otp Verified");
+        SuccessToast("OTP Verified");
       } else {
         ErrorToast("Error");
       }
