@@ -114,6 +114,10 @@ const AddTask = () => {
     }
   }, [boatname]);
 
+  // const MinDateTime=new Date();
+
+  // const date=`${MinDateTime.getDate() , MinDateTime.getMonth()+1 , MinDateTime.getFullYear()}`
+  //  console.log(date,"date")
   return (
     <div className="w-full h-auto min-h-screen overflow-y-auto bg-[#1A293D] text-white p-4 pb-20 flex flex-col justify-start items-start">
       <div className="w-full flex flex-col justify-start items-start gap-6 p-6 rounded-[18px] bg-[#001229]">

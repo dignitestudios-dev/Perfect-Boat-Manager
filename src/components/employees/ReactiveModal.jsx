@@ -8,6 +8,7 @@ const ReactivateModal = ({ isOpen, onClose, reactivate, activateLoading }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50">
       <div className="relative bg-[#02203A] rounded-lg shadow-md w-[418px] h-[202px] flex flex-col p-4">
         {/* Close button */}
+        {!activateLoading && (
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-xl font-bold text-[#199BD1] hover:text-gray-800"
@@ -15,7 +16,7 @@ const ReactivateModal = ({ isOpen, onClose, reactivate, activateLoading }) => {
         >
           ✕
         </button>
-
+        )}
         {/* Content */}
         <div className="flex-1 flex flex-col justify-center">
           <p className="text-[18px] text-white font-bold text-left mt-[-22px] mb-2">
@@ -28,13 +29,15 @@ const ReactivateModal = ({ isOpen, onClose, reactivate, activateLoading }) => {
 
         {/* Container for buttons aligned to the bottom right */}
         <div className="flex justify-end gap-2 mt-4">
-          <button
-            onClick={onClose}
-            type="button"
-            className="text-[#199BD1] font-bold py-2 px-4 rounded-lg text-[16px]"
-          >
-            Cancel
-          </button>
+          {!activateLoading && (
+            <button
+              onClick={onClose}
+              type="button"
+              className="text-[#199BD1] font-bold py-2 px-4 rounded-lg text-[16px]"
+            >
+              Cancel
+            </button>
+          )}
           <button
             disabled={activateLoading}
             onClick={reactivate}

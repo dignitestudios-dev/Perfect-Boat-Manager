@@ -26,9 +26,10 @@ const AssignReportedTask = () => {
   const location = useLocation();
   const { task } = location.state || {};
   const [passSelectedEmployee, setPassSelectedEmployee] = useState("");
-  const [dueDate, setDueDate] = useState(null);
+  const [dueDate, setDueDate] = useState({});
+
   const [selectedDay, setSelectedDay] = useState("");
-  const [inputError, setInputError] = useState("");
+  const [inputError, setInputError] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
   const [selectedTaskType, setSelectedTaskType] = useState("");
   const [selectedTask, setSelectedTask] = useState("");
@@ -218,7 +219,9 @@ const AssignReportedTask = () => {
                   onClick={() => setIsCalendarOpen(true)}
                   className="text-xs font-normal text-[#199BD1]"
                 >
-                  {dueDate?.normal || "Select Due Date"}
+                  {dueDate?.normal
+                    ? moment(dueDate?.normal).format("MM-DD-YYYY")
+                    : "Select Due Date"}
                 </button>
               </div>
               <div className="w-auto flex justify-start items-center gap-3">
@@ -264,6 +267,8 @@ const AssignReportedTask = () => {
               isOpen={isCalendarOpen}
               setIsOpen={setIsCalendarOpen}
               minDate={today.toDate()}
+              setDueDate={setDueDate}
+              setInputError={setInputError}
             />
           </div>
         </div>

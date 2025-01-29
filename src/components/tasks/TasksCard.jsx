@@ -30,7 +30,7 @@ const statusColor = (status) => {
 const sideColor = (status) => {
   switch (status) {
     case "newtask":
-      return "bg-[#FF69B41F]";
+      return "bg-[#FF69B4]";
     case "overdue":
       return "bg-[#FF3B30]";
     case "inprogress":
@@ -46,7 +46,7 @@ const sideColor = (status) => {
 
 const TasksCard = ({ getTasks, data }) => {
   const { navigate } = useContext(GlobalContext);
-const navigation =useNavigate()
+  const navigation = useNavigate();
   const getFormattedStatus = (status) => {
     return STATUS_ENUM[status] || status;
   };
@@ -81,13 +81,13 @@ const navigation =useNavigate()
         onConfirm={handleDeleteConfirm}
       />
       <button
-       onClick={() => {
-        const state = { showButton: false };
-        console.log("Passing State:", state);
-        navigation(`/tasks/${data?._id}`, {
-          state: state,
-        });
-      }}
+        onClick={() => {
+          const state = { showButton: false };
+          console.log("Passing State:", state);
+          navigation(`/tasks/${data?._id}`, {
+            state: state,
+          });
+        }}
         // onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
         className="w-full h-[196px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
@@ -141,9 +141,12 @@ const navigation =useNavigate()
               <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-[27px] rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[14.85px] bg-[#9CA2AB]/[0.12] text-[#fff]/[0.5]">
                 Due {data?.dueDate ? getUnixDate(data?.dueDate) : "No Due Date"}
               </button>
-              <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-[27px] rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[14.85px] bg-[#9CA2AB]/[0.12] text-[#fff]/[0.5]">
-                Recurring {data?.reoccuringDays ? data?.reoccuringDays : 0} days
-              </button>
+              {data?.reoccuringDays ? (
+                <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-[27px] rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[14.85px] bg-[#9CA2AB]/[0.12] text-[#fff]/[0.5]">
+                  Recurring {data?.reoccuringDays}{" "}
+                  days
+                </button>
+              ):null}
             </div>
             <button
               onClick={(e) => {

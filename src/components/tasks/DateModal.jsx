@@ -33,7 +33,7 @@ const DateModal = ({
 
   const handleDueDate = () => {
     const utcDate = date;
-    const calendarDate = moment(utcDate).format("MM DD YYYY");
+    const calendarDate = moment(utcDate).format("YYYY-MM-DD");
 
     // Convert the UTC time to Unix timestamp (epoch time) in seconds
     const epochTime = Math.floor(utcDate.getTime() / 1000);
@@ -44,11 +44,13 @@ const DateModal = ({
     setDueDate({
       normal: formattedDate,
       unix: epochTime,
-      calendar: moment(calendarDate).format("DD-MM-YYYY"),
+      calendar: calendarDate,
     });
     setInputError({});
     setIsOpen(false);
   };
+
+  console.log(minDate, "mindate");
 
   return (
     <div
@@ -105,6 +107,7 @@ const DateModal = ({
                   className="h-full"
                   id="calendar-1"
                   value={date}
+                  locale={"en-US"}
                   minDate={minDate}
                   onChange={(value) => {
                     setDate(value);

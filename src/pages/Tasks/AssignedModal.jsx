@@ -25,7 +25,13 @@ const statusColor = (status) => {
   }
 };
 
-const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }) => {
+const AssignedModal = ({
+  setIsOpen,
+  tasks,
+  isEdit,
+  handleRemoveTask,
+  showButton,
+}) => {
   const navigate = useNavigate();
   const [taskType, setTaskType] = useState([]);
   const [taskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
@@ -63,9 +69,10 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }
 
   const handleEditTaskClick = (taskId) => {
     navigate(`/tasks/${taskId}`, {
-      state: { showButton: showButton }, 
+      state: { showButton: showButton },
     });
   };
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
       <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
@@ -76,7 +83,7 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }
               onClick={() => setIsOpen(false)}
               className="text-lg font-bold"
             >
-              ✕
+              ✕ 
             </button>
           </div>
           <div className="flex justify-between items-center mb-4">
@@ -92,8 +99,8 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }
               />
             </div>
           </div>
-          <div className="relative h-full overflow-auto">
-            <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+          <div className="relative h-[80%] overflow-auto">
+            <div className="w-full h-auto overflow-auto flex flex-col gap-1 justify-start items-start">
               <div
                 className={`w-full h-8 grid ${
                   isEdit ? "grid-cols-6" : "grid-cols-5"
@@ -198,14 +205,14 @@ const AssignedModal = ({ setIsOpen, tasks, isEdit, handleRemoveTask,showButton }
               {/* Add more rows as needed */}
             </div>
           </div>
-          <div className="flex justify-end mt-4">
+          {/* <div className="flex justify-end mt-4">
             <button
               onClick={() => setIsOpen(false)}
               className="bg-[#119bd1] text-white px-6 py-2 rounded-md"
             >
               Done
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -42,7 +42,7 @@ const Notifications = () => {
   };
   useEffect(() => {
     getNotifications();
-  }, [notificationUpdate]);
+  }, [notificationUpdate, activeTab]);
 
   const unreadCount = notifications.filter(
     (notification) => !notification.isRead
@@ -61,21 +61,56 @@ const Notifications = () => {
   }, [activeTab, notifications]);
 
   const [updateLoading, setUpdateLoading] = useState(false);
-  
+  const [DeleteLoading, setDeleteLoading] = useState(false);
+
+  // Function to delete all notifications
+  const deleteAll = async () => {
+    setDeleteLoading(true);
+    try {
+      const deleteResponse = await axios.delete("/manager/notification");
+      console.log("🚀 ~ deleteAll ~ deleteResponse:", deleteResponse);
+
+      // Ensure response status is 200, and handle success accordingly
+      if (deleteResponse?.status === 200) {
+        setNotificationUpdate((prev) => !prev);
+        SuccessToast("Notifications cleared successfully.");
+      } else {
+        // Handle cases where the status is not 200 (even if the request doesn't throw an error)
+        throw new Error("Unexpected response status");
+      }
+    } catch (err) {
+      // Ensure only actual errors trigger the toast, using fallback message when necessary
+      const errorMessage =
+        err?.response?.data?.message ||
+        "An error occurred. Please try again later.";
+      ErrorToast(errorMessage);
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
+  // Function to mark all notifications as read
   const readAll = async () => {
     setUpdateLoading(true);
     try {
-      const [DeleteResponse, readResponse] = await Promise.all([
-        axios.delete(`/manager/notification`),
-        axios.put("/manager/notification/read"),
-      ]);
-      console.log("🚀 ~ readAll ~ DeleteResponse:", DeleteResponse);
-      if (DeleteResponse?.status == 200) {
-        setNotificationUpdate((prev) => !prev);
-        SuccessToast("Notification cleared successfully.");
+      const readResponse = await axios.put("/manager/notification/read");
+      console.log("🚀 ~ readAll ~ readResponse:", readResponse);
+
+      // Ensure that the response status is 200 and has the expected format
+      if (readResponse?.status === 200) {
+        // getNotifications();
+      } else {
+        // Handle cases where the status isn't 200, if needed
+        throw new Error("Unexpected response status");
       }
     } catch (err) {
-      ErrorToast(err?.response?.data?.message);
+      // Only show the error toast if it's an actual error, and avoid triggering on success.
+      if (err?.response?.data?.message) {
+        ErrorToast(err?.response?.data?.message);
+      } else {
+        // If no specific message, you could display a general error message
+        ErrorToast("An unexpected error occurred.");
+      }
     } finally {
       setUpdateLoading(false);
     }
@@ -108,24 +143,35 @@ const Notifications = () => {
               Read
             </button>
             <button
-              onClick={() => setActiveTab("Unread")}
+              onClick={() => {
+                if (filteredNotifications.some((e) => e?.isRead === false)) {
+                  readAll();
+                }
+
+                setActiveTab("Unread");
+              }}
               className={`px-2 h-[34px] flex justify-between items-center gap-2 ${
                 activeTab == "Unread" &&
                 "text-[#199BD1]  font-bold border-b-[3px] border-[#199BD1]"
               } `}
             >
               <span>Unread</span>
+              {updateLoading && (
+                <FiLoader className="animate-spin text-lg ml-1" />
+              )}
               <span className="bg-[#199BD1] text-white w-[18px] h-[18px] rounded-full text-[10px] flex items-center justify-center">
                 {unreadCount}
               </span>
             </button>
           </div>
           <button
-            onClick={readAll}
+            onClick={() => {
+              filteredNotifications.length > 0 && deleteAll();
+            }}
             className={`w-[107px] h-[32px] mb-2 text-[11px] flex items-center justify-center gap-1 font-bold rounded-[10px] text-white bg-[#199BD1]`}
           >
             Clear All
-            {updateLoading && (
+            {DeleteLoading && (
               <FiLoader className="animate-spin text-lg ml-1" />
             )}
           </button>

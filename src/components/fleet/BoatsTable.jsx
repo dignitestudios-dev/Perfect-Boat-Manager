@@ -6,8 +6,7 @@ import React, {
   Fragment,
 } from "react";
 import { FiSearch } from "react-icons/fi";
-import { FaCaretDown } from "react-icons/fa";
-import { GlobalContext } from "../../contexts/GlobalContext";
+
 import { AuthMockup } from "../../assets/export";
 import LocationType from "../global/headerDropDowns/LocationType";
 import { useNavigate } from "react-router-dom";
@@ -15,7 +14,6 @@ import BoatType from "../global/headerDropDowns/BoatType";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 
 const BoatsTable = ({ data, loading, getBoats }) => {
-  console.log("🚀 ~ BoatsTable ~ data:", data);
   const navigate = useNavigate();
 
   const [boatTypeDropdownOpen, setBoatTypeDropdownOpen] = useState(false);

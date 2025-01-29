@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 
 const TaskInputField = ({
@@ -9,15 +9,23 @@ const TaskInputField = ({
   displaySelectedTask,
   customTypeText,
   setCustomTypeText,
-  showButton
+  showButton,
 }) => {
   const additionalDropdownRef = useRef();
   const [isTaskDropdownOpen, setTaskDropdownOpen] = useState(false);
   const [customInput, setCustomInput] = useState(false);
-
   const toggleTaskDropdown = () => {
     setTaskDropdownOpen(!isTaskDropdownOpen);
   };
+
+  const inputRef = useRef(null);
+
+  // Focus the input field when customInput is true
+  useEffect(() => {
+    if (customInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [customInput]);
 
   const handleTaskSelection = (task) => {
     if (task === "custom") {
@@ -38,7 +46,7 @@ const TaskInputField = ({
     <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
       <label className="text-[16px] font-medium leading-[21.6px]">Task</label>
       <div
-        onClick={isDisabled  ? null : toggleTaskDropdown}
+        onClick={isDisabled ? null : toggleTaskDropdown}
         className={`group transition-all duration-500 w-full ${
           isTaskDropdownOpen ? "rounded-t-xl rounded-b-none" : "rounded-xl"
         } h-[52px] ${
@@ -85,10 +93,11 @@ const TaskInputField = ({
                   {customInput && (
                     <div className="absolute w-full top-10 left-0 flex flex-col justify-start items-start gap-2 px-5">
                       <input
+                        ref={inputRef} 
                         onChange={(e) => setCustomTypeText(e.target.value)}
                         type="text"
                         className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
-                           border-[1px] border-[#55C9FA] rounded-md"
+             border-[1px] border-[#55C9FA] rounded-md"
                       />
                       <button
                         type="button"
