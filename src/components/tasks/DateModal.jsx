@@ -50,8 +50,6 @@ const DateModal = ({
     setIsOpen(false);
   };
 
-  console.log(minDate, "mindate");
-
   return (
     <div
       type="button"

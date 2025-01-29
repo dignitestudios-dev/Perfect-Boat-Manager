@@ -73,7 +73,7 @@ const AddEmployee = () => {
             email: item.email || "",
             jobtitle: item.jobtitle || "",
             location: item.location || "",
-            phone: item.phoneNumber || "",
+            phone: item.phone || "",
             password: "Test@123",
           }));
           setData(parsedData);
@@ -93,15 +93,17 @@ const AddEmployee = () => {
               Add Employee
             </h1>
           </div>
-          <button
-            type="button"
-            className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
-            onClick={() => {
-              document.getElementById("input").click();
-            }}
-          >
-            Import CSV
-          </button>
+          {data?.length == 1 && (
+            <button
+              type="button"
+              className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
+              onClick={() => {
+                document.getElementById("input").click();
+              }}
+            >
+              Import CSV
+            </button>
+          )}
           <input
             type="file"
             id="input"
@@ -210,7 +212,7 @@ const AddEmployee = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    navigate('/employees', "Employees");
+                    navigate("/employees", "Employees");
                   }}
                   className="w-full lg:w-[208px] h-[52px] bg-[#02203A] text-[#199BD1] rounded-[12px] flex items-center justify-center
                    text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"

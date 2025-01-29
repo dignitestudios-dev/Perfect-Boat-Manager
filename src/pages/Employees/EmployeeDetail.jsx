@@ -33,14 +33,14 @@ const EmployeeDetail = () => {
   const [updatedTasks, setUpdatedTasks] = useState([]);
   const [submitLoading, setSubmitLoading] = useState(false);
 
-  const [isEditing, setIsEditing] = useState(false);
+  const location = useLocation();
+  const editBtnshow = location?.state;
+  const [isEditing, setIsEditing] = useState(editBtnshow ? true : false);
+  console.log("🚀 ~ EmployeeDetail ~ isEditing:", isEditing);
   const [isLoading, setIsLoading] = useState(false);
 
-  const location = useLocation();
   // console.log(location, "location");
 
-  const editBtnshow = location?.state;
-  console.log(editBtnshow, "editBtnshow");
   const getEmployeeData = async () => {
     setIsLoading(true);
     try {
@@ -89,7 +89,6 @@ const EmployeeDetail = () => {
       }
     } catch (error) {
       ErrorToast(error?.response?.data?.message);
-      console.error("Error updating employee:", error);
     } finally {
       setSubmitLoading(false);
     }
@@ -115,9 +114,7 @@ const EmployeeDetail = () => {
                   </h3>
                 </div>
                 <div className="w-auto flex justify-end items-center gap-2">
-                  {editBtnshow === true ? (
-                    ""
-                  ) : isEditing ? (
+                  {isEditing ? (
                     <div></div>
                   ) : (
                     <button
@@ -144,7 +141,7 @@ const EmployeeDetail = () => {
                   <div className="w-full h-auto flex flex-col justify-start items-start gap-6 ">
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                        isDisabled={editBtnshow === true ? isEditing : !isEditing}
+                        isDisabled={!isEditing}
                         label="Name"
                         type="text"
                         placeholder="Enter Name"
@@ -164,7 +161,7 @@ const EmployeeDetail = () => {
                         }}
                       />
                       <AddFleetInput
-                       isDisabled={true}
+                        isDisabled={true}
                         label="Email"
                         type="email"
                         placeholder="Enter Email"
@@ -180,8 +177,7 @@ const EmployeeDetail = () => {
                     </div>
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                                           isDisabled={editBtnshow === true ? isEditing : !isEditing}
-
+                        isDisabled={!isEditing}
                         label="Job Title"
                         type="text"
                         placeholder="Enter Job Title"
@@ -191,8 +187,7 @@ const EmployeeDetail = () => {
                         error={errors.jobtitle}
                       />
                       <AddFleetInput
-                                            isDisabled={editBtnshow === true ? isEditing : !isEditing}
-
+                        isDisabled={!isEditing}
                         label="Location"
                         type="text"
                         placeholder="Enter Location"
@@ -209,8 +204,7 @@ const EmployeeDetail = () => {
                     </div>
                     <div className="w-full grid grid-cols-2 gap-12">
                       <AddFleetInput
-                                             isDisabled={editBtnshow === true ? isEditing : !isEditing}
-
+                        isDisabled={!isEditing}
                         label="Phone Number"
                         type="text"
                         placeholder="Enter Phone Number"
@@ -250,7 +244,7 @@ const EmployeeDetail = () => {
             isEdit={isEditing}
           />
           <div className="w-full flex justify-end mt-10 items-center gap-4">
-         
+            {isEditing ? (
               <>
                 <button
                   type="button"
@@ -274,9 +268,16 @@ const EmployeeDetail = () => {
                   </div>
                 </button>
               </>
-          
-           
-          
+            ) : (
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+                className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
+             justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
+              >
+                Back
+              </button>
+            )}
           </div>
         </form>
       )}

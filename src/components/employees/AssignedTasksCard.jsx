@@ -44,7 +44,6 @@ const AssignedTasksCard = ({
 
   const [dueDate, setDueDate] = useState({});
   const [inputError, setInputError] = useState({});
-  console.log(dueDate, "due date");
 
   const toggleTaskTypeDropdown = () => {
     setTaskTypeDropdownOpen(!taskTypeDropdownOpen);
@@ -59,7 +58,7 @@ const AssignedTasksCard = ({
     const dueDateMatch =
       !dueDate.calendar ||
       getUnixDate(item?.dueDate) ===
-        moment(dueDate.calendar).format("DD-MM-YYYY"); 
+        moment(dueDate.calendar).format("DD-MM-YYYY");
 
     console.log(
       dueDateMatch,

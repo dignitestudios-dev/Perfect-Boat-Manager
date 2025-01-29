@@ -8,6 +8,11 @@ const AddEmployeeCsv = ({ data, setData }) => {
   const navigate = useNavigate();
   const [submitLoading, setSubmitLoading] = useState(false);
 
+  const [formError, setFormError] = useState({
+    index: 0,
+    message: null,
+  });
+
   const handleChange = (index, field, value) => {
     const newData = [...data];
     newData[index][field] = value;
@@ -36,11 +41,18 @@ const AddEmployeeCsv = ({ data, setData }) => {
       }
     } catch (error) {
       console.error("Error adding employee:", error);
-      if (error?.response?.data?.index > 0) {
-        const index = error?.response?.data?.index;
-        handleRemoveBeforeIndex(index);
-      }
       ErrorToast(error?.response?.data?.message);
+
+      const index = error?.response?.data?.index;
+      const message = error?.response?.data?.message;
+      setFormError({
+        index: index,
+        message: message,
+      });
+      // if (error?.response?.data?.index > 0) {
+      //   const index = error?.response?.data?.index;
+      //   handleRemoveBeforeIndex(index);
+      // }
     } finally {
       setSubmitLoading(false);
     }
@@ -52,8 +64,17 @@ const AddEmployeeCsv = ({ data, setData }) => {
           return (
             <div
               key={index}
-              className="w-full flex flex-col justify-start items-start gap-6"
+              className={`w-full flex flex-col justify-start items-start gap-6 ${
+                formError.index == index &&
+                formError.message &&
+                "border border-red-600 p-2 rounded-xl"
+              }`}
             >
+              {formError.index == index && formError.message && (
+                <span className="text-red-600 text-sm font-medium">
+                  {formError?.message}
+                </span>
+              )}
               <div className="w-full h-auto flex flex-col justify-start items-start gap-4 ">
                 <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-12">
                   <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
