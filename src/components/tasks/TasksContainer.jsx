@@ -78,10 +78,11 @@ const TasksContainer = () => {
   }, [filter, sortFilter, currentPage, dueDate]);
 
   const filteredData = taskData?.filter((item) =>
-    item?.boat?.name?.toLowerCase()?.replaceAll(' ','')?.includes(search?.toLowerCase()?.replaceAll(' ',''))
- 
+    item?.boat?.name
+      ?.toLowerCase()
+      ?.replaceAll(" ", "")
+      ?.includes(search?.toLowerCase()?.replaceAll(" ", ""))
   );
- 
 
   return (
     <div className="h-full  w-full  flex flex-col gap-6 justify-start items-center">
