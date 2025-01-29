@@ -105,7 +105,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
         // Check if the data contains the download link
         if (result?.success && result?.data) {
           const downloadUrl = result?.data;
-
+console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
           // Create an anchor element and trigger a download
           const link = document.createElement("a");
           link.href = downloadUrl;
@@ -191,7 +191,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
 
       <div className="w-full overflow-x-auto lg:overflow-visible">
         <div className="min-w-[768px] flex flex-col gap-1 justify-start items-start">
-          <div className="w-full grid grid-cols-[6fr_6fr_6fr_1fr_0fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+          <div className="w-full grid grid-cols-[6fr_6fr_6fr_2.5fr_0fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
             <span className="w-full flex justify-start items-center">
               Employee Name
             </span>
@@ -227,7 +227,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                   key={index}
                   className={` ${
                     employee?.isActive === true ? "cursor-pointer" : ""
-                  } w-full h-8 grid grid-cols-[5fr_5fr_5fr_1.1fr_1fr] border-b border-white/10  text-[11px]
+                  } w-full h-8 grid grid-cols-[5fr_5fr_5fr_2.1fr_1fr] border-b border-white/10  text-[11px]
           font-medium leading-[14.85px] text-white justify-start items-center`}
                   onClick={() => {
                     if (employee?.isActive) {
@@ -244,7 +244,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
                   <span className="w-full flex justify-start items-center">
                     {employee?.jobtitle}
                   </span>
-                  <span className="w-full flex justify-start items-center">
+                  <span className="w-full  flex justify-start items-center">
                     {employee?.location || "---"}
                   </span>
                   <div className="w-full flex  text-[15px] text-white/40 justify-start items-center gap-2 pl-[170px] pr-[55px]">

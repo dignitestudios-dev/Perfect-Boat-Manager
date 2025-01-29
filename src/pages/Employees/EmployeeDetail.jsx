@@ -164,8 +164,7 @@ const EmployeeDetail = () => {
                         }}
                       />
                       <AddFleetInput
-                                             isDisabled={editBtnshow === true ? isEditing : !isEditing}
-
+                       isDisabled={true}
                         label="Email"
                         type="email"
                         placeholder="Enter Email"
@@ -251,7 +250,7 @@ const EmployeeDetail = () => {
             isEdit={isEditing}
           />
           <div className="w-full flex justify-end mt-10 items-center gap-4">
-            {isEditing ? (
+         
               <>
                 <button
                   type="button"
@@ -275,16 +274,9 @@ const EmployeeDetail = () => {
                   </div>
                 </button>
               </>
-            ) : (
-              <button
-                type="button"
-                onClick={() => navigate(-1)}
-                className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
-             justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
-              >
-                Back
-              </button>
-            )}
+          
+           
+          
           </div>
         </form>
       )}
