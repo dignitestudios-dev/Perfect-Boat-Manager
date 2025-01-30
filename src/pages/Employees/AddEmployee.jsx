@@ -93,25 +93,40 @@ const AddEmployee = () => {
               Add Employee
             </h1>
           </div>
-          {data?.length == 1 && (
-            <button
-              type="button"
-              className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
-              onClick={() => {
-                document.getElementById("input").click();
-              }}
+          <div className="w-72 flex justify-end gap-2 items-center">
+            <a
+              href="https://api.theperfectboat.com/public/Image/Employee_CSV_Template.csv"
+              download
             >
-              Import CSV
-            </button>
-          )}
-          <input
-            type="file"
-            id="input"
-            className="hidden"
-            accept=".csv"
-            onChange={handleFileChange}
-          />
+              <button
+                disabled={addLoading}
+                type="button"
+                className="bg-[#1A293D] text-[#36B8F3] py-2 px-4 rounded-xl"
+              >
+                Download Template
+              </button>
+            </a>
+            {data?.length == 1 && (
+              <button
+                type="button"
+                className="bg-[#199BD1] w-[107px] h-[35px] rounded-xl text-white flex items-center justify-center text-sm font-medium leading-5"
+                onClick={() => {
+                  document.getElementById("input").click();
+                }}
+              >
+                Import CSV
+              </button>
+            )}
+            <input
+              type="file"
+              id="input"
+              className="hidden"
+              accept=".csv"
+              onChange={handleFileChange}
+            />
+          </div>
         </div>
+
         {csvUploaded ? (
           <AddEmployeeCsv data={data} setData={setData} />
         ) : (
