@@ -17,6 +17,10 @@ const AddEmployeeCsv = ({ data, setData }) => {
     const newData = [...data];
     newData[index][field] = value;
     setData(newData);
+    setFormError({
+      index: 0,
+      message: null,
+    });
   };
 
   const handleRemoveBeforeIndex = (index) => {
