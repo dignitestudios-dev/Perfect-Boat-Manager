@@ -195,6 +195,7 @@ const AddEmployeeCsv = ({ data, setData }) => {
                           +1
                         </span>
                         <input
+                          maxLength="10"
                           type="text"
                           value={form?.phone}
                           onChange={(e) =>
