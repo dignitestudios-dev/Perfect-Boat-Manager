@@ -95,7 +95,7 @@ const AddEmployee = () => {
           </div>
           <div className="w-72 flex justify-end gap-2 items-center">
             <a
-              href="https://api.theperfectboat.com/public/Image/Employee_CSV_Template.csv"
+              href="https://api.theperfectboat.com/public/Image/Employee_CSV_Template-ManagerPanel.csv"
               download
             >
               <button

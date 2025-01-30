@@ -68,11 +68,12 @@ const Notifications = () => {
     setDeleteLoading(true);
     try {
       const deleteResponse = await axios.delete("/manager/notification");
-      console.log("🚀 ~ deleteAll ~ deleteResponse:", deleteResponse);
 
       // Ensure response status is 200, and handle success accordingly
       if (deleteResponse?.status === 200) {
+        getNotifications();
         setNotificationUpdate((prev) => !prev);
+
         SuccessToast("Notifications cleared successfully.");
       } else {
         // Handle cases where the status is not 200 (even if the request doesn't throw an error)
@@ -168,7 +169,8 @@ const Notifications = () => {
             onClick={() => {
               filteredNotifications.length > 0 && deleteAll();
             }}
-            className={`w-[107px] h-[32px] mb-2 text-[11px] flex items-center justify-center gap-1 font-bold rounded-[10px] text-white bg-[#199BD1]`}
+            className={`w-[107px] h-[32px] mb-2 text-[11px] flex items-center justify-center gap-1 font-bold rounded-[10px]
+               text-white bg-[#199BD1]`}
           >
             Clear All
             {DeleteLoading && (
