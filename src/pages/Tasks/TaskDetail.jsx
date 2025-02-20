@@ -37,23 +37,6 @@ const TaskDetail = () => {
     }
   };
 
-  const sideColor = (status) => {
-    switch (status) {
-      case "newtask":
-        return "bg-[#FF69B41F]";
-      case "overdue":
-        return "bg-[#FF3B30]";
-      case "inprogress":
-        return "bg-[#36B8F3]";
-      case "completed":
-        return "bg-[#1FBA46]";
-      case "upcomingtask":
-        return "bg-[#FF007F]";
-      default:
-        return "bg-[#FFCC00]";
-    }
-  };
-
   const { taskDropDown } = useContext(GlobalContext);
   const getFormattedStatus = (status) => {
     return STATUS_ENUM[status] || status;
@@ -156,7 +139,7 @@ const TaskDetail = () => {
       setUpdateLoad(false);
     }
   };
-  const [hide, sethide] = useState(false);
+
   const [customTypeText, setCustomTypeText] = useState("");
 
   const location = useLocation();
@@ -174,8 +157,7 @@ const TaskDetail = () => {
             <div className="w-full flex justify-between items-center h-12">
               <div className="w-auto flex justify-start items-center gap-2">
                 <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-                {isEdit || showButton ? "Edit Task" : "Task"}
-
+                  {isEdit || showButton ? "Edit Task" : "Task"}
                 </h3>
                 <div
                   className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
@@ -263,8 +245,7 @@ const TaskDetail = () => {
               <div className="w-full grid grid-cols-1 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                   <label className="text-[16px] font-medium leading-[21.6px]">
-                    {!isEdit?"Notes":"Add Note"}
-                    
+                    {!isEdit ? "Notes" : "Add Note"}
                   </label>
                   <textarea
                     disabled={showButton === true ? isEdit : !isEdit}
@@ -273,7 +254,8 @@ const TaskDetail = () => {
                       setNoteText(e.target.value);
                       setInputError({});
                     }}
-                    className="w-full h-[315px] disabled:text-white/50 resize-none bg-[#1A293D] outline-none p-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
+                    className="w-full h-[315px] disabled:text-white resize-none bg-[#1A293D] 
+                    outline-none p-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
                   ></textarea>
                 </div>
               </div>
@@ -289,7 +271,6 @@ const TaskDetail = () => {
                       Due Date
                     </span>
                     <span className="text-[12px] font-normal pt-1">
-             
                       {dueDate?.normal
                         ? moment(dueDate?.normal).format("MM-DD-YYYY")
                         : "Select Due Date"}

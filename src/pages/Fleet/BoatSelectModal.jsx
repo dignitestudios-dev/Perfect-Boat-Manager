@@ -156,7 +156,7 @@ const BoatSelectModal = ({
                 managerBoats={boats?.map((item) => item.boatType)}
               />
               <span className="w-full flex justify-start items-center">
-                Name
+                Boat Name/Hull Number
               </span>
               <span className="w-full flex justify-start items-center">
                 Model/Make/Size

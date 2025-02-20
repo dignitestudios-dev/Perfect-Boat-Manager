@@ -34,7 +34,7 @@ const DeletedModal = ({ isOpen, onClose, onConfirm, deleteLoad }) => {
             Are you sure?
           </h2>
           <p className="mb-4 text-white">
-            Do you really want to delete this item? This action cannot be
+            Do you really want to delete this task? This action cannot be
             undone.
           </p>
           <div className="flex justify-center space-x-4">

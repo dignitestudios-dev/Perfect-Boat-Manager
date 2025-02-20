@@ -144,14 +144,14 @@ const AddEmployee = () => {
                     <AddFleetInput
                       label={"Name"}
                       register={register("name", {
-                        required: "Please enter your name.",
+                        required: "Please enter employee name.",
                         pattern: {
                           value: /^[A-Za-z\s]+$/,
                           message: "Please enter a valid name.",
                         },
                       })}
                       text={"Name"}
-                      placeholder={"Enter your name here"}
+                      placeholder={"Enter employee name here"}
                       type={"text"}
                       error={errors.fullName}
                       onInput={(e) => {

@@ -112,7 +112,8 @@ const VerifyOtp = () => {
   const handlePaste = (e) => {
     const pastedData = e.clipboardData.getData("Text");
     if (pastedData.length === otp.length) {
-      setOtp(pastedData.split("")); // Populate OTP array with the pasted data
+      setOtp(pastedData.split(""));
+      inputs.current[5].focus();
     }
     e.preventDefault(); // Prevent the default paste behavior
   };

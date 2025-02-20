@@ -89,7 +89,7 @@ const TasksCard = ({ getTasks, data }) => {
           });
         }}
         // onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
-        className="w-full h-[196px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
+        className="w-full h-[218px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
         <div
           className={`w-[6px] h-full rounded-l-[6px] ${sideColor(
@@ -121,6 +121,10 @@ const TasksCard = ({ getTasks, data }) => {
                   : data?.taskType}
               </span>
             </span>
+            <span className="text-[15px] font-normal leading-[21.6px] text-white/50">
+              Location:{" "}
+              <span className="font-medium">{data?.boat?.location}</span>
+            </span>
             <span className="text-[16px] font-normal leading-[21.6px] text-white/50">
               Created By:{" "}
               <span className="font-medium">{data?.assignBy?.name}</span>
@@ -143,12 +147,12 @@ const TasksCard = ({ getTasks, data }) => {
               </button>
               {data?.reoccuringDays ? (
                 <button className="w-auto outline-none focus-within:bg-[#fff] focus-within:text-[#001229] min-w-12 h-[27px] rounded-full px-2 flex items-center justify-center text-[11px] font-medium leading-[14.85px] bg-[#9CA2AB]/[0.12] text-[#fff]/[0.5]">
-                  Recurring {data?.reoccuringDays}{" "}
-                  days
+                  Recurring {data?.reoccuringDays} days
                 </button>
-              ):null}
+              ) : null}
             </div>
             <button
+              className="hover:bg-[#fff]/[0.1] rounded-full px-2 py-2"
               onClick={(e) => {
                 e.stopPropagation(); // Prevent triggering other click events
                 setDeleteModalOpen(true);

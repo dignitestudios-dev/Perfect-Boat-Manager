@@ -12,7 +12,7 @@ const TaskTypeInputField = ({
   setCustomTypeText,
   customTypeText,
   setDisplaySelectedTask,
-  showButton
+  showButton,
 }) => {
   const taskTypeDropdownRef = useRef();
   const [isTaskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
@@ -53,8 +53,9 @@ const TaskTypeInputField = ({
         } bg-[#1A293D] outline-none flex justify-between items-center px-3 focus:border-[1px]
                    focus:border-[#55C9FA] relative`}
       >
-        <span className="text-gray-400">
-          {" "}
+        <span
+          className={`${selectedTaskType ? "text-white" : "text-gray-400"}`}
+        >
           {selectedTaskType?.replace(/([A-Z])/g, " $1")?.trim() ||
             "Select Task Type"}{" "}
         </span>
@@ -68,15 +69,15 @@ const TaskTypeInputField = ({
           ref={taskTypeDropdownRef}
           className={`${
             isTaskTypeDropdownOpen ? "flex" : "hidden"
-          } flex-col justify-start items-start gap-3 transition-all duration-500 py-3 absolute -bottom-40 shadow-xl
-                     left-0 w-full h-40 max-h-40 bg-[#1A293D] rounded-b-2xl`}
+          } flex-col justify-start items-start gap-3 transition-all duration-500 py-3 absolute -bottom-56 shadow-xl
+                     left-0 w-full h-56 max-h-56 bg-[#1A293D] rounded-b-2xl`}
         >
-          <div className="w-full h-auto overflow-y-auto">
+          <div className="w-full h-full overflow-y-auto flex flex-col justify-start items-start gap-2">
             {taskDropDown?.map((item, index) => (
               <button
                 key={index}
                 onClick={() => handleTaskTypeSelection(item.taskType)}
-                className="text-gray-300 w-full h-8 px-5 flex justify-start items-center hover:bg-[#000]/10"
+                className="text-gray-300 w-full h-8 px-5 py-2 flex justify-start items-center hover:bg-[#000]/10"
               >
                 {item?.taskType?.replace(/([A-Z])/g, " $1")?.trim()}
               </button>

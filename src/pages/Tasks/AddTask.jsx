@@ -132,6 +132,30 @@ const AddTask = () => {
           <div className="w-full h-auto flex flex-col justify-start items-start gap-4">
             <div className="w-full grid grid-cols-2 gap-5 lg:gap-32">
               <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+                <label className="text-[16px] font-medium leading-[21.6px]">
+                  Assign Employee
+                </label>
+                <button
+                  onClick={() => setIsEmployeeModalOpen(true)} // Open the Employee Modal
+                  className="w-full h-[52px] bg-[#1A293D] disabled:text-white/50 outline-none px-3 
+                  focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
+                >
+                  <span
+                    className={`w-full ${
+                      passSelectedEmployee?.name
+                        ? "text-white"
+                        : "text-gray-400"
+                    }  flex justify-start`}
+                  >
+                    {passSelectedEmployee?.name || "Assign Employee"}
+                  </span>
+                </button>
+                {inputError.employee && (
+                  <p className="text-red-500">{inputError.employee}</p>
+                )}
+              </div>
+
+              <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
                 <div className="w-full justify-between flex">
                   <span className="text-[16px] font-medium leading-[21.6px]">
                     Select Boat
@@ -159,23 +183,6 @@ const AddTask = () => {
                 </button>
                 {inputError.boat && (
                   <p className="text-red-500">{inputError.boat}</p>
-                )}
-              </div>
-
-              <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-                <label className="text-[16px] font-medium leading-[21.6px]">
-                  Assign Employee
-                </label>
-                <button
-                  onClick={() => setIsEmployeeModalOpen(true)} // Open the Employee Modal
-                  className="w-full h-[52px] bg-[#1A293D] disabled:text-white/50 outline-none px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
-                >
-                  <span className="w-full text-gray-400 flex justify-start">
-                    {passSelectedEmployee?.name || "Assign Employee"}
-                  </span>
-                </button>
-                {inputError.employee && (
-                  <p className="text-red-500">{inputError.employee}</p>
                 )}
               </div>
             </div>
@@ -206,9 +213,9 @@ const AddTask = () => {
                   customTypeText={customTypeText}
                   setCustomTypeText={setCustomTypeText}
                 />
-                {inputError.dueDate && (
+                {/* {inputError.dueDate && (
                   <p className="text-red-500">{inputError.dueDate}</p>
-                )}
+                )} */}
               </div>
             </div>
             <div className="w-full grid grid-cols-1 gap-12 mt-4">
@@ -218,9 +225,13 @@ const AddTask = () => {
                 </label>
                 <textarea
                   onChange={(e) => {
-                    setNoteText(e.target.value);
+                    const value = e.target.value;
+                    const capitalizedValue =
+                      value.charAt(0).toUpperCase() + value.slice(1);
+                    setNoteText(capitalizedValue);
                     setInputError({});
                   }}
+                  value={noteText}
                   type="text"
                   className="w-full h-[315px] resize-none bg-[#1A293D] outline-none p-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
                 ></textarea>

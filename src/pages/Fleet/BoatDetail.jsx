@@ -55,7 +55,7 @@ const BoatDetail = () => {
   useEffect(() => {
     getBoats();
   }, []);
-  
+
   return (
     <div className="h-full overflow-y-auto w-full p-2 lg:p-6 flex flex-col gap-6 justify-start items-start">
       {loadingBoats ? (
@@ -90,8 +90,8 @@ const BoatDetail = () => {
                   <div className="w-full h-auto flex flex-col justify-start items-start gap-8">
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-12">
                       <AddFleetInput
-                        label="Name"
-                        placeholder="Enter Name"
+                        label="Boat Name / Hull Number"
+                        placeholder="Enter Boat Name/Hull Number"
                         type="text"
                         isDisabled={true}
                         register={register(`name`, {
@@ -106,7 +106,7 @@ const BoatDetail = () => {
                         </label>
                         <div
                           className="group transition-all duration-500 w-full h-[52px] bg-[#1A293D] outline-none 
-                    flex justify-between items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl  relative"
+                    flex justify-between items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl relative"
                         >
                           {/* hover:rounded-b-none hover:rounded-t-xl */}
                           <span className="text-white">

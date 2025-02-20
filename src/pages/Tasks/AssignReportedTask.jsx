@@ -133,7 +133,7 @@ const AssignReportedTask = () => {
             <div className="w-full h-auto flex flex-col justify-start items-start gap-4 ">
               <div className="w-full grid grid-cols-2 gap-12">
                 <AddFleetInput
-                  label={"Name"}
+                  label={"Boat Name / Hull Number"}
                   isDisabled={true}
                   register={register("name", {
                     required: "Please enter your name",

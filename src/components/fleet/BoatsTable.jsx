@@ -89,7 +89,9 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             setBoatType={setBoatType}
             managerBoats={data?.map((item) => item.boatType)}
           />
-          <span className="w-full flex justify-start items-center">Name</span>
+          <span className="w-full flex justify-start items-center">
+            Boat Name/Hull Number
+          </span>
           <span className="w-full flex justify-start items-center">
             Year/Make/Size
           </span>
