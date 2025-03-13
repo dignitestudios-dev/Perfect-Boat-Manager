@@ -83,7 +83,7 @@ const AssignedModal = ({
               onClick={() => setIsOpen(false)}
               className="text-lg font-bold"
             >
-              ✕ 
+              ✕
             </button>
           </div>
           <div className="flex justify-between items-center mb-4">
@@ -144,7 +144,8 @@ const AssignedModal = ({
                 <>
                   {filteredData?.map((task, index) => (
                     <div
-                      className={`w-full h-10 grid ${
+                      key={index}
+                      className={`w-full h-auto grid ${
                         isEdit ? "grid-cols-6" : "grid-cols-5"
                       } border-b border-[#fff]/[0.14] py-1 
                     text-[13px] font-medium leading-[14.85px] text-white justify-start items-center`}

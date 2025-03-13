@@ -65,7 +65,7 @@ const TasksCard = ({ getTasks, data }) => {
       setDeleteModalOpen(false);
       getTasks();
     } catch (error) {
-      ErrorToast(err?.response?.data?.message);
+      ErrorToast(error?.response?.data?.message);
       console.error("Error deleting task:", error);
     } finally {
       setDeleteLoad(false);
@@ -89,7 +89,7 @@ const TasksCard = ({ getTasks, data }) => {
           });
         }}
         // onClick={() => navigate(`/tasks/${data?._id}`, "All Tasks")}
-        className="w-full h-[218px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
+        className="w-full h-[238px] flex justify-start items-start rounded-l-[6px] rounded-r-[16px] bg-[#1A293D]"
       >
         <div
           className={`w-[6px] h-full rounded-l-[6px] ${sideColor(
@@ -99,9 +99,9 @@ const TasksCard = ({ getTasks, data }) => {
         <div className="w-[calc(100%-6px)] h-full py-4 px-6 flex flex-col gap-2 justify-start items-start relative">
           <div className="w-full h-auto flex justify-between items-center">
             <h3 className="text-[20px] text-nowrap font-bold leading-[27px]">
-              {data?.boat?.name?.length > 15
-                ? data?.boat?.name?.slice(0, 15) + "..."
-                : data?.boat?.name}
+              {data?.taskType?.length > 18
+                ? data?.taskType?.slice(0, 18) + "..."
+                : data?.taskType}
             </h3>
             <div
               className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
@@ -114,16 +114,20 @@ const TasksCard = ({ getTasks, data }) => {
           </div>
           <div className="w-auto flex flex-col justify-start items-start gap-1">
             <span className="text-[16px] font-normal leading-[21.6px] text-white/50">
-              Task Type:{" "}
+              Boat Type:{" "}
               <span className="capitalize font-medium">
-                {data?.taskType?.length > 25
-                  ? data?.taskType?.slice(0, 28) + "..."
-                  : data?.taskType}
+                {data?.boat?.name?.length > 25
+                  ? data?.boat?.name?.slice(0, 28) + "..."
+                  : data?.boat?.name}
               </span>
             </span>
-            <span className="text-[15px] font-normal leading-[21.6px] text-white/50">
-              Location:{" "}
-              <span className="font-medium">{data?.boat?.location}</span>
+            <span className="text-[15px] font-normal text-start leading-[21.6px] text-white/50 ">
+              Location/Customer Name:{" "}
+              <span className="font-medium">
+                {data?.boat?.location?.length > 55
+                  ? data?.boat?.location?.slice(0, 55) + "..."
+                  : data?.boat?.location}
+              </span>
             </span>
             <span className="text-[16px] font-normal leading-[21.6px] text-white/50">
               Created By:{" "}

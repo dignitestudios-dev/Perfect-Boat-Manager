@@ -105,7 +105,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
         // Check if the data contains the download link
         if (result?.success && result?.data) {
           const downloadUrl = result?.data;
-console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
+          console.log(downloadUrl, "downloadUrldownloadUrldownloadUrl");
           // Create an anchor element and trigger a download
           const link = document.createElement("a");
           link.href = downloadUrl;
@@ -191,7 +191,7 @@ console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
 
       <div className="w-full overflow-x-auto lg:overflow-visible">
         <div className="min-w-[768px] flex flex-col gap-1 justify-start items-start">
-          <div className="w-full grid grid-cols-[6fr_6fr_6fr_2.5fr_0fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+          <div className="w-full grid grid-cols-[5fr_5fr_5fr_5.1fr_1fr] border-b border-white/10 h-6 text-[11px] font-medium leading-[14.85px] text-white/50 justify-start items-start">
             <span className="w-full flex justify-start items-center">
               Employee Name
             </span>
@@ -212,6 +212,7 @@ console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
               locationType={locationType}
               setLocationType={setLocationType}
               employeesLocTitles={data?.map((item) => item.location)}
+              title="Location "
             />
             <span className="w-full flex justify-start items-center pl-[170px] pr-[60px]">
               Action
@@ -227,7 +228,7 @@ console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
                   key={index}
                   className={` ${
                     employee?.isActive === true ? "cursor-pointer" : ""
-                  } w-full h-8 grid grid-cols-[5fr_5fr_5fr_2.1fr_1fr] border-b border-white/10  text-[11px]
+                  } w-full h-auto grid grid-cols-[5fr_5fr_5fr_5.1fr_1fr] border-b border-white/10  text-[11px]
           font-medium leading-[14.85px] text-white justify-start items-center`}
                   onClick={() => {
                     if (employee?.isActive) {
@@ -235,7 +236,7 @@ console.log(downloadUrl,"downloadUrldownloadUrldownloadUrl")
                     }
                   }}
                 >
-                  <span className="w-full flex justify-start items-center">
+                  <span className="h-10  w-full flex justify-start items-center">
                     {employee?.name}
                   </span>
                   <span className="w-full flex justify-start items-center">

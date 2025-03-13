@@ -74,7 +74,6 @@ const AssignReportedTask = () => {
     if (day === "custom") {
       setRecurringDays(day);
       setSelectedDay(text);
-      setCustomDays(true);
       setRecurringDropdown(true);
     } else {
       setRecurringDays(day);
@@ -158,7 +157,7 @@ const AssignReportedTask = () => {
                   })}
                 />
                 <AddFleetInput
-                  label={"Location"}
+                  label={"Location / Customer Name"}
                   register={register("location", {
                     required: "Please enter boat type",
                   })}

@@ -8,6 +8,7 @@ import AssignModalLoader from "../global/Loaders/AssignModalLoader";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 import JobType from "../global/headerDropDowns/JobType";
 import LocationType from "../global/headerDropDowns/LocationType";
+import { ErrorToast } from "../global/Toaster";
 
 const DeactivatedEmployeesTable = () => {
   const { navigate } = useContext(GlobalContext);
@@ -79,7 +80,6 @@ const DeactivatedEmployeesTable = () => {
   }, []);
 
   const filteredData = usersData?.filter((item) => {
-    
     const matchesSearch = searchTerm
       ? item?.name?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
         item?.email?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
@@ -136,6 +136,7 @@ const DeactivatedEmployeesTable = () => {
             locationType={locationType}
             setLocationType={setLocationType}
             employeesLocTitles={usersData?.map((item) => item.location)}
+            title="Location"
           />
           <span className="w-full flex justify-center items-center">
             Action
@@ -152,7 +153,7 @@ const DeactivatedEmployeesTable = () => {
                 {filteredData?.map((user, index) => (
                   <div
                     key={index}
-                    className="w-full h-10 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
+                    className="w-full h-auto grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
                      leading-[14.85px] text-white justify-start items-center"
                   >
                     <span className="w-full flex justify-start items-center">

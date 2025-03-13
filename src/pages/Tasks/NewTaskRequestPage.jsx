@@ -207,14 +207,15 @@ const NewTaskRequestPage = () => {
                       <span className="text-gray-400">{task?.task?.task}</span>
                     </div>
                   </div>
-                  <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
-                    <label className="text-[16px] font-medium leading-[21.6px]">
-                      Location
+                  <div className="w-full h-auto flex flex-col gap-1 justify-center items-start">
+                    <label className="text-[16px] font-medium">
+                      {"Location / Customer Name"}
                     </label>
-                    <div className="group transition-all duration-500 w-full h-[52px] bg-[#1A293D] outline-none flex justify-between items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl  relative">
-                      <span className="text-gray-400">
-                        {task?.employee?.location || "---"}
-                      </span>
+                    <div
+                      className="w-full max-h-[200px] flex items-center py-4 px-2.5 resize-none bg-[#1A293D] outline-none 
+               focus:border-[1px] focus:border-[#55C9FA] rounded-xl text-left  "
+                    >
+                      {task?.employee?.location || "---"}
                     </div>
                   </div>
                 </div>

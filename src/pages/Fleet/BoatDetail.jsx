@@ -30,6 +30,7 @@ const BoatDetail = () => {
   } = useForm();
 
   const [isAssignedModalOpen, setIsAssignedModalOpen] = useState(false);
+  const [newLocation, setNewLocation] = useState(false);
 
   const [boatsData, setBoatsData] = useState([]);
   const [loadingBoats, setLoadingBoats] = useState(false);
@@ -45,6 +46,7 @@ const BoatDetail = () => {
       }/${data?.data?.boat?.size || ""}`;
       setValue("combined", combinedValue);
       setValue("location", data?.data?.boat?.location);
+      setNewLocation(data?.data?.boat?.location);
     } catch (err) {
       console.log("🚀 ~ getBoats ~ err:", err);
     } finally {
@@ -123,13 +125,18 @@ const BoatDetail = () => {
                         })}
                         isDisabled={true}
                       />
-                      <AddFleetInput
-                        label={"Location"}
-                        register={register(`location`, {
-                          required: "Location is required",
-                        })}
-                        isDisabled={true}
-                      />
+
+                      <div className="w-full h-auto flex flex-col gap-1 justify-center items-start">
+                        <label className="text-[16px] font-medium">
+                          {"Location / Customer Name"}
+                        </label>
+                        <div
+                          className="w-full max-h-[200px] flex items-center py-3.5 px-2.5 resize-none bg-[#1A293D] outline-none 
+               focus:border-[1px] focus:border-[#55C9FA] rounded-xl text-left  "
+                        >
+                          {newLocation}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -149,7 +156,10 @@ const BoatDetail = () => {
                     {boatsData?.boat?.images?.length > 0 && (
                       <>
                         {boatsData?.boat?.images?.map((item, index) => (
-                          <div className="w-full md:w-[175px] h-[147px] rounded-xl bg-[#1A293D] text-3xl flex items-center justify-center">
+                          <div
+                            key={index}
+                            className="w-full md:w-[175px] h-[147px] rounded-xl bg-[#1A293D] text-3xl flex items-center justify-center"
+                          >
                             <img
                               src={item || AuthMockup}
                               alt="boatimage"
@@ -180,7 +190,7 @@ const BoatDetail = () => {
       {/* <DateModal isOpen={isDateModalOpen} setIsOpen={setIsDateModalOpen} /> */}
       {isAssignedModalOpen && (
         <AssignedModal
-          handleViewAllClick={handleViewAllClick} // Pass the function if needed in the modal
+          // handleViewAllClick={handleViewAllClick} // Pass the function if needed in the modal
           setIsOpen={setIsAssignedModalOpen}
         />
       )}

@@ -8,6 +8,7 @@ const LocationType = ({
   setLocationType,
   locationType,
   employeesLocTitles,
+  title,
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
@@ -51,7 +52,7 @@ const LocationType = ({
       className="w-full flex justify-start items-center relative"
       ref={dropdownRef}
     >
-      Location
+      {title}
       <FaCaretDown
         className={`ml-2 cursor-pointer ${
           locationDropdownOpen ? "rotate-180" : "rotate-0"

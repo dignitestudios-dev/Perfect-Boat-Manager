@@ -21,7 +21,7 @@ const AssignedEmployeesList = ({
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           Assigned Employees
         </h3>
-       
+
         {(showButton === true && !isEdit) ||
         (showButton === false && isEdit) ? (
           <button
@@ -34,7 +34,7 @@ const AssignedEmployeesList = ({
       </div>
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">
-        <div className="w-full h-6 grid grid-cols-5 text-[13px] font-medium border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
+        <div className="w-full h-auto grid grid-cols-5 text-[13px] font-medium border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
           <span className="w-full flex justify-start items-center">
             Employee Name
           </span>
@@ -52,9 +52,9 @@ const AssignedEmployeesList = ({
         {taskDetail?.assignTo?.map((employee, index) => (
           <span
             key={index}
-            className="w-full h-10 grid grid-cols-5 py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
+            className="w-full h-auto grid grid-cols-5 py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center"
           >
-            <span className="w-[160px] overflow-hidden flex justify-start items-center">
+            <span className="w-[160px] h-10 overflow-hidden flex justify-start items-center">
               {passSelectedEmployee?.name || employee?.name}
             </span>
             <span className="w-[180px] overflow-hidden flex justify-start items-center">

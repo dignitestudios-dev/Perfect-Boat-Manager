@@ -196,6 +196,7 @@ const AddTaskBoatModal = ({
                 locationType={locationType}
                 setLocationType={setLocationType}
                 employeesLocTitles={boats?.map((item) => item?.location)}
+                title="Location / Customer Name"
               />
             </div>
 

@@ -77,7 +77,7 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
       setDeleteModalOpen(false);
       getBoats();
     } catch (error) {
-      ErrorToast(err?.response?.data?.message);
+      ErrorToast(error?.response?.data?.message);
       console.error("Error deleting task:", error);
     } finally {
       setDeleteLoad(false);
@@ -133,61 +133,72 @@ const AssignedBoatTasks = ({ tasks, getBoats }) => {
             {filteredData?.slice(0, 4)?.map((task, index) => (
               <button
                 key={index}
-                className="w-full h-10 grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px]
+                className="w-full h-auto grid grid-cols-6 border-b border-[#fff]/[0.14] py-1 text-[13px]
              font-medium leading-[14.85px] text-white justify-start items-center cursor-pointer"
-               
               >
-                <span className="w-full flex justify-start items-center"  onClick={() => {
-                  const state = { showButton: false };
-                  console.log("Passing State:", state);
-                  navigation(`/tasks/${task?._id}`, {
-                    state: state,
-                  });
-                }}>
+                <span
+                  className="w-full flex justify-start items-center"
+                  onClick={() => {
+                    const state = { showButton: false };
+                    console.log("Passing State:", state);
+                    navigation(`/tasks/${task?._id}`, {
+                      state: state,
+                    });
+                  }}
+                >
                   {task?.boat?.name}
                 </span>
-                <span className="w-full flex justify-start items-center"  onClick={() => {
-                  const state = { showButton: false };
-                  console.log("Passing State:", state);
-                  navigation(`/tasks/${task?._id}`, {
-                    state: state,
-                  });
-                }}>
+                <span
+                  className="w-full flex justify-start items-center"
+                  onClick={() => {
+                    const state = { showButton: false };
+                    console.log("Passing State:", state);
+                    navigation(`/tasks/${task?._id}`, {
+                      state: state,
+                    });
+                  }}
+                >
                   {task?.taskType?.length > 15
                     ? task?.taskType?.slice(0, 24) + "..."
                     : task?.taskType}
                 </span>
-                <span className="w-full flex justify-start items-center"  onClick={() => {
-                  const state = { showButton: false };
-                  console.log("Passing State:", state);
-                  navigation(`/tasks/${task?._id}`, {
-                    state: state,
-                  });
-                }}>
+                <span
+                  className="w-full flex justify-start items-center"
+                  onClick={() => {
+                    const state = { showButton: false };
+                    console.log("Passing State:", state);
+                    navigation(`/tasks/${task?._id}`, {
+                      state: state,
+                    });
+                  }}
+                >
                   {getUnixDate(task?.dueDate)}
                 </span>
-                <span className="w-full flex justify-start items-center "  onClick={() => {
-                  const state = { showButton: false };
-                  console.log("Passing State:", state);
-                  navigation(`/tasks/${task?._id}`, {
-                    state: state,
-                  });
-                }}>
+                <span
+                  className="w-full flex justify-start items-center ml-2"
+                  onClick={() => {
+                    const state = { showButton: false };
+                    console.log("Passing State:", state);
+                    navigation(`/tasks/${task?._id}`, {
+                      state: state,
+                    });
+                  }}
+                >
                   {task?.reoccuringDays}
                 </span>
+
                 <span
                   className={`text-[11px] ${statusColor(
                     task?.status
-                  )} rounded-full font-medium 
+                  )} rounded-full font-medium
             leading-[14.85px] flex justify-center items-center w-[100px] h-[27px]`}
-
-            onClick={() => {
-              const state = { showButton: false };
-              console.log("Passing State:", state);
-              navigation(`/tasks/${task?._id}`, {
-                state: state,
-              });
-            }}
+                  onClick={() => {
+                    const state = { showButton: false };
+                    console.log("Passing State:", state);
+                    navigation(`/tasks/${task?._id}`, {
+                      state: state,
+                    });
+                  }}
                 >
                   {getFormattedStatus(task?.status)}
                 </span>

@@ -26,10 +26,6 @@ const Dropdown = ({ options, label }) => {
     }
   };
 
-  const handleDeleteClick = () => {
-    setIsDeletedModalOpen(true); // Open DeletedModal
-  };
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -48,7 +44,7 @@ const Dropdown = ({ options, label }) => {
       </button>
       {isOpen && (
         <ul className="absolute z-10 bg-[#1A293D] text-white/50 text-[11px] rounded-[8px] mt-1 p-2 w-48">
-          {options.map((option, index) => (
+          {options?.map((option, index) => (
             <li
               key={index}
               className="py-1 px-2 hover:bg-[#199BD1] cursor-pointer flex items-center gap-2"
@@ -95,16 +91,8 @@ const EditEmployee = () => {
     setIsModalOpen(false);
   };
 
-  const handleResetPassClick = () => {
-    setIsModalOpen(true);
-  };
-
   const handleResetModal = () => {
     setIsResendModalOpen(true); // Open ResendModal
-  };
-
-  const handleChangeClick = () => {
-    setIsManagerDetailModalOpen(true); // Open ManagerDetailModal
   };
 
   const handleEditTaskClick = () => {
@@ -200,51 +188,6 @@ const EditEmployee = () => {
           </div>
         </div>
       </div>
-
-      {/* <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
-        <div className="w-auto flex  items-center gap-2">
-          <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-            Assigned Manager{" "}
-          </h3>
-          <button
-            onClick={handleChangeClick} // Update to handle opening ManagerDetailModal
-            className="text-[14px] font-medium text-[#199bd1]"
-          >
-            Change
-          </button>
-        </div>
-
-        <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
-          <div className="w-full h-6 grid grid-cols-4 text-[13px] font-medium border-b border-[#fff]/[0.14] leading-[14.85px] text-white/50 justify-start items-start">
-            <span className="w-full flex justify-start items-center">
-              Employee Name
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Email
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Job Title
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Location
-            </span>
-          </div>
-          <div className="w-full h-10 grid grid-cols-4 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium leading-[14.85px] text-white justify-start items-center">
-            <span className="w-full flex justify-start items-center">
-              Boat A
-            </span>
-            <span className="w-full flex justify-start items-center">
-              Full Inspection
-            </span>
-            <span className="w-full flex justify-start items-center">
-              12-02-2024
-            </span>
-            <span className="w-full flex justify-start items-center ">
-              90 days
-            </span>
-          </div>
-        </div>
-      </div> */}
 
       <div className="w-full h-auto flex flex-col gap-4 p-4 lg:p-6 rounded-[18px] bg-[#001229]">
         <div className="w-auto flex justify-between items-center gap-2">

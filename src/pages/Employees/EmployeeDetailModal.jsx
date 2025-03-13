@@ -12,7 +12,6 @@ const EmployeeDetailModal = ({
   employeeId = "",
 }) => {
   const { employees } = useContext(GlobalContext);
-  console.log("🚀 ~ employees:", employees);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [jobTitleDropdownOpen, setJobTitleDropdownOpen] = useState(false);
@@ -122,6 +121,7 @@ const EmployeeDetailModal = ({
                       employeesLocTitles={employees?.map(
                         (item) => item.location
                       )}
+                      title="Location"
                     />
                   </th>
                 </tr>
@@ -132,7 +132,10 @@ const EmployeeDetailModal = ({
                     {filteredData?.map((employee, index) => {
                       const isSelected = selectedEmployee?.id === employee._id;
                       return (
-                        <tr key={index} className="border-b border-gray-600">
+                        <tr
+                          key={index}
+                          className="border-b border-gray-600 h-12"
+                        >
                           <td className="px-0 py-2">
                             <input
                               checked={isSelected}
@@ -149,7 +152,9 @@ const EmployeeDetailModal = ({
                           <td className="px-4 py-2">{employee?.name}</td>
                           <td className="px-4 py-2"> {employee?.email} </td>
                           <td className="px-4 py-2">{employee?.jobtitle}</td>
-                          <td className="px-4 py-2">{employee?.location}</td>
+                          <td className="w-[220px] px-4 py-2">
+                            {employee?.location}
+                          </td>
                         </tr>
                       );
                     })}

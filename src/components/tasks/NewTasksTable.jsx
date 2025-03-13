@@ -19,7 +19,7 @@ const NewTaskTable = () => {
   };
 
   const [data, setData] = useState([]);
-  console.log("🚀 ~ NewTaskTable ~ data:", data);
+
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -92,6 +92,7 @@ const NewTaskTable = () => {
             locationType={locationType}
             setLocationType={setLocationType}
             employeesLocTitles={data?.map((item) => item?.boat?.location)}
+            title="Location / Customer Name"
           />
           <span className="w-full flex justify-start items-center px-[60px]">
             Requested By
