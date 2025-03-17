@@ -52,7 +52,7 @@ const BlogDetails = () => {
           </button>
         </div>
 
-        <div className="w-full h-auto flex flex-col justify-start items-start p-2 lg:p-6">
+        <div className="w-full h-auto flex flex-col justify-start items-start p-2 lg:p-6 font-satoshi">
           <div className="w-full h-auto flex flex-col border-b-[1px] border-white/10 justify-start items-start pt-2 pb-12 gap-4">
             <span className="text-[10px] font-medium text-[#199BD1]">
               {state?.isAdmin ? "Admin" : "Owner"} |{" "}
