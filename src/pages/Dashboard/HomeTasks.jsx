@@ -46,28 +46,23 @@ const HomeTasks = () => {
     setLoading(true);
     try {
       const searchFilter = filter ? `&status=${filter}` : "";
-  
+
       const response = await axios.get(
         `/manager/task?page=${currentPage}&pageSize=9${searchFilter}`
       );
-  
-      
-  
-  
+
       const { data } = response;
       setTaskData(data?.data?.data || []);
       setPageDetails(data?.data?.paginationDetails || []);
       setTotalPages(data?.data?.paginationDetails?.totalPages);
     } catch (err) {
-   
       console.error(
         "Error fetching Task data:",
         err.response?.status,
         err.response?.data
       );
-  
+
       if (err.response?.status === 401 || err.response?.status === 403) {
-       
         console.warn("Unauthorized or Forbidden. Redirecting to login...");
         navigate("/login");
       }
@@ -280,7 +275,7 @@ const HomeTasks = () => {
             setDueDate={setDueDate}
             setInputError={setInputError}
             isRange={"range"}
-            minDate={today.toDate()}
+            minDate={moment().startOf("day").toDate()}
           />
         </div>
         {/* <Pagination

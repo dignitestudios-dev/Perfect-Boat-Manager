@@ -301,7 +301,7 @@ const EditEmployee = () => {
       <DateModal
         isOpen={isDateModalOpen}
         setIsOpen={setIsDateModalOpen}
-        minDate={today.toDate()}
+        minDate={moment().startOf("day").toDate()}
       />
       <DeletedModal
         isOpen={isDeletedModalOpen}

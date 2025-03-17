@@ -253,7 +253,7 @@ const EditTask = () => {
               <DateModal
                 isOpen={isCalendarOpen}
                 setIsOpen={setIsCalendarOpen}
-                minDate={today.toDate()}
+                minDate={moment().startOf("day").toDate()}
               />
             </div>
           </div>

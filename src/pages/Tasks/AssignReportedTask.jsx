@@ -265,7 +265,7 @@ const AssignReportedTask = () => {
             <DateModal
               isOpen={isCalendarOpen}
               setIsOpen={setIsCalendarOpen}
-              minDate={today.toDate()}
+              minDate={moment().startOf("day").toDate()}
               setDueDate={setDueDate}
               setInputError={setInputError}
             />

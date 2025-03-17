@@ -127,7 +127,7 @@ const AssignedTasksCard = ({
             setIsOpen={setIsCalendarOpen}
             setDueDate={setDueDate}
             setInputError={setInputError}
-            minDate={today.toDate()}
+            minDate={moment().startOf("day").toDate()}
           />
           <span className="w-full flex justify-start items-center">
             Recurring Days
