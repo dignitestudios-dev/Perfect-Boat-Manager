@@ -168,6 +168,7 @@ const AddEmployeeCsv = ({ data, setData }) => {
                         }
                         className="w-full h-full bg-transparent outline-none text-white placeholder:text-gray-400 autofill:bg-transparent autofill:text-white"
                         placeholder={"Enter Location"}
+                        maxLength={80}
                       />
                     </div>
                     {/* {errors.length && (

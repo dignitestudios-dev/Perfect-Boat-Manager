@@ -191,6 +191,7 @@ const EmployeeDetail = () => {
                         label="Location"
                         type="text"
                         placeholder="Enter Location"
+                        maxLength={80}
                         register={register("location", {
                           required: "Please enter a location",
                           minLength: {

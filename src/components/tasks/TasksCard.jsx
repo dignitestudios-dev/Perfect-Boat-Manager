@@ -114,7 +114,7 @@ const TasksCard = ({ getTasks, data }) => {
           </div>
           <div className="w-auto flex flex-col justify-start items-start gap-1">
             <span className="text-[16px] font-normal leading-[21.6px] text-white/50">
-              Boat Type:{" "}
+              Boat Name:{" "}
               <span className="capitalize font-medium">
                 {data?.boat?.name?.length > 25
                   ? data?.boat?.name?.slice(0, 28) + "..."
