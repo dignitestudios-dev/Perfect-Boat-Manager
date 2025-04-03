@@ -80,7 +80,7 @@ const UpdatePassword = () => {
                 message: "Password must be at least 8 characters long.",
               },
             })}
-            maxLength={12}
+            maxLength={18}
             text={"New Password"}
             placeholder={"Enter Password"}
             type={"password"}
@@ -94,7 +94,7 @@ const UpdatePassword = () => {
                 message: "Password must be at least 8 characters long.",
               },
             })}
-            maxLength={12}
+            maxLength={18}
             text={"Re-enter Password"}
             placeholder={"Re-enter Password"}
             type={"password"}
