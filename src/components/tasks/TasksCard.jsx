@@ -117,15 +117,15 @@ const TasksCard = ({ getTasks, data }) => {
               Boat Name:{" "}
               <span className="capitalize font-medium">
                 {data?.boat?.name?.length > 25
-                  ? data?.boat?.name?.slice(0, 28) + "..."
+                  ? data?.boat?.name?.slice(0, 26) + "..."
                   : data?.boat?.name}
               </span>
             </span>
             <span className="text-[15px] font-normal text-start leading-[21.6px] text-white/50 ">
               Location/Customer Name:{" "}
               <span className="font-medium">
-                {data?.boat?.location?.length > 55
-                  ? data?.boat?.location?.slice(0, 55) + "..."
+                {data?.boat?.location?.length > 35
+                  ? data?.boat?.location?.slice(0, 35) + "..."
                   : data?.boat?.location}
               </span>
             </span>
