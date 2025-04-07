@@ -16,7 +16,7 @@ export const BlogsContainer = () => {
       setBlogs(data?.data);
     } catch (error) {
       console.log("🚀 ~ getBlogs ~ error:", error);
-      if (error?.status === 404) {
+      if (error) {
         setBlogs([]);
       }
     } finally {

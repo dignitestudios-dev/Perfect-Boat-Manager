@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthMockup } from "../../assets/export";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const BlogsCard = ({ blog }) => {
   const navigate = useNavigate();
@@ -25,11 +26,7 @@ const BlogsCard = ({ blog }) => {
       <div className="w-full h-[calc(100%-220px)] flex flex-col gap-2 justify-start items-start p-4">
         <span className="text-[10px] font-medium text-[#199BD1]">
           {blog?.isAdmin ? "Admin" : "Owner"} |{" "}
-          {new Date(blog.createdAt).toLocaleDateString("en-US", {
-            month: "long",
-            day: "numeric",
-            year: "numeric",
-          })}
+          {moment(blog.createdAt)?.format("MM-DD-YY")}
         </span>
 
         <div>

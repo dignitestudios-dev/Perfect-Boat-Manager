@@ -20,7 +20,6 @@ import { STATUS_ENUM } from "../../constants/data";
 
 const TaskDetail = () => {
   const statusColor = (status) => {
-    console.log(status, "status");
     switch (status) {
       case "newtask":
         return "bg-[#FF69B41F]/[0.12] text-[#FF69B4]";

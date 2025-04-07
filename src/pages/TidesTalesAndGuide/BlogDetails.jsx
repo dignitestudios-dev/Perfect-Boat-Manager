@@ -4,6 +4,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { GlobalContext } from "../../contexts/GlobalContext";
 import { useLocation, useParams } from "react-router-dom";
 import axios from "../../axios";
+import moment from "moment";
 
 const BlogDetails = () => {
   const { navigate } = useContext(GlobalContext);
@@ -56,11 +57,7 @@ const BlogDetails = () => {
           <div className="w-full h-auto flex flex-col border-b-[1px] border-white/10 justify-start items-start pt-2 pb-12 gap-4">
             <span className="text-[10px] font-medium text-[#199BD1]">
               {state?.isAdmin ? "Admin" : "Owner"} |{" "}
-              {new Date(state?.createdAt)?.toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
+              {moment(state?.createdAt)?.format("MM-DD-YY")}
             </span>
             <h2 className="text-[28px] font-bold text-white leading-[37.7px]">
               {state?.title}
@@ -101,14 +98,7 @@ const BlogDetails = () => {
                           <span className="text-[10px] font-medium text-[#199BD1]">
                             {/* Author name | December 20th, 2023 */}
                             {blog?.isAdmin ? "Admin" : "Owner"} |{" "}
-                            {new Date(blog?.createdAt)?.toLocaleDateString(
-                              "en-US",
-                              {
-                                month: "long",
-                                day: "numeric",
-                                year: "numeric",
-                              }
-                            )}
+                            {moment(blog?.createdAt)?.format("MM-DD-YY")}
                           </span>
                           <h2 className="text-[16px] font-medium text-white leading-[21.7px]">
                             {blog?.title}
