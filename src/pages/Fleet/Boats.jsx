@@ -25,6 +25,7 @@ const Boats = () => {
       setBoats(data?.data?.data);
       setPageDetails(data?.data?.paginationDetails);
     } catch (err) {
+      console.log("🚀 ~ Boats ~ err:", err);
     } finally {
       setLoadingBoats(false);
     }

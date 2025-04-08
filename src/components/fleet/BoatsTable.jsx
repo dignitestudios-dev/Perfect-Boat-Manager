@@ -59,7 +59,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
       <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
         Boats List{" "}
         <span className="text-[12px] font-normal text-white/50 ">
-          ({filteredData?.length})
+          ({data?.length})
         </span>
       </h3>
 
