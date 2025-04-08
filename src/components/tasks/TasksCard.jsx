@@ -99,9 +99,9 @@ const TasksCard = ({ getTasks, data }) => {
         <div className="w-[calc(100%-6px)] h-full py-4 px-6 flex flex-col gap-2 justify-start items-start relative">
           <div className="w-full h-auto flex justify-between items-center">
             <h3 className="text-[20px] text-nowrap font-bold leading-[27px]">
-              {data?.taskType?.length > 18
-                ? data?.taskType?.slice(0, 18) + "..."
-                : data?.taskType}
+              {data?.task?.length > 16
+                ? data?.task?.slice(0, 16) + "..."
+                : data?.task}
             </h3>
             <div
               className={`w-[115px]  h-[27px] rounded-full text-[11px] ${statusColor(
