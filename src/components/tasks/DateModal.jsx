@@ -21,7 +21,7 @@ const DateModal = ({
   minDate,
 }) => {
   const today = moment();
-  const startOf2023 = moment("01-01-2023");
+  // const startOf2023 = moment("01-01-2023");
   const [date, setDate] = useState(today.toDate());
   const dateRef = useRef();
 

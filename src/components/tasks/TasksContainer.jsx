@@ -313,7 +313,7 @@ const TasksContainer = () => {
           setDueDate={setDueDate}
           setInputError={setInputError}
           isRange={"range"}
-          minDate={moment().startOf("day").toDate()}
+          minDate={moment("01-01-2023")}
         />
       </div>
       <Pagination
