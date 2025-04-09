@@ -4,7 +4,7 @@ import { TbCaretDownFilled } from "react-icons/tb";
 
 const TaskTypeInputField = ({
   isEdit,
-  setInputError,
+  setInputError = () => {},
   taskDropDown,
   setTasks,
   selectedTaskType,
@@ -40,7 +40,7 @@ const TaskTypeInputField = ({
   };
   const isDisabled = showButton === true ? isEdit : !isEdit;
   return (
-    <div className="w-full h-auto flex flex-col gap-1 justify-end items-start">
+    <div className="w-full h-auto flex flex-col gap-1 justify-end items-start z-10">
       <label className="text-[16px] font-medium leading-[21.6px]">
         {"Task Type"}
       </label>
@@ -75,6 +75,7 @@ const TaskTypeInputField = ({
           <div className="w-full h-full overflow-y-auto flex flex-col justify-start items-start gap-2">
             {taskDropDown?.map((item, index) => (
               <button
+                type="button"
                 key={index}
                 onClick={() => handleTaskTypeSelection(item.taskType)}
                 className="text-gray-300 w-full h-8 px-5 py-2 flex justify-start items-center hover:bg-[#000]/10"

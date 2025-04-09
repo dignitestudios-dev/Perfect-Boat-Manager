@@ -25,18 +25,16 @@ const TasksContainer = () => {
   const [dueDate, setDueDate] = useState({});
   const [inputError, setInputError] = useState({});
 
-  const [pageDetails, setPageDetails] = useState({});
   const [taskData, setTaskData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const pageSize = 18;
 
   const handleCheckboxChange = (sort) => {
     setSortFilter(sort);
     // setIsCalendarOpen(false);
     setDueDate({ calendar: undefined });
-    console.log(dueDate, "dueDate");
     setCurrentPage(1);
   };
 
@@ -52,18 +50,28 @@ const TasksContainer = () => {
   const getTasks = async () => {
     setLoading(true);
     try {
-      const searchFilter = filter ? `&status=${filter}` : "";
-      const sortByDate = dueDate?.calendar
-        ? `&startDate=${dueDate?.calendar}&endDate=${dueDate?.calendar}&isdue=true`
-        : "";
-      const sortByFilter = sortFilter === "earliest" ? `&isEarliest=true` : "";
+      const params = [];
 
-      const { data } = await axios.get(
-        `/manager/task?page=${currentPage}&pageSize=18${searchFilter}${sortByFilter}${sortByDate}`
-      );
-      setTaskData(data?.data?.data || []);
-      setPageDetails(data?.data?.paginationDetails || []);
-      setTotalPages(data?.data?.paginationDetails?.totalPages);
+      if (filter) {
+        params.push(`status=${filter}`);
+      }
+
+      if (dueDate?.calendar) {
+        params.push(
+          `startDate=${dueDate.calendar}`,
+          `endDate=${dueDate.calendar}`,
+          `isdue=true`
+        );
+      }
+
+      if (sortFilter === "earliest") {
+        params.push(`isEarliest=true`);
+      }
+
+      const queryString = params.length > 0 ? `?${params.join("&")}` : "";
+
+      const { data } = await axios.get(`/manager/task${queryString}`);
+      setTaskData(data?.data || []);
     } catch (err) {
       console.error("Error fetching Task data:", err);
     } finally {
@@ -73,13 +81,27 @@ const TasksContainer = () => {
 
   useEffect(() => {
     getTasks();
-  }, [filter, sortFilter, currentPage, dueDate]);
+  }, [filter, sortFilter, dueDate]);
 
-  const filteredData = taskData?.filter((item) =>
-    item?.boat?.name
-      ?.toLowerCase()
-      ?.replaceAll(" ", "")
-      ?.includes(search?.toLowerCase()?.replaceAll(" ", ""))
+  // const filteredData = taskData?.filter((item) =>
+  //   item?.boat?.name
+  //     ?.toLowerCase()
+  //     ?.replaceAll(" ", "")
+  //     ?.includes(search?.toLowerCase()?.replaceAll(" ", ""))
+  // );
+  const filteredData = taskData?.filter((item) => {
+    const matchesSearch = search
+      ? item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.boat?.location?.toLowerCase()?.includes(search?.toLowerCase())
+      : true;
+    return matchesSearch;
+  });
+
+  const totalPages = Math.ceil(filteredData?.length / pageSize);
+  // Slice the data for the current page
+  const paginatedData = filteredData?.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
   );
 
   return (
@@ -88,7 +110,7 @@ const TasksContainer = () => {
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           All Tasks{" "}
           <span className="text-[12px] font-normal text-white/50 ">
-            ({pageDetails?.totalItems})
+            ({taskData?.length})
           </span>
         </h3>
 
@@ -100,7 +122,10 @@ const TasksContainer = () => {
             <input
               type="text"
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
               placeholder="Search here"
               className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full"
             />
@@ -291,8 +316,8 @@ const TasksContainer = () => {
             <TasksListLoader />
           ) : (
             <>
-              {filteredData?.length > 0 ? (
-                filteredData?.map((task, index) => {
+              {paginatedData?.length > 0 ? (
+                paginatedData?.map((task, index) => {
                   return (
                     <TasksCard
                       data={task}
@@ -321,7 +346,6 @@ const TasksContainer = () => {
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         totalPages={totalPages}
-        setTotalPages={setTotalPages}
       />
     </div>
   );

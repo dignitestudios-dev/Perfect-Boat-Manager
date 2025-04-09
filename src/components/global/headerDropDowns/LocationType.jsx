@@ -9,6 +9,7 @@ const LocationType = ({
   locationType,
   employeesLocTitles,
   title,
+  setCurrentPage = () => {},
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
@@ -27,6 +28,7 @@ const LocationType = ({
         }
       });
     }
+    setCurrentPage(1);
   };
 
   useEffect(() => {

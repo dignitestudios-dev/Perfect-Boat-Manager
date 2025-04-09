@@ -9,9 +9,11 @@ import ManagerListLoader from "../global/Loaders/ManagerListLoader";
 import JobType from "../global/headerDropDowns/JobType";
 import LocationType from "../global/headerDropDowns/LocationType";
 import { ErrorToast } from "../global/Toaster";
+import { useNavigate } from "react-router-dom";
 
 const DeactivatedEmployeesTable = () => {
   const { navigate } = useContext(GlobalContext);
+  const navigation = useNavigate();
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -152,9 +154,12 @@ const DeactivatedEmployeesTable = () => {
               <>
                 {filteredData?.map((user, index) => (
                   <div
+                    onClick={() =>
+                      navigation(`/employees/${user?._id}`, { state: false })
+                    }
                     key={index}
-                    className="w-full h-auto grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
-                     leading-[14.85px] text-white justify-start items-center"
+                    className="w-full h-auto min-h-12 pt-2 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
+                     leading-[14.85px] text-white justify-start items-center cursor-pointer"
                   >
                     <span className="w-full flex justify-start items-center">
                       {user?.name}

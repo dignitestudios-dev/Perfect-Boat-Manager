@@ -54,6 +54,7 @@ export const GlobalContextProvider = ({ children }) => {
         const { data } = await axios.get(`/manager/employees?${queryString}`);
         setEmployees(data?.data);
       } catch (err) {
+        console.log("🚀 ~ getEmployees ~ err:", err);
       } finally {
         setLoadingEmployees(false);
       }
@@ -81,6 +82,7 @@ export const GlobalContextProvider = ({ children }) => {
 
         setBoats(data?.data);
       } catch (err) {
+        console.log("🚀 ~ getBoats ~ err:", err);
       } finally {
         setLoadingBoats(false);
       }

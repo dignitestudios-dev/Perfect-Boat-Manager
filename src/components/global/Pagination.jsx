@@ -1,11 +1,6 @@
 import React from "react";
 
-const Pagination = ({
-  currentPage,
-  setCurrentPage,
-  totalPages,
-  setTotalPages,
-}) => {
+const Pagination = ({ currentPage, setCurrentPage, totalPages }) => {
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -19,7 +14,7 @@ const Pagination = ({
   };
 
   return (
-    <div className="flex justify-end items-center mt-4 w-full">
+    <div className="flex justify-end items-center mt-4 pb-4 w-full">
       <button
         onClick={handlePreviousPage}
         disabled={currentPage === 1}
@@ -32,7 +27,7 @@ const Pagination = ({
         Previous
       </button>
 
-      <span className="text-gray-500 w-20 ml-6">
+      <span className="text-gray-500 w-28 ml-6">
         Page {currentPage} of {totalPages}
       </span>
 

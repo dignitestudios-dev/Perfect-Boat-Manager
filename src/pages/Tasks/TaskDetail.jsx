@@ -139,6 +139,9 @@ const TaskDetail = () => {
     }
   };
 
+  const openImage = (url) => {
+    window.open(url, "_blank");
+  };
   const [customTypeText, setCustomTypeText] = useState("");
 
   const location = useLocation();
@@ -305,6 +308,51 @@ const TaskDetail = () => {
                 </p>
               )}
             </div>
+            {taskDetail?.status === "completed" && (
+              <>
+                <hr className="w-full bg-[#fff]/[0.14] h-[1px] " />
+                <div>
+                  <div className="w-full flex flex-col gap-4 pb-2">
+                    <label className="text-[16px] font-medium leading-[21.6px]">
+                      Photos
+                    </label>
+                  </div>
+                  <div className="w-full flex justify-center items-center gap-6">
+                    {taskDetail?.taskReport?.images?.length > 0 && (
+                      <>
+                        {taskDetail?.taskReport?.images?.map((item, index) => {
+                          return (
+                            <div
+                              key={index}
+                              className="w-full h-[147px] rounded-xl"
+                            >
+                              <img
+                                src={item}
+                                alt={`boatimage`}
+                                className="w-full h-full rounded-xl object-cover cursor-pointer"
+                                onClick={() => openImage(item)}
+                              />
+                            </div>
+                          );
+                        })}
+                      </>
+                    )}
+                  </div>
+                </div>
+                <div className="w-full grid grid-cols-1 gap-12 mt-4">
+                  <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
+                    <label className="text-[16px] font-medium leading-[21.6px]">
+                      Note
+                    </label>
+                    <textarea
+                      disabled
+                      value={taskDetail?.taskReport?.note}
+                      className="w-full h-[300px] resize-none bg-[#1A293D] outline-none p-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl"
+                    />
+                  </div>
+                </div>
+              </>
+            )}
           </div>
           <DateModal
             isOpen={isCalendarOpen}

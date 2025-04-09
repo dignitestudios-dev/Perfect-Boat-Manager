@@ -10,7 +10,6 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
 const statusColor = (status) => {
-  console.log(status, "status");
   switch (status) {
     case "newtask":
       return "bg-[#FF69B41F]/[0.12] text-[#FF69B4]";
@@ -83,7 +82,6 @@ const TasksCard = ({ getTasks, data }) => {
       <button
         onClick={() => {
           const state = { showButton: false };
-          console.log("Passing State:", state);
           navigation(`/tasks/${data?._id}`, {
             state: state,
           });

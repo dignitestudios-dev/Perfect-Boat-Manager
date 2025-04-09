@@ -8,6 +8,7 @@ const BoatType = ({
   boatType,
   setBoatType,
   managerBoats,
+  setCurrentPage = () => {},
 }) => {
   const { dropDown } = useContext(GlobalContext);
   const dropdownRef = useRef(null);
@@ -26,6 +27,7 @@ const BoatType = ({
         }
       });
     }
+    setCurrentPage(1);
   };
 
   useEffect(() => {

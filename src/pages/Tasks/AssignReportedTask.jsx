@@ -14,14 +14,18 @@ import { recurringOptions } from "../../constants/data";
 import { FiLoader } from "react-icons/fi";
 import axios from "../../axios";
 import { ErrorToast } from "../../components/global/Toaster";
+import TaskTypeInputField from "../../components/global/customInputs/TaskTypeInputField";
+import TaskInputField from "../../components/global/customInputs/TaskInputField";
 
 const AssignReportedTask = () => {
   const today = moment();
-  const { navigate } = useContext(GlobalContext);
+  const { navigate, taskDropDown } = useContext(GlobalContext);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // State for TaskAssignedModal
   const [isEmployeeModalOpen, setIsEmployeeModalOpen] = useState(false); // State for EmployeeDetailModal
-  const RecurringRef = useRef(null); // Reference for Recurring Dropdown
+  const RecurringRef = useRef(null);
+  const taskTypeDropdownRef = useRef();
+  const additionalDropdownRef = useRef();
 
   const location = useLocation();
   const { task } = location.state || {};
@@ -32,15 +36,35 @@ const AssignReportedTask = () => {
   const [inputError, setInputError] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
   const [selectedTaskType, setSelectedTaskType] = useState("");
+  const [displaySelectedTask, setDisplaySelectedTask] = useState("");
   const [selectedTask, setSelectedTask] = useState("");
+
+  const [isTaskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
+  const [isTaskDropdownOpen, setTaskDropdownOpen] = useState(false);
+  const [customInput, setCustomInput] = useState(false);
+  const [tasks, setTasks] = useState([]);
+
+  const [fieldErrors, setFieldErrors] = useState({});
+
+  const [customTypeText, setCustomTypeText] = useState("");
+  const [customTask, setCustomTask] = useState("");
 
   const [RecurringDropdown, setRecurringDropdown] = useState(false);
   const [recurringDays, setRecurringDays] = useState("");
+
   const toggleRecurringDropdown = (e) => {
     if (RecurringRef.current && !RecurringRef.current.contains(e.target)) {
       setRecurringDropdown((prev) => !prev);
       // setRecurringDropdown(!RecurringDropdown);
     }
+  };
+
+  const toggleTaskTypeDropdown = () => {
+    setTaskTypeDropdownOpen(!isTaskTypeDropdownOpen);
+  };
+
+  const toggleTaskDropdown = () => {
+    setTaskDropdownOpen(!isTaskDropdownOpen);
   };
 
   const handleAssignTask = async (data) => {
@@ -52,10 +76,29 @@ const AssignReportedTask = () => {
         taskType: selectedTaskType,
         dueDate: dueDate?.unix,
         description: data.note,
-        reoccuring: true,
-        reoccuringDays: recurringDays,
+        reoccuring: recurringDays === "none" ? false : true,
+        reoccuringDays: recurringDays === "none" ? 0 : +recurringDays,
         assignTo: [passSelectedEmployee?.id],
       };
+
+      const errors = {};
+
+      if (!dueDate?.unix) errors.dueDate = "Due date is required.";
+      if (!passSelectedEmployee?.id)
+        errors.assignTo = "Please assign to someone.";
+      if (recurringDays !== "none" && isNaN(+recurringDays)) {
+        errors.reoccuringDays = "Recurring days must be a number.";
+      }
+
+      if (Object.keys(errors).length > 0) {
+        setFieldErrors(errors);
+        setSubmitLoading(false);
+        return;
+      }
+
+      // No errors — clear previous ones
+      setFieldErrors({});
+
       const response = await axios.post("/manager/task", obj);
 
       if (response.status === 200) {
@@ -71,6 +114,7 @@ const AssignReportedTask = () => {
 
   const handleSelectDay = (day, text) => {
     setInputError({});
+    setFieldErrors({});
     if (day === "custom") {
       setRecurringDays(day);
       setSelectedDay(text);
@@ -80,6 +124,26 @@ const AssignReportedTask = () => {
       setSelectedDay(text); // Set selected text
       setRecurringDropdown(false); // Close the dropdown after selecting
     }
+  };
+
+  const handleTaskTypeSelection = (taskType) => {
+    console.log("🚀 ~ handleTaskTypeSelection ~ taskType:", taskType);
+
+    setSelectedTaskType(taskType);
+    setTasks(
+      taskDropDown?.find((item) => item?.taskType === taskType)?.task || []
+    );
+    setTaskDropdownOpen(false);
+    setDisplaySelectedTask(null);
+    setCustomTask("");
+    setFieldErrors({});
+  };
+
+  const handleTaskSelection = (task) => {
+    setInputError({});
+    setFieldErrors({});
+    setTaskDropdownOpen(false); // Close task dropdown after selecting a task
+    setDisplaySelectedTask(task);
   };
 
   const {
@@ -95,6 +159,7 @@ const AssignReportedTask = () => {
       setValue("name", task?.boat?.name);
       setValue("type", task?.boat?.boatType);
       setValue("note", task?.note);
+
       setValue("location", task?.boat?.location);
       const combinedValue = `${task?.boat?.model || ""}/${
         task?.boat?.make || ""
@@ -102,20 +167,21 @@ const AssignReportedTask = () => {
       setValue("combined", combinedValue);
       setSelectedTaskType(task?.task?.taskType);
       setSelectedTask(task?.task?.task);
+      setDisplaySelectedTask(task?.task?.task);
       setPassSelectedEmployee({
         name: task?.employee?.name,
         id: task?.employee?._id,
       });
-      setDueDate({
-        normal: moment(task?.task?.dueDate * 1000).format("YYYY-MM-DD"),
-        unix: task?.task?.dueDate,
-      });
-      setSelectedDay(
-        task?.task?.reoccuringDays
-          ? `${task?.task?.reoccuringDays} days`
-          : "None"
-      );
-      setRecurringDays(task?.task?.reoccuringDays);
+      // setDueDate({
+      //   normal: moment(task?.task?.dueDate * 1000).format("YYYY-MM-DD"),
+      //   unix: task?.task?.dueDate,
+      // });
+      // setSelectedDay(
+      //   task?.task?.reoccuringDays
+      //     ? `${task?.task?.reoccuringDays} days`
+      //     : "None"
+      // );
+      // setRecurringDays(task?.task?.reoccuringDays);
     }
   }, [task, setValue]);
 
@@ -149,19 +215,34 @@ const AssignReportedTask = () => {
                 </div>
               </div>
               <div className="w-full grid grid-cols-2 gap-12">
-                <AddFleetInput
-                  isDisabled={true}
-                  label={"Year/Make/Size"}
-                  register={register("combined", {
-                    required: "Please enter boat type",
-                  })}
+                <TaskTypeInputField
+                  isEdit={true}
+                  setInputError={setInputError}
+                  taskDropDown={taskDropDown}
+                  setTasks={setTasks}
+                  selectedTaskType={selectedTaskType}
+                  setSelectedTaskType={setSelectedTaskType}
+                  setCustomTypeText={setCustomTypeText}
+                  customTypeText={customTypeText}
+                  setDisplaySelectedTask={setDisplaySelectedTask}
                 />
-                <AddFleetInput
-                  label={"Location / Customer Name"}
-                  register={register("location", {
-                    required: "Please enter boat type",
-                  })}
+                {fieldErrors?.taskType && (
+                  <p className="text-red-500 text-sm">
+                    {fieldErrors?.taskType}
+                  </p>
+                )}
+                <TaskInputField
+                  isEdit={true}
+                  setInputError={setInputError}
+                  tasks={tasks}
+                  setDisplaySelectedTask={setDisplaySelectedTask}
+                  displaySelectedTask={displaySelectedTask}
+                  customTypeText={customTypeText}
+                  setCustomTypeText={setCustomTypeText}
                 />
+                {fieldErrors?.task && (
+                  <p className="text-red-500 text-sm">{fieldErrors?.task}</p>
+                )}
               </div>
               <div className="w-full grid grid-cols-1 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
@@ -176,6 +257,7 @@ const AssignReportedTask = () => {
                       onClick={(e) => {
                         e.preventDefault();
                         setIsEmployeeModalOpen(true);
+                        setFieldErrors({});
                       }}
                       className="text-[#199BD1] cursor-pointer ml-2 text-sm font-medium hover:underline"
                     >
@@ -184,7 +266,7 @@ const AssignReportedTask = () => {
                   </div>
                   <div className="w-full grid grid-cols-2 gap-12">
                     <div
-                      className="group transition-all duration-500 w-full h-[52px] bg-[#1A293D] outline-none flex justify-between 
+                      className="group transition-all duration-500 w-full h-[52px]  bg-[#1A293D] outline-none flex justify-between 
           items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl  relative"
                     >
                       <span className="text-gray-400">
@@ -192,6 +274,11 @@ const AssignReportedTask = () => {
                       </span>
                     </div>
                   </div>
+                  {fieldErrors.assignTo && (
+                    <p className="text-red-500 text-sm">
+                      {fieldErrors.assignTo}
+                    </p>
+                  )}
                   {/* Horizontal line above the Note label */}
                   <hr className="w-full border-t border-gray-600 my-4" />
                   <label className="text-[16px] font-medium leading-[21.6px]">
@@ -223,6 +310,11 @@ const AssignReportedTask = () => {
                     : "Select Due Date"}
                 </button>
               </div>
+              {fieldErrors?.dueDate && (
+                <p className="text-red-500 text-sm -mt-5">
+                  {fieldErrors?.dueDate}
+                </p>
+              )}
               <div className="w-auto flex justify-start items-center gap-3">
                 <TbCalendarStats className="text-2xl text-white/40" />
                 <span className="text-md font-normal text-white">
@@ -259,6 +351,11 @@ const AssignReportedTask = () => {
                     ))}
                   </div>
                 </button>
+                {fieldErrors?.reoccuringDays && (
+                  <p className="text-red-500 text-sm">
+                    {fieldErrors?.reoccuringDays}
+                  </p>
+                )}
               </div>
             </div>
 
@@ -267,7 +364,7 @@ const AssignReportedTask = () => {
               setIsOpen={setIsCalendarOpen}
               minDate={moment().startOf("day").toDate()}
               setDueDate={setDueDate}
-              setInputError={setInputError}
+              setInputError={setFieldErrors}
             />
           </div>
         </div>

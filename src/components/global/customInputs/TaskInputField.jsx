@@ -76,6 +76,7 @@ const TaskInputField = ({
               <>
                 {tasks.map((task, index) => (
                   <button
+                    type="button"
                     key={index}
                     onClick={() => handleTaskSelection(task)}
                     className="text-gray-300 w-full h-8 px-5 py-2 flex justify-start items-center text-left hover:bg-[#000]/10"
@@ -85,6 +86,7 @@ const TaskInputField = ({
                 ))}
                 <>
                   <button
+                    type="button"
                     onClick={(e) => {
                       e.stopPropagation();
                       handleTaskSelection("custom");

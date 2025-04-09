@@ -12,6 +12,7 @@ import LocationType from "../global/headerDropDowns/LocationType";
 import { useNavigate } from "react-router-dom";
 import BoatType from "../global/headerDropDowns/BoatType";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
+import Pagination from "../global/Pagination";
 
 const BoatsTable = ({ data, loading, getBoats }) => {
   const navigate = useNavigate();
@@ -20,6 +21,8 @@ const BoatsTable = ({ data, loading, getBoats }) => {
   const [locationDropdownOpen, setLocationDropdownOpen] = useState(false);
   const [locationType, setLocationType] = useState([]);
   const [boatType, setBoatType] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 18;
 
   const toggleBoatTypeDropdown = () => {
     setBoatTypeDropdownOpen(!boatTypeDropdownOpen);
@@ -50,6 +53,13 @@ const BoatsTable = ({ data, loading, getBoats }) => {
     return matchesSearch && locationTypeMatch && boatTypeMatch;
   });
 
+  const totalPages = Math.ceil(filteredData?.length / pageSize);
+  // Slice the data for the current page
+  const paginatedData = filteredData?.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   // useEffect(() => {
   //   getBoats(1, 15, boatType, locationType);
   // }, [boatType, locationType]);
@@ -69,7 +79,10 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             <FiSearch className="text-white/50 text-lg" />
           </span>
           <input
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
             type="text"
             placeholder="Search here"
             className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full text-white/50 pl-2"
@@ -88,6 +101,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             boatType={boatType}
             setBoatType={setBoatType}
             managerBoats={data?.map((item) => item.boatType)}
+            setCurrentPage={setCurrentPage}
           />
           <span className="w-full flex justify-start items-center">
             Boat Name/Hull Number
@@ -102,6 +116,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             setLocationType={setLocationType}
             employeesLocTitles={data?.map((item) => item.location)}
             title="Location / Customer Name"
+            setCurrentPage={setCurrentPage}
           />
         </div>
 
@@ -110,9 +125,9 @@ const BoatsTable = ({ data, loading, getBoats }) => {
         ) : (
           <Fragment>
             {/* Example rows */}
-            {filteredData.length > 0 ? (
+            {paginatedData.length > 0 ? (
               <>
-                {filteredData?.map((boat, index) => (
+                {paginatedData?.map((boat, index) => (
                   <div
                     key={index}
                     onClick={() => navigate(`/boats/${boat?._id}`)}
@@ -164,6 +179,11 @@ const BoatsTable = ({ data, loading, getBoats }) => {
           </Fragment>
         )}
       </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 };

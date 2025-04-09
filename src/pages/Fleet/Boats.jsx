@@ -18,12 +18,13 @@ const Boats = () => {
       const boatQuery = boatType.length !== 0 ? `&boatType=${boatType}` : "";
       const locationQuery =
         locationType.length !== 0 ? `&location=${locationType}` : "";
-      const { data } = await axios.get(
-        `/manager/boat?page=${pageNumber}&pageSize=${rows}${boatQuery}${locationQuery}`
-      );
+      // const { data } = await axios.get(
+      //   `/manager/boat?page=${pageNumber}&pageSize=${rows}${boatQuery}${locationQuery}`
+      // );
+      const { data } = await axios.get(`/manager/boat`);
 
-      setBoats(data?.data?.data);
-      setPageDetails(data?.data?.paginationDetails);
+      setBoats(data?.data);
+      // setPageDetails(data?.data?.paginationDetails);
     } catch (err) {
       console.log("🚀 ~ Boats ~ err:", err);
     } finally {

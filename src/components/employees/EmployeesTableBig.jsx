@@ -15,10 +15,14 @@ import axios from "../../axios";
 import { CiExport } from "react-icons/ci";
 import { TfiReload } from "react-icons/tfi";
 import ReactivateModal from "./ReactiveModal";
+import Pagination from "../global/Pagination";
 
-const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
+const EmployeesTableBig = ({ data, loading, getEmployees }) => {
   const { navigate, setUpdateEmployee } = useContext(GlobalContext);
   const navigation = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 18;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   // const [exportemployee, setExportemployee] = useState("");
@@ -63,6 +67,13 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
         : true;
     return matchesSearch && locationTypeMatch && jobTypeMatch;
   });
+
+  const totalPages = Math.ceil(filteredData?.length / pageSize);
+  // Slice the data for the current page
+  const paginatedData = filteredData?.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
 
   const handleEditClick = (id, editshow) => {
     console.log(editshow, "editshow");
@@ -161,7 +172,10 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
             <FiSearch className="text-white/50 text-lg" />
           </span>
           <input
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setCurrentPage(1);
+            }}
             type="text"
             placeholder="Search here"
             className="w-[calc(100%-35px)] outline-none text-sm bg-transparent h-full"
@@ -204,6 +218,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               jobType={jobType}
               setJobType={setJobType}
               employeesJobTitles={data?.map((item) => item.jobtitle)}
+              setCurrentPage={setCurrentPage}
             />
 
             <LocationType
@@ -213,6 +228,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
               setLocationType={setLocationType}
               employeesLocTitles={data?.map((item) => item.location)}
               title="Location "
+              setCurrentPage={setCurrentPage}
             />
             <span className="w-full flex justify-start items-center pl-[170px] pr-[60px]">
               Action
@@ -223,7 +239,7 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
             <ManagerListLoader />
           ) : (
             <>
-              {filteredData?.map((employee, index) => (
+              {paginatedData?.map((employee, index) => (
                 <div
                   key={index}
                   className={` ${
@@ -313,6 +329,11 @@ const EmployeesTableBig = ({ data, loading, getEmployees, setCurrentPage }) => {
           onClose={() => setIsAccountDeleteModalOpen(false)} // Add a way to close the modal
         />
       </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 };
