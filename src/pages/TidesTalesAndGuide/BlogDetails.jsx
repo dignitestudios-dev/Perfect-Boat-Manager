@@ -69,7 +69,23 @@ const BlogDetails = () => {
 
           <div className="w-full h-auto flex justify-start items-start py-6">
             {/* All the html from backend rightnow putting image to show html */}
-            <div dangerouslySetInnerHTML={{ __html: state?.story }} />
+            <style>
+              {`
+        .rich-html a {
+          color: #2563eb; 
+          text-decoration: underline;
+        }
+        .rich-html a:hover {
+          color: #1d4ed8; 
+        }
+      `}
+            </style>
+            <div
+              className={`rich-html w-full ${
+                state?.story?.length < 2500 ? "h-[150px]" : "h-auto"
+              } relative`}
+              dangerouslySetInnerHTML={{ __html: state?.story }}
+            />
           </div>
 
           {blogs?.length > 0 && (
