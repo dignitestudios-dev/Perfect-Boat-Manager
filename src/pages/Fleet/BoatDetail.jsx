@@ -1,21 +1,18 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { GlobalContext } from "../../contexts/GlobalContext";
-import { FaCaretDown, FaRegEdit } from "react-icons/fa";
-import { RiDeleteBinLine } from "react-icons/ri";
-import { TbCaretDownFilled } from "react-icons/tb";
+
 import AddFleetInput from "../../components/fleet/AddFleetInput";
 import AddFleetImage from "../../components/fleet/AddFleetImage";
 import { AuthMockup } from "../../assets/export";
-import ViewAllTasksModal from "../../components/tasks/ViewAllTasksModal";
-import DateModal from "../../components/tasks/DateModal";
+
 import AssignedModal from "../Tasks/AssignedModal";
-import { MdOutlineDateRange } from "react-icons/md";
-import DeletedModal from "../../components/global/DeletedModal";
+
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "../../axios";
 import { useForm } from "react-hook-form";
 import AssignedBoatTasks from "../../components/fleet/AssignedBoatTasks";
 import { FiLoader } from "react-icons/fi";
+import ServiceHistoryModal from "./ServiceHistoryModal";
 
 const BoatDetail = () => {
   const { boatDropDown } = useContext(GlobalContext);
@@ -34,6 +31,8 @@ const BoatDetail = () => {
 
   const [boatsData, setBoatsData] = useState([]);
   const [loadingBoats, setLoadingBoats] = useState(false);
+  const [isServiceHistoryModalOpen, setServiceHistoryModalOpen] =
+    useState(false);
 
   const getBoats = async () => {
     setLoadingBoats(true);
@@ -74,17 +73,27 @@ const BoatDetail = () => {
                 </h3>
               </div>
 
-              <button
-                onClick={() =>
-                  navigate("/add-task", {
-                    state: { boat: boatsData?.boat },
-                  })
-                }
-                className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3] rounded-[10px] text-[#fff] text-[13px] font-medium"
-              >
-                <span className="text-lg">+</span>
-                <span>Add New Task</span>
-              </button>
+              <div className="flex flex-col md:flex-row gap-2">
+                <button
+                  type="button"
+                  onClick={() => setServiceHistoryModalOpen(true)}
+                  className="w-full md:w-[150px] lg:w-[118px] h-[40px] md:h-[35px] flex justify-center items-center gap-2 rounded-[10px] text-[#36B8F3] text-[14px] md:text-[13px] font-medium"
+                >
+                  <span>Service History</span>
+                </button>
+
+                <button
+                  onClick={() =>
+                    navigate("/add-task", {
+                      state: { boat: boatsData?.boat },
+                    })
+                  }
+                  className="w-[118px] h-[32px] flex justify-center items-center gap-2 bg-[#36B8F3] rounded-[10px] text-[#fff] text-[13px] font-medium"
+                >
+                  <span className="text-lg">+</span>
+                  <span>Add New Task</span>
+                </button>
+              </div>
             </div>
             <div className="w-full h-auto flex flex-col justify-start items-start gap-8 lg:gap-16">
               <div className="w-full h-auto flex flex-col gap-6 justify-start items-start">
@@ -194,6 +203,11 @@ const BoatDetail = () => {
           setIsOpen={setIsAssignedModalOpen}
         />
       )}
+      <ServiceHistoryModal
+        id={id}
+        isOpen={isServiceHistoryModalOpen}
+        onClose={() => setServiceHistoryModalOpen(false)}
+      />
     </div>
   );
 };

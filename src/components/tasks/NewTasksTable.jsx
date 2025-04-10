@@ -103,51 +103,55 @@ const NewTaskTable = () => {
           <ManagerListLoader />
         ) : (
           <>
-            {filteredData?.map((task, index) => (
-              <button
-                key={index}
-                onClick={() =>
-                  navigate(`/new-tasks-request/${task?._id}`, {
-                    state: { task },
-                  })
-                }
-                className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
-              >
-                <span className="w-[106px] h-[76px] flex justify-start items-center relative">
-                  <img
-                    src={task?.boat?.cover}
-                    alt="boat_image"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      borderRadius: "15px 0 0 15px",
-                      objectFit: "cover",
-                    }}
-                  />
-                  <div
-                    className="w-24"
-                    style={{
-                      content: '""',
-                      position: "absolute",
-                      top: 0,
-                      right: 0,
-                      bottom: 0,
-                      background:
-                        "linear-gradient(to right, transparent, #001229)",
-                    }}
-                  />
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  {task?.boat?.name}
-                </span>
-                <span className="w-full flex justify-start items-center">
-                  {task?.boat?.location}
-                </span>
-                <span className="w-full flex justify-start items-center px-[60px]">
-                  {task?.employee?.name}
-                </span>
-              </button>
-            ))}
+            {filteredData?.length > 0 ? (
+              filteredData?.map((task, index) => (
+                <button
+                  key={index}
+                  onClick={() =>
+                    navigate(`/new-tasks-request/${task?._id}`, {
+                      state: { task },
+                    })
+                  }
+                  className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
+                >
+                  <span className="w-[106px] h-[76px] flex justify-start items-center relative">
+                    <img
+                      src={task?.boat?.cover}
+                      alt="boat_image"
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        borderRadius: "15px 0 0 15px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <div
+                      className="w-24"
+                      style={{
+                        content: '""',
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                        background:
+                          "linear-gradient(to right, transparent, #001229)",
+                      }}
+                    />
+                  </span>
+                  <span className="w-full flex justify-start items-center">
+                    {task?.boat?.name}
+                  </span>
+                  <span className="w-full flex justify-start items-center">
+                    {task?.boat?.location}
+                  </span>
+                  <span className="w-full flex justify-start items-center px-[60px]">
+                    {task?.employee?.name}
+                  </span>
+                </button>
+              ))
+            ) : (
+              <span className="w-full">No Record Found</span>
+            )}
           </>
         )}
       </div>

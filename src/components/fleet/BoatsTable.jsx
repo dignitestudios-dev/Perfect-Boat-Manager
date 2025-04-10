@@ -117,6 +117,7 @@ const BoatsTable = ({ data, loading, getBoats }) => {
             employeesLocTitles={data?.map((item) => item.location)}
             title="Location / Customer Name"
             setCurrentPage={setCurrentPage}
+            locationTitles={data?.map((item) => item.location)}
           />
         </div>
 

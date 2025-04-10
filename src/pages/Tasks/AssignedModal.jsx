@@ -99,8 +99,8 @@ const AssignedModal = ({
               />
             </div>
           </div>
-          <div className="relative h-[80%] overflow-auto">
-            <div className="w-full h-auto overflow-auto flex flex-col gap-1 justify-start items-start">
+          <div className="relative h-[80%] overflow-y-hidden ">
+            <div className="w-full h-full overflow-y-auto flex flex-col gap-1 justify-start items-start">
               <div
                 className={`w-full h-8 grid ${
                   isEdit ? "grid-cols-6" : "grid-cols-5"
