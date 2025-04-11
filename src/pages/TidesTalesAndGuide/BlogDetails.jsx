@@ -57,7 +57,7 @@ const BlogDetails = () => {
           <div className="w-full h-auto flex flex-col border-b-[1px] border-white/10 justify-start items-start pt-2 pb-12 gap-4">
             <span className="text-[10px] font-medium text-[#199BD1]">
               {state?.isAdmin ? "Admin" : "Owner"} |{" "}
-              {moment(state?.createdAt)?.format("MM-DD-YY")}
+              {moment(state?.createdAt)?.format("MM-DD-YYYY")}
             </span>
             <h2 className="text-[28px] font-bold text-white leading-[37.7px]">
               {state?.title}

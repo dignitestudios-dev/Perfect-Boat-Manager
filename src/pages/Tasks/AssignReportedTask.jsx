@@ -269,7 +269,7 @@ const AssignReportedTask = () => {
                       className="group transition-all duration-500 w-full h-[52px]  bg-[#1A293D] outline-none flex justify-between 
           items-center  px-3 focus:border-[1px] focus:border-[#55C9FA] rounded-xl  relative"
                     >
-                      <span className="text-gray-400">
+                      <span className="text-gray-50">
                         {passSelectedEmployee?.name || "Assign Employee"}
                       </span>
                     </div>

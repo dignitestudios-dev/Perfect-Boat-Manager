@@ -8,6 +8,7 @@ import { ErrorToast } from "../global/Toaster";
 import LocationType from "../global/headerDropDowns/LocationType";
 import { useNavigate } from "react-router-dom";
 import ManagerListLoader from "../global/Loaders/ManagerListLoader";
+import moment from "moment/moment";
 
 const NewTaskTable = () => {
   const navigate = useNavigate();
@@ -79,7 +80,7 @@ const NewTaskTable = () => {
       </div>
 
       <div className="w-full flex flex-col gap-1 justify-start items-start">
-        <div className="w-full grid grid-cols-4 text-[11px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
+        <div className="w-full grid grid-cols-5 text-[11px] py-2 border-b border-[#fff]/[0.14] font-medium leading-[14.85px] text-white/50 justify-start items-start">
           <span className="w-full flex justify-start items-center">
             Boat Image
           </span>
@@ -97,6 +98,9 @@ const NewTaskTable = () => {
           <span className="w-full flex justify-start items-center px-[60px]">
             Requested By
           </span>
+          <span className="w-full flex justify-start items-center px-[60px]">
+            Reported Date
+          </span>
         </div>
 
         {loading ? (
@@ -112,7 +116,7 @@ const NewTaskTable = () => {
                       state: { task },
                     })
                   }
-                  className="w-full h-auto grid grid-cols-4 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
+                  className="w-full h-auto grid grid-cols-5 border-b border-[#fff]/[0.14] py-3 text-[11px] font-medium leading-[14.85px] text-white justify-start items-center"
                 >
                   <span className="w-[106px] h-[76px] flex justify-start items-center relative">
                     <img
@@ -141,11 +145,14 @@ const NewTaskTable = () => {
                   <span className="w-full flex justify-start items-center">
                     {task?.boat?.name}
                   </span>
-                  <span className="w-full flex justify-start items-center">
+                  <span className="w-full flex justify-start items-center text-start">
                     {task?.boat?.location}
                   </span>
                   <span className="w-full flex justify-start items-center px-[60px]">
                     {task?.employee?.name}
+                  </span>
+                  <span className="w-full flex justify-start items-center px-[60px]">
+                    {moment(task?.createdAt).format("MM-DD-YYYY")}
                   </span>
                 </button>
               ))

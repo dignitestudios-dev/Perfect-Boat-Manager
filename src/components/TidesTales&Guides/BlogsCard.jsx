@@ -26,20 +26,19 @@ const BlogsCard = ({ blog }) => {
       <div className="w-full h-[calc(100%-220px)] flex flex-col gap-2 justify-start items-start p-4">
         <span className="text-[10px] font-medium text-[#199BD1]">
           {blog?.isAdmin ? "Admin" : "Owner"} |{" "}
-          {moment(blog.createdAt)?.format("MM-DD-YY")}
+          {moment(blog.createdAt)?.format("MM-DD-YYYY")}
         </span>
 
-        <div>
+        <div className="space-y-2">
           <h1 className="text-[16px] font-bold leading-[21.6px] text-white">
             {blog?.title?.length > 40
               ? blog?.title?.slice(0, 40) + "..."
               : blog?.title}
           </h1>
           <p className="text-[12px] font-normal leading-[16.2px] text-white/50">
-            {parseHTML(blog?.story)?.length > 150
-              ? parseHTML(blog?.story)?.slice(0, 150)
-              : parseHTML(blog?.story)}
-            ...
+            {blog?.subTitle?.length > 150
+              ? blog?.subTitle?.slice(0, 150) + "..."
+              : blog?.subTitle}
           </p>
         </div>
       </div>
