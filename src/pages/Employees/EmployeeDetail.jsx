@@ -36,7 +36,7 @@ const EmployeeDetail = () => {
   const location = useLocation();
   const editBtnshow = location?.state;
   const [isEditing, setIsEditing] = useState(editBtnshow ? true : false);
-  console.log("🚀 ~ EmployeeDetail ~ isEditing:", isEditing);
+
   const [isLoading, setIsLoading] = useState(false);
 
   // console.log(location, "location");

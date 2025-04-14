@@ -154,9 +154,10 @@ const DeactivatedEmployeesTable = () => {
               <>
                 {filteredData?.map((user, index) => (
                   <div
-                    onClick={() =>
-                      navigation(`/employees/${user?._id}`, { state: false })
-                    }
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigation(`/employees/${user?._id}`, { state: false });
+                    }}
                     key={index}
                     className="w-full h-auto min-h-12 pt-2 grid grid-cols-5 border-b border-[#fff]/[0.14] py-1 text-[13px] font-medium
                      leading-[14.85px] text-white justify-start items-center cursor-pointer"
@@ -174,7 +175,10 @@ const DeactivatedEmployeesTable = () => {
                       {user?.location}
                     </span>
                     <button
-                      onClick={() => handleActionClick(user?._id)}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleActionClick(user?._id);
+                      }}
                       className="text-white/50 font-medium w-full flex justify-center items-center"
                     >
                       <TfiReload />

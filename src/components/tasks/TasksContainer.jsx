@@ -26,6 +26,7 @@ const TasksContainer = () => {
   const [inputError, setInputError] = useState({});
 
   const [taskData, setTaskData] = useState([]);
+
   const [loading, setLoading] = useState(false);
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -92,7 +93,11 @@ const TasksContainer = () => {
   const filteredData = taskData?.filter((item) => {
     const matchesSearch = search
       ? item?.boat?.name?.toLowerCase()?.includes(search?.toLowerCase()) ||
-        item?.boat?.location?.toLowerCase()?.includes(search?.toLowerCase())
+        item?.boat?.location?.toLowerCase()?.includes(search?.toLowerCase()) ||
+        item?.assignTo[0]?.name
+          ?.toLowerCase()
+          ?.includes(search?.toLowerCase()) ||
+        item?.assignBy?.name?.toLowerCase()?.includes(search?.toLowerCase())
       : true;
     return matchesSearch;
   });

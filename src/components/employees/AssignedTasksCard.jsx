@@ -60,12 +60,6 @@ const AssignedTasksCard = ({
       getUnixDate(item?.dueDate) ===
         moment(dueDate.calendar).format("DD-MM-YYYY");
 
-    console.log(
-      dueDateMatch,
-      getUnixDate(item?.dueDate),
-      moment(dueDate.calendar).format("DD-MM-YYYY"),
-      "data"
-    );
     return taskTypeMatch && dueDateMatch;
   });
 
@@ -88,7 +82,7 @@ const AssignedTasksCard = ({
         <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
           Assigned Tasks{" "}
           <span className="text-[14px] leading-[24.3px] text-[#ffffff9b]">
-            ({tasks.length})
+            ({filteredData?.length})
           </span>
         </h3>
         {filteredData?.length > 0 && (

@@ -317,14 +317,14 @@ const TaskDetail = () => {
                       Photos
                     </label>
                   </div>
-                  <div className="w-full flex justify-center items-center gap-6">
+                  <div className="w-full flex justify-start items-center gap-6">
                     {taskDetail?.taskReport?.images?.length > 0 && (
                       <>
                         {taskDetail?.taskReport?.images?.map((item, index) => {
                           return (
                             <div
                               key={index}
-                              className="w-full h-[147px] rounded-xl"
+                              className="w-[200px] h-[147px] rounded-xl"
                             >
                               <img
                                 src={item}

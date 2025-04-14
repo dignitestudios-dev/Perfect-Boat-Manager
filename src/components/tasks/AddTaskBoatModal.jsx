@@ -16,7 +16,7 @@ const AddTaskBoatModal = ({
   setInputError,
 }) => {
   const { boats } = useContext(GlobalContext);
-  console.log("🚀 ~ boats:", boats);
+
   const [allSelected, setAllSelected] = useState(false);
   const [selectedBoat, setSelectedBoat] = useState(null);
   const [selectedBoats, setSelectedBoats] = useState([]);
@@ -120,7 +120,7 @@ const AddTaskBoatModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[#000000a0] z-50">
-      <div className="w-[100%]  h-[90%] lg:w-[953px] lg:h-[680px] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
+      <div className="w-[100%]  h-[90%] lg:w-[1020px] lg:h-[680px] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
         <div className="relative w-full  h-full bg-[#001229] rounded-2xl  p-4 lg:p-6">
           <button
             onClick={() => setIsOpen(false)}
@@ -196,7 +196,7 @@ const AddTaskBoatModal = ({
                 locationType={locationType}
                 setLocationType={setLocationType}
                 employeesLocTitles={boats?.map((item) => item?.location)}
-                title="Location / Customer Name"
+                title="Location/Customer Name"
               />
             </div>
 

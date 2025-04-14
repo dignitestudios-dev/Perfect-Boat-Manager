@@ -60,9 +60,11 @@ const TasksCard = ({ getTasks, data }) => {
     setDeleteLoad(true);
     try {
       const response = await axios.delete(`/manager/task/${deleteId}`);
-      SuccessToast("Deleted successfully");
-      setDeleteModalOpen(false);
-      getTasks();
+      if (response?.status === 200) {
+        SuccessToast("Deleted successfully");
+        setDeleteModalOpen(false);
+        getTasks();
+      }
     } catch (error) {
       ErrorToast(error?.response?.data?.message);
       console.error("Error deleting task:", error);

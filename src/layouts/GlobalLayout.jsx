@@ -1,3 +1,5 @@
+import Cookies from "js-cookie";
+
 import React, { useContext, useEffect } from "react";
 import { Logo } from "../assets/export";
 import { Link, useNavigate } from "react-router-dom";
@@ -54,7 +56,7 @@ const GlobalLayout = ({ page }) => {
           >
             <div
               id="hs-toast-soft-color-teal-label"
-              class="w-full flex justify-between items-center p-4"
+              className="w-full flex justify-between items-center p-4"
             >
               <div className="w-auto flex gap-3 justify-start items-center">
                 <span className="bg-gray-800 flex items-center justify-center w-16 h-12 rounded-xl">
@@ -78,16 +80,16 @@ const GlobalLayout = ({ page }) => {
                   </span>
                 </div>
               </div>
-              <div class="ms-auto">
+              <div className="ms-auto">
                 <button
                   onClick={() => setShow(false)}
                   type="button"
-                  class="inline-flex shrink-0 justify-center items-center size-5 rounded-lg text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100 "
+                  className="inline-flex shrink-0 justify-center items-center size-5 rounded-lg text-white opacity-50 hover:opacity-100 focus:outline-none focus:opacity-100 "
                   aria-label="Close"
                 >
-                  <span class="sr-only">Close</span>
+                  <span className="sr-only">Close</span>
                   <svg
-                    class="shrink-0 size-4"
+                    className="shrink-0 size-4"
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
                     height="30"
