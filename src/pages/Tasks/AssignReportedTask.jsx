@@ -16,6 +16,7 @@ import axios from "../../axios";
 import { ErrorToast } from "../../components/global/Toaster";
 import TaskTypeInputField from "../../components/global/customInputs/TaskTypeInputField";
 import TaskInputField from "../../components/global/customInputs/TaskInputField";
+import RecurringDaysInputField from "../../components/global/customInputs/RecurringDaysInputField";
 
 const AssignReportedTask = () => {
   const today = moment();
@@ -291,7 +292,19 @@ const AssignReportedTask = () => {
                   {fieldErrors?.dueDate}
                 </p>
               )}
-              <div className="w-auto flex justify-start items-center gap-3">
+              <RecurringDaysInputField
+                selectedDay={selectedDay}
+                setSelectedDay={setSelectedDay}
+                setRecurringDays={setRecurringDays}
+                isEdit={true}
+                setInputError={setInputError}
+              />
+              {fieldErrors?.reoccuringDays && (
+                <p className="text-red-500 -mt-1">
+                  {fieldErrors?.reoccuringDays}
+                </p>
+              )}
+              {/* <div className="w-auto flex justify-start items-center gap-3">
                 <TbCalendarStats className="text-2xl text-white/40" />
                 <span className="text-md font-normal text-white">
                   Recurring Days
@@ -332,7 +345,7 @@ const AssignReportedTask = () => {
                     {fieldErrors?.reoccuringDays}
                   </p>
                 )}
-              </div>
+              </div> */}
             </div>
 
             <DateModal

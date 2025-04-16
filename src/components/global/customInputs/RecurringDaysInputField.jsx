@@ -39,7 +39,7 @@ const RecurringDaysInputField = ({
 
   // Adjust `isEdit` based on `showButton`
   const adjustedIsEdit = showButton ? true : isEdit;
-  console.log(adjustedIsEdit, "adjustedIsEdit");
+
   const isDisabled = showButton === true ? adjustedIsEdit : !adjustedIsEdit;
 
   return (
@@ -49,6 +49,7 @@ const RecurringDaysInputField = ({
       {adjustedIsEdit === true ? (
         <>
           <button
+            type="button"
             disabled={!adjustedIsEdit} // Disable button based on adjustedIsEdit logic
             onClick={toggleRecurringDropdown}
             className="text-xs flex flex-col justify-start items-start font-normal text-[#199BD1] relative"
