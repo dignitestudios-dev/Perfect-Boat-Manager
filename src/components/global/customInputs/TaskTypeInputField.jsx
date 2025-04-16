@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { TbCaretDownFilled } from "react-icons/tb";
 // import { taskTypeData } from '../../../data/TaskTypeData';
 
@@ -38,6 +38,16 @@ const TaskTypeInputField = ({
     }
     setDisplaySelectedTask(null);
   };
+
+  const inputRef = useRef(null);
+
+  // Focus the input field when customInput is true
+  useEffect(() => {
+    if (customInput && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [customInput]);
+
   const isDisabled = showButton === true ? isEdit : !isEdit;
   return (
     <div className="w-full h-auto flex flex-col gap-1 justify-end items-start z-10">
@@ -83,7 +93,8 @@ const TaskTypeInputField = ({
                 {item?.taskType?.replace(/([A-Z])/g, " $1")?.trim()}
               </button>
             ))}
-            {/* <button
+            <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 handleTaskTypeSelection("custom");
@@ -95,6 +106,7 @@ const TaskTypeInputField = ({
               {customInput && (
                 <div className="absolute w-full top-10 left-0 flex flex-col justify-start items-start gap-2 px-5">
                   <input
+                    ref={inputRef}
                     onChange={(e) => setCustomTypeText(e.target.value)}
                     type="text"
                     className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
@@ -114,7 +126,7 @@ const TaskTypeInputField = ({
                   </button>
                 </div>
               )}
-            </button> */}
+            </button>
           </div>
         </div>
       </div>

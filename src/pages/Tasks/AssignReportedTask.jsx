@@ -36,12 +36,9 @@ const AssignReportedTask = () => {
   const [inputError, setInputError] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
   const [selectedTaskType, setSelectedTaskType] = useState("");
-  console.log("🚀 ~ AssignReportedTask ~ selectedTaskType:", selectedTaskType);
+  const [customTask, setCustomTask] = useState("");
+
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
-  console.log(
-    "🚀 ~ AssignReportedTask ~ displaySelectedTask:",
-    displaySelectedTask
-  );
 
   const [tasks, setTasks] = useState([]);
 
@@ -215,7 +212,8 @@ const AssignReportedTask = () => {
                     setDisplaySelectedTask={setDisplaySelectedTask}
                     displaySelectedTask={displaySelectedTask}
                     customTypeText={customTypeText}
-                    setCustomTypeText={setCustomTypeText}
+                    setCustomTask={setCustomTask}
+                    customTask={customTask}
                   />
                   {fieldErrors?.task && (
                     <p className="text-red-500 text-sm">{fieldErrors?.task}</p>

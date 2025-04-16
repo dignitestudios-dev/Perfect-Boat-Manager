@@ -9,7 +9,7 @@ const RecurringDaysInputField = ({
   isEdit,
   setRecurringDays,
   setInputError,
-  showButton
+  showButton,
 }) => {
   const RecurringRef = useRef(null);
   const [customRecurring, setCustomRecurring] = useState("");
@@ -39,7 +39,7 @@ const RecurringDaysInputField = ({
 
   // Adjust `isEdit` based on `showButton`
   const adjustedIsEdit = showButton ? true : isEdit;
-console.log(adjustedIsEdit,"adjustedIsEdit")
+  console.log(adjustedIsEdit, "adjustedIsEdit");
   const isDisabled = showButton === true ? adjustedIsEdit : !adjustedIsEdit;
 
   return (
@@ -54,8 +54,7 @@ console.log(adjustedIsEdit,"adjustedIsEdit")
             className="text-xs flex flex-col justify-start items-start font-normal text-[#199BD1] relative"
           >
             <span className="flex gap-1 justify-start items-center">
-              <span>{selectedDay || "Select Days"}</span>{" "}
-              <FaCaretDown />
+              <span>{selectedDay || "Select Days"}</span> <FaCaretDown />
             </span>
             <div
               ref={RecurringRef}
@@ -84,8 +83,8 @@ console.log(adjustedIsEdit,"adjustedIsEdit")
 
                       if (
                         /^\d*$/.test(value) &&
-                        (value === "" ||
-                          (Number(value) <= 365 && Number(value) >= 1))
+                        (value === "" || !/^0\d+/.test(value)) &&
+                        value.length <= 4
                       ) {
                         setCustomRecurring(value);
                       }

@@ -35,6 +35,7 @@ const AddTask = () => {
   const [passSelectedEmployee, SetPassSelectedEmployee] = useState("");
   const [tasks, setTasks] = useState([]);
   const [customTypeText, setCustomTypeText] = useState("");
+  const [customTask, setCustomTask] = useState("");
   const [selectedTaskType, setSelectedTaskType] = useState(null);
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
 
@@ -79,7 +80,7 @@ const AddTask = () => {
       setSubmitLoading(true);
       const obj = {
         boat: passSelectedBoat?.map((item) => item?.id),
-        task: displaySelectedTask ? displaySelectedTask : selectedTaskType,
+        task: displaySelectedTask ? displaySelectedTask : customTask,
         taskType: selectedTaskType?.replace(/([A-Z])/g, " $1")?.trim(),
         dueDate: dueDate?.unix,
         description: noteText,
@@ -211,7 +212,8 @@ const AddTask = () => {
                   setDisplaySelectedTask={setDisplaySelectedTask}
                   displaySelectedTask={displaySelectedTask}
                   customTypeText={customTypeText}
-                  setCustomTypeText={setCustomTypeText}
+                  setCustomTask={setCustomTask}
+                  customTask={customTask}
                 />
                 {/* {inputError.dueDate && (
                   <p className="text-red-500">{inputError.dueDate}</p>

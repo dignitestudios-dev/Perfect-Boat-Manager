@@ -7,8 +7,9 @@ const TaskInputField = ({
   tasks,
   setDisplaySelectedTask,
   displaySelectedTask,
+  customTask,
   customTypeText,
-  setCustomTypeText,
+  setCustomTask,
   showButton,
 }) => {
   const additionalDropdownRef = useRef();
@@ -72,7 +73,7 @@ const TaskInputField = ({
                     shadow-xl left-0 w-full h-56 max-h-56 overflow-y-auto bg-[#1A293D] rounded-b-2xl`}
         >
           <div className="w-full h-full overflow-y-auto flex flex-col justify-start items-start gap-2">
-            {tasks.length > 0 ? (
+            {tasks.length > 0 || customTypeText ? (
               <>
                 {tasks.map((task, index) => (
                   <button
@@ -99,7 +100,7 @@ const TaskInputField = ({
                       <div className="absolute w-full top-10 left-0 flex flex-col justify-start items-start gap-2 px-5">
                         <input
                           ref={inputRef}
-                          onChange={(e) => setCustomTypeText(e.target.value)}
+                          onChange={(e) => setCustomTask(e.target.value)}
                           type="text"
                           className="w-[95%] h-[42px] mb-2 bg-[#1A293D] disabled:text-white/50 outline-none px-3
              border-[1px] border-[#55C9FA] rounded-md"
@@ -108,7 +109,7 @@ const TaskInputField = ({
                           type="button"
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleTaskSelection(customTypeText);
+                            handleTaskSelection(customTask);
                             toggleTaskDropdown();
                           }}
                           className="w-[95%] h-[42px] rounded-md bg-[#119bd1] text-white flex items-center 
