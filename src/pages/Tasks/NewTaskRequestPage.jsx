@@ -158,7 +158,7 @@ const NewTaskRequestPage = () => {
         <div className="w-full flex justify-between items-center h-12">
           <div className="w-auto flex justify-start items-center gap-2">
             <h3 className="text-[18px] font-bold leading-[24.3px] text-white">
-              New Task Request
+              Boat Details
             </h3>
           </div>
         </div>

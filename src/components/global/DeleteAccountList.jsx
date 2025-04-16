@@ -61,8 +61,8 @@ const DeleteAccountList = () => {
   const [loading, setLoading] = useState(false);
   const [deleteLoad, setDeleteLoad] = useState(false);
   const [passSelectedEmployee, setPassSelectedEmployee] = useState("");
-  console.log(passSelectedEmployee,"passselectionsModal");
-  
+  console.log(passSelectedEmployee, "passselectionsModal");
+
   const [inputError, setInputError] = useState({});
 
   const toggleTaskTypeDropdown = () => {
@@ -313,7 +313,7 @@ const DeleteAccountList = () => {
         {reasonForDelete === "deactivation" ? (
           <button
             disabled={deactivateLoading}
-            onClick={passSelectedEmployee&&handleDeactivate} // Trigger delete action
+            onClick={passSelectedEmployee && handleDeactivate} // Trigger delete action
             className="w-full lg:w-[208px] h-[52px] bg-[#199BD1] text-white rounded-[12px] flex items-center
              justify-center text-[16px] font-bold leading-[21.6px] tracking-[-0.24px]"
           >
@@ -352,12 +352,12 @@ const DeleteAccountList = () => {
       )}
 
       {/* AssignManagerModal Component */}
-      {isAssignEmployeeModalOpen && (
+      {/* {isAssignEmployeeModalOpen && (
         <AssignManagerModal
           isOpen={isAssignEmployeeModalOpen}
           onClose={() => setIsAssignEmployeeModalOpen(false)}
         />
-      )}
+      )} */}
 
       {/* AccountDeletedModal Component */}
       {isAccountDeletedModalOpen && (

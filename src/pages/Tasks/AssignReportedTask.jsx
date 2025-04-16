@@ -36,18 +36,18 @@ const AssignReportedTask = () => {
   const [inputError, setInputError] = useState({});
   const [submitLoading, setSubmitLoading] = useState(false);
   const [selectedTaskType, setSelectedTaskType] = useState("");
+  console.log("🚀 ~ AssignReportedTask ~ selectedTaskType:", selectedTaskType);
   const [displaySelectedTask, setDisplaySelectedTask] = useState("");
-  const [selectedTask, setSelectedTask] = useState("");
+  console.log(
+    "🚀 ~ AssignReportedTask ~ displaySelectedTask:",
+    displaySelectedTask
+  );
 
-  const [isTaskTypeDropdownOpen, setTaskTypeDropdownOpen] = useState(false);
-  const [isTaskDropdownOpen, setTaskDropdownOpen] = useState(false);
-  const [customInput, setCustomInput] = useState(false);
   const [tasks, setTasks] = useState([]);
 
   const [fieldErrors, setFieldErrors] = useState({});
 
   const [customTypeText, setCustomTypeText] = useState("");
-  const [customTask, setCustomTask] = useState("");
 
   const [RecurringDropdown, setRecurringDropdown] = useState(false);
   const [recurringDays, setRecurringDays] = useState("");
@@ -59,20 +59,12 @@ const AssignReportedTask = () => {
     }
   };
 
-  const toggleTaskTypeDropdown = () => {
-    setTaskTypeDropdownOpen(!isTaskTypeDropdownOpen);
-  };
-
-  const toggleTaskDropdown = () => {
-    setTaskDropdownOpen(!isTaskDropdownOpen);
-  };
-
   const handleAssignTask = async (data) => {
     try {
       setSubmitLoading(true);
       const obj = {
         boat: [data.boatId],
-        task: selectedTaskType,
+        task: displaySelectedTask,
         taskType: selectedTaskType,
         dueDate: dueDate?.unix,
         description: data.note,
@@ -84,6 +76,8 @@ const AssignReportedTask = () => {
       const errors = {};
 
       if (!dueDate?.unix) errors.dueDate = "Due date is required.";
+      if (!displaySelectedTask) errors.task = "Task is required.";
+      if (!selectedTaskType) errors.taskType = "Task type is required.";
       if (!passSelectedEmployee?.id)
         errors.assignTo = "Please assign to someone.";
       if (recurringDays !== "none" && isNaN(+recurringDays)) {
@@ -126,26 +120,6 @@ const AssignReportedTask = () => {
     }
   };
 
-  const handleTaskTypeSelection = (taskType) => {
-    console.log("🚀 ~ handleTaskTypeSelection ~ taskType:", taskType);
-
-    setSelectedTaskType(taskType);
-    setTasks(
-      taskDropDown?.find((item) => item?.taskType === taskType)?.task || []
-    );
-    setTaskDropdownOpen(false);
-    setDisplaySelectedTask(null);
-    setCustomTask("");
-    setFieldErrors({});
-  };
-
-  const handleTaskSelection = (task) => {
-    setInputError({});
-    setFieldErrors({});
-    setTaskDropdownOpen(false); // Close task dropdown after selecting a task
-    setDisplaySelectedTask(task);
-  };
-
   const {
     register,
     handleSubmit,
@@ -165,9 +139,9 @@ const AssignReportedTask = () => {
         task?.boat?.make || ""
       }/${task?.boat?.size || ""}`;
       setValue("combined", combinedValue);
-      setSelectedTaskType(task?.task?.taskType);
-      setSelectedTask(task?.task?.task);
-      setDisplaySelectedTask(task?.task?.task);
+      // setSelectedTaskType(task?.task?.taskType);
+      // setSelectedTask(task?.task?.task);
+      // setDisplaySelectedTask(task?.task?.task);
       setPassSelectedEmployee({
         name: task?.employee?.name,
         id: task?.employee?._id,
@@ -215,34 +189,38 @@ const AssignReportedTask = () => {
                 </div>
               </div>
               <div className="w-full grid grid-cols-2 gap-12">
-                <TaskTypeInputField
-                  isEdit={true}
-                  setInputError={setInputError}
-                  taskDropDown={taskDropDown}
-                  setTasks={setTasks}
-                  selectedTaskType={selectedTaskType}
-                  setSelectedTaskType={setSelectedTaskType}
-                  setCustomTypeText={setCustomTypeText}
-                  customTypeText={customTypeText}
-                  setDisplaySelectedTask={setDisplaySelectedTask}
-                />
-                {fieldErrors?.taskType && (
-                  <p className="text-red-500 text-sm">
-                    {fieldErrors?.taskType}
-                  </p>
-                )}
-                <TaskInputField
-                  isEdit={true}
-                  setInputError={setInputError}
-                  tasks={tasks}
-                  setDisplaySelectedTask={setDisplaySelectedTask}
-                  displaySelectedTask={displaySelectedTask}
-                  customTypeText={customTypeText}
-                  setCustomTypeText={setCustomTypeText}
-                />
-                {fieldErrors?.task && (
-                  <p className="text-red-500 text-sm">{fieldErrors?.task}</p>
-                )}
+                <div className="z-30">
+                  <TaskTypeInputField
+                    isEdit={true}
+                    setInputError={setFieldErrors}
+                    taskDropDown={taskDropDown}
+                    setTasks={setTasks}
+                    selectedTaskType={selectedTaskType}
+                    setSelectedTaskType={setSelectedTaskType}
+                    setCustomTypeText={setCustomTypeText}
+                    customTypeText={customTypeText}
+                    setDisplaySelectedTask={setDisplaySelectedTask}
+                  />
+                  {fieldErrors?.taskType && (
+                    <p className="text-red-500 text-sm">
+                      {fieldErrors?.taskType}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <TaskInputField
+                    isEdit={true}
+                    setInputError={setFieldErrors}
+                    tasks={tasks}
+                    setDisplaySelectedTask={setDisplaySelectedTask}
+                    displaySelectedTask={displaySelectedTask}
+                    customTypeText={customTypeText}
+                    setCustomTypeText={setCustomTypeText}
+                  />
+                  {fieldErrors?.task && (
+                    <p className="text-red-500 text-sm">{fieldErrors?.task}</p>
+                  )}
+                </div>
               </div>
               <div className="w-full grid grid-cols-1 gap-12">
                 <div className="w-full h-auto flex flex-col gap-1 justify-start items-start">
