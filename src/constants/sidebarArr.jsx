@@ -38,7 +38,7 @@ export const sidebarArr = [
 
       {
         title: "Add Employee",
-        url: "add-employee",
+        url: "/add-employee",
       },
     ],
   },
