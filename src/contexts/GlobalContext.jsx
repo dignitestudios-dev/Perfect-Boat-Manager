@@ -52,7 +52,10 @@ export const GlobalContextProvider = ({ children }) => {
           .filter(Boolean)
           .join("&");
         const { data } = await axios.get(`/manager/employees?${queryString}`);
-        setEmployees(data?.data);
+        let filteredEmployee = data?.data?.filter(
+          (item) => item?.isActive === true
+        );
+        setEmployees(filteredEmployee);
       } catch (err) {
         console.log("🚀 ~ getEmployees ~ err:", err);
       } finally {

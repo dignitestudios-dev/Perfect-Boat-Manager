@@ -65,8 +65,8 @@ const EmployeeDetailModal = ({
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-      <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D]">
+    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+      <div className="w-[90%] max-w-4xl h-[80%] max-h-[80%] rounded-3xl flex items-center justify-center p-4 bg-[#1A293D] ">
         <div className="bg-[#001229] text-white rounded-2xl shadow-lg w-full h-full p-4 overflow-hidden">
           <div className="flex flex-col mb-4">
             <div className="flex justify-between items-center mb-4">
